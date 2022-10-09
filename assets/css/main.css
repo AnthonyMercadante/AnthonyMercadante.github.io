@@ -1619,6 +1619,11 @@ input, select, textarea {
 
 /* Image */
 
+	.selfie {
+		padding-bottom: 5em;
+		
+	}
+
 	.image {
 		display: inline-block;
 		position: relative;
@@ -1632,6 +1637,7 @@ input, select, textarea {
 		.image.fit {
 			display: block;
 			width: 100%;
+			
 		}
 
 		.image.featured {
