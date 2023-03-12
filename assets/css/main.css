@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&display=swap');
-.logo-font {
-	font-family: 'Bebas Neue', cursive;
-}
+
 @font-face {
     font-family: customFont;
     src: url(../../fonts/Silkscreen-Regular.ttf);
 }
+
+
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
@@ -31,6 +31,11 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+}
+
+.logo-font {
+	font-family: 'Bebas Neue', cursive;
+	font-size: 36px;
 }
 
 ol, ul {
