@@ -1,4 +1,7 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&display=swap');
+.logo-font {
+	font-family: 'Bebas Neue', cursive;
+}
 @font-face {
     font-family: customFont;
     src: url(../../fonts/Silkscreen-Regular.ttf);
