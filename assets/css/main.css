@@ -36,6 +36,7 @@ body {
 .logo-font {
 	font-family: 'Bebas Neue', cursive;
 	font-size: 36px;
+	margin-top: 1em;
 }
 
 ol, ul {
