@@ -2509,3 +2509,7 @@ input, select, textarea {
 		position: relative;
 		top: 0;
 	}
+.change-font-size {
+	font-size: 24px;
+	line-height: 12px;
+}
