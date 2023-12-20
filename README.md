@@ -5,3 +5,5 @@ Welcome to the repository for my personal portfolio website. This website showca
 ## Structure
 
 - `backup (old site)/`: Contains the old version of the site for archival purposes.
+- `src/`: The source code of the new React-based website.
+- `public/`: Public assets and the entry HTML file.
