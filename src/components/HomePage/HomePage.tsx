@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Typography, Button } from '@mui/material';
 
 const HomePage = () => {
@@ -22,7 +23,7 @@ const HomePage = () => {
         I'm a full-stack software developer. Here you can find my portfolio, 
         a small glimpse of recently worked on projects using various programming languages.
       </Typography>
-      <Button variant="contained" color="primary" href="./Portfolio/Portfolio">
+      <Button variant="contained" color="primary" component={Link} to="/portfolio">
         View My Work
       </Button>
     </Container>
