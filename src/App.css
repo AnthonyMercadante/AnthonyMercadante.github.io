@@ -28,11 +28,58 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes float {
+  0%, 100% { 
+    transform: translate(-50%, -10px) rotate(-360deg); 
   }
-  to {
-    transform: rotate(360deg);
+  50% { 
+    transform: translate(-50%, 10px) rotate(-360deg); 
   }
+}
+
+.floating-cursor {
+  height: 30px;
+  position: absolute;
+  top: 30%; 
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+  animation: float 2s ease-in-out infinite;
+}
+
+.floating-cursor img {
+  height: 50px; 
+}
+
+/* Media query for mobile screens */
+@media (max-width: 600px) {
+  .floating-cursor {
+    top: 20%; /* Adjust for mobile screens */
+    /* Additional adjustments for mobile, if needed */
+  }
+
+  .floating-cursor img {
+    height: 40px; /* Smaller size for mobile screens */
+  }
+
+  .view-work-button {
+    margin-top: 10px !important;
+  }
+
+  .body-text {
+    font-size: .98rem !important;
+  }
+}
+
+.name-title {
+  transition: transform 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for scaling and glowing */
+}
+
+.name-title:hover, .name-title.hover-effect {
+  transform: scale(1.05); /* Enlarge on hover */
+  text-shadow: 0 0 8px #fff; /* Glow effect on hover */
+  cursor: pointer;
+}
+
+.body-text {
+  font-size: 1rem !important;
 }

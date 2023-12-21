@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Typography, Button } from '@mui/material';
+import cursorImage from '../../assets/images/arrow.png'; 
 
 const HomePage = () => {
   return (
     <Container maxWidth={false} 
                style={{ 
+                 position: 'relative',
                  backgroundColor: '#000', 
                  color: '#fff', 
                  minHeight: '100vh', 
@@ -16,16 +18,28 @@ const HomePage = () => {
                  textAlign: 'center',
                  padding: '20px', 
                }}>
-      <Typography variant="h1" component="h1" gutterBottom>
-        Anthony Mercadante
+      <div className="floating-cursor">
+        <img src={cursorImage} alt="Cursor" />
+      </div>
+      <Typography variant="h1" component="h1" gutterBottom className="name-title">
+        <Link to="/about-me" style={{ color: 'inherit', textDecoration: 'none' }}> {/* Add this line */}
+          Anthony Mercadante
+        </Link>
       </Typography>
-      <Typography variant="body1" style={{ maxWidth: '600px', marginBottom: '20px' }}> {/* Added margin-bottom */}
+      <Typography variant="body1" className="body-text" style={{ maxWidth: '600px', marginBottom: '20px' }}>
         I'm a full-stack software developer. Here you can find my portfolio, 
         a small glimpse of recently worked on projects using various programming languages.
       </Typography>
-      <Button variant="contained" color="primary" component={Link} to="/portfolio">
-        View My Work
-      </Button>
+      <Button 
+        variant="contained" 
+        color="primary" 
+        component={Link} 
+        to="/portfolio"
+        className="view-work-button"
+      >
+  View My Work
+</Button>
+
     </Container>
   );
 };
