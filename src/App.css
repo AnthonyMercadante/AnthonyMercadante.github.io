@@ -83,3 +83,17 @@
 .body-text {
   font-size: 1rem !important;
 }
+
+.about-me-profile-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* Media query for mobile screens */
+@media (max-width: 600px) {
+  .about-me-profile-image {
+    width: 75%; /* Reduce image size on mobile */
+  }
+}
