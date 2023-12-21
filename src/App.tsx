@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import HomePage from './components/HomePage/HomePage';
 import Portfolio from './components/Portfolio/Portfolio';
+import AboutMe from './components/AboutMe/AboutMe'; 
 import theme from './theme';
+import './App.css';
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/about-me" element={<AboutMe />} />
           </Routes>
         </div>
       </Router>
