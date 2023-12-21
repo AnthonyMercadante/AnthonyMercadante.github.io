@@ -52,4 +52,3 @@ The site is deployed on GitHub Pages. To update the live website:
 ## Contributing
 
 Feel free to suggest improvements.
->>>>>>> Stashed changes
