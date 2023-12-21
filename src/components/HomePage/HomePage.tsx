@@ -22,7 +22,7 @@ const HomePage = () => {
         <img src={cursorImage} alt="Cursor" />
       </div>
       <Typography variant="h1" component="h1" gutterBottom className="name-title">
-        <Link to="/about-me" style={{ color: 'inherit', textDecoration: 'none' }}> {/* Add this line */}
+        <Link to="/about-me" style={{ color: 'inherit', textDecoration: 'none' }}>
           Anthony Mercadante
         </Link>
       </Typography>
