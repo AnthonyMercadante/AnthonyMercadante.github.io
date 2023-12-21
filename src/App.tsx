@@ -1,7 +1,8 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import HomePage from './components/HomePage/HomePage'; // Adjust the path as necessary
-import theme from './theme'; // Adjust the path to your theme file
+import HomePage from './components/HomePage/HomePage'; 
+import theme from './theme'; 
+import Portfolio from './components/Portfolio/Portfolio';
 
 
 function App() {

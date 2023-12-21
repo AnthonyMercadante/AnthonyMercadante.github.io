@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Button } from '@mui/material';
 
 const HomePage = () => {
   return (
@@ -12,16 +12,19 @@ const HomePage = () => {
                  flexDirection: 'column', 
                  justifyContent: 'center', 
                  alignItems: 'center',
-                 textAlign: 'center'
+                 textAlign: 'center',
+                 padding: '20px', 
                }}>
       <Typography variant="h1" component="h1" gutterBottom>
         Anthony Mercadante
       </Typography>
-      <Typography variant="body1" style={{ maxWidth: '600px' }}> {/* maxWidth for better readability */}
+      <Typography variant="body1" style={{ maxWidth: '600px', marginBottom: '20px' }}> {/* Added margin-bottom */}
         I'm a full-stack software developer. Here you can find my portfolio, 
         a small glimpse of recently worked on projects using various programming languages.
       </Typography>
-      {/* Additional content goes here */}
+      <Button variant="contained" color="primary" href="./Portfolio/Portfolio">
+        View My Work
+      </Button>
     </Container>
   );
 };
