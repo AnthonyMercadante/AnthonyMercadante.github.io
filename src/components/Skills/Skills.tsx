@@ -5,12 +5,19 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
+import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTheme } from '@mui/material/styles';
 import skillImage1 from '../../assets/images/python-analytics-visualization.png';
 import skillImage2 from '../../assets/images/AIIntelligentSystems.png';
 import skillImage3 from '../../assets/images/AdvancedDotNet.png';
 import skillImage4 from '../../assets/images/WebDevelopmentDatabase.png';
+import skillImage5 from '../../assets/images/MobileAppDev.png';
+import skillImage6 from '../../assets/images/DataStructures.png';
+import skillImage7 from '../../assets/images/ObjectOriented.png';
+import skillImage8 from '../../assets/images/SoftwareQuality.png';
+import skillImage9 from '../../assets/images/NetworkFundamentals.png';
 
 interface Skill {
     title: string;
@@ -39,8 +46,13 @@ interface Skill {
     transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
     '&:hover': {
       transform: 'scale(1.05)',
-      boxShadow: '0 4px 20px 0 rgba(255, 255, 255, 0.2)' // subtle glow effect
-    }
+      boxShadow: '0 4px 20px 0 rgba(255, 255, 255, 0.2)', // subtle glow effect
+      cursor: 'pointer',
+    },
+    [theme.breakpoints.down('sm')]: {
+        height: 150, // Smaller height for mobile
+        maxWidth: 300, // Smaller width for mobile
+      },
   }));
 
 const SkillImage = styled('img')({
@@ -50,7 +62,9 @@ const SkillImage = styled('img')({
   marginBottom: '10px',
 });
 
-const SkillsModal = ({ skill, open, handleClose }: SkillsModalProps) => (
+const SkillsModal = ({ skill, open, handleClose }: SkillsModalProps) => {
+    const theme = useTheme();
+    return (
     <Modal open={open} onClose={handleClose} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Box 
         sx={{ 
@@ -63,6 +77,10 @@ const SkillsModal = ({ skill, open, handleClose }: SkillsModalProps) => (
           width: '90%', 
           color: 'white',
           backgroundColor: '#2E2E2E',
+          [theme.breakpoints.down('sm')]: {
+            maxWidth: '80%', // Smaller modal on mobile
+            p: 2, // Reduced padding on mobile
+          },
         }}
       >
         <IconButton
@@ -79,14 +97,23 @@ const SkillsModal = ({ skill, open, handleClose }: SkillsModalProps) => (
         <Typography variant="h5" gutterBottom component="h2" sx={{ color: 'primary.main' }}>
           {skill.title}
         </Typography>
-        {/* ... rest of your modal content */}
+        <Box sx={{ my: 2 }}>
+          {skill.skillsList.map((skillItem, index) => (
+            <Chip label={skillItem} key={index} color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
+          ))}
+        </Box>
+        <Typography variant="body1" sx={{ mt: 2 }}>
+          {skill.description}
+        </Typography>
       </Box>
     </Modal>
-  );
+    );
+};
   
   
 
 const Skills = () => {
+    const theme = useTheme();
     const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const skills = [
@@ -138,7 +165,64 @@ const Skills = () => {
         ],
         description: 'I have learned comprehensive expertise in building dynamic web applications and managing databases using a wide range of programming languages.',
         imageUrl: skillImage4,
-      }
+      },
+      {
+        title: "Mobile Application Development",
+        skillsList: [
+            'Android app development',
+            'Java',
+            'Android Studio',
+            'UI Design',
+            'Cross-application data sharing'
+        ],
+        description: 'I am proficent in developing Android applications using Java, focusing on user interfacve and interaction',
+        imageUrl: skillImage5,
+      },
+      {
+        title: "Data Structures, Algorithms & Database Theory",
+        skillsList: [
+            'Java programming',
+            'Data structures',
+            'Algorithm application',
+            'SQL',
+            'Database normalization',
+        ],
+        description: 'I have a solid foundation in data strcutures and algorithms using Java, combined with in-depth knowedge of database theory and SQL',
+        imageUrl: skillImage6, 
+      },
+      {
+        title: 'Object-Oriented Programming & System Analysis',
+        skillsList: [
+            'Object-oriented methodology',
+            'UML',
+            'System analysis & design',
+            'Software lifecycle management',
+        ],
+        description: 'I have learned a strong understanding of object-oriented systems, UML, and system analysis, with a focus on the software development lifecycle',
+        imageUrl: skillImage7,
+      },
+      {
+        title: 'Software Quality, Testing & Technical Writing',
+        skillsList: [
+            'Software testing',
+            'Quality assurance',
+            'Test documentation',
+            'Technical writing and documentation',
+        ],
+        description: 'Proficient in ensuring software quality through testing and documentation, complemented by skills in technical writing and training.',
+        imageUrl: skillImage8,
+      },
+      {
+        title: 'Network Fundamentals & Client-Side Programming',
+        skillsList: [
+            'Networking technologies',
+            'JavaScript',
+            'JQuery',
+            'Client-side web app development'
+        ],
+        description: 'Knowledge of networking fundamentals combined with expertise in client-side programming using JavaScript and jQuery.',
+        imageUrl: skillImage9,
+      },
       // ... add other skills here
     ];
 
@@ -148,10 +232,19 @@ const Skills = () => {
       };
 
       return (
-        <Box sx={{ p: 3, backgroundColor: 'black', color: 'white' }}>
-          <Grid container spacing={4} justifyContent="center">
+        <Box sx={{ 
+          p: 1.5, 
+          backgroundColor: 'black', 
+          color: 'white', 
+          height: 'calc(100vh - 24px)',
+          display: 'flex', 
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden'
+        }}>
+          <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>    
             {skills.map((skill, index) => (
-              <Grid item xs={12} sm={6} md={4} lg={4} key={index} onClick={() => handleOpen(skill)}>
+              <Grid item xs={12} sm={6} md={4} key={index} onClick={() => handleOpen(skill)}>
                 <Item>
                   <SkillImage src={skill.imageUrl} alt={skill.title} />
                   <Typography variant="h6">{skill.title}</Typography>
