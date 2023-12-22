@@ -39,7 +39,7 @@ const AboutMe = () => {
             style={{ 
               maxWidth: '100%', 
               height: 'auto', 
-              borderRadius: '8px',
+              borderRadius: '100px',
               boxSizing: 'border-box',
             }}
             className='about-me-profile-image'
