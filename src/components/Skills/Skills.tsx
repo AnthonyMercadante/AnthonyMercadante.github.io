@@ -36,7 +36,7 @@ interface Skill {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     color: theme.palette.text.secondary,
-    height: 200,
+    height: 250,
     maxWidth: 400,
     width: 'auto',
     display: 'flex',
@@ -50,17 +50,22 @@ interface Skill {
       cursor: 'pointer',
     },
     [theme.breakpoints.down('sm')]: {
-        height: 150, // Smaller height for mobile
+        height: 125, // Smaller height for mobile
         maxWidth: 300, // Smaller width for mobile
+        padding: '1px',
       },
   }));
 
-const SkillImage = styled('img')({
-  height: '100px', // Adjust as needed
-  width: '100px', // Adjust as needed
-  objectFit: 'cover',
-  marginBottom: '10px',
-});
+  const SkillImage = styled('img')(({ theme }) => ({
+    height: 'auto',
+    width: '30%', // Adjust width to be responsive
+    objectFit: 'cover',
+    marginBottom: '10px',
+    [theme.breakpoints.down('sm')]: {
+      width: '60%', // Smaller width for mobile
+      marginTop: '10px',
+    },
+  }));
 
 const SkillsModal = ({ skill, open, handleClose }: SkillsModalProps) => {
     const theme = useTheme();
@@ -244,10 +249,10 @@ const Skills = () => {
         }}>
           <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>    
             {skills.map((skill, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index} onClick={() => handleOpen(skill)}>
+              <Grid item xs={4} sm={6} md={4} key={index} onClick={() => handleOpen(skill)}> 
                 <Item>
                   <SkillImage src={skill.imageUrl} alt={skill.title} />
-                  <Typography variant="h6">{skill.title}</Typography>
+                  <Typography variant="h6"sx={{ [theme.breakpoints.down('sm')]: { fontSize: '0.4rem' } }}>{skill.title}</Typography>
                 </Item>
               </Grid>
             ))}
@@ -255,6 +260,6 @@ const Skills = () => {
           {selectedSkill && <SkillsModal skill={selectedSkill} open={modalOpen} handleClose={() => setModalOpen(false)} />}
         </Box>
       );
-    };
-    
-    export default Skills;
+  };
+  
+  export default Skills;
