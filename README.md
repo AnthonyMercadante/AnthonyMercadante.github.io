@@ -61,4 +61,3 @@ The site is deployed on GitHub Pages. For deployment:
 Contributions, issues, and feature requests are welcome. Feel free to check [issues page](https://github.com/AnthonyMercadante/AnthonyMercadante.github.io/issues) if you want to contribute.
 
 Thank you for visiting my portfolio's repository!
-```
