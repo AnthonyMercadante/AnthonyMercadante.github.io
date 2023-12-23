@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import profileImage from '../../assets/images/professional-photo.jpg';
 import { useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Back icon
 
 const AboutMe = () => {
   const theme = useTheme();
@@ -12,6 +13,10 @@ const AboutMe = () => {
 
   const navigateToSkills = () => {
     navigate('/skills');
+  };
+
+  const goBack = () => {
+    navigate(-1); // Go back to the previous page
   };
 
   return (
@@ -45,7 +50,7 @@ const AboutMe = () => {
             className='about-me-profile-image'
           />
         </Grid>
-        <Grid item xs={12} sm={8} md={6} style={{ textAlign: 'center', padding: theme.spacing(2) }}>
+        <Grid item xs={12} sm={8} md={6} style={{ textAlign: 'center', padding: theme.spacing(5) }}>
           <h1>Hello! I'm Anthony Mercadante</h1>
           <p>Founder of Raethexn Technologies, specializing in custom software solutions.
              I'm also a 3rd year Software Development student at Mohawk College, 
@@ -61,6 +66,8 @@ const AboutMe = () => {
           </Button>
         </Grid>
       </Grid>
+      <Button startIcon={<ArrowBackIcon />} onClick={goBack} sx={{ position: 'absolute', top: 20, left: 20 }}>
+      </Button>
     </Box>
   );
 };

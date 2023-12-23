@@ -1,16 +1,25 @@
 {
   "files": {
     "main.css": "/static/css/main.6a5cbe44.css",
-    "main.js": "/static/js/main.6e63f085.js",
+    "main.js": "/static/js/main.970772fd.js",
     "static/js/787.2dcca737.chunk.js": "/static/js/787.2dcca737.chunk.js",
+    "static/media/NetworkFundamentals.png": "/static/media/NetworkFundamentals.12dcc0a0cebe2f46485e.png",
+    "static/media/SoftwareQuality.png": "/static/media/SoftwareQuality.46766cb511b3b257e1b2.png",
+    "static/media/ObjectOriented.png": "/static/media/ObjectOriented.de80e481ad7fa30d0e03.png",
+    "static/media/WebDevelopmentDatabase.png": "/static/media/WebDevelopmentDatabase.0d13cc3784bc2e46e224.png",
+    "static/media/MobileAppDev.png": "/static/media/MobileAppDev.b64e36b5bc98c7bb2c11.png",
+    "static/media/DataStructures.png": "/static/media/DataStructures.2be3863e0b8ec8210ceb.png",
+    "static/media/AdvancedDotNet.png": "/static/media/AdvancedDotNet.9f79372273bd74902376.png",
+    "static/media/AIIntelligentSystems.png": "/static/media/AIIntelligentSystems.ce22e13e9df2e7651660.png",
+    "static/media/python-analytics-visualization.png": "/static/media/python-analytics-visualization.79f1b2c525a1fc9fee38.png",
     "static/media/professional-photo.jpg": "/static/media/professional-photo.e28cd5836920ba4ec674.jpg",
     "index.html": "/index.html",
     "main.6a5cbe44.css.map": "/static/css/main.6a5cbe44.css.map",
-    "main.6e63f085.js.map": "/static/js/main.6e63f085.js.map",
+    "main.970772fd.js.map": "/static/js/main.970772fd.js.map",
     "787.2dcca737.chunk.js.map": "/static/js/787.2dcca737.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6a5cbe44.css",
-    "static/js/main.6e63f085.js"
+    "static/js/main.970772fd.js"
   ]
 }

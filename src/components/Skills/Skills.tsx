@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
@@ -8,6 +9,8 @@ import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Back icon
 import skillImage1 from '../../assets/images/python-analytics-visualization.png';
 import skillImage2 from '../../assets/images/AIIntelligentSystems.png';
 import skillImage3 from '../../assets/images/AdvancedDotNet.png';
@@ -215,6 +218,12 @@ const Skills = () => {
         setModalOpen(true);
       };
 
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1); // Go back to the previous page
+  };
+
       return (
         <Box sx={{ 
           p: 1.5, 
@@ -233,8 +242,10 @@ const Skills = () => {
           </Grid>
         ))}
       </Grid>
-      {selectedSkill && <SkillsModal skill={selectedSkill} open={modalOpen} handleClose={() => setModalOpen(false)} />}
-    </Box>
+        {selectedSkill && <SkillsModal skill={selectedSkill} open={modalOpen} handleClose={() => setModalOpen(false)} />}
+        <Button startIcon={<ArrowBackIcon />} onClick={goBack} sx={{ position: 'absolute', top: 20, left: 20 }}>
+      </Button>
+      </Box>
   );
 };
 
