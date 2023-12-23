@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
@@ -44,40 +43,6 @@ interface Skill {
     },
     [theme.breakpoints.down('sm')]: {
       width: '75%', // Increased width for mobile
-    },
-  }));
-  
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    color: theme.palette.text.secondary,
-    height: 250,
-    maxWidth: 400,
-    width: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-    '&:hover': {
-      transform: 'scale(1.05)',
-      boxShadow: '0 4px 20px 0 rgba(255, 255, 255, 0.2)', // subtle glow effect
-      cursor: 'pointer',
-    },
-    [theme.breakpoints.down('sm')]: {
-        height: 125, // Smaller height for mobile
-        maxWidth: 300, // Smaller width for mobile
-        padding: '1px',
-      },
-  }));
-
-  const SkillImage = styled('img')(({ theme }) => ({
-    height: 'auto',
-    width: '30%', // Adjust width to be responsive
-    objectFit: 'cover',
-    [theme.breakpoints.down('sm')]: {
-      width: '60%', // Smaller width for mobile
-      
     },
   }));
 
