@@ -162,7 +162,7 @@ const Skills = () => {
             'UI Design',
             'Cross-application data sharing'
         ],
-        description: 'I am proficent in developing Android applications using Java, focusing on user interfacve and interaction',
+        description: 'I am proficent in developing Android applications using Java, focusing on user interface and interaction.',
         imageUrl: skillImage5,
       },
       {
@@ -174,7 +174,7 @@ const Skills = () => {
             'SQL',
             'Database normalization',
         ],
-        description: 'I have a solid foundation in data strcutures and algorithms using Java, combined with in-depth knowedge of database theory and SQL',
+        description: 'I have a solid foundation in data strcutures and algorithms using Java, combined with in-depth knowedge of database theory and SQL.',
         imageUrl: skillImage6, 
       },
       {
@@ -185,7 +185,7 @@ const Skills = () => {
             'System analysis & design',
             'Software lifecycle management',
         ],
-        description: 'I have learned a strong understanding of object-oriented systems, UML, and system analysis, with a focus on the software development lifecycle',
+        description: 'I have learned a strong understanding of object-oriented systems, UML, and system analysis, with a focus on the software development lifecycle.',
         imageUrl: skillImage7,
       },
       {
