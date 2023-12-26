@@ -224,28 +224,34 @@ const Skills = () => {
     navigate(-1); // Go back to the previous page
   };
 
-      return (
-        <Box sx={{ 
-          p: 1.5, 
-          backgroundColor: 'black', 
-          color: 'white', 
-          height: 'calc(100vh - 24px)',
-          display: 'flex', 
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden'
-        }}>
-          <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>    
+  return (
+    <Box sx={{ 
+      p: 1.5, 
+      backgroundColor: 'black', 
+      color: 'white', 
+      height: 'calc(100vh - 24px)',
+      display: 'flex', 
+      flexDirection: 'column', // Changed to column for vertical stacking
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden'
+    }}>
+      <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>    
         {skills.map((skill, index) => (
           <Grid item xs={4} sm={6} md={4} key={index} onClick={() => handleOpen(skill)}> 
             <SkillIcon src={skill.imageUrl} alt={skill.title} />
           </Grid>
         ))}
       </Grid>
-        {selectedSkill && <SkillsModal skill={selectedSkill} open={modalOpen} handleClose={() => setModalOpen(false)} />}
-        <Button startIcon={<ArrowBackIcon />} onClick={goBack} sx={{ position: 'absolute', top: 20, left: 20 }}>
+
+      <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray' }}>
+        Click an icon to reveal more about each skill
+      </Typography>
+
+      {selectedSkill && <SkillsModal skill={selectedSkill} open={modalOpen} handleClose={() => setModalOpen(false)} />}
+      <Button startIcon={<ArrowBackIcon />} onClick={goBack} sx={{ position: 'absolute', top: 20, left: 20 }}>
       </Button>
-      </Box>
+    </Box>
   );
 };
 
