@@ -97,3 +97,23 @@
     width: 75%; /* Reduce image size on mobile */
   }
 }
+
+.paper {
+  background-color: #1a1a1a; /* Dark background for each paper */
+  color: white; /* White text for readability */
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.paper h5 {
+  font-weight: bold; /* Bold titles for positions */
+}
+
+.button {
+  background-color: #61dafb; /* Stylish button color */
+  color: white;
+}
+
+.button:hover {
+  background-color: #49a6cc; /* Slightly darker on hover */
+}

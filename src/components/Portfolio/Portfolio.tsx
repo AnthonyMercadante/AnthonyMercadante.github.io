@@ -28,6 +28,10 @@ const Portfolio = () => {
 
   const navigate = useNavigate();
 
+  const navigateToWorkExperience = () => {
+    navigate('/WorkExperience');
+  };
+
   const goBack = () => {
     navigate(-1); // Go back to the previous page
   };
@@ -42,11 +46,10 @@ const Portfolio = () => {
       alignItems: 'center',
       justifyContent: 'center',
     }}>
-      <Typography variant="h3" gutterBottom>My Portfolio</Typography>
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
-          <Button sx={buttonStyle} onClick={() => {/* navigate to Work Experience */}}>
-            <WorkIcon sx={{ fontSize: '3rem' }} /> {/* Adjust icon size as needed */}
+          <Button sx={buttonStyle} onClick={navigateToWorkExperience}>
+            <WorkIcon sx={{ fontSize: '3rem' }} />
             <Typography>Work Experience</Typography>
           </Button>
         </Grid>
