@@ -46,6 +46,9 @@ const WorkExperience = () => {
         <Typography variant="body2" gutterBottom>
           As an automation assistant for the manager of funding propsals within the colleges research department, I was tasked with developing an application to automate the grant proposal creatin process.
         </Typography>
+        <Box sx={{my: 2}}>
+          <Chip label="Python" color="primary" variant="outlined" sx={{mr: 1, mb: 1}}/>
+        </Box>
         <Button variant="outlined" color="primary" sx={{marginTop: 1}}>
           More Details
         </Button>
