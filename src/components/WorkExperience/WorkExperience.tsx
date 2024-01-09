@@ -6,49 +6,61 @@ import Chip from '@mui/material/Chip';
 
 const WorkExperience = () => {
   return (
-    <Box sx={{ flexGrow: 1, padding: 3, backgroundColor: theme.palette.background.default }}>
+    <Box sx={{ 
+      flexGrow: 1, 
+      padding: 3, 
+      backgroundColor: theme.palette.background.default,
+      maxWidth: '689px', 
+      mx: 'auto',
+    }}>
+    
       <Typography variant="h3" gutterBottom>
         Work Experience
       </Typography>
 
       {/* XR Software Developer at Mohawk College */}
-      <Paper elevation={3} sx={{ margin: 2, padding: 2 }}>
-        <Box display="flex" alignItems="center">
+      <Paper elevation={3} sx={{ margin: 5, padding: 5 }}>
+        <Box display="flex" flexDirection="column" alignItems="center">
           <WorkIcon sx={{ marginRight: 1 }} />
-          <Typography variant="h5">XR Software Developer - Mohawk College</Typography>
+          <Typography variant="h5" textAlign="center">XR Software Developer - Mohawk College</Typography>
         </Box>
         <Typography variant="body1" gutterBottom>
-          Jan 2023 - Dec 2023 | Hybrid
-        </Typography>
-        <Typography variant="body2">
-          Specializing in immersive virtual learning experiences using XR technologies. Key projects include VR Water Channel Machine, Cell Tower Training Simulator, and Interactive Car Industry Exhibit.
+          Jan 2023 - Dec 2023
         </Typography>
         <Box sx={{ my: 2 }}>
             <Chip label="C#" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
             <Chip label="Unity" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
             <Chip label="Unreal Engine" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-            <Chip label="Blender" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />    
+            <Chip label="Blender" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
+            <Chip label="Git" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />    
         </Box>
+                <Typography variant="body2" sx={{padding: 2}}>
+          Specializing in immersive virtual learning experiences using XR technologies. Key projects include a VR Water Channel Machine, Cell Tower Training Simulator, and an Interactive Car Industry Exhibit.
+        </Typography>
         <Button variant="outlined" color="primary" sx={{ marginTop: 1 }}>
           More Details
         </Button>
       </Paper>
 
       {/* Automation Assistant at Mohawk College */}
-      <Paper elevation={3} sx={{margin: 2, padding: 2}}>
-        <Box display="flex" alignItems="center">
+      <Paper elevation={3} sx={{margin: 5, padding: 5}}>
+        <Box display="flex" flexDirection="column" alignItems="center">
           <WorkIcon sx={{marginRight: 1}}/>
-          <Typography variant="h5">Automation Assistant - Mohawk College</Typography>
+          <Typography variant="h5" textAlign="center">Automation Assistant - Mohawk College</Typography>
         </Box>
         <Typography variant="body1" gutterBottom>
-          September 2022 - December 2022 | Hybrid
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          As an automation assistant for the manager of funding propsals within the colleges research department, I was tasked with developing an application to automate the grant proposal creatin process.
+          September 2022 - December 2022
         </Typography>
         <Box sx={{my: 2}}>
           <Chip label="Python" color="primary" variant="outlined" sx={{mr: 1, mb: 1}}/>
+          <Chip label="Qt 6" color="primary" variant="outlined" sx={{mr: 1, mb: 1}}/>
+          <Chip label="OpenAI" color="primary" variant="outlined" sx={{mr: 1, mb: 1}}/>
+          <Chip label="httpx" color="primary" variant="outlined" sx={{mr: 1, mb: 1}}/>
+          <Chip label="SQLite" color="primary" variant="outlined" sx={{mr: 1, mb: 1}}/>
         </Box>
+                <Typography variant="body2" sx={{padding: 2}} gutterBottom>
+          As an automation assistant for the manager of funding proposals within the colleges research department, I was tasked with developing an application to automate the grant proposal creation process.
+        </Typography>
         <Button variant="outlined" color="primary" sx={{marginTop: 1}}>
           More Details
         </Button>
