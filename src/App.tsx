@@ -8,6 +8,8 @@ import Skills from './components/Skills/Skills';
 import theme from './theme';
 import './App.css';
 import WorkExperience from './components/WorkExperience/WorkExperience';
+import XRDeveloper from './components/XRSoftwareDeveloper/XRDeveloper';
+import AutomationAssistant from './components/AutomationAssistant/AutomationAssistant';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route path="/about-me" element={<AboutMe />} />
             <Route path="/skills" element={<Skills/>} />
             <Route path="/WorkExperience" element={<WorkExperience/>}/>
+            <Route path="/XRDeveloper" element={<XRDeveloper/>}/>
+            <Route path="/AutomationAssistant" element={<AutomationAssistant/>}/>
           </Routes>
         </div>
       </Router>
