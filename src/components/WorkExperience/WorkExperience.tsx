@@ -8,18 +8,18 @@ const WorkExperience = () => {
   return (
     <Box sx={{ 
       flexGrow: 1, 
-      padding: 3, 
+      p: { xs: 2, sm: 3 }, // Responsive padding
       backgroundColor: theme.palette.background.default,
-      maxWidth: '689px', 
+      maxWidth: { sm: '689px', xs: '100%' }, // Responsive width
       mx: 'auto',
     }}>
     
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' }, color:"white"}}>
         Work Experience
       </Typography>
 
       {/* XR Software Developer at Mohawk College */}
-      <Paper elevation={3} sx={{ margin: 5, padding: 5 }}>
+      <Paper elevation={3} sx={{ m: { xs: 2, sm: 5 }, p: { xs: 2, sm: 5 } }}>
         <Box display="flex" flexDirection="column" alignItems="center">
           <WorkIcon sx={{ marginRight: 1 }} />
           <Typography variant="h5" textAlign="center">XR Software Developer - Mohawk College</Typography>
@@ -43,7 +43,7 @@ const WorkExperience = () => {
       </Paper>
 
       {/* Automation Assistant at Mohawk College */}
-      <Paper elevation={3} sx={{margin: 5, padding: 5}}>
+      <Paper elevation={3} sx={{ m: { xs: 2, sm: 5 }, p: { xs: 2, sm: 5 } }}>
         <Box display="flex" flexDirection="column" alignItems="center">
           <WorkIcon sx={{marginRight: 1}}/>
           <Typography variant="h5" textAlign="center">Automation Assistant - Mohawk College</Typography>
