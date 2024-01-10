@@ -1,73 +1,130 @@
-import React from 'react';
-import { Paper, Typography, Box, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { Paper, Typography, Box, Button, IconButton, useMediaQuery } from '@mui/material';
 import WorkIcon from '@mui/icons-material/Work';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import theme from '../../theme';
 import Chip from '@mui/material/Chip';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import SwipeableViews from 'react-swipeable-views';
 
-const WorkExperience = () => {
+interface WorkExperience {
+  title: string;
+  period: string;
+  details: string;
+  skills: string[];
+  link: string;
+}
+
+const WorkExperienceComponent = () => {
+  const navigate = useNavigate();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [activeStep, setActiveStep] = useState(0);
+
+  const workExperiences: WorkExperience[] = [
+    {
+      title: "XR Software Developer Mohawk College",
+      period: "Jan 2023 - Dec 2023",
+      details: "Specializing in immersive virtual learning experiences using XR technologies. Key projects include a VR Water Channel Machine, Cell Tower Training Simulator, and an Interactive Car Industry Exhibit.",
+      skills: ["C#", "Unity", "Unreal Engine", "Blender", "Git"],
+      link: "/XRDeveloper",
+    },
+    {
+      title: "Automation Assistant Mohawk College",
+      period: "September 2022 - December 2022",
+      details: "As an automation assistant for the manager of funding proposals within the colleges research department, I was tasked with developing an application to automate the grant proposal creation process.",
+      skills: ["Python", "Qt 6", "OpenAI", "httpx", "SQLite"],
+      link: "/AutomationAssistant",
+    },
+  ];
+
+  const handleBack = () => {
+    navigate(-1); // Navigate back to the previous page
+  };
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => (prevActiveStep + 1) % workExperiences.length);
+  };
+
+  const handlePrev = () => {
+    setActiveStep((prevActiveStep) => (prevActiveStep - 1 + workExperiences.length) % workExperiences.length);
+  };
+
+  const renderWorkExperience = (experience: WorkExperience) => {
+    const formattedTitle = experience.title.replace("Mohawk College", "<br>Mohawk College");
+    return (
+      <Paper elevation={3} sx={{ m: { xs: 2, sm: 5 }, p: { xs: 2, sm: 5 } }}>
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <WorkIcon sx={{ marginRight: 1 }} />
+        <Typography variant="h5" textAlign="center" dangerouslySetInnerHTML={{ __html: formattedTitle }} />
+      </Box>
+        <Typography variant="body1" gutterBottom>
+          {experience.period}
+        </Typography>
+        <Box sx={{ my: 2 }}>
+          {experience.skills.map((skill, index) => (
+            <Chip label={skill} key={index} color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
+          ))}
+        </Box>
+        <Typography variant="body2" sx={{ padding: 2 }}>
+          {experience.details}
+        </Typography>
+        <Button component={Link} to={experience.link} variant="outlined" color="primary" sx={{ marginTop: 1 }}>
+          More Details
+        </Button>
+      </Paper>
+    );
+  };
+
   return (
     <Box sx={{
       flexGrow: 1,
-      p: { xs: 2, sm: 3 },
+      pt: { xs: 7, sm: 3 },
+      pb: { xs: 2, sm: 3 },
       backgroundColor: theme.palette.background.default,
       maxWidth: { sm: '689px', xs: '100%' },
       mx: 'auto',
     }}>
+      <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
+        <ArrowBackIcon />
+      </IconButton>
 
-      <Typography variant="h4" gutterBottom sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' }, color: "white" }}>
-        Work Experience
-      </Typography>
-
-      {/* XR Software Developer at Mohawk College */}
-      <Paper elevation={3} sx={{ m: { xs: 2, sm: 5 }, p: { xs: 2, sm: 5 } }}>
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <WorkIcon sx={{ marginRight: 1 }} />
-          <Typography variant="h5" textAlign="center">XR Software Developer - Mohawk College</Typography>
-        </Box>
-        <Typography variant="body1" gutterBottom>
-          Jan 2023 - Dec 2023
-        </Typography>
-        <Box sx={{ my: 2 }}>
-          <Chip label="C#" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-          <Chip label="Unity" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-          <Chip label="Unreal Engine" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-          <Chip label="Blender" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-          <Chip label="Git" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-        </Box>
-        <Typography variant="body2" sx={{ padding: 2 }}>
-          Specializing in immersive virtual learning experiences using XR technologies. Key projects include a VR Water Channel Machine, Cell Tower Training Simulator, and an Interactive Car Industry Exhibit.
-        </Typography>
-        <Button component={Link} to="/XRDeveloper" variant="outlined" color="primary" sx={{ marginTop: 1 }}>
-          More Details
-        </Button>
-      </Paper>
-
-      {/* Automation Assistant at Mohawk College */}
-      <Paper elevation={3} sx={{ m: { xs: 2, sm: 5 }, p: { xs: 2, sm: 5 } }}>
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <WorkIcon sx={{ marginRight: 1 }} />
-          <Typography variant="h5" textAlign="center">Automation Assistant - Mohawk College</Typography>
-        </Box>
-        <Typography variant="body1" gutterBottom>
-          September 2022 - December 2022
-        </Typography>
-        <Box sx={{ my: 2 }}>
-          <Chip label="Python" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-          <Chip label="Qt 6" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-          <Chip label="OpenAI" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-          <Chip label="httpx" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-          <Chip label="SQLite" color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-        </Box>
-        <Typography variant="body2" sx={{ padding: 2 }} gutterBottom>
-          As an automation assistant for the manager of funding proposals within the colleges research department, I was tasked with developing an application to automate the grant proposal creation process.
-        </Typography>
-        <Button component={Link} to="../AutomationAssistant/AutomationAssistant" variant="outlined" color="primary" sx={{ marginTop: 1 }}>
-          More Details
-        </Button>
-      </Paper>
+      {isMobile ? (
+        <>
+          <SwipeableViews index={activeStep} onChangeIndex={(step) => setActiveStep(step)}>
+            {workExperiences.map((experience, index) => (
+              <div key={index}>{renderWorkExperience(experience)}</div>
+            ))}
+          </SwipeableViews>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 2 }}>
+            <IconButton onClick={handlePrev} disabled={activeStep === 0} sx={{ mx: 2 }}>
+              <ArrowBackIosIcon />
+            </IconButton>
+            {workExperiences.map((_, index) => (
+              <Box
+                key={index}
+                sx={{
+                  width: 10,
+                  height: 10,
+                  backgroundColor: activeStep === index ? 'white' : 'grey',
+                  borderRadius: '50%',
+                  mx: 0.5,
+                }}
+              />
+            ))}
+            <IconButton onClick={handleNext} disabled={activeStep === workExperiences.length - 1} sx={{ mx: 2 }}>
+              <ArrowForwardIosIcon />
+            </IconButton>
+          </Box>
+        </>
+      ) : (
+        workExperiences.map((experience, index) => (
+          <div key={index}>{renderWorkExperience(experience)}</div>
+        ))
+      )}
     </Box>
   );
 };
 
-export default WorkExperience;
+export default WorkExperienceComponent;
