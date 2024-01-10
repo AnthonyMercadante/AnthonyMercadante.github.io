@@ -38,7 +38,7 @@ const WorkExperience = () => {
         <Typography variant="body2" sx={{ padding: 2 }}>
           Specializing in immersive virtual learning experiences using XR technologies. Key projects include a VR Water Channel Machine, Cell Tower Training Simulator, and an Interactive Car Industry Exhibit.
         </Typography>
-        <Button component={Link} to="../XRSoftwareDeveloper/XRDeveloper" variant="outlined" color="primary" sx={{ marginTop: 1 }}>
+        <Button component={Link} to="/XRDeveloper" variant="outlined" color="primary" sx={{ marginTop: 1 }}>
           More Details
         </Button>
       </Paper>
@@ -66,8 +66,6 @@ const WorkExperience = () => {
           More Details
         </Button>
       </Paper>
-      {/* Other positions can be added in a similar manner */}
-
     </Box>
   );
 };
