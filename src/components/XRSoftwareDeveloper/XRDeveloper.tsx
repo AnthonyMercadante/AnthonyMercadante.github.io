@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 
 import ProjectImage from '../../assets/images/OpenFlowIcon.png';
+import ProjectImage2 from '../../assets/images/CellTowerIcon.png';
 
 
   const ProjectIcon = styled('img')(({ theme }) => ({
@@ -35,6 +36,11 @@ import ProjectImage from '../../assets/images/OpenFlowIcon.png';
         title: 'Water Machine',
         route: '/OpenFlowMachine',
         imageUrl: ProjectImage,
+      },
+      {
+        title: 'Cell Tower',
+        route: '/CellTower',
+        imageUrl: ProjectImage2,
       },
       // ... other projects
     ];

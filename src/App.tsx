@@ -11,6 +11,7 @@ import WorkExperience from './components/WorkExperience/WorkExperience';
 import XRDeveloper from './components/XRSoftwareDeveloper/XRDeveloper';
 import AutomationAssistant from './components/AutomationAssistant/AutomationAssistant';
 import OpenFlowMachine from './components/OpenFlowMachine/OpenFlowMachine';
+import CellTower from './components/CellTower/CellTower';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/XRDeveloper" element={<XRDeveloper/>}/>
             <Route path="/AutomationAssistant" element={<AutomationAssistant/>}/>
             <Route path="/OpenFlowMachine" element={<OpenFlowMachine/>}/>
+            <Route path="/CellTower" element={<CellTower/>}/>
           </Routes>
         </div>
       </Router>
