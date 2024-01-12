@@ -10,6 +10,7 @@ import './App.css';
 import WorkExperience from './components/WorkExperience/WorkExperience';
 import XRDeveloper from './components/XRSoftwareDeveloper/XRDeveloper';
 import AutomationAssistant from './components/AutomationAssistant/AutomationAssistant';
+import OpenFlowMachine from './components/OpenFlowMachine/OpenFlowMachine';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/WorkExperience" element={<WorkExperience/>}/>
             <Route path="/XRDeveloper" element={<XRDeveloper/>}/>
             <Route path="/AutomationAssistant" element={<AutomationAssistant/>}/>
+            <Route path="/OpenFlowMachine" element={<OpenFlowMachine/>}/>
           </Routes>
         </div>
       </Router>
