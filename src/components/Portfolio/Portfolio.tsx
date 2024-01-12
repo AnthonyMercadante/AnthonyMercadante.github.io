@@ -1,12 +1,14 @@
 import React from 'react';
-import { Box, Button, Grid, Typography } from '@mui/material';
-import WorkIcon from '@mui/icons-material/Work'; // Example icon, change as needed
-import ProjectIcon from '@mui/icons-material/Build'; // Example icon, change as needed
+import { Box, Button, Grid, Typography, useTheme } from '@mui/material';
+import WorkIcon from '@mui/icons-material/Work'; 
+import ProjectIcon from '@mui/icons-material/Build'; 
 import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Back icon
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'; 
 
 const Portfolio = () => {
+  const theme = useTheme();
+  const navigate = useNavigate();
+
   const buttonStyle = {
     width: 150, // Fixed width for desktop
     height: 150, // Fixed height for desktop
@@ -23,10 +25,20 @@ const Portfolio = () => {
     '@media (max-width: 600px)': {
       width: 100, // Smaller width for mobile
       height: 100, // Smaller height for mobile
+      '& .MuiSvgIcon-root': {
+        fontSize: '2rem', // Smaller icon size for mobile
+      },
     },
   };
 
-  const navigate = useNavigate();
+  const textStyle = {
+    marginTop: theme.spacing(1), // Space between icon and text
+    fontSize: '1rem', // Default text size
+    textAlign: 'center', // Center align text
+    '@media (max-width: 600px)': {
+      fontSize: '0.8rem', // Smaller text size for mobile
+    },
+  };
 
   const navigateToWorkExperience = () => {
     navigate('/WorkExperience');
@@ -38,7 +50,7 @@ const Portfolio = () => {
 
   return (
     <Box sx={{
-      backgroundColor: 'background.default', // Use theme color
+      backgroundColor: 'background.default', 
       minHeight: '100vh',
       minWidth: '100vw',
       display: 'flex',
@@ -50,13 +62,13 @@ const Portfolio = () => {
         <Grid item>
           <Button sx={buttonStyle} onClick={navigateToWorkExperience}>
             <WorkIcon sx={{ fontSize: '3rem' }} />
-            <Typography>Work Experience</Typography>
+            <Typography sx={textStyle}>Work Experience</Typography>
           </Button>
         </Grid>
         <Grid item>
           <Button sx={buttonStyle} onClick={() => {/* navigate to Projects */}}>
-            <ProjectIcon sx={{ fontSize: '3rem' }} /> {/* Adjust icon size as needed */}
-            <Typography>Projects</Typography>
+            <ProjectIcon sx={{ fontSize: '3rem' }} />
+            <Typography sx={textStyle}>Projects</Typography>
           </Button>
         </Grid>
       </Grid>
