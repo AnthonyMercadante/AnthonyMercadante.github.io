@@ -12,6 +12,7 @@ import XRDeveloper from './components/XRSoftwareDeveloper/XRDeveloper';
 import AutomationAssistant from './components/AutomationAssistant/AutomationAssistant';
 import OpenFlowMachine from './components/OpenFlowMachine/OpenFlowMachine';
 import CellTower from './components/CellTower/CellTower';
+import OVIN from './components/OVIN/OVIN';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/AutomationAssistant" element={<AutomationAssistant/>}/>
             <Route path="/OpenFlowMachine" element={<OpenFlowMachine/>}/>
             <Route path="/CellTower" element={<CellTower/>}/>
+            <Route path='/OVIN' element={<OVIN/>}/>
           </Routes>
         </div>
       </Router>

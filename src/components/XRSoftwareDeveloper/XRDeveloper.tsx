@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles';
 
 import ProjectImage from '../../assets/images/OpenFlowIcon.png';
 import ProjectImage2 from '../../assets/images/CellTowerIcon.png';
+import ProjectImage3 from '../../assets/images/OVIN.png';
 
 
   const ProjectIcon = styled('img')(({ theme }) => ({
@@ -42,6 +43,11 @@ import ProjectImage2 from '../../assets/images/CellTowerIcon.png';
         route: '/CellTower',
         imageUrl: ProjectImage2,
       },
+      {
+        title: 'OVIN',
+        route: '/OVIN',
+        imageUrl: ProjectImage3,
+      }
       // ... other projects
     ];
   
