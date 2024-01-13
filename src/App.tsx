@@ -13,6 +13,8 @@ import AutomationAssistant from './components/AutomationAssistant/AutomationAssi
 import OpenFlowMachine from './components/OpenFlowMachine/OpenFlowMachine';
 import CellTower from './components/CellTower/CellTower';
 import OVIN from './components/OVIN/OVIN';
+import Projects from './components/Projects/Projects';
+import RealEstateBot from './components/RealEstateBot/RealEstateBot';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             <Route path="/OpenFlowMachine" element={<OpenFlowMachine/>}/>
             <Route path="/CellTower" element={<CellTower/>}/>
             <Route path='/OVIN' element={<OVIN/>}/>
+            <Route path='/Projects' element={<Projects/>}/>
+            <Route path='/RealEstateBot' element={<RealEstateBot/>}/>
           </Routes>
         </div>
       </Router>

@@ -47,6 +47,10 @@ const Portfolio = () => {
     navigate('/WorkExperience');
   };
 
+  const navigateToProjects = () => {
+    navigate('/Projects');
+  }
+
   const goBack = () => {
     navigate(-1); // Go back to the previous page
   };
@@ -69,7 +73,7 @@ const Portfolio = () => {
           </Button>
         </Grid>
         <Grid item>
-          <Button sx={buttonStyle} onClick={() => {/* navigate to Projects */}}>
+          <Button sx={buttonStyle} onClick={navigateToProjects}>
             <ProjectIcon sx={{ fontSize: '3rem' }} />
             <Typography sx={textStyle}>Projects</Typography>
           </Button>

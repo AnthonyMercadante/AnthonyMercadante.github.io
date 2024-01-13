@@ -57,11 +57,6 @@ import ProjectImage3 from '../../assets/images/OVIN.png';
       navigate(route);
     };
 
-
-  const goBack = () => {
-    navigate(-1); // Go back to the previous page
-  };
-
   return (
     <Box sx={{ 
       p: 1.5,
