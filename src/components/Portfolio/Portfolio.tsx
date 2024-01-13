@@ -10,8 +10,8 @@ const Portfolio = () => {
   const navigate = useNavigate();
 
   const buttonStyle = {
-    width: 150, // Fixed width for desktop
-    height: 150, // Fixed height for desktop
+    width: 200, // Increased width for desktop
+    height: 200, // Increased height for desktop
     borderRadius: '20%', // Rounded corners
     margin: '10px', // Space between buttons
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Subtle shadow for depth
@@ -22,21 +22,24 @@ const Portfolio = () => {
     '&:hover': {
       boxShadow: '0 6px 12px rgba(0, 0, 0, 0.5)', // More pronounced shadow on hover
     },
+    '& .MuiSvgIcon-root': {
+      fontSize: '5rem', // Increased icon size for desktop
+    },
     '@media (max-width: 600px)': {
-      width: 100, // Smaller width for mobile
-      height: 100, // Smaller height for mobile
+      width: 100, // Retained width for mobile
+      height: 100, // Retained height for mobile
       '& .MuiSvgIcon-root': {
-        fontSize: '2rem', // Smaller icon size for mobile
+        fontSize: '2rem', // Retained icon size for mobile
       },
     },
   };
 
   const textStyle = {
     marginTop: theme.spacing(1), // Space between icon and text
-    fontSize: '1rem', // Default text size
+    fontSize: '1.2rem', // Increased text size for desktop
     textAlign: 'center', // Center align text
     '@media (max-width: 600px)': {
-      fontSize: '0.8rem', // Smaller text size for mobile
+      fontSize: '0.8rem', // Retained text size for mobile
     },
   };
 
