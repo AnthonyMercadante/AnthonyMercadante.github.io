@@ -26,7 +26,7 @@ const OVIN = () => {
 
       <Box sx={{ width: isMobile ? '100%' : '66%', textAlign: 'center', mb: 4 }}>
         <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}>
-          Ontario Vehicle Innovation Network
+        Ontario Vehicle Innovation Network: A VR Journey into the Automotive World
         </Typography>
 
         {/* YouTube Video Embed */}
@@ -43,36 +43,70 @@ const OVIN = () => {
         </Box>
 
         <Typography variant="body1" gutterBottom>
-          My co-op placement at Mohawk College presented a unique challenge: transforming a space-consuming Open Flow Water Machine into a virtual reality experience. This project was not only about saving physical space but also about enhancing the educational process through innovative VR technology.
-        </Typography>
+        At Mohawk College's XR Innovation Studio, my final project was a thrilling venture into the world of virtual reality, crafted for the Ontario Vehicle Innovation Network. The government of Ontario had a compelling vision: to kindle a passion for the automotive industry among young students. Our mission? To develop a VR game and information center that would captivate students at various summer camps, sparking an interest in automotive-related post-secondary education.        </Typography>
 
         <img src={Image} alt="Open Flow Water Channel Machine Project Scene layout" style={imageStyle} />
         <Typography variant="caption" sx={{ display: 'block', mb: 3 }}>Project Scene Layout</Typography>
 
-        <Typography variant="body1" gutterBottom>
-          The VR setup revolutionized how students conducted experiments, replacing the physical machine with VR headsets. This transition was a significant step in educational technology, blending practicality with immersive learning.
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
+        The Challenge of Virtual Driving
         </Typography>
+
+        <Typography variant="body1" gutterBottom>
+        My role in this project was pivotal—I was responsible for the driving component of the experience. Contrary to initial expectations, crafting a realistic driving experience in VR proved to be a formidable challenge. It wasn't just about simulating a drive; it was about capturing the essence of being behind the wheel, ensuring every turn and acceleration felt genuine.        </Typography>
 
         <img src={Image2} alt="Close-up shot of the machine" style={imageStyle} />
-        <Typography variant="caption" sx={{ display: 'block', mb: 3 }}>Close-up of the Machine</Typography>
+        <Typography variant="caption" sx={{ display: 'block', mb: 3 }}>Early testing of a hydraulic lift</Typography>
 
         <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
-          Tackling the Complexities of Water Simulation
+        Engaging Young Minds
         </Typography>
         <Typography variant="body1" gutterBottom>
-          One of the most complex aspects of this project was developing a realistic water simulation in VR. I delved into the intricacies of fluid dynamics, exploring Eulerian and Lagrangian methods to accurately represent and simulate fluid behavior. This was crucial for ensuring the authenticity of the lab experiments in the virtual environment.
+        Another crucial aspect of my role was to devise entertaining yet educational ways to engage a young audience. 
+        We wanted the students to not only have fun but also to walk away with a deeper understanding of the automotive industry. 
+        This balance between education and entertainment was key to the project's success.
         </Typography>
 
-        <Typography variant="caption" sx={{ display: 'block', mb: 3 }}>Lab Tools in VR</Typography>
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
+        The Power of Incentives
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+        One enlightening discovery during our play tests with high school and elementary students was the impact of incentives. 
+        We observed that the prospect of driving a car they had built was a powerful motivator for the students, encouraging them to engage fully with the content. 
+        This insight shaped our approach, ensuring the final experience was both rewarding and educational.        
+        </Typography>
+
+
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
+        The Crucial Role of Tutorials
+        </Typography>
 
         <Typography variant="body1" gutterBottom>
-          The success of this project was a testament to the power of VR in education. It demonstrated how complex simulations, when executed well, can significantly enhance the learning experience. This endeavor at Mohawk College was not just a technical achievement but also a valuable learning experience in applying theoretical knowledge to practical challenges.
+        The importance of an intuitive tutorial became evident as we progressed. 
+        We found that new players, regardless of their gaming background, often struggled to get started. 
+        This realization led to many hours dedicated to developing a tutorial system that could guide players of all skill levels through the experience, without the need for our physical presence.
+        </Typography>
+
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
+        Overcoming Technical Hurdles
         </Typography>
 
         <Typography variant="body1" gutterBottom>
-          This journey honed my skills in simulation, VR, and programming, highlighting the importance of practical application in education and the transformative potential of technology.
+        A significant technical challenge was the optimization of the VR experience. 
+        The high-poly models of the cars, chosen for their realism, initially led to poor performance. 
+        To resolve this, I delved into extensive research and applied various optimization techniques, ensuring a smooth and playable experience without compromising on visual fidelity.        
         </Typography>
-      </Box>
+      
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
+        Conclusion
+        </Typography>
+
+        <Typography variant="body1" gutterBottom>
+        This project at Mohawk College's XR Innovation Studio was more than just a technical feat; it was a journey that honed my skills in VR, simulation, and user engagement. 
+        It underscored the transformative potential of technology in education and the impact of practical application in learning environments. 
+        By blending fun, education, and state-of-the-art VR technology, we not only achieved our goal but also opened new avenues for future exploration in the realm of virtual learning.      
+        </Typography>
+        </Box>
     </Box>
   );
 };

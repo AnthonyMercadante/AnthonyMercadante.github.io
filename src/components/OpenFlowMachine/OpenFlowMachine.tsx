@@ -44,14 +44,16 @@ const OpenFlowMachinePortfolio = () => {
         </Box>
 
         <Typography variant="body1" gutterBottom>
-          My co-op placement at Mohawk College presented a unique challenge: transforming a space-consuming Open Flow Water Machine into a virtual reality experience. This project was not only about saving physical space but also about enhancing the educational process through innovative VR technology.
+          My co-op placement at Mohawk College presented a unique challenge: transforming a space-consuming Open Flow Water Machine into a virtual reality experience. 
+          This project was not only about saving physical space but also about enhancing the educational process through innovative VR technology.
         </Typography>
 
         <img src={Image} alt="Open Flow Water Channel Machine Project Scene layout" style={imageStyle} />
         <Typography variant="caption" sx={{ display: 'block', mb: 3 }}>Project Scene Layout</Typography>
 
         <Typography variant="body1" gutterBottom>
-          The VR setup revolutionized how students conducted experiments, replacing the physical machine with VR headsets. This transition was a significant step in educational technology, blending practicality with immersive learning.
+          The VR setup revolutionized how students conducted experiments, replacing the physical machine with VR headsets. 
+          This transition was a significant step in educational technology, blending practicality with immersive learning.
         </Typography>
 
         <img src={Image2} alt="Close-up shot of the machine" style={imageStyle} />
@@ -61,14 +63,18 @@ const OpenFlowMachinePortfolio = () => {
           Tackling the Complexities of Water Simulation
         </Typography>
         <Typography variant="body1" gutterBottom>
-          One of the most complex aspects of this project was developing a realistic water simulation in VR. I delved into the intricacies of fluid dynamics, exploring Eulerian and Lagrangian methods to accurately represent and simulate fluid behavior. This was crucial for ensuring the authenticity of the lab experiments in the virtual environment.
+          One of the most complex aspects of this project was developing a realistic water simulation in VR. 
+          I delved into the intricacies of fluid dynamics, exploring Eulerian and Lagrangian methods to accurately represent and simulate fluid behavior. 
+          This was crucial for ensuring the authenticity of the lab experiments in the virtual environment.
         </Typography>
 
         <img src={Image3} alt="Tools the users can use for completing their labs" style={imageStyle} />
         <Typography variant="caption" sx={{ display: 'block', mb: 3 }}>Lab Tools in VR</Typography>
 
         <Typography variant="body1" gutterBottom>
-          The success of this project was a testament to the power of VR in education. It demonstrated how complex simulations, when executed well, can significantly enhance the learning experience. This endeavor at Mohawk College was not just a technical achievement but also a valuable learning experience in applying theoretical knowledge to practical challenges.
+          The success of this project was a testament to the power of VR in education. 
+          It demonstrated how complex simulations, when executed well, can significantly enhance the learning experience. 
+          This endeavor at Mohawk College was not just a technical achievement but also a valuable learning experience in applying theoretical knowledge to practical challenges.
         </Typography>
 
         <Typography variant="body1" gutterBottom>
