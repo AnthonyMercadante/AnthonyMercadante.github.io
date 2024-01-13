@@ -269,12 +269,13 @@ const RealEstateBot = () => {
             <Typography variant="h2" sx={style.header}>RealEstate AI Bot</Typography>
             
             <Typography variant="body1" sx={style.paragraph}>
-                This script defines the core functionality of a Real Estate Assistant Discord Bot. It integrates with OpenAI's GPT models to process user inquiries related to the real estate market, focusing on the Toronto and Ontario regions. The bot maintains a conversation history for context management, analyzes word frequency vectors, classifies utterances for emotional tone or speech act, and uses two different OpenAI API calls (completion and chat models) to generate informative and relevant responses.
+                This script is the backbone of a Real Estate Assistant Discord Bot, leveraging OpenAI's GPT models for handling real estate inquiries, particularly within the Toronto and Ontario markets. It's adept at maintaining conversation histories to ensure contextually aware interactions, while also utilizing advanced techniques like word frequency analysis and emotional tone classification to understand and respond to user queries effectively.
             </Typography>
-            
+
             <Typography variant="body1" sx={style.paragraph}>
-                The script handles the construction of prompts for the OpenAI API, manages conversation history, analyzes word frequency, classifies utterances, determines the relevance and redundancy of responses, and decides the final response to be sent to the user. It is designed to be integrated with a Discord bot client for interaction in a Discord server environment.
+                Furthermore, the script is intricately designed to craft detailed prompts for the OpenAI API, ensuring each response is tailored and relevant. Its sophisticated logic not only manages dialogue history but also evaluates the relevance and redundancy of potential responses. This seamless integration with a Discord bot client allows for dynamic interactions in a server environment, enhancing user engagement.
             </Typography>
+
 
             <Box sx={style.featureBox}>
                 <Typography variant="h4" sx={style.featureHeading}>Key Features:</Typography>
