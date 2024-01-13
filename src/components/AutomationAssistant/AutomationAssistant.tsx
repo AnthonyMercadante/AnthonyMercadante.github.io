@@ -48,17 +48,6 @@ const AutomationAssistant = () => {
         Using my skills in Python, Qt 6, OpenAI, httpx, and SQLite, I embarked on designing and implementing a comprehensive automation solution. 
         The process involved creating templates, forms, and process flows tailored to the specific needs of grant proposal creation.
         </Typography>
-
-        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
-        The Power of Incentives
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-        One enlightening discovery during our play tests with high school and elementary students was the impact of incentives. 
-        We observed that the prospect of driving a car they had built was a powerful motivator for the students, encouraging them to engage fully with the content. 
-        This insight shaped our approach, ensuring the final experience was both rewarding and educational.        
-        </Typography>
-
-
         <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
         Key Responsibilities
         </Typography>
