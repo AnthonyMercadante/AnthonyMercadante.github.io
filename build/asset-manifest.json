@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.9b343a2d.css",
-    "main.js": "/static/js/main.d346d46f.js",
+    "main.js": "/static/js/main.f1fcf04f.js",
     "static/js/787.2dcca737.chunk.js": "/static/js/787.2dcca737.chunk.js",
     "static/media/arieltower.png": "/static/media/arieltower.d36faead2a6c6235f848.png",
     "static/media/Toolsforuse.png": "/static/media/Toolsforuse.e08f78e0d73e7b457670.png",
@@ -14,6 +14,7 @@
     "static/media/MobileAppDev.png": "/static/media/MobileAppDev.b64e36b5bc98c7bb2c11.png",
     "static/media/DataStructures.png": "/static/media/DataStructures.2be3863e0b8ec8210ceb.png",
     "static/media/AdvancedDotNet.png": "/static/media/AdvancedDotNet.9f79372273bd74902376.png",
+    "static/media/RealEstateBot.png": "/static/media/RealEstateBot.4045c5b357406e695915.png",
     "static/media/GroundCellTower.png": "/static/media/GroundCellTower.c06737fd955766965750.png",
     "static/media/OVINMenu.png": "/static/media/OVINMenu.1e07fc460a726e9db8f5.png",
     "static/media/CellTowerIcon.png": "/static/media/CellTowerIcon.db3360ab7c233d8b057b.png",
@@ -26,11 +27,11 @@
     "static/media/professional-photo.jpg": "/static/media/professional-photo.e28cd5836920ba4ec674.jpg",
     "index.html": "/index.html",
     "main.9b343a2d.css.map": "/static/css/main.9b343a2d.css.map",
-    "main.d346d46f.js.map": "/static/js/main.d346d46f.js.map",
+    "main.f1fcf04f.js.map": "/static/js/main.f1fcf04f.js.map",
     "787.2dcca737.chunk.js.map": "/static/js/787.2dcca737.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9b343a2d.css",
-    "static/js/main.d346d46f.js"
+    "static/js/main.f1fcf04f.js"
   ]
 }
