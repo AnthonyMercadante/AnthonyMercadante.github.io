@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+import { Button, IconButton} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
@@ -15,8 +15,8 @@ const AboutMe = () => {
     navigate('/skills');
   };
 
-  const goBack = () => {
-    navigate(-1); // Go back to the previous page
+  const handleBack = () => {
+    navigate(-1); // Navigate back to the previous page
   };
 
   return (
@@ -36,6 +36,9 @@ const AboutMe = () => {
         px: [2, 4, 8], 
       }}
     >
+      <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
+        <ArrowBackIcon />
+      </IconButton>
       <Grid container spacing={0} justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={6} md={4}>
           <img 
@@ -66,8 +69,6 @@ const AboutMe = () => {
           </Button>
         </Grid>
       </Grid>
-      <Button startIcon={<ArrowBackIcon />} onClick={goBack} sx={{ position: 'absolute', top: 20, left: 20 }}>
-      </Button>
     </Box>
   );
 };

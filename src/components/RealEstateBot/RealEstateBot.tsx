@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { xonokai } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -8,6 +8,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import CodeIcon from '@mui/icons-material/Code';
 import { CSSProperties } from 'react';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 
@@ -54,6 +55,10 @@ const RealEstateBot = () => {
         setShowReadme(!showReadme);
     };
 
+    const handleBack = () => {
+        navigate(-1); // Navigate back to the previous page
+    };
+
     const buttonStyle = {
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
@@ -68,7 +73,7 @@ const RealEstateBot = () => {
     // Function to download zip file
     const downloadZip = () => {
         const link = document.createElement('a');
-        link.href = './real_estate_assistant.zip'; 
+        link.href = './real_estate_assistant.zip';
         link.download = 'real_estate_assistant.zip';
         document.body.appendChild(link);
         link.click();
@@ -632,14 +637,18 @@ def is_response_redundant(response1, response2):
     };
 
     return (
+
         <Box sx={style.container}>
-            <Typography variant="h2" sx={style.header}>Real Estate AI Bot</Typography>
+            <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
+                <ArrowBackIcon />
+            </IconButton>
+            <Typography variant="h2" sx={style.header}><br></br>Real Estate AI Bot</Typography>
 
             <Typography variant="body1" sx={style.paragraph}>
                 This script is the backbone of a Real Estate Assistant Discord Bot, leveraging OpenAI's GPT models for handling real estate inquiries, particularly within the Toronto and Ontario markets. It's adept at maintaining conversation histories to ensure contextually aware interactions, while also utilizing advanced techniques like word frequency analysis and emotional tone classification to understand and respond to user queries effectively.
             </Typography>
 
-            <Typography variant="body1" sx={style.paragraph}>
+            <Typography variant="body1" sx={style.paragraph}><br></br>
                 Furthermore, the script is intricately designed to craft detailed prompts for the OpenAI API, ensuring each response is tailored and relevant. Its sophisticated logic not only manages dialogue history but also evaluates the relevance and redundancy of potential responses. This seamless integration with a Discord bot client allows for dynamic interactions in a server environment, enhancing user engagement.
             </Typography>
 

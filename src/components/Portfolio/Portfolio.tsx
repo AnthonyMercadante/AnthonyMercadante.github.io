@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Grid, Typography, useTheme } from '@mui/material';
+import { Box, Button, Grid, Typography, IconButton, useTheme } from '@mui/material';
 import WorkIcon from '@mui/icons-material/Work'; 
 import ProjectIcon from '@mui/icons-material/Build'; 
 import { useNavigate } from 'react-router-dom';
@@ -51,8 +51,8 @@ const Portfolio = () => {
     navigate('/Projects');
   }
 
-  const goBack = () => {
-    navigate(-1); // Go back to the previous page
+  const handleBack = () => {
+    navigate(-1); // Navigate back to the previous page
   };
 
   return (
@@ -65,6 +65,9 @@ const Portfolio = () => {
       alignItems: 'center',
       justifyContent: 'center',
     }}>
+      <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
+        <ArrowBackIcon />
+      </IconButton>
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
           <Button sx={buttonStyle} onClick={navigateToWorkExperience}>
@@ -79,8 +82,6 @@ const Portfolio = () => {
           </Button>
         </Grid>
       </Grid>
-      <Button startIcon={<ArrowBackIcon />} onClick={goBack} sx={{ position: 'absolute', top: 20, left: 20 }}>
-      </Button>
     </Box>
   );
 };
