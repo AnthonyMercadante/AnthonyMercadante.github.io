@@ -1,4 +1,0 @@
-My API Key: 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
-
-Run this command  in the terminal/commpand prompt window before launching the discord bot:
-export OPENAI_API_KEY='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'
