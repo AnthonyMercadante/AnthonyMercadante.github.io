@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, Button, IconButton, useMediaQuery, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import Image from '../../assets/images/OVINMenu.png'; 
@@ -20,12 +20,12 @@ const OVIN = () => {
 
   return (
     <Box sx={{ flexGrow: 1, bgcolor: 'background.default', color: 'text.primary', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Button startIcon={<ArrowBackIcon />} onClick={handleBack} sx={{ alignSelf: 'flex-start', mb: 2 }}>
-        
-      </Button>
+      <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
+                <ArrowBackIcon />
+            </IconButton>
 
       <Box sx={{ width: isMobile ? '100%' : '66%', textAlign: 'center', mb: 4 }}>
-        <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}>
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}><br></br><br></br>
         Ontario Vehicle Innovation Network: A VR Journey into the Automotive World
         </Typography>
 

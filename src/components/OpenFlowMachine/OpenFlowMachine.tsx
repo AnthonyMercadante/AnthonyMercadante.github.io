@@ -26,7 +26,7 @@ const OpenFlowMachinePortfolio = () => {
       </IconButton>
 
       <Box sx={{ width: isMobile ? '100%' : '66%', textAlign: 'center', mb: 4 }}>
-        <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}><br></br>
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}><br></br><br></br>
           Open Flow Water Channel Machine in Virtual Reality
         </Typography>
 

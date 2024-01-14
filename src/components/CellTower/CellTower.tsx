@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, IconButton, Button, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, IconButton, useMediaQuery, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import Image from '../../assets/images/arieltower.png';
@@ -26,7 +26,7 @@ const OpenFlowMachinePortfolio = () => {
             </IconButton>
 
             <Box sx={{ width: isMobile ? '100%' : '66%', textAlign: 'center', mb: 4 }}>
-                <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}><br></br>
+                <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}><br></br><br></br>
                     Cell Tower Repair Training in Virutal Reality
                 </Typography>
 
