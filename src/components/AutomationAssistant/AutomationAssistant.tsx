@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button, useMediaQuery, useTheme, Card, CardContent } from '@mui/material';
+import { Box, Typography, Button, useMediaQuery, useTheme, IconButton, Card, CardContent } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom'; 
 
@@ -24,10 +24,12 @@ const AutomationAssistant = () => {
   };
 
   return (
+    
     <Box sx={{ flexGrow: 1, bgcolor: 'black', color: 'text.secondary', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Button startIcon={<ArrowBackIcon />} onClick={handleBack} sx={{ alignSelf: 'flex-start', mb: 2, color: 'white' }}>
-        
-      </Button>
+      <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
+        <ArrowBackIcon />
+      </IconButton>
+      <Box sx={{ flexGrow: 1, bgcolor: 'black', color: 'text.secondary', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}></Box>
 
       <Box sx={{ width: isMobile ? '100%' : '66%' }}>
         {/* Automation Assistant Role */}

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
+import { Button, IconButton} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
-import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
@@ -33,6 +32,8 @@ interface Skill {
     open: boolean;
     handleClose: () => void;
   }
+
+  
 
   const SkillIcon = styled('img')(({ theme }) => ({
     borderRadius: '20%', // Rounded corners for an icon-like appearance
@@ -218,11 +219,11 @@ const Skills = () => {
         setModalOpen(true);
       };
 
-  const navigate = useNavigate();
+      const navigate = useNavigate();
 
-  const goBack = () => {
-    navigate(-1); // Go back to the previous page
-  };
+      const handleBack = () => {
+        navigate(-1); // Navigate back to the previous page
+      };
 
   return (
     <Box sx={{ 
@@ -236,6 +237,9 @@ const Skills = () => {
       justifyContent: 'center',
       overflow: 'hidden'
     }}>
+      <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
+        <ArrowBackIcon />
+      </IconButton>
       <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>    
         {skills.map((skill, index) => (
           <Grid item xs={4} sm={6} md={4} key={index} onClick={() => handleOpen(skill)}> 
@@ -249,8 +253,6 @@ const Skills = () => {
       </Typography>
 
       {selectedSkill && <SkillsModal skill={selectedSkill} open={modalOpen} handleClose={() => setModalOpen(false)} />}
-      <Button startIcon={<ArrowBackIcon />} onClick={goBack} sx={{ position: 'absolute', top: 20, left: 20 }}>
-      </Button>
     </Box>
   );
 };
