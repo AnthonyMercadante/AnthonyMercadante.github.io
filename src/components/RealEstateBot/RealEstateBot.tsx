@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
+// React imports
+import React, { useState, CSSProperties } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { xonokai } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { IconButton, Tooltip } from '@mui/material';
+
+// Material UI components and icons
+import { Box, Typography, IconButton, Tooltip, useTheme } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DescriptionIcon from '@mui/icons-material/Description';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import CodeIcon from '@mui/icons-material/Code';
-import { CSSProperties } from 'react';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+// Syntax highlighting components and styles
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { xonokai } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 
 
 
