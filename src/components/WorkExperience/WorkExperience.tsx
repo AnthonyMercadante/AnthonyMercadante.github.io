@@ -1,13 +1,21 @@
+// React and Hooks
 import React, { useState } from 'react';
-import { Paper, Typography, Box, Button, IconButton, useMediaQuery } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+// Material UI Components and Icons
+import { 
+  Paper, Typography, Box, Button, IconButton, Chip, useMediaQuery 
+} from '@mui/material';
 import WorkIcon from '@mui/icons-material/Work';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import theme from '../../theme';
-import Chip from '@mui/material/Chip';
-import { Link, useNavigate } from 'react-router-dom';
+
+// Other Imports
 import SwipeableViews from 'react-swipeable-views';
+import theme from '../../theme';
+
 
 interface WorkExperience {
   title: string;

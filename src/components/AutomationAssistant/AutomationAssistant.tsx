@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Typography, Button, useMediaQuery, useTheme, IconButton, Card, CardContent } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme, IconButton, Card, CardContent } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const AutomationAssistant = () => {
   const theme = useTheme();
@@ -12,19 +12,18 @@ const AutomationAssistant = () => {
     navigate(-1);
   };
 
-  // Card style
   const cardStyle = {
-    backgroundColor: 'rgba(25, 25, 25, 0.8)', // Very dark semi-transparent background for cards
+    backgroundColor: 'rgba(25, 25, 25, 0.8)',
     borderRadius: '10px',
     padding: '20px',
-    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // Darker shadow for depth
+    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
     marginBottom: '20px',
-    color: 'white', // Text color for dark theme
-    textAlign: 'left', // Left-aligned text within the card
+    color: 'white',
+    textAlign: 'left',
   };
 
   return (
-    
+
     <Box sx={{ flexGrow: 1, bgcolor: 'black', color: 'text.secondary', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
         <ArrowBackIcon />
@@ -32,7 +31,6 @@ const AutomationAssistant = () => {
       <Box sx={{ flexGrow: 1, bgcolor: 'black', color: 'text.secondary', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}></Box>
 
       <Box sx={{ width: isMobile ? '100%' : '66%' }}>
-        {/* Automation Assistant Role */}
         <Card sx={cardStyle}>
           <CardContent>
             <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}>
@@ -43,8 +41,6 @@ const AutomationAssistant = () => {
             </Typography>
           </CardContent>
         </Card>
-
-        {/* The Challenge */}
         <Card sx={cardStyle}>
           <CardContent>
             <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
@@ -55,8 +51,6 @@ const AutomationAssistant = () => {
             </Typography>
           </CardContent>
         </Card>
-
-        {/* My Approach */}
         <Card sx={cardStyle}>
           <CardContent>
             <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
@@ -67,8 +61,6 @@ const AutomationAssistant = () => {
             </Typography>
           </CardContent>
         </Card>
-
-        {/* Key Responsibilities */}
         <Card sx={cardStyle}>
           <CardContent>
             <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
@@ -82,8 +74,6 @@ const AutomationAssistant = () => {
             </Typography>
           </CardContent>
         </Card>
-
-        {/* Outcomes */}
         <Card sx={cardStyle}>
           <CardContent>
             <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
@@ -96,8 +86,6 @@ const AutomationAssistant = () => {
             </Typography>
           </CardContent>
         </Card>
-
-        {/* Conclusion */}
         <Card sx={cardStyle}>
           <CardContent>
             <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mt: 4, mb: 2 }}>
