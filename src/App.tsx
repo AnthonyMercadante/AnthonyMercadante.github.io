@@ -15,6 +15,7 @@ import CellTower from './components/CellTower/CellTower';
 import OVIN from './components/OVIN/OVIN';
 import Projects from './components/Projects/Projects';
 import RealEstateBot from './components/RealEstateBot/RealEstateBot';
+import BotInteraction from './components/BotInteraction/BotInteraction';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path='/OVIN' element={<OVIN/>}/>
             <Route path='/Projects' element={<Projects/>}/>
             <Route path='/RealEstateBot' element={<RealEstateBot/>}/>
+            <Route path='/BotInteraction' element={<BotInteraction/>}/>
           </Routes>
         </div>
       </Router>
