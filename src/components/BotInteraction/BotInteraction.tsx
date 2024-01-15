@@ -30,14 +30,14 @@ const BotInteraction = () => {
     };
 
     return (
-        <Box sx={{ padding: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default', color: 'text.primary', height: '100vh' }}>
+        <Box sx={{ padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default', color: 'text.primary', height: '80vh', }}>
             <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
                 <ArrowBackIcon />
             </IconButton>
             <Typography variant="h4" gutterBottom>
                 Real Estate AI Bot Interaction
             </Typography>
-            <Box sx={{ width: '100%', maxWidth: 600, minHeight: 400, bgcolor: 'background.paper', borderRadius: 2, padding: 2, marginTop: 2 }}>
+            <Box sx={{ width: '100%', maxWidth: 600, minHeight: 400, bgcolor: 'background.paper', borderRadius: 2, padding: 2, marginTop: 1 }}>
                 <List sx={{ maxHeight: 300, overflow: 'auto' }}>
                     {messages.map((message, index) => (
                         <ListItem key={index}>
