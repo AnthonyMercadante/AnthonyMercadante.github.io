@@ -1,15 +1,17 @@
+// React and Hooks
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import { Button, IconButton} from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { styled } from '@mui/material/styles';
-import Chip from '@mui/material/Chip';
-import CloseIcon from '@mui/icons-material/Close';
-import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Back icon
+
+// Material UI Components and Styles
+import { 
+  Box, Grid, Button, IconButton, Typography, Modal, Chip, styled, useTheme 
+} from '@mui/material';
+
+// Material UI Icons
+import CloseIcon from '@mui/icons-material/Close';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+// Asset Imports
 import skillImage1 from '../../assets/images/python-analytics-visualization.png';
 import skillImage2 from '../../assets/images/AIIntelligentSystems.png';
 import skillImage3 from '../../assets/images/AdvancedDotNet.png';
@@ -19,6 +21,7 @@ import skillImage6 from '../../assets/images/DataStructures.png';
 import skillImage7 from '../../assets/images/ObjectOriented.png';
 import skillImage8 from '../../assets/images/SoftwareQuality.png';
 import skillImage9 from '../../assets/images/NetworkFundamentals.png';
+
 
 interface Skill {
     title: string;
