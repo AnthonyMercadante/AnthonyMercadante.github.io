@@ -19,15 +19,38 @@ const BotInteraction = () => {
         navigate(-1); // Navigate back to the previous page
     };
 
-    const handleSendMessage = () => {
-        // Add message to the chat display and clear input
-        if (input.trim()) {
-            setMessages([...messages, { text: input, sender: 'user' }]);
+    const handleSendMessage = async () => {
+        const userInput = input.trim();
+        if (userInput) {
+            // Add the user's message to the chat display
+            setMessages(messages => [...messages, { text: userInput, sender: 'user' }]);
             setInput('');
 
-            // Here, you can also send the message to your Python backend and get the response
+            try {
+                // Send the message to the Flask backend
+                const response = await fetch('http://localhost:5001/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userInput }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // Add the bot's response to the chat display
+                setMessages(messages => [...messages, { text: data.response, sender: 'bot' }]);
+            } catch (error) {
+                console.error('Failed to send message:', error);
+                // Optionally handle the error, e.g., show an error message in the chat
+            }
         }
     };
+
 
     return (
         <Box sx={{ padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default', color: 'text.primary', height: '80vh', }}>
@@ -40,8 +63,11 @@ const BotInteraction = () => {
             <Box sx={{ width: '100%', maxWidth: 600, minHeight: 400, bgcolor: 'background.paper', borderRadius: 2, padding: 2, marginTop: 1 }}>
                 <List sx={{ maxHeight: 300, overflow: 'auto' }}>
                     {messages.map((message, index) => (
-                        <ListItem key={index}>
-                            <ListItemText primary={message.text} sx={{ wordBreak: 'break-word' }} />
+                        <ListItem key={index} style={{ alignSelf: message.sender === 'user' ? 'flex-end' : 'flex-start' }}>
+                            <ListItemText
+                                primary={message.text}
+                                sx={{ wordBreak: 'break-word', background: message.sender === 'user' ? '#e0e0e0' : '#9fa8da', borderRadius: '10px', padding: '10px' }}
+                            />
                         </ListItem>
                     ))}
                 </List>
