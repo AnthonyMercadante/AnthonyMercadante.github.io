@@ -17,6 +17,9 @@ const BotInteraction = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    // reference for the chat messages container
+    const chatContainerRef = useRef<HTMLUListElement | null>(null);
+
     const handleBack = () => {
         navigate(-1); // Navigate back to the previous page
     };
@@ -24,7 +27,11 @@ const BotInteraction = () => {
     const messagesEndRef = useRef<HTMLLIElement | null>(null);
 
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        if (chatContainerRef.current) {
+            // Scroll to the bottom of the chat container
+            const scrollHeight = chatContainerRef.current.scrollHeight;
+            chatContainerRef.current.scrollTop = scrollHeight;
+        }
     }, [messages]);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -121,7 +128,10 @@ const BotInteraction = () => {
                 Real Estate AI Bot Interaction
             </Typography>
             <Box sx={{ width: '100%', maxWidth: 600, minHeight: 400, bgcolor: 'background.paper', borderRadius: 2, padding: 2, marginBottom: 2 }}>
-                <List sx={{ maxHeight: 300, overflow: 'auto' }}>
+            <List 
+                    sx={{ maxHeight: 300, overflow: 'auto' }}
+                    ref={chatContainerRef} 
+                >
                     {messages.map((message, index) => (
                         <ListItem
                             key={index}
