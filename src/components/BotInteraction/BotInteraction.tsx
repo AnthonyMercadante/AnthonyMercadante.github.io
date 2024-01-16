@@ -28,13 +28,14 @@ const BotInteraction = () => {
 
             try {
                 // Send the message to the Flask backend
-                const response = await fetch('http://localhost:5001/chat', {
+                const response = await fetch('https://realestateassistantapi.azurewebsites.net/chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({ message: userInput }),
                 });
+
 
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
