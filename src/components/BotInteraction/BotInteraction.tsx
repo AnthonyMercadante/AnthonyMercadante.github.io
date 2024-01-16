@@ -110,7 +110,7 @@ const BotInteraction = () => {
             <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
                 <ArrowBackIcon />
             </IconButton>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom><br></br>
                 Real Estate AI Bot Interaction
             </Typography>
             <Box sx={{ width: '100%', maxWidth: 600, minHeight: 400, bgcolor: 'background.paper', borderRadius: 2, padding: 2, marginBottom: 2 }}>
@@ -156,14 +156,6 @@ const BotInteraction = () => {
                         onClick={() => handleExampleQuestion("Can you explain how down payments work in real estate transactions?")}
                     >
                         Can you explain how down payments work in real estate transactions?
-                    </Button>
-                    <Button
-                        variant="outlined"
-                        startIcon={<HelpOutlineIcon />}
-                        sx={{ justifyContent: 'flex-start', borderRadius: '20px', borderColor: 'primary.main' }}
-                        onClick={() => handleExampleQuestion("How can I calculate my potential monthly mortgage payments?")}
-                    >
-                        How can I calculate my potential monthly mortgage payments?
                     </Button>
                     <Button
                         variant="outlined"
