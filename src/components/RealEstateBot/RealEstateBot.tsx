@@ -73,6 +73,7 @@ const RealEstateBot = () => {
                 <Typography variant="h4" sx={style.featureHeading}>Key Technical Features:</Typography>
                 <ul>
                     <li><Typography variant="body1">Advanced integration with OpenAI's GPT models for insightful responses.</Typography></li>
+                    <li><Typography variant="body1">Deployment on Azure App Service using Flask and Gunicorn for robust and scalable performance.</Typography></li>
                     <li><Typography variant="body1">Conversation history tracking for context-aware interactions.</Typography></li>
                     <li><Typography variant="body1">Word frequency analysis and utterance classification for nuanced query understanding.</Typography></li>
                     <li><Typography variant="body1">Utilization of both completion and chat models for varied and appropriate responses.</Typography></li>
@@ -95,6 +96,8 @@ const RealEstateBot = () => {
                     <li><Typography variant="body1">OpenAI Python client library for interfacing with GPT models.</Typography></li>
                     <li><Typography variant="body1">Python 3.6 or higher for backend development.</Typography></li>
                     <li><Typography variant="body1">spaCy and sklearn for advanced NLP and machine learning tasks.</Typography></li>
+                    <li><Typography variant="body1">Flask as the web framework for handling HTTP requests and serving the API.</Typography></li>
+                    <li><Typography variant="body1">Gunicorn as the WSGI HTTP server for handling production-level traffic.</Typography></li>
                 </ul>
             </Box>
             <Button 
