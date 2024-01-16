@@ -1,7 +1,7 @@
 // React imports
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, IconButton, TextField, Button, List, ListItem, ListItemText, Paper } from '@mui/material';
+import { Box, Typography, IconButton, TextField, Button, List, ListItem, ListItemText, CircularProgress } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 
@@ -14,6 +14,7 @@ const BotInteraction = () => {
     const navigate = useNavigate();
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState<Message[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleBack = () => {
         navigate(-1); // Navigate back to the previous page
@@ -25,6 +26,7 @@ const BotInteraction = () => {
             // Add the user's message to the chat display
             setMessages(messages => [...messages, { text: userInput, sender: 'user' }]);
             setInput('');
+            setIsLoading(true);
 
             try {
                 // Send the message to the Flask backend
@@ -44,17 +46,18 @@ const BotInteraction = () => {
                 const data = await response.json();
 
                 // Add the bot's response to the chat display
+                setIsLoading(false);
                 setMessages(messages => [...messages, { text: data.response, sender: 'bot' }]);
             } catch (error) {
                 console.error('Failed to send message:', error);
-                // Optionally handle the error, e.g., show an error message in the chat
+                setIsLoading(false);
             }
         }
     };
 
 
     return (
-        <Box sx={{ padding: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default', color: 'text.primary', height: '80vh', }}>
+        <Box sx={{ padding: 4.5, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default', color: 'text.primary', height: '60vh', }}>
             <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
                 <ArrowBackIcon />
             </IconButton>
@@ -67,7 +70,7 @@ const BotInteraction = () => {
                         <ListItem key={index} style={{ alignSelf: message.sender === 'user' ? 'flex-end' : 'flex-start' }}>
                             <ListItemText
                                 primary={message.text}
-                                sx={{ wordBreak: 'break-word', background: message.sender === 'user' ? '#e0e0e0' : '#9fa8da', borderRadius: '10px', padding: '10px' }}
+                                sx={{ wordBreak: 'break-word', background: message.sender === 'user' ? '#525050' : '#333769', borderRadius: '10px', padding: '10px' }}
                             />
                         </ListItem>
                     ))}
@@ -79,13 +82,13 @@ const BotInteraction = () => {
                         placeholder="Type your message here..."
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                         sx={{ mr: 1, bgcolor: 'background.paper' }}
                     />
                     <Button variant="contained" endIcon={<SendIcon />} onClick={handleSendMessage}>
                         Send
                     </Button>
                 </Box>
+                {isLoading && <CircularProgress />}
             </Box>
         </Box>
     );
