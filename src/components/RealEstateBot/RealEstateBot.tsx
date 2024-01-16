@@ -74,12 +74,13 @@ const RealEstateBot = () => {
                 <ul>
                     <li><Typography variant="body1">Advanced integration with OpenAI's GPT models for insightful responses.</Typography></li>
                     <li><Typography variant="body1">Deployment on Azure App Service using Flask and CORS.</Typography></li>
-                    <li><Typography variant="body1">Conversation history tracking for context-aware interactions.</Typography></li>
-                    <li><Typography variant="body1">Word frequency analysis and utterance classification for nuanced query understanding.</Typography></li>
+                    <li><Typography variant="body1">Session-based conversation history management with inactivity timeout for context-aware interactions.</Typography></li>
+                    <li><Typography variant="body1">Word frequency analysis for nuanced query understanding.</Typography></li>
                     <li><Typography variant="body1">Utilization of both completion and chat models for varied and appropriate responses.</Typography></li>
                     <li><Typography variant="body1">Sophisticated relevance and redundancy evaluation for response optimization.</Typography></li>
                 </ul>
             </Box>
+
 
             <Box sx={style.featureBox}>
                 <Typography variant="h4" sx={style.featureHeading}>Project Motivation:</Typography>
@@ -99,20 +100,20 @@ const RealEstateBot = () => {
                     <li><Typography variant="body1">Flask as the web framework for handling HTTP requests and serving the API.</Typography></li>
                 </ul>
             </Box>
-            <Button 
-            variant="contained" 
-            color="primary" 
-            endIcon={<ChatIcon />} 
-            onClick={handleBotInteraction} 
-            sx={{ 
-                marginTop: theme.spacing(4), 
-                padding: theme.spacing(1, 4), 
-                fontSize: '1rem',
-                marginBottom: '2em', 
-            }}
-        >
-            Interact with the AI Bot
-        </Button>
+            <Button
+                variant="contained"
+                color="primary"
+                endIcon={<ChatIcon />}
+                onClick={handleBotInteraction}
+                sx={{
+                    marginTop: theme.spacing(4),
+                    padding: theme.spacing(1, 4),
+                    fontSize: '1rem',
+                    marginBottom: '2em',
+                }}
+            >
+                Interact with the AI Bot
+            </Button>
         </Box>
     );
 
