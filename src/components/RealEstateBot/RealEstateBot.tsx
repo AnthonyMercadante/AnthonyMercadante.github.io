@@ -73,7 +73,7 @@ const RealEstateBot = () => {
                 <Typography variant="h4" sx={style.featureHeading}>Key Technical Features:</Typography>
                 <ul>
                     <li><Typography variant="body1">Advanced integration with OpenAI's GPT models for insightful responses.</Typography></li>
-                    <li><Typography variant="body1">Deployment on Azure App Service using Flask and Gunicorn for robust and scalable performance.</Typography></li>
+                    <li><Typography variant="body1">Deployment on Azure App Service using Flask and CORS.</Typography></li>
                     <li><Typography variant="body1">Conversation history tracking for context-aware interactions.</Typography></li>
                     <li><Typography variant="body1">Word frequency analysis and utterance classification for nuanced query understanding.</Typography></li>
                     <li><Typography variant="body1">Utilization of both completion and chat models for varied and appropriate responses.</Typography></li>
