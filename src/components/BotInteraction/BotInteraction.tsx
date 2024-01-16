@@ -26,7 +26,14 @@ const BotInteraction = () => {
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
-    
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        // Check if the key pressed is 'Enter'
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default action to avoid a new line
+            handleSendMessage(); // Call the sendMessage function
+        }
+    }
 
     const handleExampleQuestion = async (question: string) => {
         // Add the example question to the chat display as a user message
@@ -115,18 +122,18 @@ const BotInteraction = () => {
             </Typography>
             <Box sx={{ width: '100%', maxWidth: 600, minHeight: 400, bgcolor: 'background.paper', borderRadius: 2, padding: 2, marginBottom: 2 }}>
                 <List sx={{ maxHeight: 300, overflow: 'auto' }}>
-                {messages.map((message, index) => (
-    <ListItem 
-        key={index} 
-        style={{ alignSelf: message.sender === 'user' ? 'flex-end' : 'flex-start' }}
-        ref={index === messages.length - 1 ? messagesEndRef : null}
-    >
-        <ListItemText
-            primary={message.text}
-            sx={{ wordBreak: 'break-word', background: message.sender === 'user' ? '#525050' : '#333769', borderRadius: '10px', padding: '10px' }}
-        />
-    </ListItem>
-))}
+                    {messages.map((message, index) => (
+                        <ListItem
+                            key={index}
+                            style={{ alignSelf: message.sender === 'user' ? 'flex-end' : 'flex-start' }}
+                            ref={index === messages.length - 1 ? messagesEndRef : null}
+                        >
+                            <ListItemText
+                                primary={message.text}
+                                sx={{ wordBreak: 'break-word', background: message.sender === 'user' ? '#525050' : '#333769', borderRadius: '10px', padding: '10px' }}
+                            />
+                        </ListItem>
+                    ))}
                 </List>
                 <Box component="form" sx={{ display: 'flex', alignItems: 'center', marginTop: 1 }}>
                     <TextField
@@ -135,6 +142,7 @@ const BotInteraction = () => {
                         placeholder="Type your message here..."
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={handleKeyDown}
                         sx={{ mr: 1, bgcolor: 'background.paper' }}
                     />
                     <Button variant="contained" endIcon={<SendIcon />} onClick={handleSendMessage}>
