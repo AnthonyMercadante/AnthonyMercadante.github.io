@@ -84,6 +84,29 @@ import ProjectIconImage from '../../assets/images/RealEstateBot.png';
         <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
           Click an icon to view the project
         </Typography>
+        {/* Overlay for landscape mode */}
+      <Box sx={{
+        display: 'none',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 1)',
+        color: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000,
+        '@media (orientation: landscape)': {
+          display: 'flex',
+          flexDirection: 'column',
+          textAlign: 'center',
+        },
+      }}>
+        <Typography variant="h6">
+          Please rotate your device to portrait mode.
+        </Typography>
+      </Box>
       </Box>
     );
   };
