@@ -36,25 +36,25 @@ const AboutMe = () => {
           // Adjustments for screens smaller than 932px
           px: [1, 2, 4],
           '& .about-me-profile-image': {
-            maxWidth: '75%', // Scale down the image
+            maxWidth: '75%', 
           },
           '& h1': {
-            fontSize: '1.5rem', // Scale down the header font size
+            fontSize: '1.5rem', 
           },
           '& p': {
-            fontSize: '0.9rem', // Scale down the paragraph font size
+            fontSize: '0.9rem', 
           },
         },
         '@media (max-width: 667px)': {
           // Further adjustments for screens smaller than 667px
           '& .about-me-profile-image': {
-            maxWidth: '70%', // Further scale down the image
+            maxWidth: '70%', 
           },
           '& h1': {
-            fontSize: '1.25rem', // Further scale down the header font size
+            fontSize: '1.25rem', 
           },
           '& p': {
-            fontSize: '0.8rem', // Further scale down the paragraph font size
+            fontSize: '0.8rem', 
           },
         },
       }}
