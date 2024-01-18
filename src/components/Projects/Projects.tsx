@@ -16,75 +16,75 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ProjectIconImage from '../../assets/images/RealEstateBot.png';
 
 
-  const Projects = () => {
-    const theme = useTheme();
-    const navigate = useNavigate();
+const Projects = () => {
+  const theme = useTheme();
+  const navigate = useNavigate();
 
-    const ProjectIcon = styled('img')(({ theme }) => ({
-      borderRadius: '20%', 
-      width: '70%', 
-      height: 'auto',
-      objectFit: 'cover',
-      transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-      '&:hover': {
-        transform: 'scale(1.05)',
-        boxShadow: '0 4px 20px 0 rgba(0, 0, 0, 0.2)', 
-      },
-      [theme.breakpoints.down('sm')]: {
-        width: '75%', 
-      },
-    }));
-  
-    const projects = [
-      {
-        title: 'Real Estate AI Chat Bot',
-        route: '/RealEstateBot',
-        imageUrl: ProjectIconImage,
-      },
-      
-    ];
+  const ProjectIcon = styled('img')(({ theme }) => ({
+    borderRadius: '20%',
+    width: '70%',
+    height: 'auto',
+    objectFit: 'cover',
+    transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.05)',
+      boxShadow: '0 4px 20px 0 rgba(0, 0, 0, 0.2)',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '75%',
+    },
+  }));
 
+  const projects = [
+    {
+      title: 'Real Estate AI Chat Bot',
+      route: '/RealEstateBot',
+      imageUrl: ProjectIconImage,
+    },
 
-    const navigateToProject = (route: string) => {
-      navigate(route);
-    };
+  ];
 
 
-    return (
-      <Box sx={{ 
-        p: 1.5,
-        backgroundColor: 'black',
-        color: 'white',
-        height: 'calc(100vh - 24px)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden'
-      }}>
-        <IconButton onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 20, left: 20 }}>
-          <ArrowBackIcon />
-        </IconButton>
-        <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>
-          {projects.map((project, index) => (
-            <Grid item xs={4} sm={6} md={4} key={index} onClick={() => navigateToProject(project.route)}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <ProjectIcon src={project.imageUrl} alt={project.title} />
-                <Typography variant="subtitle1" sx={{ 
-                  mt: 1, 
-                  color: 'white',
-                  fontSize: { xs: '0.7rem', sm: '1rem' } 
-                }}>
-                  {project.title}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-        <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
-          Click an icon to view the project
-        </Typography>
-        {/* Overlay for landscape mode */}
+  const navigateToProject = (route: string) => {
+    navigate(route);
+  };
+
+
+  return (
+    <Box sx={{
+      p: 1.5,
+      backgroundColor: 'black',
+      color: 'white',
+      height: 'calc(100vh - 24px)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden'
+    }}>
+      <IconButton onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 20, left: 20 }}>
+        <ArrowBackIcon />
+      </IconButton>
+      <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>
+        {projects.map((project, index) => (
+          <Grid item xs={4} sm={6} md={4} key={index} onClick={() => navigateToProject(project.route)}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <ProjectIcon src={project.imageUrl} alt={project.title} />
+              <Typography variant="subtitle1" sx={{
+                mt: 1,
+                color: 'white',
+                fontSize: { xs: '0.7rem', sm: '1rem' }
+              }}>
+                {project.title}
+              </Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+      <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
+        Click an icon to view the project
+      </Typography>
+      {/* Overlay for landscape mode */}
       <Box sx={{
         display: 'none',
         position: 'absolute',
@@ -97,7 +97,7 @@ import ProjectIconImage from '../../assets/images/RealEstateBot.png';
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        '@media (orientation: landscape)': {
+        '@media (orientation: landscape) and (max-width: 768px)': {
           display: 'flex',
           flexDirection: 'column',
           textAlign: 'center',
@@ -107,8 +107,8 @@ import ProjectIconImage from '../../assets/images/RealEstateBot.png';
           Please rotate your device to portrait mode.
         </Typography>
       </Box>
-      </Box>
-    );
-  };
+    </Box>
+  );
+};
 
 export default Projects;

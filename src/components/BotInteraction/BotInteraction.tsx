@@ -128,9 +128,9 @@ const BotInteraction = () => {
                 Real Estate AI Bot Interaction
             </Typography>
             <Box sx={{ width: '100%', maxWidth: 600, minHeight: 400, bgcolor: 'background.paper', borderRadius: 2, padding: 2, marginBottom: 2 }}>
-            <List 
+                <List
                     sx={{ maxHeight: 300, overflow: 'auto' }}
-                    ref={chatContainerRef} 
+                    ref={chatContainerRef}
                 >
                     {messages.map((message, index) => (
                         <ListItem
@@ -186,28 +186,28 @@ const BotInteraction = () => {
                 </Box>
             </Paper>
             {/* Overlay for landscape mode */}
-      <Box sx={{
-        display: 'none',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 1)',
-        color: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-        '@media (orientation: landscape)': {
-          display: 'flex',
-          flexDirection: 'column',
-          textAlign: 'center',
-        },
-      }}>
-        <Typography variant="h6">
-          Please rotate your device to portrait mode.
-        </Typography>
-      </Box>
+            <Box sx={{
+                display: 'none',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'rgba(0, 0, 0, 1)',
+                color: 'white',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1000,
+                '@media (orientation: landscape) and (max-width: 768px)': {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    textAlign: 'center',
+                },
+            }}>
+                <Typography variant="h6">
+                    Please rotate your device to portrait mode.
+                </Typography>
+            </Box>
 
         </Box>
     );

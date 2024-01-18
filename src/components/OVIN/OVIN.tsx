@@ -107,7 +107,7 @@ const OVIN = () => {
         By blending fun, education, and state-of-the-art VR technology, we not only achieved our goal but also opened new avenues for future exploration in the realm of virtual learning.      
         </Typography>
         </Box>
-        {/* Overlay for landscape mode */}
+      {/* Overlay for landscape mode */}
       <Box sx={{
         display: 'none',
         position: 'absolute',
@@ -120,7 +120,7 @@ const OVIN = () => {
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        '@media (orientation: landscape)': {
+        '@media (orientation: landscape) and (max-width: 768px)': {
           display: 'flex',
           flexDirection: 'column',
           textAlign: 'center',

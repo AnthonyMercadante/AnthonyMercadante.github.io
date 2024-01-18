@@ -106,7 +106,7 @@ const AboutMe = () => {
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        '@media (orientation: landscape)': {
+        '@media (orientation: landscape) and (max-width: 768px)': {
           display: 'flex',
           flexDirection: 'column',
           textAlign: 'center',
