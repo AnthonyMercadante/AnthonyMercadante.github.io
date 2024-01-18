@@ -57,7 +57,7 @@ body {
 /* Media query for mobile screens */
 @media (max-width: 600px) {
   .floating-cursor {
-    top: 28%; /* Adjust for mobile screens */
+    top: 20%; /* Adjust for mobile screens */
     /* Additional adjustments for mobile, if needed */
   }
 
@@ -76,7 +76,7 @@ body {
   /* New media query for landscape orientation */
 @media (max-width: 896px) and (orientation: landscape) {
   .floating-cursor {
-    top: 10%; 
+    top: 9%; 
     left: 50%; 
     
   }

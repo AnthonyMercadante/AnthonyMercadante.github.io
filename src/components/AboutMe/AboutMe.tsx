@@ -1,29 +1,20 @@
 // AboutMe.tsx
-// This component renders the About Me page, including a profile image, a brief introduction,
-// and a button to navigate to the Skills page.
-
-// Importing React and necessary components from Material-UI
 import React from 'react';
 import { Button, IconButton, Grid, Box, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
-
-// Importing assets
 import profileImage from '../../assets/images/professional-photo.jpg';
 
 const AboutMe = () => {
-  // Using Material-UI theme and React Router's navigate function
   const theme = useTheme();
   const navigate = useNavigate();
 
-  // Function to navigate to the Skills page
   const navigateToSkills = () => {
     navigate('/skills');
   };
 
-  // Function to handle back navigation
   const handleBack = () => {
-    navigate(-1); // Navigate back to the previous page
+    navigate(-1);
   };
 
   return (
@@ -41,13 +32,19 @@ const AboutMe = () => {
         boxSizing: 'border-box',
         overflow: 'hidden',
         px: [2, 4, 8],
+        '@media (orientation: landscape)': {
+          px: [1, 2, 4], // Adjust padding for landscape orientation
+          '& .about-me-profile-image': {
+            maxWidth: '80%', // Adjust image size for landscape orientation
+          },
+        },
       }}
     >
       <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
         <ArrowBackIcon />
       </IconButton>
       <Grid container spacing={0} justifyContent="center" alignItems="center">
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
           <img 
             src={profileImage} 
             alt="Profile" 
@@ -60,7 +57,7 @@ const AboutMe = () => {
             className='about-me-profile-image'
           />
         </Grid>
-        <Grid item xs={12} sm={8} md={6} style={{ textAlign: 'center', padding: theme.spacing(5) }}>
+        <Grid item xs={12} sm={8} md={6} lg={5} style={{ textAlign: 'center', padding: theme.spacing(5) }}>
           <h1>Hello! I'm Anthony Mercadante</h1>
           <p>
             Founder of Raethexn Technologies, specializing in custom software solutions.
