@@ -73,6 +73,14 @@ body {
     font-size: .98rem !important;
   }
 }
+  /* New media query for landscape orientation */
+@media (max-width: 896px) and (orientation: landscape) {
+  .floating-cursor {
+    top: 9%; 
+    left: 50%; 
+    
+  }
+}
 
 .name-title {
   transition: transform 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for scaling and glowing */

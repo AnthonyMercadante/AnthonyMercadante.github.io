@@ -82,6 +82,29 @@ const Portfolio = () => {
           </Button>
         </Grid>
       </Grid>
+      {/* Overlay for landscape mode */}
+      <Box sx={{
+        display: 'none',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 1)',
+        color: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000,
+        '@media (orientation: landscape)': {
+          display: 'flex',
+          flexDirection: 'column',
+          textAlign: 'center',
+        },
+      }}>
+        <Typography variant="h6">
+          Please rotate your device to portrait mode.
+        </Typography>
+      </Box>
     </Box>
   );
 };

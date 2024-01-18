@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 // Material UI Components and Icons
-import { 
-  Paper, Typography, Box, Button, IconButton, Chip, useMediaQuery 
+import {
+  Paper, Typography, Box, Button, IconButton, Chip, useMediaQuery
 } from '@mui/material';
 import WorkIcon from '@mui/icons-material/Work';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -63,10 +63,10 @@ const WorkExperienceComponent = () => {
     const formattedTitle = experience.title.replace("Mohawk College", "<br>Mohawk College");
     return (
       <Paper elevation={3} sx={{ m: { xs: 2, sm: 5 }, p: { xs: 2, sm: 5 } }}>
-      <Box display="flex" flexDirection="column" alignItems="center">
-        <WorkIcon sx={{ marginRight: 1 }} />
-        <Typography variant="h5" textAlign="center" dangerouslySetInnerHTML={{ __html: formattedTitle }} />
-      </Box>
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <WorkIcon sx={{ marginRight: 1 }} />
+          <Typography variant="h5" textAlign="center" dangerouslySetInnerHTML={{ __html: formattedTitle }} />
+        </Box>
         <Typography variant="body1" gutterBottom>
           {experience.period}
         </Typography>
@@ -131,6 +131,29 @@ const WorkExperienceComponent = () => {
           <div key={index}>{renderWorkExperience(experience)}</div>
         ))
       )}
+      {/* Overlay for landscape mode */}
+      <Box sx={{
+        display: 'none',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 1)',
+        color: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000,
+        '@media (orientation: landscape)': {
+          display: 'flex',
+          flexDirection: 'column',
+          textAlign: 'center',
+        },
+      }}>
+        <Typography variant="h6">
+          Please rotate your device to portrait mode.
+        </Typography>
+      </Box>
     </Box>
   );
 };
