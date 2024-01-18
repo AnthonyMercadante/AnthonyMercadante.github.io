@@ -32,10 +32,29 @@ const AboutMe = () => {
         boxSizing: 'border-box',
         overflow: 'hidden',
         px: [2, 4, 8],
-        '@media (orientation: landscape)': {
-          px: [1, 2, 4], // Adjust padding for landscape orientation
+        '@media (max-width: 932px)': {
+          // Adjustments for screens smaller than 932px
+          px: [1, 2, 4],
           '& .about-me-profile-image': {
-            maxWidth: '80%', // Adjust image size for landscape orientation
+            maxWidth: '75%', // Scale down the image
+          },
+          '& h1': {
+            fontSize: '1.5rem', // Scale down the header font size
+          },
+          '& p': {
+            fontSize: '0.9rem', // Scale down the paragraph font size
+          },
+        },
+        '@media (max-width: 667px)': {
+          // Further adjustments for screens smaller than 667px
+          '& .about-me-profile-image': {
+            maxWidth: '70%', // Further scale down the image
+          },
+          '& h1': {
+            fontSize: '1.25rem', // Further scale down the header font size
+          },
+          '& p': {
+            fontSize: '0.8rem', // Further scale down the paragraph font size
           },
         },
       }}
@@ -45,12 +64,12 @@ const AboutMe = () => {
       </IconButton>
       <Grid container spacing={0} justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <img 
-            src={profileImage} 
-            alt="Profile" 
-            style={{ 
-              maxWidth: '100%', 
-              height: 'auto', 
+          <img
+            src={profileImage}
+            alt="Profile"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
               borderRadius: '100px',
               boxSizing: 'border-box',
             }}
@@ -61,12 +80,12 @@ const AboutMe = () => {
           <h1>Hello! I'm Anthony Mercadante</h1>
           <p>
             Founder of Raethexn Technologies, specializing in custom software solutions.
-            I'm also a 3rd year Software Development student at Mohawk College, 
+            I'm also a 3rd year Software Development student at Mohawk College,
             driven by a lifelong passion for technology.
           </p>
-          <Button 
-            variant="contained" 
-            color="primary" 
+          <Button
+            variant="contained"
+            color="primary"
             sx={{ marginTop: theme.spacing(2) }}
             onClick={navigateToSkills}
           >
