@@ -1,21 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import HomePage from './components/HomePage/HomePage';
-import Portfolio from './components/Portfolio/Portfolio';
-import AboutMe from './components/AboutMe/AboutMe';
-import Skills from './components/Skills/Skills'; 
+import HomePage from './pages/HomePage/HomePage';
+import Portfolio from './pages/Portfolio/Portfolio';
+import AboutMe from './pages/AboutMe/AboutMe';
+import Skills from './pages/Skills/Skills'; 
 import theme from './theme';
 import './App.css';
-import WorkExperience from './components/WorkExperience/WorkExperience';
-import XRDeveloper from './components/XRSoftwareDeveloper/XRDeveloper';
-import AutomationAssistant from './components/AutomationAssistant/AutomationAssistant';
-import OpenFlowMachine from './components/OpenFlowMachine/OpenFlowMachine';
-import CellTower from './components/CellTower/CellTower';
-import OVIN from './components/OVIN/OVIN';
-import Projects from './components/Projects/Projects';
-import RealEstateBot from './components/RealEstateBot/RealEstateBot';
-import BotInteraction from './components/BotInteraction/BotInteraction';
+import WorkExperience from './pages/WorkExperience/WorkExperience';
+import XRDeveloper from './pages/XRSoftwareDeveloper/XRDeveloper';
+import AutomationAssistant from './pages/AutomationAssistant/AutomationAssistant';
+import OpenFlowMachine from './pages/OpenFlowMachine/OpenFlowMachine';
+import CellTower from './pages/CellTower/CellTower';
+import OVIN from './pages/OVIN/OVIN';
+import Projects from './pages/Projects/Projects';
+import RealEstateBot from './pages/RealEstateBot/RealEstateBot';
+import BotInteraction from './pages/BotInteraction/BotInteraction';
 
 function App() {
   return (
