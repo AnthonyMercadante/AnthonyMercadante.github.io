@@ -4,6 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import Image from '../../assets/images/OVINMenu.png'; 
 import Image2 from '../../assets/images/OVINFormulaCar.png'; 
+import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 
 const OVIN = () => {
   const theme = useTheme();
@@ -107,29 +108,7 @@ const OVIN = () => {
         By blending fun, education, and state-of-the-art VR technology, we not only achieved our goal but also opened new avenues for future exploration in the realm of virtual learning.      
         </Typography>
         </Box>
-      {/* Overlay for landscape mode */}
-      <Box sx={{
-        display: 'none',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 1)',
-        color: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-        '@media (orientation: landscape) and (max-width: 768px)': {
-          display: 'flex',
-          flexDirection: 'column',
-          textAlign: 'center',
-        },
-      }}>
-        <Typography variant="h6">
-          Please rotate your device to portrait mode.
-        </Typography>
-      </Box>
+      <LandscapeOverlay />
     </Box>
   );
 };

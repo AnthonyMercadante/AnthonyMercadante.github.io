@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Typography, Button, Box } from '@mui/material';
 import cursorImage from '../../assets/images/arrow.png';
+import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 
 const HomePage = () => {
   return (
@@ -39,31 +40,7 @@ const HomePage = () => {
       >
         View My Work
       </Button>
-      {/* Overlay for landscape mode */}
-      <Box sx={{
-    display: 'none',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 1)',
-    color: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1000,
-    '@media (orientation: landscape) and (max-width: 768px)': { // Adjust max-width as needed
-      display: 'flex',
-      flexDirection: 'column',
-      textAlign: 'center',
-    },
-  }}>
-    <Typography variant="h6">
-      Please rotate your device to portrait mode.
-    </Typography>
-</Box>
-
-
+      <LandscapeOverlay />
     </Container>
   );
 };

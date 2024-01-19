@@ -5,6 +5,7 @@ import { Box, Typography, IconButton, TextField, Button, List, ListItem, ListIte
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 
 type Message = {
     text: string;
@@ -185,29 +186,7 @@ const BotInteraction = () => {
                     </Button>
                 </Box>
             </Paper>
-            {/* Overlay for landscape mode */}
-            <Box sx={{
-                display: 'none',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'rgba(0, 0, 0, 1)',
-                color: 'white',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: 1000,
-                '@media (orientation: landscape) and (max-width: 768px)': {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    textAlign: 'center',
-                },
-            }}>
-                <Typography variant="h6">
-                    Please rotate your device to portrait mode.
-                </Typography>
-            </Box>
+            <LandscapeOverlay />
 
         </Box>
     );

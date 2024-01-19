@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, useMediaQuery, useTheme, IconButton, Card, CardContent } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
+import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 
 const AutomationAssistant = () => {
   const theme = useTheme();
@@ -97,29 +98,7 @@ const AutomationAssistant = () => {
           </CardContent>
         </Card>
       </Box>
-      {/* Overlay for landscape mode */}
-      <Box sx={{
-        display: 'none',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 1)',
-        color: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-        '@media (orientation: landscape) and (max-width: 768px)': {
-          display: 'flex',
-          flexDirection: 'column',
-          textAlign: 'center',
-        },
-      }}>
-        <Typography variant="h6">
-          Please rotate your device to portrait mode.
-        </Typography>
-      </Box>
+      <LandscapeOverlay />
     </Box>
   );
 };

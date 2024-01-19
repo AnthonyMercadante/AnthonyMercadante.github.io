@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Image from '../../assets/images/arieltower.png';
 import Image2 from '../../assets/images/GroundCellTower.png';
 import Image3 from '../../assets/images/celltowerfromabove.png';
+import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 
 const OpenFlowMachinePortfolio = () => {
     const theme = useTheme();
@@ -82,29 +83,7 @@ const OpenFlowMachinePortfolio = () => {
                 </Typography>
 
             </Box>
-            {/* Overlay for landscape mode */}
-            <Box sx={{
-                display: 'none',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'rgba(0, 0, 0, 1)',
-                color: 'white',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: 1000,
-                '@media (orientation: landscape) and (max-width: 768px)': {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    textAlign: 'center',
-                },
-            }}>
-                <Typography variant="h6">
-                    Please rotate your device to portrait mode.
-                </Typography>
-            </Box>
+            <LandscapeOverlay />
         </Box>
     );
 };

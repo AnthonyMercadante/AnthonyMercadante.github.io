@@ -4,6 +4,7 @@ import { Button, Typography, IconButton, Grid, Box, useTheme } from '@mui/materi
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import profileImage from '../../assets/images/professional-photo.jpg';
+import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 
 const AboutMe = () => {
   const theme = useTheme();
@@ -93,29 +94,7 @@ const AboutMe = () => {
           </Button>
         </Grid>
       </Grid>
-      {/* Overlay for landscape mode */}
-      <Box sx={{
-        display: 'none',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 1)',
-        color: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-        '@media (orientation: landscape) and (max-width: 768px)': {
-          display: 'flex',
-          flexDirection: 'column',
-          textAlign: 'center',
-        },
-      }}>
-        <Typography variant="h6">
-          Please rotate your device to portrait mode.
-        </Typography>
-      </Box>
+      <LandscapeOverlay />
     </Box>
   );
 };
