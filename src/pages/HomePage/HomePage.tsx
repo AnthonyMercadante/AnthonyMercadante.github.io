@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Typography, Button, Box } from '@mui/material';
+import { Container, Typography, Button } from '@mui/material';
 import cursorImage from '../../assets/images/arrow.png';
 import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 

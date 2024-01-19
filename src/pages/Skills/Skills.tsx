@@ -5,7 +5,7 @@ import LandscapeOverlay from '../../components/LandscapeOverlay';
 
 // Material UI Components and Styles
 import {
-  Box, Grid, Button, IconButton, Typography, Modal, Chip, styled, useTheme
+  Box, Grid, IconButton, Typography, Modal, Chip, styled, useTheme
 } from '@mui/material';
 
 // Material UI Icons

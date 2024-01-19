@@ -1,6 +1,6 @@
 // AboutMe.tsx
 import React from 'react';
-import { Button, Typography, IconButton, Grid, Box, useTheme } from '@mui/material';
+import { Button, IconButton, Grid, Box, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import profileImage from '../../assets/images/professional-photo.jpg';

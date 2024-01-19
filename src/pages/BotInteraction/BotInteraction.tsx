@@ -1,7 +1,7 @@
 // React imports
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, IconButton, TextField, Button, List, ListItem, ListItemText, ListItemIcon, CircularProgress, Paper } from '@mui/material';
+import { Box, Typography, IconButton, TextField, Button, List, ListItem, ListItemText, CircularProgress, Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
