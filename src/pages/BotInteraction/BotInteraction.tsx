@@ -33,6 +33,7 @@ const BotInteraction = () => {
             const scrollHeight = chatContainerRef.current.scrollHeight;
             chatContainerRef.current.scrollTop = scrollHeight;
         }
+        window.scrollTo(0, 0);
     }, [messages]);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
