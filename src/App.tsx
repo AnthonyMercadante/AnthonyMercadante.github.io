@@ -16,6 +16,7 @@ import OVIN from './pages/OVIN/OVIN';
 import Projects from './pages/Projects/Projects';
 import RealEstateBot from './pages/RealEstateBot/RealEstateBot';
 import BotInteraction from './pages/BotInteraction/BotInteraction';
+import BattleShipBot from './pages/BattleShipBot/BattleShipBot';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path='/Projects' element={<Projects/>}/>
             <Route path='/RealEstateBot' element={<RealEstateBot/>}/>
             <Route path='/BotInteraction' element={<BotInteraction/>}/>
+            <Route path='/BattleShipBot' element={<BattleShipBot/>}/>
           </Routes>
         </div>
       </Router>

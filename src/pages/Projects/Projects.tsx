@@ -15,6 +15,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Assets
 import ProjectIconImage from '../../assets/images/RealEstateBot.png';
+import ProjectIconImage2 from '../../assets/images/BattleShipBot.png';
 
 
 const Projects = () => {
@@ -42,6 +43,12 @@ const Projects = () => {
       route: '/RealEstateBot',
       imageUrl: ProjectIconImage,
     },
+    {
+      title: 'Battle Ship Bot',
+      route: '/BattleShipBot',
+      imageUrl: ProjectIconImage2,
+    
+    }
 
   ];
 
