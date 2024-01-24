@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import Image from '../../assets/images/arieltower.png';
 import Image2 from '../../assets/images/GroundCellTower.png';
 import Image3 from '../../assets/images/celltowerfromabove.png';
-import LandscapeOverlay from '../../components/LandscapeOverlay'; 
+import LandscapeOverlay from '../../components/LandscapeOverlay';
+import Starfield from '../../components/Starfield'; 
 
 const OpenFlowMachinePortfolio = () => {
     const theme = useTheme();
@@ -14,14 +15,15 @@ const OpenFlowMachinePortfolio = () => {
 
     const imageStyle = isMobile ?
         { width: '100%', height: 'auto', marginTop: '20px' } :
-        { maxWidth: '80%', height: 'auto', marginTop: '20px', display: 'block', marginLeft: 'auto', marginRight: 'auto' };
+        { maxWidth: '75%', height: 'auto', marginTop: '20px', display: 'block', marginLeft: 'auto', marginRight: 'auto' };
 
     const handleBack = () => {
         navigate(-1);
     };
 
     return (
-        <Box sx={{ flexGrow: 1, bgcolor: 'background.default', color: 'text.primary', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Box sx={{ flexGrow: 1, bgcolor: 'transparent', color: 'text.primary', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Starfield/>
             <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
                 <ArrowBackIcon />
             </IconButton>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay'; 
+import Starfield from '../../components/Starfield';
 
 // Material UI Components and Icons
 import {
@@ -91,10 +92,10 @@ const WorkExperienceComponent = () => {
       flexGrow: 1,
       pt: { xs: 7, sm: 3 },
       pb: { xs: 2, sm: 3 },
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: 'transparent',
       maxWidth: { sm: '689px', xs: '100%' },
       mx: 'auto',
-    }}>
+    }}><Starfield/>
       <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
         <ArrowBackIcon />
       </IconButton>

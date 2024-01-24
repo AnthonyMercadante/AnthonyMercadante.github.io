@@ -3,6 +3,7 @@ import { Box, Typography, IconButton, Grid } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 import { useNavigate } from 'react-router-dom';
+import Starfield from '../../components/Starfield';
 
 const style = {
     container: {
@@ -75,6 +76,7 @@ const BattleShipBot = () => {
 
     return (
         <Box sx={style.container}>
+            <Starfield/>
             <IconButton onClick={handleBack} sx={style.backButton}>
                 <ArrowBackIcon />
             </IconButton>

@@ -4,7 +4,8 @@ import { Button, IconButton, Grid, Box, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import profileImage from '../../assets/images/professional-photo.jpg';
-import LandscapeOverlay from '../../components/LandscapeOverlay'; 
+import LandscapeOverlay from '../../components/LandscapeOverlay';
+import Starfield from '../../components/Starfield'; 
 
 const AboutMe = () => {
   const theme = useTheme();
@@ -21,7 +22,7 @@ const AboutMe = () => {
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: 'transparent',
         color: theme.palette.text.primary,
         minHeight: '100vh',
         minWidth: '100vw',
@@ -59,7 +60,7 @@ const AboutMe = () => {
           },
         },
       }}
-    >
+    > <Starfield/>
       <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
         <ArrowBackIcon />
       </IconButton>

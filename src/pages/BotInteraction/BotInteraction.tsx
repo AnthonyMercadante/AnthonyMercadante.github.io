@@ -6,6 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LandscapeOverlay from '../../components/LandscapeOverlay'; 
+import Starfield from '../../components/Starfield';
 
 type Message = {
     text: string;
@@ -119,10 +120,10 @@ const BotInteraction = () => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'flex-start',
-            bgcolor: 'background.default',
+            bgcolor: 'transparent',
             color: 'text.primary',
             height: '100vh',
-        }}>
+        }}><Starfield/>
             <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
                 <ArrowBackIcon />
             </IconButton>

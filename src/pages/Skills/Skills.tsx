@@ -1,7 +1,8 @@
 // React and Hooks
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LandscapeOverlay from '../../components/LandscapeOverlay'; 
+import LandscapeOverlay from '../../components/LandscapeOverlay';
+import Starfield from '../../components/Starfield'; 
 
 // Material UI Components and Styles
 import {
@@ -232,7 +233,7 @@ const Skills = () => {
   return (
     <Box sx={{
       p: 1.5,
-      backgroundColor: 'black',
+      backgroundColor: 'transparent',
       color: 'white',
       height: 'calc(100vh - 24px)',
       display: 'flex',
@@ -240,7 +241,7 @@ const Skills = () => {
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden'
-    }}>
+    }}> <Starfield/>
       <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
         <ArrowBackIcon />
       </IconButton>
