@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 const style = {
     container: {
         padding: '3rem',
-        color: 'white',
-        backgroundColor: '#123456', 
+        color: '#E0E0E0', // Light grey for text
+        backgroundColor: '#1C1C1E', // Dark grey background
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
@@ -17,15 +17,19 @@ const style = {
         maxWidth: '600px',
         marginLeft: 'auto',
         marginRight: 'auto',
+        borderRadius: '12px', // Rounded corners for container
     },
     header: {
         marginBottom: '2rem',
         textAlign: 'center',
         fontSize: '2rem',
+        fontWeight: 'bold', // Emphasize headers
+        color: '#FFFFFF', // Brighter text for headers
     },
     paragraph: {
         marginBottom: '1rem',
         textAlign: 'left',
+        lineHeight: '1.6', // Improve readability
     },
     featureBox: {
         marginTop: '4rem',
@@ -34,14 +38,33 @@ const style = {
     featureHeading: {
         marginBottom: '1rem',
         fontSize: '1.5rem',
+        fontWeight: 'bold',
+        color: '#FFFFFF',
     },
     backButton: {
         position: 'absolute', 
         top: '20px', 
         left: '20px', 
-        zIndex: 1
+        zIndex: 1,
+        color: '#0a84ff', // Apple-like blue for interactive elements
+    },
+    codeSnippet: {
+        backgroundColor: '#333',
+        color: '#ddd',
+        padding: '1rem',
+        borderRadius: '8px', // Rounded corners for code blocks
+        fontFamily: 'monospace', // Monospace font for code
+        overflowX: 'auto', // Horizontal scrolling for long code
+    },
+    link: {
+        color: '#0a84ff', // Apple-like blue for links
+        textDecoration: 'none', // No underlines by default
+        '&:hover': {
+            textDecoration: 'underline', // Underline on hover
+        },
     }
 };
+
 
 const BattleShipBot = () => {
     const navigate = useNavigate();
