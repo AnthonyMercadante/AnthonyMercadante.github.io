@@ -1,14 +1,14 @@
 import React from 'react';
 import { Box, Typography, IconButton, Grid } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import LandscapeOverlay from '../../components/LandscapeOverlay'; // Adjust path as needed
+import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 import { useNavigate } from 'react-router-dom';
 
 const style = {
     container: {
         padding: '3rem',
-        color: '#E0E0E0', // Light grey for text
-        backgroundColor: '#1C1C1E', // Dark grey background
+        color: '#E0E0E0', 
+        backgroundColor: '#1C1C1E', 
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
@@ -17,19 +17,22 @@ const style = {
         maxWidth: '600px',
         marginLeft: 'auto',
         marginRight: 'auto',
-        borderRadius: '12px', // Rounded corners for container
+        borderRadius: '12px',
+        '@media (max-width: 600px)': {
+            maxWidth: '100%',
+            padding: '1rem',
+        }, 
     },
     header: {
         marginBottom: '2rem',
         textAlign: 'center',
         fontSize: '2rem',
-        fontWeight: 'bold', // Emphasize headers
-        color: '#FFFFFF', // Brighter text for headers
+        color: '#FFFFFF', 
     },
     paragraph: {
         marginBottom: '1rem',
         textAlign: 'left',
-        lineHeight: '1.6', // Improve readability
+        lineHeight: '1.6', 
     },
     featureBox: {
         marginTop: '4rem',
@@ -46,21 +49,18 @@ const style = {
         top: '20px', 
         left: '20px', 
         zIndex: 1,
-        color: '#0a84ff', // Apple-like blue for interactive elements
     },
     codeSnippet: {
         backgroundColor: '#333',
         color: '#ddd',
         padding: '1rem',
-        borderRadius: '8px', // Rounded corners for code blocks
-        fontFamily: 'monospace', // Monospace font for code
-        overflowX: 'auto', // Horizontal scrolling for long code
+        borderRadius: '8px', 
     },
     link: {
-        color: '#0a84ff', // Apple-like blue for links
-        textDecoration: 'none', // No underlines by default
+        color: '#0a84ff', 
+        textDecoration: 'none', 
         '&:hover': {
-            textDecoration: 'underline', // Underline on hover
+            textDecoration: 'underline', 
         },
     }
 };
@@ -97,13 +97,13 @@ const BattleShipBot = () => {
 const ProjectOverview = () => {
     return (
         <Grid item xs={12}>
-            <Typography variant="h2" sx={style.header}>
+            <Typography variant="h2" sx={style.header}><br></br><br></br>
                 Battleship Strategy Bot
             </Typography>
             <Typography variant="body1" sx={style.paragraph}>
-                The TitanBot, is an advanced Battleship game bot designed to play against an opponent with strategic precision. 
+                The BattleShipBot, is an advanced Battleship game bot designed to play against an opponent with strategic precision. 
                 This bot utilizes a unique combination of probabilistic and targeted strategies to enhance its gameplay, aiming to achieve the 
-                lowest average number of shots across multiple games on a 15x15 grid.
+                lowest average number of shots across multiple games on a 10x10 grid.
             </Typography>
             <Typography variant="body1" sx={style.paragraph}>
                 Objective: Minimize the number of shots required to sink all enemy ships across 10,000 games.
@@ -117,7 +117,7 @@ const YourApproach = () => {
         <Grid item xs={12}>
             <Typography variant="h4" sx={style.featureHeading}>My Approach</Typography>
             <Typography variant="body1" sx={style.paragraph}>
-                TitanBot implements a hybrid strategy, integrating both probabilistic and targeted approaches. 
+                BattleShipBot implements a hybrid strategy, integrating both probabilistic and targeted approaches. 
                 It leverages historical data to make educated guesses in the early game and switches to a 
                 more focused approach once a ship is hit, targeting specific areas to effectively sink ships.
             </Typography>
@@ -158,7 +158,6 @@ const Results = () => {
                 effectiveness in strategically playing Battleship. The precise combination of algorithms and data 
                 structures played a pivotal role in this achievement.
             </Typography>
-            {/* Include graphical representations of results when available */}
         </Grid>
     );
 }
