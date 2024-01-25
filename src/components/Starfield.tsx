@@ -57,6 +57,9 @@ const Starfield = () => {
         }
 
         const handleMouseMove = (event: MouseEvent) => {
+            // Disable velocity adjustment on mobile
+            if (isMobileDevice()) return;
+            
             mouse.current.x = event.clientX;
             mouse.current.y = event.clientY;
 
