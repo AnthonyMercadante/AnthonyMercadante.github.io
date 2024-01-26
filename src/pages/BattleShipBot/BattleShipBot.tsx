@@ -1552,7 +1552,7 @@ const filesData = [
             String getAuthors();
         }`,
     },
-   {
+    {
         name: "CellState.java",
         code: `package BattleShipAPI;
 
@@ -1577,8 +1577,8 @@ const filesData = [
                 }
             }
         }`,
-   },
-   {
+    },
+    {
         name: "Ship.java",
         code: `package BattleShipAPI;
 
@@ -1702,10 +1702,10 @@ const filesData = [
                 }
             }
         }`,
-   },
-   {
-    name: 'ShipOrientation.java',
-    code: `package BattleShipAPI;
+    },
+    {
+        name: 'ShipOrientation.java',
+        code: `package BattleShipAPI;
 
     public enum ShipOrientation {
         Vertical,
@@ -1714,7 +1714,7 @@ const filesData = [
         private ShipOrientation() {
         }
     }`,
-   }
+    }
 ];
 
 
@@ -1837,13 +1837,14 @@ const CodeAccessibility = () => {
             <Button
                 variant="contained"
                 color="primary"
-                href="BattleShip-main.zip"
+                href="https://drive.google.com/uc?export=download&id=1lzJLerHY6IB5U9nSyc3LxcWD01hFUd46"
                 startIcon={<GetAppIcon />}
                 sx={{ marginTop: '1rem' }}
                 download="BattleShip-main.zip"
             >
                 Download Full Code
             </Button>
+
         </Grid>
     );
 };
