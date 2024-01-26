@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import { Container, Typography, Button } from '@mui/material';
 import cursorImage from '../../assets/images/arrow.png';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
-import Starfield from '../../components/Starfield';
 
 const HomePage = () => {
   return (
     <>
-      <Starfield />
       <Container maxWidth={false}
         style={{
           position: 'relative',

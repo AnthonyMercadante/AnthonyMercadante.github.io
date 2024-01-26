@@ -3,7 +3,7 @@ import { Box, Typography, useMediaQuery, useTheme, IconButton, Card, CardContent
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay'; 
-import Starfield from '../../components/Starfield';
+
 
 const AutomationAssistant = () => {
   const theme = useTheme();
@@ -27,7 +27,6 @@ const AutomationAssistant = () => {
   return (
 
     <Box sx={{ flexGrow: 1, bgcolor: 'transparent', color: 'text.secondary', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Starfield/>
       <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
         <ArrowBackIcon />
       </IconButton>

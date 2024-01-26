@@ -5,7 +5,6 @@ import ProjectIcon from '@mui/icons-material/Build';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; 
 import LandscapeOverlay from '../../components/LandscapeOverlay';
-import Starfield from '../../components/Starfield'; 
 
 const Portfolio = () => {
   const theme = useTheme();
@@ -67,7 +66,6 @@ const Portfolio = () => {
       alignItems: 'center',
       justifyContent: 'center',
     }}>
-      <Starfield/>
       <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
         <ArrowBackIcon />
       </IconButton>

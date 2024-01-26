@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
-import Starfield from '../../components/Starfield'; 
 
 // Material UI Components and Styles
 import {
@@ -241,7 +240,7 @@ const Skills = () => {
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden'
-    }}> <Starfield/>
+    }}>
       <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
         <ArrowBackIcon />
       </IconButton>

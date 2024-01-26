@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import Image from '../../assets/images/OVINMenu.png'; 
 import Image2 from '../../assets/images/OVINFormulaCar.png'; 
 import LandscapeOverlay from '../../components/LandscapeOverlay'; 
-import Starfield from '../../components/Starfield';
 
 const OVIN = () => {
   const theme = useTheme();
@@ -22,7 +21,6 @@ const OVIN = () => {
 
   return (
     <Box sx={{ flexGrow: 1, bgcolor: 'transparent', color: 'text.primary', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Starfield/>
       <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
                 <ArrowBackIcon />
             </IconButton>

@@ -2,7 +2,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay'; 
-import Starfield from '../../components/Starfield';
 
 // Material UI Components and Styles
 import Box from '@mui/material/Box';
@@ -70,7 +69,7 @@ const Projects = () => {
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden'
-    }}><Starfield/>
+    }}>
       <IconButton onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 20, left: 20 }}>
         <ArrowBackIcon />
       </IconButton>

@@ -2,7 +2,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
-import Starfield from '../../components/Starfield'; 
 
 // Material UI components and icons
 import { Box, Typography, IconButton, useTheme, Button, Grid } from '@mui/material';
@@ -57,7 +56,7 @@ const RealEstateBot = () => {
     };
 
     return (
-        <Box sx={style.container}><Starfield/>
+        <Box sx={style.container}>
             {/* Back button */}
             <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
                 <ArrowBackIcon />
