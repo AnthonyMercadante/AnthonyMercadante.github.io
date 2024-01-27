@@ -50,9 +50,9 @@ const AutomationAssistant = () => {
                 Using my skills in Python, Qt 6, OpenAI, httpx, and SQLite, I embarked on designing and implementing a comprehensive automation solution. The process involved creating templates, forms, and process flows tailored to the specific needs of grant proposal creation.
               </p>
             </div>
-          
 
-          
+
+
             <div style={cardStyle}>
               <h2 className="text-3xl font-semibold mb-6">
                 Key <span className="text-purple-400">Responsibilities</span>
@@ -64,9 +64,9 @@ const AutomationAssistant = () => {
                 <strong>Technical Support:</strong> Providing ongoing support to the research department staff, ensuring they could navigate and utilize the new system effectively.
               </p>
             </div>
-            </div>
+          </div>
 
-            <div className="md:w-1/2 text-left px-4">
+          <div className="md:w-1/2 text-left px-4">
             <div style={cardStyle}>
               <h2 className="text-3xl font-semibold mb-6">
                 <span className="text-cyan-400">Outcomes</span>
