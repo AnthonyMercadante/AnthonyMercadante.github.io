@@ -14,8 +14,8 @@ import { useTheme, styled } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Assets
-import ProjectIconImage from '../../assets/images/RealEstateBot.png';
-import ProjectIconImage2 from '../../assets/images/BattleShipBot.png';
+import ProjectIconImage from '../../assets/images/VRprojects.png';
+import ProjectIconImage2 from '../../assets/images/BotProjects.png';
 
 
 const Projects = () => {
@@ -39,13 +39,13 @@ const Projects = () => {
 
   const projects = [
     {
-      title: 'Real Estate AI Chat Bot',
-      route: '/RealEstateBot',
+      title: 'VR Projects',
+      route: '/XRDeveloper',
       imageUrl: ProjectIconImage,
     },
     {
-      title: 'Battle Ship Bot',
-      route: '/BattleShipBot',
+      title: 'Bot Projects',
+      route: '/Bots',
       imageUrl: ProjectIconImage2,
     
     }

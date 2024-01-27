@@ -17,6 +17,7 @@ import Projects from './pages/Projects/Projects';
 import RealEstateBot from './pages/RealEstateBot/RealEstateBot';
 import BotInteraction from './pages/BotInteraction/BotInteraction';
 import BattleShipBot from './pages/BattleShipBot/BattleShipBot';
+import Bots from './pages/Bots/Bots';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path='/RealEstateBot' element={<RealEstateBot/>}/>
             <Route path='/BotInteraction' element={<BotInteraction/>}/>
             <Route path='/BattleShipBot' element={<BattleShipBot/>}/>
+            <Route path='/Bots' element={<Bots/>}/>
           </Routes>
         </div>
       </Router>
