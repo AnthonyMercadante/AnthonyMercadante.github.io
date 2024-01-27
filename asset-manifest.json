@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.0ed14f18.css",
-    "main.js": "/static/js/main.882bc032.js",
+    "main.js": "/static/js/main.1befb751.js",
     "static/js/787.2dcca737.chunk.js": "/static/js/787.2dcca737.chunk.js",
     "static/media/arieltower.png": "/static/media/arieltower.d36faead2a6c6235f848.png",
     "static/media/Toolsforuse.png": "/static/media/Toolsforuse.e08f78e0d73e7b457670.png",
@@ -21,6 +21,8 @@
     "static/media/OVIN.png": "/static/media/OVIN.a9649d9b5a98fbec1003.png",
     "static/media/AIIntelligentSystems.png": "/static/media/AIIntelligentSystems.ce22e13e9df2e7651660.png",
     "static/media/openflowmachine.png": "/static/media/openflowmachine.a6067cad93bbe252d215.png",
+    "static/media/VRprojects.png": "/static/media/VRprojects.356a261ab5574e832f1b.png",
+    "static/media/BotProjects.png": "/static/media/BotProjects.e73d7ae96f524eea9a52.png",
     "static/media/OVINFormulaCar.png": "/static/media/OVINFormulaCar.643b2c32cb4a3694965d.png",
     "static/media/BattleShipBot.png": "/static/media/BattleShipBot.1e59e4c9491bdf9f6529.png",
     "static/media/OpenFlowIcon.png": "/static/media/OpenFlowIcon.514a277b9f3f155b6103.png",
@@ -28,11 +30,11 @@
     "static/media/professional-photo.jpg": "/static/media/professional-photo.e28cd5836920ba4ec674.jpg",
     "index.html": "/index.html",
     "main.0ed14f18.css.map": "/static/css/main.0ed14f18.css.map",
-    "main.882bc032.js.map": "/static/js/main.882bc032.js.map",
+    "main.1befb751.js.map": "/static/js/main.1befb751.js.map",
     "787.2dcca737.chunk.js.map": "/static/js/787.2dcca737.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0ed14f18.css",
-    "static/js/main.882bc032.js"
+    "static/js/main.1befb751.js"
   ]
 }
