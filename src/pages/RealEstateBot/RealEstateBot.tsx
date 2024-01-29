@@ -31,7 +31,7 @@ const RealEstateBot = () => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            maxWidth: '600px',
+            maxWidth: '1000px',
             marginLeft: 'auto',
             marginRight: 'auto',
             [theme.breakpoints.down('md')]: {
@@ -68,7 +68,7 @@ const RealEstateBot = () => {
                 {/* Header */}
                 <Grid item xs={12}>
                     <Typography variant="h2" sx={style.header}>
-                        <br></br><br></br>Real Estate AI Bot
+                        <br></br>Real Estate AI Bot
                     </Typography>
                 </Grid>
     
