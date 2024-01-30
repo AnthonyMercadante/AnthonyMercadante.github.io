@@ -76,7 +76,7 @@ const ReactProjects = () => {
               <Typography variant="subtitle1" sx={{
                 mt: 1,
                 color: 'white',
-                fontSize: { xs: '0.6rem', sm: '0.7rem', md: '1rem' } // Adjusted font size for responsiveness
+                fontSize: { xs: '0.7rem', sm: '0.7rem', md: '1rem' } // Adjusted font size for responsiveness
               }}>
                 {project.title}
               </Typography>

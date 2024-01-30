@@ -25,7 +25,7 @@ const EcoChallenger = () => {
 
                 <iframe
                     className="w-full md:max-w-3xl mx-auto aspect-video mb-6"
-                    src="https://www.youtube.com/embed/6fOtOiw-vnE?si=19EodNK7KmocSbvN" // Replace with your actual video link
+                    src="https://www.youtube.com/embed/6fOtOiw-vnE?si=19EodNK7KmocSbvN" 
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -41,7 +41,7 @@ const EcoChallenger = () => {
                 <div className="md:flex md:flex-row md:justify-center">
                     <div className="md:w-1/2 text-left px-4 mb-6">
                         <p className="text-lg md:text-xl leading-relaxed mb-6">
-                            The <span className="text-green-400 font-semibold">Eco Challenge Tracker</span> app was a fun prrof of concept project designed to empower communities in environmental cleanup initiatives. Users could capture and post geo-tagged photos of litter in their surroundings, contributing to a communal effort to identify and resolve local environmental challenges.
+                            The <span className="text-green-400 font-semibold">Eco Challenge Tracker</span> app was a fun proof of concept project designed to empower communities in environmental cleanup initiatives. Users could capture and post geo-tagged photos of litter in their surroundings, contributing to a communal effort to identify and resolve local environmental challenges.
                         </p>
 
                         <p className="text-lg md:text-xl leading-relaxed">

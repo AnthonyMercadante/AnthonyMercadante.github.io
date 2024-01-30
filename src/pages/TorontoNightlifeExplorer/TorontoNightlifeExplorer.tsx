@@ -41,11 +41,11 @@ const TorontoNightlifeExplorer = () => {
         <div className="md:flex md:flex-row md:justify-center">
           <div className="md:w-1/2 text-left px-4 mb-6">
             <p className="text-lg md:text-xl leading-relaxed mb-6">
-              The <span className="text-purple-400 font-semibold">Toronto Nightlife Explorer</span> app is a unique proof of concept prototype connects users with the best clubs, restaurants, venues, and festivals in Toronto. It utilizes web API calls to Google to fetch real-time data about nightlife spots.
+              The <span className="text-purple-400 font-semibold">Toronto Nightlife Explorer</span> app is a unique proof of concept prototype that connects users with the best clubs, restaurants, venues, and festivals in Toronto. It utilizes web API calls to Google to fetch real-time data about nightlife spots.
             </p>
 
             <p className="text-lg md:text-xl leading-relaxed">
-              Incorporating a <span className="text-blue-400 font-semibold">user-friendly interface</span> and a curated search function, the app enhances the search for nightlife experience by providing personalized recommendations based on user preferences.
+              Incorporating a <span className="text-blue-400 font-semibold">user-friendly interface</span> and a curated search function, the app enhances the search for nightlife experiences by providing personalized recommendations based on user preferences.
             </p>
           </div>
 
@@ -59,7 +59,7 @@ const TorontoNightlifeExplorer = () => {
             </p>
 
             <p className="text-lg md:text-xl leading-relaxed">
-              This project highlights my capabilities in integrating web services and developing responsive mobile applications, demonstrating my ability to creating engaging user experiences and leveraging technology in innovative ways.
+              This project highlights my capabilities in integrating web services and developing responsive mobile applications, demonstrating my ability in creating engaging user experiences and leveraging technology in an innovative way.
             </p>
           </div>
         </div>
