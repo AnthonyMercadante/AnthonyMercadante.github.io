@@ -1,7 +1,6 @@
 // React and Hooks
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 
 // Material UI Components and Styles
 import Box from '@mui/material/Box';
@@ -14,12 +13,9 @@ import { useTheme, styled } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Assets
-import ProjectIconImage from '../../assets/images/VRProjectsIcon.png';
-import ProjectIconImage2 from '../../assets/images/BotProjects.png';
-import ProjectIconImage3 from '../../assets/images/ReactProjectIcon.png';
+import ReactProjectIconImage from '../../assets/images/ReactProjectIcon.png';
 
-
-const Projects = () => {
+const ReactProjects = () => {
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -38,31 +34,28 @@ const Projects = () => {
     },
   }));
 
+  // Sample project details
   const projects = [
     {
-      title: 'VR Projects',
-      route: '/XRDeveloper',
-      imageUrl: ProjectIconImage,
+      title: 'React Project 1',
+      route: '/react-project-1',
+      imageUrl: ReactProjectIconImage,
     },
     {
-      title: 'Bot Projects',
-      route: '/Bots',
-      imageUrl: ProjectIconImage2,
-    
+      title: 'React Project 2',
+      route: '/react-project-2',
+      imageUrl: ReactProjectIconImage,
     },
     {
-      title: 'React Projects',
-      route: '/ReactProjects',
-      imageUrl: ProjectIconImage3,
+      title: 'React Project 3',
+      route: '/react-project-3',
+      imageUrl: ReactProjectIconImage,
     }
-
   ];
-
 
   const navigateToProject = (route: string) => {
     navigate(route);
   };
-
 
   return (
     <Box sx={{
@@ -96,11 +89,10 @@ const Projects = () => {
         ))}
       </Grid>
       <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
-        Click an icon cateogry to view the projects
+        Click an icon to view the project
       </Typography>
-      <LandscapeOverlay />
     </Box>
   );
 };
 
-export default Projects;
+export default ReactProjects;
