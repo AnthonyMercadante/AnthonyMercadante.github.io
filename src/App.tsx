@@ -18,6 +18,9 @@ import RealEstateBot from './pages/RealEstateBot/RealEstateBot';
 import BotInteraction from './pages/BotInteraction/BotInteraction';
 import BattleShipBot from './pages/BattleShipBot/BattleShipBot';
 import Bots from './pages/Bots/Bots';
+import ReactProjects from './pages/ReactProjects/ReactProjects';
+import EcoChallengeTracker from './pages/EcoChallengeTracker/EcoChallengeTracker';
+import TorontoNightlifeExplorer from './pages/TorontoNightlifeExplorer/TorontoNightlifeExplorer';
 
 function App() {
   return (
@@ -40,6 +43,9 @@ function App() {
             <Route path='/BotInteraction' element={<BotInteraction/>}/>
             <Route path='/BattleShipBot' element={<BattleShipBot/>}/>
             <Route path='/Bots' element={<Bots/>}/>
+            <Route path='/ReactProjects' element={<ReactProjects/>}/>
+            <Route path='/EcoChallengeTracker' element={<EcoChallengeTracker/>}/>
+            <Route path='/TorontoNightlifeExplorer' element={<TorontoNightlifeExplorer/>}/>
           </Routes>
         </div>
       </Router>

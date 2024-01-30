@@ -6,6 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LandscapeOverlay from '../../components/LandscapeOverlay'; 
+import Starfield from '../../components/Starfield';
 
 type Message = {
     text: string;
@@ -187,6 +188,7 @@ const BotInteraction = () => {
                     </Button>
                 </Box>
             </Paper>
+            <Starfield/>
             <LandscapeOverlay />
 
         </Box>

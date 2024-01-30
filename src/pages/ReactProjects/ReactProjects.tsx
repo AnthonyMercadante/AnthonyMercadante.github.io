@@ -1,7 +1,6 @@
 // React and Hooks
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 
 // Material UI Components and Styles
 import Box from '@mui/material/Box';
@@ -14,18 +13,16 @@ import { useTheme, styled } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Assets
-import ProjectIconImage from '../../assets/images/VRProjectsIcon.png';
-import ProjectIconImage2 from '../../assets/images/BotProjects.png';
-import ProjectIconImage3 from '../../assets/images/ReactProjectIcon.png';
+import ReactProjectIconImage2 from '../../assets/images/TorontoNightlifeExplorerIcon.png';
+import ReactProjectIconImage from '../../assets/images/EcoChallengeTrackerIcon.png';
 
-
-const Projects = () => {
+const ReactProjects = () => {
   const theme = useTheme();
   const navigate = useNavigate();
 
   const ProjectIcon = styled('img')(({ theme }) => ({
     borderRadius: '20%',
-    width: '70%',
+    width: '70%', // Adjusted width for larger screens
     height: 'auto',
     objectFit: 'cover',
     transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
@@ -34,35 +31,27 @@ const Projects = () => {
       boxShadow: '0 4px 20px 0 rgba(0, 0, 0, 0.2)',
     },
     [theme.breakpoints.down('sm')]: {
-      width: '75%',
+      width: '60%', // Adjusted width for mobile screens
     },
   }));
 
+  // Sample project details
   const projects = [
     {
-      title: 'VR Projects',
-      route: '/XRDeveloper',
-      imageUrl: ProjectIconImage,
+      title: 'Eco Challenge Tracker',
+      route: '/EcoChallengeTracker',
+      imageUrl: ReactProjectIconImage,
     },
     {
-      title: 'Bot Projects',
-      route: '/Bots',
-      imageUrl: ProjectIconImage2,
-    
-    },
-    {
-      title: 'React Projects',
-      route: '/ReactProjects',
-      imageUrl: ProjectIconImage3,
+      title: 'Toronto Nightlife Explorer',
+      route: '/TorontoNightlifeExplorer',
+      imageUrl: ReactProjectIconImage2,
     }
-
   ];
-
 
   const navigateToProject = (route: string) => {
     navigate(route);
   };
-
 
   return (
     <Box sx={{
@@ -79,15 +68,15 @@ const Projects = () => {
       <IconButton onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 20, left: 20 }}>
         <ArrowBackIcon />
       </IconButton>
-      <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>
+      <Grid container spacing={2} justifyContent="center" sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%', spacing: 1 } }}> {/* Adjusted spacing for mobile */}
         {projects.map((project, index) => (
-          <Grid item xs={4} sm={6} md={4} key={index} onClick={() => navigateToProject(project.route)}>
+          <Grid item xs={6} sm={6} md={4} key={index} onClick={() => navigateToProject(project.route)}> {/* Adjusted grid item size for xs */}
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <ProjectIcon src={project.imageUrl} alt={project.title} />
               <Typography variant="subtitle1" sx={{
                 mt: 1,
                 color: 'white',
-                fontSize: { xs: '0.7rem', sm: '1rem' }
+                fontSize: { xs: '0.6rem', sm: '0.7rem', md: '1rem' } // Adjusted font size for responsiveness
               }}>
                 {project.title}
               </Typography>
@@ -96,11 +85,10 @@ const Projects = () => {
         ))}
       </Grid>
       <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
-        Click an icon category to view the projects
+        Click an icon to view the project
       </Typography>
-      <LandscapeOverlay />
     </Box>
   );
 };
 
-export default Projects;
+export default ReactProjects;
