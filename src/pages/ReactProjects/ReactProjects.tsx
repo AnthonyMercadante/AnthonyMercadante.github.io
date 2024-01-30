@@ -13,7 +13,8 @@ import { useTheme, styled } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Assets
-import ReactProjectIconImage from '../../assets/images/ReactProjectIcon.png';
+import ReactProjectIconImage2 from '../../assets/images/ReactProjectIcon.png';
+import ReactProjectIconImage from '../../assets/images/EcoChallengeTrackerIcon.png';
 
 const ReactProjects = () => {
   const theme = useTheme();
@@ -37,19 +38,19 @@ const ReactProjects = () => {
   // Sample project details
   const projects = [
     {
-      title: 'React Project 1',
-      route: '/react-project-1',
+      title: 'Eco Challenge Tracker',
+      route: '/EcoChallengeTracker',
       imageUrl: ReactProjectIconImage,
     },
     {
       title: 'React Project 2',
       route: '/react-project-2',
-      imageUrl: ReactProjectIconImage,
+      imageUrl: ReactProjectIconImage2,
     },
     {
       title: 'React Project 3',
       route: '/react-project-3',
-      imageUrl: ReactProjectIconImage,
+      imageUrl: ReactProjectIconImage2,
     }
   ];
 

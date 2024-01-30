@@ -19,6 +19,7 @@ import BotInteraction from './pages/BotInteraction/BotInteraction';
 import BattleShipBot from './pages/BattleShipBot/BattleShipBot';
 import Bots from './pages/Bots/Bots';
 import ReactProjects from './pages/ReactProjects/ReactProjects';
+import EcoChallengeTracker from './pages/EcoChallengeTracker/EcoChallengeTracker';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path='/BattleShipBot' element={<BattleShipBot/>}/>
             <Route path='/Bots' element={<Bots/>}/>
             <Route path='/ReactProjects' element={<ReactProjects/>}/>
+            <Route path='/EcoChallengeTracker' element={<EcoChallengeTracker/>}/>
           </Routes>
         </div>
       </Router>
