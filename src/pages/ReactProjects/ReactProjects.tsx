@@ -13,7 +13,8 @@ import { useTheme, styled } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Assets
-import ReactProjectIconImage2 from '../../assets/images/ReactProjectIcon.png';
+import ReactProjectIconImage2 from '../../assets/images/TorontoNightlifeExplorerIcon.png';
+import ReactProjectIconImage3 from '../../assets/images/ReactProjectIcon.png';
 import ReactProjectIconImage from '../../assets/images/EcoChallengeTrackerIcon.png';
 
 const ReactProjects = () => {
@@ -43,14 +44,14 @@ const ReactProjects = () => {
       imageUrl: ReactProjectIconImage,
     },
     {
-      title: 'React Project 2',
-      route: '/react-project-2',
+      title: 'Toronto Nightlife Explorer',
+      route: '/TorontoNightlifeExplorer',
       imageUrl: ReactProjectIconImage2,
     },
     {
       title: 'React Project 3',
       route: '/react-project-3',
-      imageUrl: ReactProjectIconImage2,
+      imageUrl: ReactProjectIconImage3,
     }
   ];
 
