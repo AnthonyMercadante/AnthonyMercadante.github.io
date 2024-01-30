@@ -47,7 +47,7 @@ const RealEstateBot = () => {
             textAlign: 'left',
         },
         featureBox: {
-            marginTop: theme.spacing(4),
+            marginTop: theme.spacing(2),
             textAlign: 'left',
         },
         featureHeading: {
@@ -68,7 +68,7 @@ const RealEstateBot = () => {
                 {/* Header */}
                 <Grid item xs={12}>
                     <Typography variant="h2" sx={style.header}>
-                        <br></br>Real Estate AI Bot
+                        <br></br><br></br>Real Estate AI Bot
                     </Typography>
                 </Grid>
     
@@ -86,7 +86,7 @@ const RealEstateBot = () => {
                 {/* Key Technical Features */}
                 <Grid item xs={12} md={6}>
                     <Box sx={style.featureBox}>
-                        <Typography variant="h4" sx={style.featureHeading}>Key Technical Features:</Typography>
+                        <Typography variant="h4" sx={style.featureHeading}>Key Technical Features</Typography>
                         <ul>
                             <li><Typography variant="body1">Advanced integration with OpenAI's GPT models for insightful responses.</Typography></li>
                             <li><Typography variant="body1">Deployment on Azure App Service using Flask and CORS.</Typography></li>
@@ -101,7 +101,7 @@ const RealEstateBot = () => {
                 {/* Project Motivation */}
                 <Grid item xs={12}>
                     <Box sx={style.featureBox}>
-                        <Typography variant="h4" sx={style.featureHeading}>Project Motivation:</Typography>
+                        <Typography variant="h4" sx={style.featureHeading}>Project Motivation</Typography>
                         <Typography variant="body1">
                             The inception of this bot was driven by the ambition to innovate in the real estate sector through AI. A key motivation behind this project was exploring the possibility of replacing the traditional real estate agent with an AI bot, provided it is trained on the correct data. This bot exemplifies the potential of AI in automating and enhancing customer interactions in real estate, offering a more efficient and data-driven alternative to conventional methods.
                         </Typography>
@@ -111,7 +111,7 @@ const RealEstateBot = () => {
                 {/* Technical Stack and Dependencies */}
                 <Grid item xs={12}>
                     <Box sx={style.featureBox}>
-                        <Typography variant="h4" sx={style.featureHeading}>Technical Stack and Dependencies:</Typography>
+                        <Typography variant="h4" sx={style.featureHeading}>Technical Stack and Dependencies</Typography>
                         <ul>
                             <li><Typography variant="body1">OpenAI Python client library for interfacing with GPT models.</Typography></li>
                             <li><Typography variant="body1">Python 3.6 or higher for backend development.</Typography></li>

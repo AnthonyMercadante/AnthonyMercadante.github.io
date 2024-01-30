@@ -96,7 +96,7 @@ const Projects = () => {
         ))}
       </Grid>
       <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
-        Click an icon cateogry to view the projects
+        Click an icon category to view the projects
       </Typography>
       <LandscapeOverlay />
     </Box>
