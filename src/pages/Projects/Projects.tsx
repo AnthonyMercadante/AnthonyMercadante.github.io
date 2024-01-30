@@ -14,8 +14,9 @@ import { useTheme, styled } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Assets
-import ProjectIconImage from '../../assets/images/VRprojects.png';
+import ProjectIconImage from '../../assets/images/VRProjectsIcon.png';
 import ProjectIconImage2 from '../../assets/images/BotProjects.png';
+import ProjectIconImage3 from '../../assets/images/ReactProjectIcon.png';
 
 
 const Projects = () => {
@@ -48,6 +49,11 @@ const Projects = () => {
       route: '/Bots',
       imageUrl: ProjectIconImage2,
     
+    },
+    {
+      title: 'React Projects',
+      route: '/ReactProjects',
+      imageUrl: ProjectIconImage3,
     }
 
   ];
