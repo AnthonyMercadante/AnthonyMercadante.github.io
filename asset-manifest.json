@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ea33468c.css",
-    "main.js": "/static/js/main.a4a6d633.js",
+    "main.css": "/static/css/main.4037f881.css",
+    "main.js": "/static/js/main.06ab723f.js",
     "static/js/787.2dcca737.chunk.js": "/static/js/787.2dcca737.chunk.js",
     "static/media/arieltower.png": "/static/media/arieltower.d36faead2a6c6235f848.png",
     "static/media/Toolsforuse.png": "/static/media/Toolsforuse.e08f78e0d73e7b457670.png",
@@ -21,14 +21,18 @@
     "static/media/OVINFormulaCar.png": "/static/media/OVINFormulaCar.643b2c32cb4a3694965d.png",
     "static/media/BattleShipBot.png": "/static/media/BattleShipBot.1e59e4c9491bdf9f6529.png",
     "static/media/OpenFlowIcon.png": "/static/media/OpenFlowIcon.514a277b9f3f155b6103.png",
+    "static/media/Machine Learning.webp": "/static/media/Machine Learning.5bdcc57bffcddbccaa72.webp",
+    "static/media/beingInterviewed.jpg": "/static/media/beingInterviewed.4e495ef3a053246019b8.jpg",
+    "static/media/AircraftIdentificationAI.webp": "/static/media/AircraftIdentificationAI.dc90f4badfc525849fa8.webp",
+    "static/media/groupPhoto.jpg": "/static/media/groupPhoto.2c927940238b7b2f3c1d.jpg",
     "static/media/professional-photo.jpg": "/static/media/professional-photo.e28cd5836920ba4ec674.jpg",
     "index.html": "/index.html",
-    "main.ea33468c.css.map": "/static/css/main.ea33468c.css.map",
-    "main.a4a6d633.js.map": "/static/js/main.a4a6d633.js.map",
+    "main.4037f881.css.map": "/static/css/main.4037f881.css.map",
+    "main.06ab723f.js.map": "/static/js/main.06ab723f.js.map",
     "787.2dcca737.chunk.js.map": "/static/js/787.2dcca737.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ea33468c.css",
-    "static/js/main.a4a6d633.js"
+    "static/css/main.4037f881.css",
+    "static/js/main.06ab723f.js"
   ]
 }
