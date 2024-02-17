@@ -68,14 +68,14 @@ const RealEstateBot = () => {
                 {/* Header */}
                 <Grid item xs={12}>
                     <Typography variant="h2" sx={style.header}>
-                        <br></br><br></br>Real Estate AI Bot
+                        <br></br><br></br>Real Estate Bot
                     </Typography>
                 </Grid>
     
                 {/* Text Content */}
                 <Grid item xs={12} md={6}>
                     <Typography variant="body1" sx={style.paragraph}>
-                        The Real Estate AI Bot demonstrates an advanced application of OpenAI's GPT models tailored for real estate inquiries. Initially designed for the Toronto and Ontario markets, this bot is capable of processing complex user queries and maintaining conversation histories for contextual coherence.
+                        The Real Estate Bot demonstrates an advanced application of OpenAI's GPT models tailored for real estate inquiries. Initially designed for the Toronto and Ontario markets, this bot is capable of processing complex user queries and maintaining conversation histories for contextual coherence.
                     </Typography>
     
                     <Typography variant="body1" sx={style.paragraph}><br></br>
