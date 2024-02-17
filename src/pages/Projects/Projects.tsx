@@ -17,6 +17,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ProjectIconImage from '../../assets/images/VRProjectsIcon.png';
 import ProjectIconImage2 from '../../assets/images/BotProjects.png';
 import ProjectIconImage3 from '../../assets/images/ReactProjectIcon.png';
+import ProjectIconImage4 from '../../assets/images/Machine Learning.webp'
 
 
 const Projects = () => {
@@ -51,11 +52,16 @@ const Projects = () => {
     
     },
     {
-      title: 'React Projects',
+      title: 'React Native Projects',
       route: '/ReactProjects',
       imageUrl: ProjectIconImage3,
-    }
+    },
+    {
+      title: 'Machine Learning Projects',
+      route: '/MachineLearningProjects',
+      imageUrl: ProjectIconImage4,
 
+    }
   ];
 
 

@@ -32,7 +32,7 @@ const Bots = () => {
 
   const projects = [
     {
-      title: 'Real Estate AI Bot',
+      title: 'Real Estate Bot',
       route: '/RealEstateBot',
       imageUrl: ProjectImage,
     },
