@@ -22,6 +22,7 @@ import ReactProjects from './pages/ReactProjects/ReactProjects';
 import EcoChallengeTracker from './pages/EcoChallengeTracker/EcoChallengeTracker';
 import TorontoNightlifeExplorer from './pages/TorontoNightlifeExplorer/TorontoNightlifeExplorer';
 import MachineLearningProjects from './pages/MachineLearningProjects/MachineLearningProjects';
+import AircraftIdentifierAI from './pages/AircraftIdentifierAI/AircraftIdentifierAI';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             <Route path='/EcoChallengeTracker' element={<EcoChallengeTracker/>}/>
             <Route path='/TorontoNightlifeExplorer' element={<TorontoNightlifeExplorer/>}/>
             <Route path='/MachineLearningProjects' element={<MachineLearningProjects/>}/>
+            <Route path='/AircraftIdentifierAI' element={<AircraftIdentifierAI/>}/>
           </Routes>
         </div>
       </Router>
