@@ -2,6 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
+import PreloadImages from '../../components/PreloadImages';
 
 // Material UI Components, Icons, and Styles
 import { Box, Grid, Typography, IconButton, useTheme, styled } from '@mui/material';
@@ -48,41 +49,43 @@ const Bots = () => {
   };
 
   return (
-    <Box sx={{
-      p: 1.5,
-      backgroundColor: 'transparent',
-      color: 'white',
-      height: 'calc(100vh - 24px)',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden'
-    }}>
-      <IconButton onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 20, left: 20 }}>
-        <ArrowBackIcon />
-      </IconButton>
-      <Grid container spacing={2} justifyContent="center" sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%', spacing: 0.25 } }}> {/* Reduced spacing for mobile */}
-        {projects.map((project, index) => (
-          <Grid item xs={6} sm={6} md={4} key={index} onClick={() => navigateToProject(project.route)}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <ProjectIcon src={project.imageUrl} alt={project.title} />
-              <Typography variant="subtitle1" sx={{
-                mt: 1,
-                color: 'white',
-                fontSize: { xs: '0.7rem', sm: '0.7rem', md: '1rem' }
-              }}>
-                {project.title}
-              </Typography>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
-      <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
-        Click an icon to view the project
-      </Typography>
-      <LandscapeOverlay />
-    </Box>
+    <PreloadImages>
+      <Box sx={{
+        p: 1.5,
+        backgroundColor: 'transparent',
+        color: 'white',
+        height: 'calc(100vh - 24px)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden'
+      }}>
+        <IconButton onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 20, left: 20 }}>
+          <ArrowBackIcon />
+        </IconButton>
+        <Grid container spacing={2} justifyContent="center" sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%', spacing: 0.25 } }}> {/* Reduced spacing for mobile */}
+          {projects.map((project, index) => (
+            <Grid item xs={6} sm={6} md={4} key={index} onClick={() => navigateToProject(project.route)}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <ProjectIcon src={project.imageUrl} alt={project.title} />
+                <Typography variant="subtitle1" sx={{
+                  mt: 1,
+                  color: 'white',
+                  fontSize: { xs: '0.7rem', sm: '0.7rem', md: '1rem' }
+                }}>
+                  {project.title}
+                </Typography>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+        <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
+          Click an icon to view the project
+        </Typography>
+        <LandscapeOverlay />
+      </Box>
+    </PreloadImages>
   );
 };
 
