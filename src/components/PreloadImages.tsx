@@ -8,10 +8,13 @@ const PreloadImages: React.FC<PreloadImagesProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Specify the type for observer
+    let observer: MutationObserver | null = null;
+    
     const loadImages = async () => {
       const images = Array.from(document.images);
-      const promises = images.map(img => {
-        if (img.complete) {
+      const promises = images.map((img) => {
+        if (img.complete && img.naturalHeight !== 0) {
           return Promise.resolve();
         }
         return new Promise((resolve, reject) => {
@@ -22,14 +25,30 @@ const PreloadImages: React.FC<PreloadImagesProps> = ({ children }) => {
 
       try {
         await Promise.all(promises);
+        setLoading(false);
       } catch (error) {
         console.error("One or more images failed to load.");
       }
-
-      setLoading(false);
     };
 
+    const config = { childList: true, subtree: true };
+    observer = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          loadImages();
+        }
+      }
+    });
+
+    observer.observe(document.body, config);
+
+    // Initial load in case all images are already in the DOM
     loadImages();
+
+    return () => {
+      // Use the observer?.disconnect() to safely disconnect if observer is not null
+      observer?.disconnect();
+    };
   }, []);
 
   if (loading) {
