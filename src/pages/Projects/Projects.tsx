@@ -1,7 +1,8 @@
 // React and Hooks
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LandscapeOverlay from '../../components/LandscapeOverlay'; 
+import LandscapeOverlay from '../../components/LandscapeOverlay';
+import PreloadImages from '../../components/PreloadImages';
 
 // Material UI Components and Styles
 import Box from '@mui/material/Box';
@@ -49,7 +50,7 @@ const Projects = () => {
       title: 'Bot Projects',
       route: '/Bots',
       imageUrl: ProjectIconImage2,
-    
+
     },
     {
       title: 'React Native Projects',
@@ -71,41 +72,43 @@ const Projects = () => {
 
 
   return (
-    <Box sx={{
-      p: 1.5,
-      backgroundColor: 'transparent',
-      color: 'white',
-      height: 'calc(100vh - 24px)',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden'
-    }}>
-      <IconButton onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 20, left: 20 }}>
-        <ArrowBackIcon />
-      </IconButton>
-      <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>
-        {projects.map((project, index) => (
-          <Grid item xs={4} sm={6} md={4} key={index} onClick={() => navigateToProject(project.route)}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <ProjectIcon src={project.imageUrl} alt={project.title} />
-              <Typography variant="subtitle1" sx={{
-                mt: 1,
-                color: 'white',
-                fontSize: { xs: '0.7rem', sm: '1rem' }
-              }}>
-                {project.title}
-              </Typography>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
-      <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
-        Click an icon category to view the projects
-      </Typography>
-      <LandscapeOverlay />
-    </Box>
+    <PreloadImages>
+      <Box sx={{
+        p: 1.5,
+        backgroundColor: 'transparent',
+        color: 'white',
+        height: 'calc(100vh - 24px)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden'
+      }}>
+        <IconButton onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 20, left: 20 }}>
+          <ArrowBackIcon />
+        </IconButton>
+        <Grid container spacing={4} sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%' } }}>
+          {projects.map((project, index) => (
+            <Grid item xs={4} sm={6} md={4} key={index} onClick={() => navigateToProject(project.route)}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <ProjectIcon src={project.imageUrl} alt={project.title} />
+                <Typography variant="subtitle1" sx={{
+                  mt: 1,
+                  color: 'white',
+                  fontSize: { xs: '0.7rem', sm: '1rem' }
+                }}>
+                  {project.title}
+                </Typography>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+        <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
+          Click an icon category to view the projects
+        </Typography>
+        <LandscapeOverlay />
+      </Box>
+    </PreloadImages>
   );
 };
 
