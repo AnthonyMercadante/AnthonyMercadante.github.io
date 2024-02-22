@@ -5,62 +5,47 @@ Welcome to the digital canvas of my professional saga! 🚀 This repository is t
 ## What's Inside? 🌟
 
 - **Crafted with React & Tailwind**: Built using the powerful React framework and spiced up with Tailwind CSS, this website stands as a testament to my love for sleek, responsive design and efficient coding.
-- **Python API Integration**: It's not just about looks! The site taps into a Python API web service, bringing one of my projects to life directly on the web platform.
+- **Python API Integration**: It's not just about looks! The site taps into various Python API web services, bringing several of my projects to life directly on the web platform, including a real estate bot that simulates a real estate agent for the Toronto market.
 - **Inspired by Apple**: Drawing design inspiration from Apple's aesthetic, the website sports a clean, modern interface that's a joy to navigate.
 
 ## Key Highlights ✨
 
 - **Responsive Design**: A seamless experience across devices, be it a desktop behemoth or a mobile wonder.
 - **Interactive UI**: Engaging and intuitive, the UI is an invitation to explore and discover.
-- **Dynamic Content**: My portfolio of work, neatly packaged and presented in an organized, captivating format.
+- **Dynamic Content**: My portfolio of work, including machine learning projects, bots, and virtual reality experiences, is neatly packaged and presented in an organized, captivating format.
 
-## Project Anatomy 📂
+## Featured Projects 🚀
 
-- `src/`: Dive into the React components and TypeScript brilliance.
-- `public/`: The public face with assets and the HTML entry point.
-- `assets/images/`: A gallery of images and media embellishing the portfolio.
+- **AircraftIdentificationAI**: A machine learning project using Python and YoloV8, aimed at identifying aircraft models from pictures.
+- **Battleship Bot**: A Java-based bot utilizing data structures and algorithms to efficiently win the game of Battleship.
+- **Toronto Real Estate Bot**: A conversational AI simulating a real estate agent for the Toronto market, powered by NLP techniques and connected via a web service.
+- **VR Cell Tower Repair Simulator**: A Unity and C# project creating a virtual reality simulator for training in cell tower repair.
+- **Eco Challenge Tracker**: A React Native app encouraging environmental challenges through geotagged images.
+- **OVIN Project**: A virtual reality project designed as an information center, game, mechanic shop, and driving simulator.
+- **Open Flow Water Machine Lab**: A VR laboratory for Mohawk College students to complete fluid dynamics labs.
+- **Toronto Nightlife Explorer**: A React Native app for discovering Toronto's curated nightlife through web API calls.
+
+## Professional Experience 🛠
+
+- **XR Developer, Mohawk College's XR Innovation Studio**: Spent a year developing cutting-edge XR solutions, contributing significantly to the field of virtual and augmented reality.
+- **Automation Assistant, IDEAWORKS**: Engaged in automation projects within Mohawk College's Research Department, leveraging technology to streamline processes and enhance efficiency.
 
 ## Getting Started 🚀
 
 To get a local version up and running, follow these simple steps:
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/AnthonyMercadante/AnthonyMercadante.github.io.git
-   ```
+```bash
+git clone https://github.com/AnthonyMercadante/AnthonyMercadante.github.io.git
+cd AnthonyMercadante.github.io
+npm install
+npm start
+```
 
-2. **Navigate to the project directory**:
-   ```bash
-   cd AnthonyMercadante.github.io
-   ```
-
-3. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-4. **Fire up the development server**:
-   ```bash
-   npm start
-   ```
-   Voilà! The website spins up at `http://localhost:3000`.
-
-5. **Build for the grand stage**:
-   ```bash
-   npm run build
-   ```
-   Prepares the project for production.
+Voilà! The website spins up at `http://localhost:3000`.
 
 ## On the Web 🌐
 
-The website is proudly hosted on GitHub Pages. For the world to see:
-
-1. **Build for production**.
-2. **Deploy to GitHub Pages**:
-   ```bash
-   npm run deploy
-   ```
-   This command propels the build to the `gh-pages` branch, beaming the updates to the live site.
+The website is proudly hosted on GitHub Pages. Showcase to the world by deploying to the `gh-pages` branch.
 
 ## Join the Odyssey 🌌
 
