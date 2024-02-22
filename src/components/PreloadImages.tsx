@@ -25,11 +25,10 @@ const PreloadImages: React.FC<PreloadImagesProps> = ({ children }) => {
         imageLoaded();
       } else {
         images[i].onload = imageLoaded;
-        images[i].onerror = imageLoaded; // Call imageLoaded on error to proceed regardless
+        images[i].onerror = imageLoaded; 
       }
     }
 
-    // If there are no images, set loading to false
     if (totalImages === 0) {
       setLoading(false);
     }
@@ -38,9 +37,10 @@ const PreloadImages: React.FC<PreloadImagesProps> = ({ children }) => {
   return (
     <>
       {loading ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-          {/* Customize your loading indicator here */}
-          <div className="text-2xl">Loading...</div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+          <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
         </div>
       ) : (
         <Transition
@@ -60,3 +60,4 @@ const PreloadImages: React.FC<PreloadImagesProps> = ({ children }) => {
 };
 
 export default PreloadImages;
+
