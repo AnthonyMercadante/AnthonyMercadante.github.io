@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Image1 from '../../assets/images/beingInterviewed.jpg';
-import Image2 from '../../assets/images/groupPhoto.jpg';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import PreloadImages from '../../components/PreloadImages';
 
@@ -44,13 +43,20 @@ const AircraftIdentifierAI = () => {
                             <p className="text-lg md:text-xl leading-relaxed mb-6">
                                 It was an honor to represent our team and discuss the project's intricacies on CHCH News, emphasizing the practical, hands-on skills gained through our educational approach.
                             </p>
-
-
                         </div>
 
                         <div className="md:w-2/3 text-left px-1">
-
-                            <img src={Image2} alt="Project Team" className="w-1/2 md:w-1/2 mx-auto h-auto shadow-lg my-4" />
+                            {/* Embedded video of the application demo */}
+                            <iframe
+                                width="100%"
+                                height="auto"
+                                src="https://www.youtube.com/embed/L8QHCNwK01g?si=K1i3XGflU49yBJ4m"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                className="aspect-video"
+                            ></iframe>
 
                             <h2 className="text-3xl font-semibold mb-6 text-gradient">
                                 Powering <span className="text-blue-500">AI</span> with Python Libraries and Advanced Model Training
@@ -65,21 +71,7 @@ const AircraftIdentifierAI = () => {
                                 <span className="font-semibold text-pink-300"> pandas</span> for data manipulation and analysis.
                                 This technological stack has been instrumental in handling the complexities of processing vast datasets of historical aircraft images, enabling us to train our AI models with unprecedented <span className="font-bold text-indigo-500">precision</span> and <span className="font-bold text-indigo-500">efficiency</span>.
                             </p>
-
-                            <p className="text-lg md:text-xl leading-relaxed mb-6">
-                                One of the project's key challenges was the need to <span className="font-bold text-indigo-500">train our own custom model</span> to accurately identify specific aircraft models.
-                                Given the <span className="font-semibold">unique nature of our dataset</span>, comprised of historical photos with varying qualities and angles, we had to classify our own distinct classes of aircraft.
-                                This task involved <span className="italic text-green-500">writing numerous scripts</span> to automate the annotation process, thereby <span className="underline decoration-sky-500">significantly streamlining</span> the preparation of our training data.
-                            </p>
-
-
-                            <p className="text-lg md:text-xl leading-relaxed mb-6">
-                                A crucial breakthrough in our development process was the utilization of <span className="font-semibold text-indigo-500">GPU acceleration</span> through <span className="font-semibold text-red-500">CUDA</span>, in combination with <span className="font-semibold text-green-500">PyTorch</span>.
-                                This approach dramatically <span className="font-bold text-yellow-400">reduced our model training times</span> from an initial 10 hours to just 10 minutes. Such efficiency gains not only <span className="font-bold underline decoration-pink-500">expedited our research cycle</span> but also allowed for more iterative testing and refinement of our AI model, leading to improved accuracy in aircraft identification.
-                            </p>
-
                         </div>
-
                     </div>
                 </div>
                 <LandscapeOverlay />
