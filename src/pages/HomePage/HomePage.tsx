@@ -10,7 +10,7 @@ const HomePage = () => {
       <Container maxWidth={false}
         style={{
           position: 'relative',
-          backgroundColor: 'transparent', // Ensure this is transparent
+          backgroundColor: 'transparent',
           color: '#fff',
           minHeight: '100vh',
           display: 'flex',
