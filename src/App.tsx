@@ -23,6 +23,7 @@ import EcoChallengeTracker from './pages/EcoChallengeTracker/EcoChallengeTracker
 import TorontoNightlifeExplorer from './pages/TorontoNightlifeExplorer/TorontoNightlifeExplorer';
 import MachineLearningProjects from './pages/MachineLearningProjects/MachineLearningProjects';
 import AircraftIdentifierAI from './pages/AircraftIdentifierAI/AircraftIdentifierAI';
+import Music from './pages/Music/Music';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             <Route path='/TorontoNightlifeExplorer' element={<TorontoNightlifeExplorer/>}/>
             <Route path='/MachineLearningProjects' element={<MachineLearningProjects/>}/>
             <Route path='/AircraftIdentifierAI' element={<AircraftIdentifierAI/>}/>
+            <Route path='/Music' element={<Music/>}/>
           </Routes>
         </div>
       </Router>
