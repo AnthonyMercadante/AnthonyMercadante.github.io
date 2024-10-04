@@ -14,14 +14,31 @@ const Music = () => {
                     scrolling="no" 
                     frameBorder="no" 
                     allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1928549981&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+                </iframe>
+                <div className="text-xs mt-2 text-gray-400 text-center">
+                    <a href="https://soundcloud.com/anthony_mercadante" title="Anthony Mercadante" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
+                        Anthony Mercadante
+                    </a> · 
+                    <a href="https://soundcloud.com/raethexn/radio-show-001" title="Radio Show #001" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
+                        Radio Show #002
+                    </a>
+                </div>
+                <iframe 
+                    title="SoundCloud Player" 
+                    width="100%" 
+                    height="300" 
+                    scrolling="no" 
+                    frameBorder="no" 
+                    allow="autoplay"
                     src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1798062109&color=%23ff5500&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=true"
                     className="shadow-lg rounded-lg">
                 </iframe>
                 <div className="text-xs mt-2 text-gray-400 text-center">
-                    <a href="https://soundcloud.com/raethexn" title="Raethexn" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
-                        Raethexn
+                    <a href="https://soundcloud.com/anthony_mercadante" title="Anthony Mercadante" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
+                        Anthony Mercadante
                     </a> · 
-                    <a href="https://soundcloud.com/raethexn/radio-show-001" title="Radio Show #001" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
+                    <a href="https://soundcloud.com/anthony_mercadante/radio-show-001" title="Radio Show #001" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
                         Radio Show #001
                     </a>
                 </div>
