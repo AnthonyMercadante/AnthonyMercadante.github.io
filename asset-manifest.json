@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e7df9c65.css",
+    "main.js": "/static/js/main.fd7f4c61.js",
+    "static/js/787.2dcca737.chunk.js": "/static/js/787.2dcca737.chunk.js",
+    "static/media/arieltower.png": "/static/media/arieltower.d36faead2a6c6235f848.png",
+    "static/media/Toolsforuse.png": "/static/media/Toolsforuse.e08f78e0d73e7b457670.png",
+    "static/media/celltowerfromabove.png": "/static/media/celltowerfromabove.29811c092bd03ac1a43f.png",
+    "static/media/closeupwatermachine.png": "/static/media/closeupwatermachine.e5dd905623f4ebc7a674.png",
+    "static/media/RealEstateBot.png": "/static/media/RealEstateBot.4045c5b357406e695915.png",
+    "static/media/GroundCellTower.png": "/static/media/GroundCellTower.c06737fd955766965750.png",
+    "static/media/OVINMenu.png": "/static/media/OVINMenu.1e07fc460a726e9db8f5.png",
+    "static/media/coverfinal.jpg": "/static/media/coverfinal.b108827b67adf9d1ca75.jpg",
+    "static/media/CellTowerIcon.png": "/static/media/CellTowerIcon.db3360ab7c233d8b057b.png",
+    "static/media/EcoChallengeTrackerIcon.png": "/static/media/EcoChallengeTrackerIcon.34472ab5cc9a7ce268fa.png",
+    "static/media/OVIN.png": "/static/media/OVIN.a9649d9b5a98fbec1003.png",
+    "static/media/VRProjectsIcon.png": "/static/media/VRProjectsIcon.39fd81f97dd9a36cad8c.png",
+    "static/media/TorontoNightlifeExplorerIcon.png": "/static/media/TorontoNightlifeExplorerIcon.4931c38cecf536a63f91.png",
+    "static/media/openflowmachine.png": "/static/media/openflowmachine.a6067cad93bbe252d215.png",
+    "static/media/ReactProjectIcon.png": "/static/media/ReactProjectIcon.af0b6219515328482ba9.png",
+    "static/media/BotProjects.png": "/static/media/BotProjects.e73d7ae96f524eea9a52.png",
+    "static/media/OVINFormulaCar.png": "/static/media/OVINFormulaCar.643b2c32cb4a3694965d.png",
+    "static/media/BattleShipBot.png": "/static/media/BattleShipBot.1e59e4c9491bdf9f6529.png",
+    "static/media/OpenFlowIcon.png": "/static/media/OpenFlowIcon.514a277b9f3f155b6103.png",
+    "static/media/Machine Learning.webp": "/static/media/Machine Learning.5bdcc57bffcddbccaa72.webp",
+    "static/media/beingInterviewed.jpg": "/static/media/beingInterviewed.4e495ef3a053246019b8.jpg",
+    "static/media/AircraftIdentificationAI.webp": "/static/media/AircraftIdentificationAI.dc90f4badfc525849fa8.webp",
+    "static/media/professional-photo.jpg": "/static/media/professional-photo.e28cd5836920ba4ec674.jpg",
+    "index.html": "/index.html",
+    "main.e7df9c65.css.map": "/static/css/main.e7df9c65.css.map",
+    "main.fd7f4c61.js.map": "/static/js/main.fd7f4c61.js.map",
+    "787.2dcca737.chunk.js.map": "/static/js/787.2dcca737.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e7df9c65.css",
+    "static/js/main.fd7f4c61.js"
+  ]
+}
