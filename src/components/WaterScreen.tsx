@@ -1,148 +1,104 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function WaterScreen() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [needUnlock, setNeedUnlock] = useState(false);
-
-  /* ---------- state shared between draw + handlers ---------- */
-  const dims = useRef({ w: 0, h: 0 });
-  const physics = useRef({
-    targetSlope: 0,
-    currentSlope: 0,
-    targetOffset: 0,
-    currentOffset: 0,
-    t: 0,
-  });
-
-  /* 🔸 1 — declare the tilt handler OUTSIDE useEffect 🔸 */
-  const handleTilt = (e: DeviceOrientationEvent) => {
-    const { w, h } = dims.current;
-    const SLOPE_RANGE  = h * 0.25;
-    const HEIGHT_RANGE = h * 0.15;
-
-    const gamma = (e.gamma ?? 0) / 90; // −1…+1
-    const beta  = (e.beta  ?? 0) / 90; // −1…+1
-
-    physics.current.targetSlope  = SLOPE_RANGE  * gamma;
-    physics.current.targetOffset = -HEIGHT_RANGE * beta;
-  };
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
 
-    dims.current.w = canvas.width  = window.innerWidth;
-    dims.current.h = canvas.height = window.innerHeight;
+    /* ---------- size ---------- */
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
-    const BASE_Y = dims.current.h * 0.7;
-    const EASE   = 0.08;
+    /* ---------- state ---------- */
+    const p = { slope: 0, offset: 0, t: 0 };
+    const ease = 0.08;
 
-    /* ---------- draw loop ---------- */
+    /* ---------- input ---------- */
+    const applyInput = (gamma: number, beta: number) => {
+      const h = canvas.height;
+      const slopeRange = h * 0.25;
+      const heightRange = h * 0.15;
+      p.slope  += ((slopeRange  * gamma) - p.slope)  * ease;
+      p.offset += ((-heightRange * beta ) - p.offset) * ease;
+    };
+
+    /* 1️⃣ pointer fallback (always) */
+    window.addEventListener("mousemove", e => {
+      applyInput((e.clientX / canvas.width) * 2 - 1,
+                 (e.clientY / canvas.height) * 2 - 1);
+    });
+
+    /* 2️⃣ motion if available */
+    const motionOK = () => {
+      window.addEventListener("deviceorientation", e => {
+        applyInput((e.gamma ?? 0) / 90, (e.beta ?? 0) / 90);
+      }, true);
+    };
+
+    if (typeof DeviceOrientationEvent !== "undefined") {
+      // iOS 13+ secure‑context permission dance
+      if ("requestPermission" in DeviceOrientationEvent) {
+        const ask = async () => {
+          try {
+            const res = await (DeviceOrientationEvent as any).requestPermission();
+            if (res === "granted") motionOK();
+          } catch {}
+        };
+        // one‑time overlay
+        const div = document.createElement("div");
+        div.className =
+          "fixed inset-0 z-50 flex items-center justify-center bg-black/60 text-white";
+        div.innerHTML =
+          '<button class="px-6 py-3 bg-blue-600 rounded">Enable motion</button>';
+        div.onclick = () => { ask(); div.remove(); };
+        document.body.appendChild(div);
+      } else {
+        // Android / desktop
+        motionOK();
+      }
+    }
+
+    /* ---------- draw ---------- */
     const draw = () => {
-      const { w, h } = dims.current;
-      const p = physics.current;
-
-      ctx.clearRect(0, 0, w, h);
-
-      p.currentSlope  += (p.targetSlope  - p.currentSlope)  * EASE;
-      p.currentOffset += (p.targetOffset - p.currentOffset) * EASE;
+      const { width: w, height: h } = canvas;
       p.t += 0.03;
-
-      const samples = 120;
-      const dx = w / (samples - 1);
-
+      ctx.clearRect(0, 0, w, h);
       ctx.beginPath();
+      const baseY = h * 0.7;
+      const samples = 120;
       for (let i = 0; i < samples; i++) {
-        const x = i * dx;
+        const x = (i / (samples - 1)) * w;
         const y =
-          BASE_Y +
-          p.currentOffset +
-          p.currentSlope * (x - w / 2) +
+          baseY +
+          p.offset +
+          p.slope * (x - w / 2) +
           Math.sin(p.t + i * 0.3) * 4;
-
-        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
       }
       ctx.lineTo(w, h);
       ctx.lineTo(0, h);
       ctx.closePath();
       ctx.fillStyle = "rgba(37,145,255,0.35)";
       ctx.fill();
-
       requestAnimationFrame(draw);
     };
     draw();
 
-    /* ---------- desktop fallback ---------- */
-    const handleMouse = (e: MouseEvent) => {
-      const { w, h } = dims.current;
-      const SLOPE_RANGE  = h * 0.25;
-      const HEIGHT_RANGE = h * 0.15;
-
-      const gamma = (e.clientX / w) * 2 - 1;
-      const beta  = (e.clientY / h) * 2 - 1;
-
-      physics.current.targetSlope  = SLOPE_RANGE  * gamma;
-      physics.current.targetOffset = -HEIGHT_RANGE * beta;
-    };
-
-    const handleResize = () => {
-      dims.current.w = canvas.width  = window.innerWidth;
-      dims.current.h = canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener("mousemove", handleMouse);
-    window.addEventListener("resize", handleResize);
-
-    /* ---------- iOS‑style permission check ---------- */
-    if (
-      typeof DeviceOrientationEvent !== "undefined" &&
-      "requestPermission" in DeviceOrientationEvent
-    ) {
-      setNeedUnlock(true); // show overlay
-    } else {
-      // Android / desktop HTTPS → no prompt needed
-      window.addEventListener("deviceorientation", handleTilt, true);
-    }
-
     return () => {
-      window.removeEventListener("deviceorientation", handleTilt, true);
-      window.removeEventListener("mousemove", handleMouse);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", resize);
     };
   }, []);
 
-  /* ---------- unlock button (only rendered if needUnlock) ---------- */
-  const requestMotion = async () => {
-    // haptic feedback (optional)
-    navigator.vibrate?.(20);
-
-    try {
-      const perm = await (DeviceOrientationEvent as any).requestPermission();
-      if (perm === "granted") {
-        window.addEventListener("deviceorientation", handleTilt, true);
-        setNeedUnlock(false); // hide overlay
-      }
-    } catch {
-      console.warn("DeviceOrientation permission denied.");
-    }
-  };
-
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 pointer-events-none select-none"
-      />
-
-      {needUnlock && (
-        <button
-          onClick={requestMotion}            /* 👈 merged into ONE onClick */
-          className="fixed inset-0 z-50 flex items-center justify-center
-                     bg-black/60 text-white text-xl"
-        >
-          Enable motion control
-        </button>
-      )}
-    </>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none select-none"
+    />
   );
 }
