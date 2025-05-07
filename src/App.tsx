@@ -24,6 +24,7 @@ import TorontoNightlifeExplorer from './pages/TorontoNightlifeExplorer/TorontoNi
 import MachineLearningProjects from './pages/MachineLearningProjects/MachineLearningProjects';
 import AircraftIdentifierAI from './pages/AircraftIdentifierAI/AircraftIdentifierAI';
 import Music from './pages/Music/Music';
+import WaterScreen from './components/WaterScreen';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
             <Route path='/MachineLearningProjects' element={<MachineLearningProjects/>}/>
             <Route path='/AircraftIdentifierAI' element={<AircraftIdentifierAI/>}/>
             <Route path='/Music' element={<Music/>}/>
+            <Route path="/water" element={<WaterScreen />} />
           </Routes>
         </div>
       </Router>
