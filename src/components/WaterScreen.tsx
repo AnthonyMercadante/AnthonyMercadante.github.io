@@ -1,73 +1,94 @@
 import { useRef, useEffect } from "react";
 
-const WaterScreen = () => {
+export default function WaterScreen() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
-    let w = (canvas.width = window.innerWidth);
-    let h = (canvas.height = window.innerHeight);
 
-    /* === tiny height‑field ripple sim ==================== */
-    const C = 120, R = 80, damp = 0.99;
-    const z = Array.from({ length: R }, () => Array(C).fill(0));
-    const zPrev = z.map(r => [...r]);
+    /* -------------------------------------------------- */
+    /*   CONFIG                                           */
+    /* -------------------------------------------------- */
+    let w = (canvas.width  = window.innerWidth);   // 👈 use window.
+    let h = (canvas.height = window.innerHeight);  // 👈 use window.
+    const BASE_Y       = h * 0.7;
+    const HEIGHT_RANGE = h * 0.15;
+    const SLOPE_RANGE  = h * 0.25;
+    const EASE         = 0.08;
 
-    const step = () => {
-      for (let y = 1; y < R - 1; y++)
-        for (let x = 1; x < C - 1; x++) {
-          const nz =
-            ((z[y - 1][x] + z[y + 1][x] + z[y][x - 1] + z[y][x + 1]) / 2 -
-              zPrev[y][x]) *
-            damp;
-          zPrev[y][x] = z[y][x];
-          z[y][x] = nz;
-        }
-    };
+    /* -------------------------------------------------- */
+    /*   STATE                                            */
+    /* -------------------------------------------------- */
+    let targetSlope = 0, currentSlope = 0;
+    let targetOffset = 0, currentOffset = 0;
+    let t = 0;
 
+    /* -------------------------------------------------- */
+    /*   DRAW loop                                        */
+    /* -------------------------------------------------- */
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = "#07f3"; // translucent blue
+      currentSlope  += (targetSlope  - currentSlope)  * EASE;
+      currentOffset += (targetOffset - currentOffset) * EASE;
+      t += 0.03;
+
+      const samples = 120;
+      const dx = w / (samples - 1);
+
       ctx.beginPath();
-      for (let y = 0; y < R - 1; y++) {
-        for (let x = 0; x < C; x++) {
-          const xpos = (x / (C - 1)) * w;
-          const ypos = ((y + z[y][x]) / (R - 1)) * h;
-          ctx.lineTo(xpos, ypos);
-        }
+      for (let i = 0; i < samples; i++) {
+        const x = i * dx;
+        const y =
+          BASE_Y +
+          currentOffset +
+          currentSlope * (x - w / 2) +
+          Math.sin(t + i * 0.3) * 4;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
+      ctx.lineTo(w, h);
+      ctx.lineTo(0, h);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(37,145,255,0.35)";
       ctx.fill();
     };
 
-    const tick = () => {
-      step();
+    const loop = () => {
       draw();
-      requestAnimationFrame(tick);
+      requestAnimationFrame(loop);
     };
-    tick();
+    loop();
 
-    const splash = (x: number, y: number, mag = 8) => {
-      const cx = Math.floor((x / w) * C);
-      const cy = Math.floor((y / h) * R);
-      if (z[cy]) z[cy][cx] = mag;
+    /* -------------------------------------------------- */
+    /*   EVENT HANDLERS                                   */
+    /* -------------------------------------------------- */
+    const handleTilt = (e: DeviceOrientationEvent) => {
+      const gamma = (e.gamma ?? 0) / 90;
+      const beta  = (e.beta  ?? 0) / 90;
+      targetSlope  = SLOPE_RANGE  * gamma;
+      targetOffset = -HEIGHT_RANGE * beta;
     };
 
-    window.addEventListener("mousemove", e => splash(e.clientX, e.clientY, 6));
-    window.addEventListener("deviceorientation", e => {
-      const mag = (Math.abs(e.beta ?? 0) + Math.abs(e.gamma ?? 0)) / 90;
-      splash(w / 2, h / 2, mag * 10);
-    });
-    window.addEventListener("resize", () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    });
+    const handleMouse = (e: MouseEvent) => {
+      const gamma = (e.clientX / w) * 2 - 1;
+      const beta  = (e.clientY / h) * 2 - 1;
+      targetSlope  = SLOPE_RANGE  * gamma;
+      targetOffset = -HEIGHT_RANGE * beta;
+    };
+
+    const handleResize = () => {
+      w = canvas.width  = window.innerWidth;   // 👈 use window.
+      h = canvas.height = window.innerHeight;  // 👈 use window.
+    };
+
+    window.addEventListener("deviceorientation", handleTilt, true);
+    window.addEventListener("mousemove", handleMouse);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      /* cleanup listeners on unmount */
-      window.removeEventListener("mousemove", () => {});
-      window.removeEventListener("deviceorientation", () => {});
-      window.removeEventListener("resize", () => {});
+      window.removeEventListener("deviceorientation", handleTilt, true);
+      window.removeEventListener("mousemove", handleMouse);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -77,6 +98,4 @@ const WaterScreen = () => {
       className="fixed inset-0 pointer-events-none select-none"
     />
   );
-};
-
-export default WaterScreen;
+}
