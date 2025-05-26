@@ -37,7 +37,7 @@ To get a local version up and running, follow these simple steps:
 ```bash
 git clone https://github.com/AnthonyMercadante/AnthonyMercadante.github.io.git
 cd AnthonyMercadante.github.io
-npm install
+npm install --legacy-peer-deps
 npm start
 ```
 
