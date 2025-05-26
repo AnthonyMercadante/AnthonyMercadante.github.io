@@ -29,20 +29,20 @@ const links = [
     ),
   },
   {
-    name: "Instagram",
-    href: "https://instagram.com/anthony_mercadante",
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-        <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.5-2.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z" />
-      </svg>
-    ),
-  },
-  {
     name: "Strava",
     href: "https://strava.app.link/42BwywgdHTb",
     icon: (
       <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
         <path d="M12 2l5.5 10H13l-1 2h6.5L12 22 5.5 14H11l1-2H5.5L12 2z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Instagram",
+    href: "https://instagram.com/anthony_mercadante",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
+        <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.5-2.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z" />
       </svg>
     ),
   },
