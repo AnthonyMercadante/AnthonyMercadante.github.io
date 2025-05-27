@@ -109,7 +109,7 @@ export default function HomePage() {
         </p>
 
         {/* links */}
-        <ul className="w-full flex flex-col gap-3 mt-4">
+        <ul className="w-full grid grid-cols-2 gap-3 mt-4">
           {links.map(({ name, path, href, internal, icon }) => (
             <li key={name} className="w-full">
               {internal ? (
