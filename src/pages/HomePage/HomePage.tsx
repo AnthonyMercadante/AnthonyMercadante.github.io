@@ -105,7 +105,7 @@ export default function HomePage() {
 
         {/* tagline */}
         <p className="text-center text-sm sm:text-base opacity-90">
-          Full-stack software developer & Audio Engineer.
+          Full-stack software developer & sound designer.
         </p>
 
         {/* links */}
