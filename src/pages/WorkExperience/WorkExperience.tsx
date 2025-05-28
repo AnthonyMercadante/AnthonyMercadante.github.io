@@ -33,19 +33,26 @@ const WorkExperienceComponent = () => {
 
   const workExperiences: WorkExperience[] = [
     {
-      title: "XR Software Developer Mohawk College",
-      period: "Jan 2023 - Dec 2023",
+      title: "Software Engineer Intern at BASL.ai",
+      period: "May 2024 - Sep 2024",
+      details: "Full-stack SaaS delivery (Vue3/Inertia, Laravel, Tailwind); 10k-row auto-import; Twilio voice/SMS; Docker CI/CD.",
+      skills: ["Vue 3", "Inertia.js", "Laravel", "TailwindCSS", "Twilio", "Docker", "Git"],
+      link: "/BaslEngineer",
+    },
+    {
+      title: "XR Software Developer at Mohawk College",
+      period: "January 2023 - December 2023",
       details: "Specializing in immersive virtual learning experiences using XR technologies. Key projects include a VR Water Channel Machine, Cell Tower Training Simulator, and an Interactive Car Industry Exhibit.",
       skills: ["C#", "Unity", "Unreal Engine", "Blender", "Git"],
       link: "/XRDeveloper",
     },
     {
-      title: "Automation Assistant Mohawk College",
+      title: "Automation Assistant at Mohawk College",
       period: "September 2022 - December 2022",
       details: "As an automation assistant for the manager of funding proposals within the colleges research department, I was tasked with developing an application to automate the grant proposal creation process.",
       skills: ["Python", "Qt 6", "OpenAI", "httpx", "SQLite"],
       link: "/AutomationAssistant",
-    },
+    }
   ];
 
   const handleBack = () => {

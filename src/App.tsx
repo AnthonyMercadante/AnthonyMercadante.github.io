@@ -10,6 +10,7 @@ import './App.css';
 import WorkExperience from './pages/WorkExperience/WorkExperience';
 import XRDeveloper from './pages/XRSoftwareDeveloper/XRDeveloper';
 import AutomationAssistant from './pages/AutomationAssistant/AutomationAssistant';
+import BaslEngineer from './pages/BaslEngineer/BaslEngineer'
 import OpenFlowMachine from './pages/OpenFlowMachine/OpenFlowMachine';
 import CellTower from './pages/CellTower/CellTower';
 import OVIN from './pages/OVIN/OVIN';
@@ -39,6 +40,7 @@ function App() {
             <Route path="/WorkExperience" element={<WorkExperience/>}/>
             <Route path="/XRDeveloper" element={<XRDeveloper/>}/>
             <Route path="/AutomationAssistant" element={<AutomationAssistant/>}/>
+            <Route path='BaslEngineer' element={<BaslEngineer/>}/>
             <Route path="/OpenFlowMachine" element={<OpenFlowMachine/>}/>
             <Route path="/CellTower" element={<CellTower/>}/>
             <Route path='/OVIN' element={<OVIN/>}/>
