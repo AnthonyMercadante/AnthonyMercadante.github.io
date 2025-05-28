@@ -18,7 +18,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ProjectIconImage from '../../assets/images/VRProjectsIcon.png';
 import ProjectIconImage2 from '../../assets/images/BotProjects.png';
 import ProjectIconImage3 from '../../assets/images/ReactProjectIcon.png';
-import ProjectIconImage4 from '../../assets/images/Machine Learning.webp'
+import ProjectIconImage4 from '../../assets/images/Machine Learning.webp';
+import ProjectIconImage5 from '../../assets/images/audio-visual-projects.png';
 
 
 const Projects = () => {
@@ -41,6 +42,11 @@ const Projects = () => {
   }));
 
   const projects = [
+    {
+      title: 'Audio Visual Projects',
+      route: '/avProjects',
+      imageUrl:ProjectIconImage5 
+    },
     {
       title: 'VR Projects',
       route: '/XRDeveloper',
