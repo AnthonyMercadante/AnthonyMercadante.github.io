@@ -50,11 +50,11 @@ const links = [
     name: "SoundCloud",
     href: "https://soundcloud.com/anthony_mercadante",
     icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-        <path d="M7 10a4 4 0 0 1 4-4c1.54 0 2.87.87 3.5 2.15A3.5 3.5 0 1 1 22 12.5H7V10z" />
+      <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.715 10.402a3.72 3.72 0 00-1.173.188 4.739 4.739 0 00-4.475-3.28c-.27 0-.53.026-.79.062A5.986 5.986 0 006.938 9.73a4.173 4.173 0 00-.516-.032A4.419 4.419 0 002 14.114a4.421 4.421 0 004.421 4.42h11.273a3.34 3.34 0 100-6.671h-.003a3.42 3.42 0 00-.976.14z" />
       </svg>
     ),
-  },
+  },  
   {
     name: "TikTok",
     href: "https://www.tiktok.com/@anthony_mercadante",
