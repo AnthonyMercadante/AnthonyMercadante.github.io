@@ -77,11 +77,15 @@ const links = [
     name: "YouTube",
     href: "https://www.youtube.com/@anthonymercadante695",
     icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-        <path d="M10 15l5.19-3L10 9v6zm12-3c0-2.19-.19-3.8-.44-4.76-.24-.93-.97-1.66-1.9-1.9C18.8 5.19 12 5.19 12 5.19s-6.8 0-7.66.15c-.93.24-1.66.97-1.9 1.9C2.19 8.2 2 9.81 2 12s.19 3.8.44 4.76c.24.93.97 1.66 1.9 1.9.86.15 7.66.15 7.66.15s6.8 0 7.66-.15c.93-.24 1.66-.97 1.9-1.9.25-.96.44-2.57.44-4.76z" />
+      <svg
+        viewBox="0 0 24 24"
+        className="w-6 h-6 fill-current"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M19.615 3.184H4.385A1.386 1.386 0 003 4.57v14.86a1.386 1.386 0 001.385 1.385h15.23A1.386 1.386 0 0021 19.43V4.57a1.386 1.386 0 00-1.385-1.385zM10 15V9l5 3-5 3z" />
       </svg>
     ),
-  },
+  },  
 ];
 
 export default function HomePage() {
