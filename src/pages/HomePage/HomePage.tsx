@@ -65,11 +65,11 @@ const links = [
     ),
   },
   {
-    name: "Snapchat",
-    href: "https://www.snapchat.com/add/anthmercadante",
+    name: "Twitch",
+    href: "https://www.twitch.tv/anthonymercadante",
     icon: (
       <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-        <path d="M12 2c-3.2 0-6 2.8-6 6v3c0 .5-.5.9-1 .9-.6 0-1 .4-1 1v2c0 .5.4 1 1 1 .6 0 1 .4 1 .9V19c0 1.7 3.6 3 6 3s6-1.3 6-3v-1.3c0-.5.5-.9 1-.9.6 0 1-.5 1-1v-2c0-.6-.4-1-1-1-.5 0-1-.4-1-.9V8c0-3.2-2.8-6-6-6z" />
+        <path d="M4.265 0L0 4.265v15.47h5.62V24l4.265-4.265h3.185L24 13.06V0H4.265zM21.265 11.56l-3.53 3.53h-3.53L10.06 19.47v-4.38H5.62V2.735h15.645v8.825zM15.53 6.18h-1.765v5.295H15.53V6.18zm-4.47 0H9.295v5.295h1.765V6.18z" />
       </svg>
     ),
   },
