@@ -20,6 +20,7 @@ import ProjectIconImage2 from '../../assets/images/BotProjects.png';
 import ProjectIconImage3 from '../../assets/images/ReactProjectIcon.png';
 import ProjectIconImage4 from '../../assets/images/Machine Learning.webp';
 import ProjectIconImage5 from '../../assets/images/audio-visual-projects.png';
+import ProjectIconImage6 from '../../assets/images/video-games-projects.png';
 
 
 const Projects = () => {
@@ -41,11 +42,19 @@ const Projects = () => {
     },
   }));
 
-  const projects = [
-    {
+  /*
+  {
       title: 'Audio Visual Projects',
       route: '/avProjects',
       imageUrl:ProjectIconImage5 
+    },
+  */
+
+  const projects = [
+    {
+      title: 'Game Projects',
+      route: '/Games/Void',
+      imageUrl: ProjectIconImage6
     },
     {
       title: 'VR Projects',
