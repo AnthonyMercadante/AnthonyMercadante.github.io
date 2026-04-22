@@ -12,7 +12,7 @@ let theme = createTheme({
     // ... other theme options
   },
   typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
+    fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, sans-serif',
   },
   components: {
     MuiButton: {

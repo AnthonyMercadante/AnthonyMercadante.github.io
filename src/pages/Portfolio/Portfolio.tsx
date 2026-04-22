@@ -1,90 +1,100 @@
 import React from 'react';
-import { Box, Button, Grid, Typography, IconButton, useTheme } from '@mui/material';
-import WorkIcon from '@mui/icons-material/Work'; 
-import ProjectIcon from '@mui/icons-material/Build'; 
 import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'; 
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 
+const navItems = [
+  {
+    label: 'About Me',
+    route: '/about-me',
+    description: 'Background, philosophy, and what drives the work',
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Work Experience',
+    route: '/WorkExperience',
+    description: 'Industry roles in AI, XR, and full-stack engineering',
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" />
+        <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+        <line x1="12" y1="12" x2="12" y2="16" />
+        <line x1="10" y1="14" x2="14" y2="14" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Projects',
+    route: '/Projects',
+    description: 'Open-source repos, XR simulations, AI tools, and more',
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+        <line x1="14.5" y1="4" x2="9.5" y2="20" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Skills & Stack',
+    route: '/skills',
+    description: 'Languages, frameworks, AI tooling, and infrastructure',
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+      </svg>
+    ),
+  },
+];
+
 const Portfolio = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
 
-  const buttonStyle = {
-    width: 200, // Increased width for desktop
-    height: 200, // Increased height for desktop
-    borderRadius: '20%', // Rounded corners
-    margin: '10px', // Space between buttons
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Subtle shadow for depth
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    '&:hover': {
-      boxShadow: '0 6px 12px rgba(0, 0, 0, 0.5)', // More pronounced shadow on hover
-    },
-    '& .MuiSvgIcon-root': {
-      fontSize: '5rem', // Increased icon size for desktop
-    },
-    '@media (max-width: 600px)': {
-      width: 100, // Retained width for mobile
-      height: 100, // Retained height for mobile
-      '& .MuiSvgIcon-root': {
-        fontSize: '2rem', // Retained icon size for mobile
-      },
-    },
-  };
-
-  const textStyle = {
-    marginTop: theme.spacing(1), // Space between icon and text
-    fontSize: '1.2rem', // Increased text size for desktop
-    textAlign: 'center', // Center align text
-    '@media (max-width: 600px)': {
-      fontSize: '0.8rem', // Retained text size for mobile
-    },
-  };
-
-  const navigateToWorkExperience = () => {
-    navigate('/WorkExperience');
-  };
-
-  const navigateToProjects = () => {
-    navigate('/Projects');
-  }
-
-  const handleBack = () => {
-    navigate(-1); // Navigate back to the previous page
-  };
-
   return (
-    <Box sx={{
-      backgroundColor: 'transparent', 
-      minHeight: '100vh',
-      minWidth: '100vw',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}>
-      <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
+    <div className="min-h-screen flex items-center justify-center px-6 py-12 text-white">
+      <IconButton
+        onClick={() => navigate(-1)}
+        sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
+      >
         <ArrowBackIcon />
       </IconButton>
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item>
-          <Button sx={buttonStyle} onClick={navigateToWorkExperience}>
-            <WorkIcon sx={{ fontSize: '3rem' }} />
-            <Typography sx={textStyle}>Work Experience</Typography>
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button sx={buttonStyle} onClick={navigateToProjects}>
-            <ProjectIcon sx={{ fontSize: '3rem' }} />
-            <Typography sx={textStyle}>Projects</Typography>
-          </Button>
-        </Grid>
-      </Grid>
+
+      <div className="w-full max-w-md space-y-8">
+        <div className="space-y-1">
+          <h2 className="text-3xl font-bold tracking-tight">Portfolio</h2>
+          <p className="text-sm text-zinc-500 font-mono">Anthony Mercadante · Raethexn Technologies</p>
+        </div>
+
+        <div className="space-y-3">
+          {navItems.map(({ label, route, description, icon }) => (
+            <button
+              key={route}
+              onClick={() => navigate(route)}
+              className="w-full flex items-center gap-4 border border-zinc-800 hover:border-zinc-600 rounded-xl p-5 bg-zinc-900/30 hover:bg-zinc-900/60 transition-all text-left group"
+            >
+              <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors shrink-0">
+                {icon}
+              </span>
+              <div className="min-w-0">
+                <div className="font-medium text-white group-hover:text-white">{label}</div>
+                <div className="text-xs text-zinc-500 mt-0.5 leading-relaxed">{description}</div>
+              </div>
+              <span className="ml-auto text-zinc-600 group-hover:text-zinc-400 transition-colors shrink-0">→</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       <LandscapeOverlay />
-    </Box>
+    </div>
   );
 };
 
