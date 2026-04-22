@@ -25,7 +25,7 @@ const featuredProjects = [
     description:
       'Decentralized AI memory: user-owned, browser-signed writes to an ICP canister with Physarum-inspired graph dynamics and multi-agent collective memory.',
     tags: ['ICP', 'Knowledge Graph', 'AI Memory', 'Open Source'],
-    url: 'https://github.com/AnthonyMercadante/OpenMemory',
+    url: 'https://github.com/Raethexn-Technologies/OpenMemory',
     studio: true,
   },
   {

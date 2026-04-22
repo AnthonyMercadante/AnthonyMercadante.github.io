@@ -1,90 +1,81 @@
-// React and Hooks
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import PreloadImages from '../../components/PreloadImages';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-// Material UI Components, Icons, and Styles
-import { Box, Grid, Typography, IconButton, useTheme, styled } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Back icon
-
-// Asset Imports
 import ProjectImage from '../../assets/images/RealEstateBot.png';
 import ProjectImage2 from '../../assets/images/BattleShipBot.png';
 
-const ProjectIcon = styled('img')(({ theme }) => ({
-  borderRadius: '20%',
-  width: '70%', // Default width for larger screens
-  height: 'auto',
-  objectFit: 'cover',
-  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-  '&:hover': {
-    transform: 'scale(1.05)',
-    boxShadow: '0 4px 20px 0 rgba(0, 0, 0, 0.2)',
+const projects = [
+  {
+    title: 'Real Estate Bot',
+    route: '/RealEstateBot',
+    imageUrl: ProjectImage,
+    description: 'GPT-powered knowledge assistant for real estate agents — answers property, listing, and market questions via natural language.',
+    tags: ['Python', 'OpenAI', 'GPT'],
   },
-  [theme.breakpoints.down('sm')]: {
-    width: '60%', // Adjusted width for mobile screens to bring icons closer
+  {
+    title: 'BattleShip Bot',
+    route: '/BattleShipBot',
+    imageUrl: ProjectImage2,
+    description: 'AI opponent for Battleship using probabilistic targeting and hunt/destroy strategy logic.',
+    tags: ['Python', 'Game AI', 'Algorithms'],
   },
-}));
+];
 
 const Bots = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
-
-  const projects = [
-    {
-      title: 'Real Estate Bot',
-      route: '/RealEstateBot',
-      imageUrl: ProjectImage,
-    },
-    {
-      title: 'BattleShip Bot',
-      route: '/BattleShipBot',
-      imageUrl: ProjectImage2,
-    }
-  ];
-
-  const navigateToProject = (route: string) => {
-    navigate(route);
-  };
 
   return (
     <PreloadImages>
-      <Box sx={{
-        p: 1.5,
-        backgroundColor: 'transparent',
-        color: 'white',
-        height: 'calc(100vh - 24px)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden'
-      }}>
-        <IconButton onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 20, left: 20 }}>
+      <div className="min-h-screen bg-black text-white px-6 py-16">
+        <IconButton
+          onClick={() => navigate(-1)}
+          sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
+        >
           <ArrowBackIcon />
         </IconButton>
-        <Grid container spacing={2} justifyContent="center" sx={{ maxWidth: 1200, [theme.breakpoints.down('sm')]: { maxWidth: '100%', spacing: 0.25 } }}> {/* Reduced spacing for mobile */}
-          {projects.map((project, index) => (
-            <Grid item xs={6} sm={6} md={4} key={index} onClick={() => navigateToProject(project.route)}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <ProjectIcon src={project.imageUrl} alt={project.title} />
-                <Typography variant="subtitle1" sx={{
-                  mt: 1,
-                  color: 'white',
-                  fontSize: { xs: '0.7rem', sm: '0.7rem', md: '1rem' }
-                }}>
-                  {project.title}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-        <Typography variant="subtitle1" sx={{ mt: 2, color: 'gray', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
-          Click an icon to view the project
-        </Typography>
+
+        <div className="max-w-2xl mx-auto space-y-8">
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold tracking-tight">Bot Projects</h1>
+            <p className="text-sm text-zinc-500 font-mono">AI-powered automation and game agents</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {projects.map(({ title, route, imageUrl, description, tags }) => (
+              <button
+                key={route}
+                onClick={() => navigate(route)}
+                className="flex flex-col gap-4 border border-zinc-800 hover:border-zinc-600 rounded-xl p-5 bg-zinc-900/30 hover:bg-zinc-900/60 transition-all text-left group"
+              >
+                <img
+                  src={imageUrl}
+                  alt={title}
+                  className="w-full h-36 object-cover rounded-lg opacity-80 group-hover:opacity-100 transition-opacity"
+                />
+                <div className="space-y-2">
+                  <div className="font-semibold text-white group-hover:text-cyan-400 transition-colors">
+                    {title}
+                  </div>
+                  <p className="text-xs text-zinc-500 leading-relaxed">{description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {tags.map((tag) => (
+                      <span key={tag} className="text-xs text-zinc-500 bg-zinc-800/60 border border-zinc-700/40 px-2 py-0.5 rounded font-mono">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <LandscapeOverlay />
-      </Box>
+      </div>
     </PreloadImages>
   );
 };
