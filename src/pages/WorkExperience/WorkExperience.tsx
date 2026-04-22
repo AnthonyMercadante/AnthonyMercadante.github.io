@@ -1,146 +1,106 @@
-// React and Hooks
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import LandscapeOverlay from '../../components/LandscapeOverlay'; 
-
-// Material UI Components and Icons
-import {
-  Paper, Typography, Box, Button, IconButton, Chip, useMediaQuery
-} from '@mui/material';
-import WorkIcon from '@mui/icons-material/Work';
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import LandscapeOverlay from '../../components/LandscapeOverlay';
 
-// Other Imports
-import SwipeableViews from 'react-swipeable-views';
-import theme from '../../theme';
-
-
-interface WorkExperience {
+interface WorkEntry {
   title: string;
+  company: string;
   period: string;
   details: string;
   skills: string[];
   link: string;
 }
 
+const workExperiences: WorkEntry[] = [
+  {
+    title: 'Software Engineer Intern',
+    company: 'BASL.ai',
+    period: 'May 2024 – Sep 2024',
+    details:
+      'Full-stack SaaS delivery on a knowledge-management platform for real-estate brokerages. Shipped production features weekly — auto-import pipeline processing 10k-row MLS/CRM exports in under 30s, Twilio voice/SMS integration with in-browser calling and voicemail transcription, and Docker-based CI/CD across dev/stage/prod.',
+    skills: ['Vue 3', 'Inertia.js', 'Laravel', 'TailwindCSS', 'Twilio', 'Docker', 'PHPUnit'],
+    link: '/BaslEngineer',
+  },
+  {
+    title: 'XR Software Developer',
+    company: 'Mohawk College',
+    period: 'Jan 2023 – Dec 2023',
+    details:
+      'Built immersive XR learning environments for engineering and automotive education. Key deliverables: open-channel water flow simulation for fluid dynamics training, VR cell tower inspection simulator, and an interactive automotive industry exhibit for the Ontario VR Innovation Network (OVIN).',
+    skills: ['C#', 'Unity', 'Unreal Engine', 'Blender', 'Git'],
+    link: '/XRDeveloper',
+  },
+  {
+    title: 'Automation Assistant',
+    company: 'Mohawk College Research Dept.',
+    period: 'Sep 2022 – Dec 2022',
+    details:
+      'Developed a Python desktop application to automate the grant proposal creation process for the college\'s research funding department. Integrated OpenAI for draft generation, Qt 6 for the UI, and SQLite for proposal history and template management.',
+    skills: ['Python', 'Qt 6', 'OpenAI API', 'httpx', 'SQLite'],
+    link: '/AutomationAssistant',
+  },
+];
+
 const WorkExperienceComponent = () => {
   const navigate = useNavigate();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [activeStep, setActiveStep] = useState(0);
-
-  const workExperiences: WorkExperience[] = [
-    {
-      title: "Software Engineer Intern at BASL.ai",
-      period: "May 2024 - Sep 2024",
-      details: "Full-stack SaaS delivery (Vue3/Inertia, Laravel, Tailwind); 10k-row auto-import; Twilio voice/SMS; Docker CI/CD.",
-      skills: ["Vue 3", "Inertia.js", "Laravel", "TailwindCSS", "Twilio", "Docker", "Git"],
-      link: "/BaslEngineer",
-    },
-    {
-      title: "XR Software Developer at Mohawk College",
-      period: "January 2023 - December 2023",
-      details: "Specializing in immersive virtual learning experiences using XR technologies. Key projects include a VR Water Channel Machine, Cell Tower Training Simulator, and an Interactive Car Industry Exhibit.",
-      skills: ["C#", "Unity", "Unreal Engine", "Blender", "Git"],
-      link: "/XRDeveloper",
-    },
-    {
-      title: "Automation Assistant at Mohawk College",
-      period: "September 2022 - December 2022",
-      details: "As an automation assistant for the manager of funding proposals within the colleges research department, I was tasked with developing an application to automate the grant proposal creation process.",
-      skills: ["Python", "Qt 6", "OpenAI", "httpx", "SQLite"],
-      link: "/AutomationAssistant",
-    }
-  ];
-
-  const handleBack = () => {
-    navigate(-1); // Navigate back to the previous page
-  };
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => (prevActiveStep + 1) % workExperiences.length);
-  };
-
-  const handlePrev = () => {
-    setActiveStep((prevActiveStep) => (prevActiveStep - 1 + workExperiences.length) % workExperiences.length);
-  };
-
-  const renderWorkExperience = (experience: WorkExperience) => {
-    const formattedTitle = experience.title.replace("Mohawk College", "<br>Mohawk College");
-    return (
-      <Paper elevation={3} sx={{ m: { xs: 2, sm: 5 }, p: { xs: 2, sm: 5 } }}>
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <WorkIcon sx={{ marginRight: 1 }} />
-          <Typography variant="h5" textAlign="center" dangerouslySetInnerHTML={{ __html: formattedTitle }} />
-        </Box>
-        <Typography variant="body1" gutterBottom>
-          {experience.period}
-        </Typography>
-        <Box sx={{ my: 2 }}>
-          {experience.skills.map((skill, index) => (
-            <Chip label={skill} key={index} color="primary" variant="outlined" sx={{ mr: 1, mb: 1 }} />
-          ))}
-        </Box>
-        <Typography variant="body2" sx={{ padding: 2 }}>
-          {experience.details}
-        </Typography>
-        <Button component={Link} to={experience.link} variant="outlined" color="primary" sx={{ marginTop: 1 }}>
-          More Details
-        </Button>
-      </Paper>
-    );
-  };
 
   return (
-    <Box sx={{
-      flexGrow: 1,
-      pt: { xs: 7, sm: 3 },
-      pb: { xs: 2, sm: 3 },
-      backgroundColor: 'transparent',
-      maxWidth: { sm: '689px', xs: '100%' },
-      mx: 'auto',
-    }}>
-      <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
+    <div className="min-h-screen bg-black text-white px-6 py-16">
+      <IconButton
+        onClick={() => navigate(-1)}
+        sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
+      >
         <ArrowBackIcon />
       </IconButton>
 
-      {isMobile ? (
-        <>
-          <SwipeableViews index={activeStep} onChangeIndex={(step) => setActiveStep(step)}>
-            {workExperiences.map((experience, index) => (
-              <div key={index}>{renderWorkExperience(experience)}</div>
-            ))}
-          </SwipeableViews>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 2 }}>
-            <IconButton onClick={handlePrev} disabled={activeStep === 0} sx={{ mx: 2 }}>
-              <ArrowBackIosIcon />
-            </IconButton>
-            {workExperiences.map((_, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: 10,
-                  height: 10,
-                  backgroundColor: activeStep === index ? 'white' : 'grey',
-                  borderRadius: '50%',
-                  mx: 0.5,
-                }}
-              />
-            ))}
-            <IconButton onClick={handleNext} disabled={activeStep === workExperiences.length - 1} sx={{ mx: 2 }}>
-              <ArrowForwardIosIcon />
-            </IconButton>
-          </Box>
-        </>
-      ) : (
-        workExperiences.map((experience, index) => (
-          <div key={index}>{renderWorkExperience(experience)}</div>
-        ))
-      )}
+      <div className="max-w-2xl mx-auto space-y-8">
+        <div className="space-y-1">
+          <h1 className="text-3xl font-bold tracking-tight">Work Experience</h1>
+          <p className="text-sm text-zinc-500 font-mono">Industry roles in AI, XR, and full-stack engineering</p>
+        </div>
+
+        <div className="space-y-4">
+          {workExperiences.map(({ title, company, period, details, skills, link }) => (
+            <div
+              key={link}
+              className="border border-zinc-800 rounded-xl p-6 bg-zinc-900/30 space-y-4"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+                <div>
+                  <h2 className="font-semibold text-white text-lg leading-tight">{title}</h2>
+                  <p className="text-sm text-cyan-400 font-mono">{company}</p>
+                </div>
+                <span className="text-xs text-zinc-500 font-mono shrink-0 mt-0.5">{period}</span>
+              </div>
+
+              <p className="text-sm text-zinc-400 leading-relaxed">{details}</p>
+
+              <div className="flex flex-wrap gap-1.5">
+                {skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="text-xs text-zinc-400 bg-zinc-800/60 border border-zinc-700/40 px-2 py-0.5 rounded font-mono"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              <Link
+                to={link}
+                className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors font-mono"
+              >
+                Full details →
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <LandscapeOverlay />
-    </Box>
+    </div>
   );
 };
 
