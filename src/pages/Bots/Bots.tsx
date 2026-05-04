@@ -4,6 +4,8 @@ import LandscapeOverlay from '../../components/LandscapeOverlay';
 import PreloadImages from '../../components/PreloadImages';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { motion } from 'framer-motion';
+import { pageVariants, containerVariants, itemVariants, headerVariants, backButtonVariants, cardHover, cardTap } from '../../animations';
 
 import ProjectImage from '../../assets/images/RealEstateBot.png';
 import ProjectImage2 from '../../assets/images/BattleShipBot.png';
@@ -30,31 +32,47 @@ const Bots = () => {
 
   return (
     <PreloadImages>
-      <div className="min-h-screen bg-black text-white px-6 py-16">
-        <IconButton
-          onClick={() => navigate(-1)}
-          sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
-        >
-          <ArrowBackIcon />
-        </IconButton>
+      <motion.div
+        className="h-screen flex flex-col items-center justify-center px-6 py-8 bg-black text-white overflow-y-auto"
+        variants={pageVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
+        <motion.div variants={backButtonVariants} initial="hidden" animate="visible">
+          <IconButton
+            onClick={() => navigate(-1)}
+            sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        </motion.div>
 
-        <div className="max-w-2xl mx-auto space-y-8">
-          <div className="space-y-1">
+        <div className="w-full max-w-2xl space-y-6">
+          <motion.div variants={headerVariants} initial="hidden" animate="visible">
             <h1 className="text-3xl font-bold tracking-tight">Bot Projects</h1>
-            <p className="text-sm text-zinc-500 font-mono">AI-powered automation and game agents</p>
-          </div>
+            <p className="text-sm text-zinc-500 font-mono mt-1">AI-powered automation and game agents</p>
+          </motion.div>
 
-          <div className="grid sm:grid-cols-2 gap-4">
+          <motion.div
+            className="grid grid-cols-2 gap-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {projects.map(({ title, route, imageUrl, description, tags }) => (
-              <button
+              <motion.button
                 key={route}
                 onClick={() => navigate(route)}
-                className="flex flex-col gap-4 border border-zinc-800 hover:border-zinc-600 rounded-xl p-5 bg-zinc-900/30 hover:bg-zinc-900/60 transition-all text-left group"
+                className="flex flex-col gap-4 border border-zinc-800 rounded-xl p-5 bg-zinc-900/30 text-left group"
+                variants={itemVariants}
+                whileHover={cardHover}
+                whileTap={cardTap}
               >
                 <img
                   src={imageUrl}
                   alt={title}
-                  className="w-full h-36 object-cover rounded-lg opacity-80 group-hover:opacity-100 transition-opacity"
+                  className="w-full h-32 object-cover rounded-lg opacity-80 group-hover:opacity-100 transition-opacity"
                 />
                 <div className="space-y-2">
                   <div className="font-semibold text-white group-hover:text-cyan-400 transition-colors">
@@ -69,13 +87,13 @@ const Bots = () => {
                     ))}
                   </div>
                 </div>
-              </button>
+              </motion.button>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         <LandscapeOverlay />
-      </div>
+      </motion.div>
     </PreloadImages>
   );
 };

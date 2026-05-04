@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
+import { motion } from 'framer-motion';
+import { pageVariants, containerVariants, itemVariants, headerVariants, backButtonVariants, cardHover } from '../../animations';
 
 interface WorkEntry {
   title: string;
@@ -19,7 +21,7 @@ const workExperiences: WorkEntry[] = [
     company: 'BASL.ai',
     period: 'May 2024 – Sep 2024',
     details:
-      'Full-stack SaaS delivery on a knowledge-management platform for real-estate brokerages. Shipped production features weekly — auto-import pipeline processing 10k-row MLS/CRM exports in under 30s, Twilio voice/SMS integration with in-browser calling and voicemail transcription, and Docker-based CI/CD across dev/stage/prod.',
+      'Full-stack SaaS delivery on a knowledge-management platform for real-estate brokerages. Shipped production features weekly — auto-import pipeline for 10k-row MLS/CRM exports in under 30s, Twilio voice/SMS with in-browser calling and voicemail transcription, Docker-based CI/CD across dev/stage/prod.',
     skills: ['Vue 3', 'Inertia.js', 'Laravel', 'TailwindCSS', 'Twilio', 'Docker', 'PHPUnit'],
     link: '/BaslEngineer',
   },
@@ -37,7 +39,7 @@ const workExperiences: WorkEntry[] = [
     company: 'Mohawk College Research Dept.',
     period: 'Sep 2022 – Dec 2022',
     details:
-      'Developed a Python desktop application to automate the grant proposal creation process for the college\'s research funding department. Integrated OpenAI for draft generation, Qt 6 for the UI, and SQLite for proposal history and template management.',
+      'Developed a Python desktop application to automate the grant proposal creation process for the research funding department. Integrated OpenAI for AI-assisted draft generation, Qt 6 for the UI, SQLite for proposal history — my first production LLM integration.',
     skills: ['Python', 'Qt 6', 'OpenAI API', 'httpx', 'SQLite'],
     link: '/AutomationAssistant',
   },
@@ -47,37 +49,50 @@ const WorkExperienceComponent = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-black text-white px-6 py-16">
-      <IconButton
-        onClick={() => navigate(-1)}
-        sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
-      >
-        <ArrowBackIcon />
-      </IconButton>
+    <motion.div
+      className="h-screen flex flex-col px-6 py-8 bg-black text-white overflow-y-auto"
+      variants={pageVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      <motion.div variants={backButtonVariants} initial="hidden" animate="visible">
+        <IconButton
+          onClick={() => navigate(-1)}
+          sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
+        >
+          <ArrowBackIcon />
+        </IconButton>
+      </motion.div>
 
-      <div className="max-w-2xl mx-auto space-y-8">
-        <div className="space-y-1">
+      <div className="max-w-5xl mx-auto w-full flex flex-col h-full pt-2">
+        <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
           <h1 className="text-3xl font-bold tracking-tight">Work Experience</h1>
-          <p className="text-sm text-zinc-500 font-mono">Industry roles in AI, XR, and full-stack engineering</p>
-        </div>
+          <p className="text-sm text-zinc-500 font-mono mt-1">Industry roles in AI, XR, and full-stack engineering</p>
+        </motion.div>
 
-        <div className="space-y-4">
+        <motion.div
+          className="flex-1 grid grid-cols-3 gap-4 overflow-hidden"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {workExperiences.map(({ title, company, period, details, skills, link }) => (
-            <div
+            <motion.div
               key={link}
-              className="border border-zinc-800 rounded-xl p-6 bg-zinc-900/30 space-y-4"
+              className="flex flex-col border border-zinc-800 rounded-xl p-5 bg-zinc-900/30 overflow-hidden"
+              variants={itemVariants}
+              whileHover={cardHover}
             >
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
-                <div>
-                  <h2 className="font-semibold text-white text-lg leading-tight">{title}</h2>
-                  <p className="text-sm text-cyan-400 font-mono">{company}</p>
-                </div>
-                <span className="text-xs text-zinc-500 font-mono shrink-0 mt-0.5">{period}</span>
+              <div className="mb-3">
+                <h2 className="font-semibold text-white leading-tight">{title}</h2>
+                <p className="text-sm text-cyan-400 font-mono mt-0.5">{company}</p>
+                <p className="text-xs text-zinc-500 font-mono mt-0.5">{period}</p>
               </div>
 
-              <p className="text-sm text-zinc-400 leading-relaxed">{details}</p>
+              <p className="text-sm text-zinc-400 leading-relaxed flex-1">{details}</p>
 
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1.5 mt-4">
                 {skills.map((skill) => (
                   <span
                     key={skill}
@@ -88,19 +103,21 @@ const WorkExperienceComponent = () => {
                 ))}
               </div>
 
-              <Link
-                to={link}
-                className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors font-mono"
-              >
-                Full details →
-              </Link>
-            </div>
+              <motion.div whileHover={{ x: 3 }} transition={{ duration: 0.15 }}>
+                <Link
+                  to={link}
+                  className="mt-4 inline-flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-300 transition-colors font-mono"
+                >
+                  Full details →
+                </Link>
+              </motion.div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <LandscapeOverlay />
-    </div>
+    </motion.div>
   );
 };
 

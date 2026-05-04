@@ -1,109 +1,135 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
+import { motion } from 'framer-motion';
+import { pageVariants, containerVariants, itemVariants, headerVariants, backButtonVariants } from '../../../animations';
 
-/**
- * Showcase page for VOID – my original 3D game project (Alpha v0.0.1)
- * Featuring real-time mob animations, performance-focused design,
- * and a custom unit-frame UI inspired by World of Warcraft.
- */
+const sections = [
+  {
+    label: 'Vision',
+    accent: 'text-violet-400',
+    content: (
+      <>
+        VOID is a dark, stylized 3D game exploring ambient dread and sci-fi estrangement. Built in
+        Unity with a focus on performance and immersion — animated mobs, real-time mechanics, and
+        a floating unit-frame UI instead of traditional camera-locked health bars.
+      </>
+    ),
+  },
+  {
+    label: 'Demo',
+    accent: 'text-cyan-400',
+    content: (
+      <div className="w-full h-full min-h-0 rounded-lg overflow-hidden mt-1">
+        <iframe
+          className="w-full h-full min-h-[120px]"
+          src="https://www.youtube.com/embed/1FKdzQ8HbpU"
+          title="VOID Game Demo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    ),
+    flex: true,
+  },
+  {
+    label: 'Tech Stack',
+    accent: 'text-blue-400',
+    content: (
+      <div className="flex flex-wrap gap-1.5 mt-1">
+        {['Unity', 'C#', 'Animator Controllers', 'Unity UI Toolkit', 'Blender'].map((t) => (
+          <span key={t} className="text-xs text-zinc-300 bg-zinc-800/60 border border-zinc-700/60 px-2 py-0.5 rounded font-mono">
+            {t}
+          </span>
+        ))}
+      </div>
+    ),
+  },
+  {
+    label: 'Design Choices',
+    accent: 'text-yellow-400',
+    content: (
+      <>
+        Health bars anchored to the UI, not world space — inspired by MMORPG unit frames.
+        Performance-first mindset throughout. Modular mob system designed for easy future
+        expansion of enemy types and behaviors.
+      </>
+    ),
+  },
+  {
+    label: 'Current Status',
+    accent: 'text-emerald-400',
+    content: (
+      <>
+        Alpha v0.0.1. Core mechanics in place: enemy animation loops, unit frame UI system,
+        basic game loop. Next phase: enemy AI and pathfinding, terrain polish, ambient
+        soundtrack and VFX layering.
+      </>
+    ),
+  },
+  {
+    label: "What's Next",
+    accent: 'text-pink-400',
+    content: (
+      <>
+        Enemy AI pathfinding · Procedural level elements · Ambient soundtrack and VFX
+        layering · Steam prototype release
+      </>
+    ),
+  },
+];
+
 const VoidGame: React.FC = () => {
   const navigate = useNavigate();
-  const handleBack = () => navigate(-1);
-
-  const cardStyle: React.CSSProperties = {
-    backgroundColor: 'rgba(25, 25, 25, 0.80)',
-    borderRadius: '10px',
-    padding: '20px',
-    boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
-    marginBottom: '20px',
-    color: 'white',
-    textAlign: 'left',
-  };
 
   return (
-    <div className="flex flex-col items-center bg-black text-white py-6 min-h-screen relative">
-      <button onClick={handleBack} className="absolute top-5 left-5 z-10 text-white hover:text-blue-400 transition-colors">
-        <ArrowBackIcon />
-      </button>
+    <motion.div
+      className="h-screen flex flex-col px-6 py-8 bg-black text-zinc-300 overflow-y-auto"
+      variants={pageVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      <motion.div variants={backButtonVariants} initial="hidden" animate="visible">
+        <IconButton
+          onClick={() => navigate(-1)}
+          sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
+        >
+          <ArrowBackIcon />
+        </IconButton>
+      </motion.div>
 
-      <div className="container mx-auto px-4 lg:px-16 text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gradient">
-          VOID
-        </h1>
+      <div className="max-w-4xl mx-auto w-full flex flex-col h-full pt-2">
+        <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
+          <h1 className="text-3xl font-bold text-white tracking-tight">VOID</h1>
+          <p className="text-sm font-mono text-violet-400 mt-1">Raethexn Technologies · Unity · Alpha v0.0.1</p>
+        </motion.div>
 
-        <div className="flex flex-col md:flex-row md:justify-center">
-          <div className="md:w-1/2 text-left px-4 mb-6">
-            <div style={cardStyle}>
-              <h2 className="text-3xl font-semibold mb-6">
-                The <span className="text-blue-400">Vision</span>
+        <motion.div
+          className="flex-1 grid grid-cols-3 grid-rows-2 gap-3 overflow-hidden"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {sections.map(({ label, accent, content, flex }) => (
+            <motion.div
+              key={label}
+              className={`flex flex-col border border-zinc-800 rounded-xl p-4 bg-zinc-900/30 overflow-hidden ${flex ? 'min-h-0' : ''}`}
+              variants={itemVariants}
+              whileHover={{ borderColor: 'rgba(63,63,70,0.8)', transition: { duration: 0.2 } }}
+            >
+              <h2 className={`text-xs font-mono font-medium uppercase tracking-widest mb-2 shrink-0 ${accent}`}>
+                {label}
               </h2>
-              <p className="text-lg md:text-xl leading-relaxed">
-                VOID is a dark, stylized 3D game exploring ambient dread and sci-fi estrangement. Built in Unity, it focuses on performance and immersion—featuring animated mobs, real-time mechanics, and a floating unit frame UI instead of traditional camera-locked health bars.
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <h2 className="text-3xl font-semibold mb-6">
-                <span className="text-purple-400">Tech Stack</span>
-              </h2>
-              <p className="text-lg md:text-xl leading-relaxed">
-                VOID is built with Unity using C#. Enemies feature walking animations powered by Animator Controllers. The UI takes inspiration from MMORPGs—unit frames persist onscreen, ensuring minimal camera interference.
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <h2 className="text-3xl font-semibold mb-6">
-                Design <span className="text-yellow-400">Choices</span>
-              </h2>
-              <p className="text-lg md:text-xl leading-relaxed">
-                - Health bars are anchored to the UI, not the world space<br/>
-                - Designed with performance-first mindset<br/>
-                - Modular mob system for easy future expansion
-              </p>
-            </div>
-          </div>
-
-          <div className="md:w-1/2 text-left px-4">
-            <div style={cardStyle}>
-              <h2 className="text-3xl font-semibold mb-6">
-                <span className="text-cyan-400">Demo Video</span>
-              </h2>
-              <div className="w-full rounded-lg overflow-hidden" style={{ height: '400px' }}>
-                <iframe
-                  className="w-full h-full"
-                  src="https://www.youtube.com/embed/1FKdzQ8HbpU"
-                  title="VOID Game Demo"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+              <div className={`text-sm leading-relaxed ${flex ? 'flex-1 min-h-0' : ''}`}>
+                {content}
               </div>
-            </div>
-
-            <div style={cardStyle}>
-              <h2 className="text-3xl font-semibold mb-6">
-                <span className="text-green-400">Current Status</span>
-              </h2>
-              <p className="text-lg md:text-xl leading-relaxed">
-                VOID is currently in Alpha (v0.0.1). Core gameplay mechanics are in place, including enemy animation loops and a UI system. Next phase includes AI, terrain polish, and music integration.
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <h2 className="text-3xl font-semibold mb-6">
-                <span className="text-pink-400">What’s Next?</span>
-              </h2>
-              <p className="text-lg md:text-xl leading-relaxed">
-                - Enemy AI and pathfinding<br/>
-                - Procedural level elements<br/>
-                - Ambient soundtrack and VFX layering<br/>
-                - Steam prototype release
-              </p>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

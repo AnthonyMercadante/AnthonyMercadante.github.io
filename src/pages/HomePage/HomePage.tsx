@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { pageVariants, containerVariants, itemVariants, headerVariants, cardHover, cardTap } from "../../animations";
 
 const ExternalLinkIcon = () => (
   <svg viewBox="0 0 12 12" className="w-3 h-3 inline-block opacity-60" fill="currentColor">
@@ -57,61 +59,30 @@ const GlobeIcon = () => (
 );
 
 const socialLinks = [
-  {
-    name: "GitHub",
-    href: "https://github.com/AnthonyMercadante",
-    icon: <GitHubIcon />,
-  },
-  {
-    name: "Studio",
-    href: "https://github.com/Raethexn-Technologies",
-    icon: <GitHubIcon />,
-    label: "GitHub · Studio",
-  },
-  {
-    name: "Raethexn.com",
-    href: "https://www.raethexntechnologies.com/",
-    icon: <GlobeIcon />,
-  },
-  {
-    name: "Instagram",
-    href: "https://instagram.com/anthony_mercadante",
-    icon: <InstagramIcon />,
-  },
-  {
-    name: "SoundCloud",
-    href: "https://soundcloud.com/anthony_mercadante",
-    icon: <SoundCloudIcon />,
-  },
-  {
-    name: "TikTok",
-    href: "https://www.tiktok.com/@anthony_mercadante",
-    icon: <TikTokIcon />,
-  },
-  {
-    name: "Twitch",
-    href: "https://www.twitch.tv/anthonymercadante",
-    icon: <TwitchIcon />,
-  },
-  {
-    name: "YouTube",
-    href: "https://www.youtube.com/@anthonymercadante695",
-    icon: <YouTubeIcon />,
-  },
-  {
-    name: "Strava",
-    href: "https://strava.app.link/42BwywgdHTb",
-    icon: <StravaIcon />,
-  },
+  { name: "GitHub", href: "https://github.com/AnthonyMercadante", icon: <GitHubIcon /> },
+  { name: "Studio", href: "https://github.com/Raethexn-Technologies", icon: <GitHubIcon />, label: "GitHub · Studio" },
+  { name: "Raethexn.com", href: "https://www.raethexntechnologies.com/", icon: <GlobeIcon /> },
+  { name: "Instagram", href: "https://instagram.com/anthony_mercadante", icon: <InstagramIcon /> },
+  { name: "SoundCloud", href: "https://soundcloud.com/anthony_mercadante", icon: <SoundCloudIcon /> },
+  { name: "TikTok", href: "https://www.tiktok.com/@anthony_mercadante", icon: <TikTokIcon /> },
+  { name: "Twitch", href: "https://www.twitch.tv/anthonymercadante", icon: <TwitchIcon /> },
+  { name: "YouTube", href: "https://www.youtube.com/@anthonymercadante695", icon: <YouTubeIcon /> },
+  { name: "Strava", href: "https://strava.app.link/42BwywgdHTb", icon: <StravaIcon /> },
 ];
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-12 text-white">
+    <motion.div
+      className="h-screen flex items-center justify-center px-6 py-12 text-white overflow-y-auto"
+      variants={pageVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <div className="w-full max-w-md space-y-10">
 
         {/* Identity */}
-        <div className="space-y-2">
+        <motion.div className="space-y-2" variants={headerVariants}>
           <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-none">
             <Link to="/about-me" className="hover:opacity-80 transition-opacity">
               Anthony Mercadante
@@ -128,43 +99,50 @@ export default function HomePage() {
           >
             Raethexn Technologies <ExternalLinkIcon />
           </a>
-        </div>
+        </motion.div>
 
         {/* Tagline */}
-        <p className="text-zinc-500 text-sm leading-relaxed">
+        <motion.p className="text-zinc-500 text-sm leading-relaxed" variants={itemVariants}>
           Building AI systems, memory infrastructure, and natural language interfaces.
-        </p>
+        </motion.p>
 
         {/* Primary CTA */}
-        <Link
-          to="/portfolio"
-          className="flex items-center justify-between w-full py-4 px-6 border border-zinc-700 rounded-xl hover:border-zinc-500 hover:bg-zinc-900/40 transition-all group"
-        >
-          <span className="text-base font-medium">Portfolio</span>
-          <span className="text-zinc-500 group-hover:text-zinc-300 transition-colors text-lg">→</span>
-        </Link>
+        <motion.div variants={itemVariants} whileHover={cardHover} whileTap={cardTap}>
+          <Link
+            to="/portfolio"
+            className="flex items-center justify-between w-full py-4 px-6 border border-zinc-700 rounded-xl hover:border-zinc-500 hover:bg-zinc-900/40 transition-all group"
+          >
+            <span className="text-base font-medium">Portfolio</span>
+            <span className="text-zinc-500 group-hover:text-zinc-300 transition-colors text-lg">→</span>
+          </Link>
+        </motion.div>
 
         {/* Connect */}
-        <div className="space-y-3">
-          <p className="text-xs text-zinc-600 font-mono uppercase tracking-widest">Connect</p>
+        <motion.div className="space-y-3" variants={containerVariants} initial="hidden" animate="visible">
+          <motion.p className="text-xs text-zinc-600 font-mono uppercase tracking-widest" variants={itemVariants}>
+            Connect
+          </motion.p>
           <div className="grid grid-cols-3 gap-2">
             {socialLinks.map(({ name, href, icon, label }) => (
-              <a
+              <motion.a
                 key={name}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 border border-zinc-800 hover:border-zinc-600 rounded-lg py-2.5 px-3 bg-zinc-900/30 hover:bg-zinc-900/60 transition-all"
                 title={name}
+                variants={itemVariants}
+                whileHover={{ scale: 1.04, transition: { duration: 0.15 } }}
+                whileTap={{ scale: 0.96 }}
               >
                 <span className="text-zinc-400">{icon}</span>
                 <span className="text-xs text-zinc-400 truncate">{label ?? name}</span>
-              </a>
+              </motion.a>
             ))}
           </div>
-        </div>
+        </motion.div>
 
       </div>
-    </div>
+    </motion.div>
   );
 }
