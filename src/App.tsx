@@ -1,10 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
+import { AnimatePresence } from 'framer-motion';
+import { MotionConfig } from 'framer-motion';
 import HomePage from './pages/HomePage/HomePage';
 import Portfolio from './pages/Portfolio/Portfolio';
 import AboutMe from './pages/AboutMe/AboutMe';
-import Skills from './pages/Skills/Skills'; 
+import Skills from './pages/Skills/Skills';
 import theme from './theme';
 import './App.css';
 import WorkExperience from './pages/WorkExperience/WorkExperience';
@@ -28,40 +30,51 @@ import VoidGame from './pages/Games/Void/Void';
 import Music from './pages/Music/Music';
 import WaterScreen from './components/WaterScreen';
 
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/about-me" element={<AboutMe />} />
+        <Route path="/skills" element={<Skills/>} />
+        <Route path="/WorkExperience" element={<WorkExperience/>}/>
+        <Route path="/XRDeveloper" element={<XRDeveloper/>}/>
+        <Route path="/AutomationAssistant" element={<AutomationAssistant/>}/>
+        <Route path='BaslEngineer' element={<BaslEngineer/>}/>
+        <Route path="/OpenFlowMachine" element={<OpenFlowMachine/>}/>
+        <Route path="/CellTower" element={<CellTower/>}/>
+        <Route path='/OVIN' element={<OVIN/>}/>
+        <Route path='/Projects' element={<Projects/>}/>
+        <Route path='/RealEstateBot' element={<RealEstateBot/>}/>
+        <Route path='/BotInteraction' element={<BotInteraction/>}/>
+        <Route path='/BattleShipBot' element={<BattleShipBot/>}/>
+        <Route path='/Bots' element={<Bots/>}/>
+        <Route path='/ReactProjects' element={<ReactProjects/>}/>
+        <Route path='/EcoChallengeTracker' element={<EcoChallengeTracker/>}/>
+        <Route path='/TorontoNightlifeExplorer' element={<TorontoNightlifeExplorer/>}/>
+        <Route path='/MachineLearningProjects' element={<MachineLearningProjects/>}/>
+        <Route path='/AircraftIdentifierAI' element={<AircraftIdentifierAI/>}/>
+        <Route path='/Games/Void' element={<VoidGame/>}/>
+        <Route path='/Music' element={<Music/>}/>
+        <Route path="/water" element={<WaterScreen />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/about-me" element={<AboutMe />} />
-            <Route path="/skills" element={<Skills/>} />
-            <Route path="/WorkExperience" element={<WorkExperience/>}/>
-            <Route path="/XRDeveloper" element={<XRDeveloper/>}/>
-            <Route path="/AutomationAssistant" element={<AutomationAssistant/>}/>
-            <Route path='BaslEngineer' element={<BaslEngineer/>}/>
-            <Route path="/OpenFlowMachine" element={<OpenFlowMachine/>}/>
-            <Route path="/CellTower" element={<CellTower/>}/>
-            <Route path='/OVIN' element={<OVIN/>}/>
-            <Route path='/Projects' element={<Projects/>}/>
-            <Route path='/RealEstateBot' element={<RealEstateBot/>}/>
-            <Route path='/BotInteraction' element={<BotInteraction/>}/>
-            <Route path='/BattleShipBot' element={<BattleShipBot/>}/>
-            <Route path='/Bots' element={<Bots/>}/>
-            <Route path='/ReactProjects' element={<ReactProjects/>}/>
-            <Route path='/EcoChallengeTracker' element={<EcoChallengeTracker/>}/>
-            <Route path='/TorontoNightlifeExplorer' element={<TorontoNightlifeExplorer/>}/>
-            <Route path='/MachineLearningProjects' element={<MachineLearningProjects/>}/>
-            <Route path='/AircraftIdentifierAI' element={<AircraftIdentifierAI/>}/>
-            <Route path='/Games/Void' element={<VoidGame/>}/>
-            <Route path='/Music' element={<Music/>}/>
-            <Route path="/water" element={<WaterScreen />} />
-          </Routes>
-        </div>
-      </Router>
-    </ThemeProvider>
+    <MotionConfig reducedMotion="user">
+      <ThemeProvider theme={theme}>
+        <Router>
+          <div className="App">
+            <AnimatedRoutes />
+          </div>
+        </Router>
+      </ThemeProvider>
+    </MotionConfig>
   );
 }
 
