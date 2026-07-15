@@ -29,6 +29,7 @@ import AircraftIdentifierAI from './pages/AircraftIdentifierAI/AircraftIdentifie
 import VoidGame from './pages/Games/Void/Void';
 import Music from './pages/Music/Music';
 import WaterScreen from './components/WaterScreen';
+import Ambient from './components/Ambient';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -70,6 +71,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <div className="App">
+            <Ambient />
             <AnimatedRoutes />
           </div>
         </Router>
