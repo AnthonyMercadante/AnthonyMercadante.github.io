@@ -9,13 +9,51 @@ import { pageVariants, containerVariants, itemVariants, headerVariants, backButt
 interface WorkEntry {
   title: string;
   company: string;
+  type?: string;
+  location?: string;
   period: string;
   details: string;
+  highlights?: string[];
   skills: string[];
-  link: string;
+  link?: string;
 }
 
 const workExperiences: WorkEntry[] = [
+  {
+    title: 'Junior AI/ML Engineer',
+    company: 'Clarity',
+    type: 'Contract Full-time',
+    location: 'Canada - Remote',
+    period: 'Jul 2025 - Present',
+    details:
+      'Designing and building applied AI systems, memory infrastructure, and natural-language software.',
+    highlights: [
+      'Building LLM-powered applications, agent workflows, and automation systems.',
+      'Integrating AI capabilities into scalable production software.',
+      'Designing memory, retrieval, and document-processing pipelines for AI applications.',
+      'Deploying systems across cloud infrastructure with attention to security, reliability, and maintainability.',
+      'Working across GCP, Python, Laravel, Vue, Node.js, PostgreSQL, and DevOps workflows.',
+    ],
+    skills: ['GCP', 'Vertex AI', 'Python', 'Laravel', 'Vue', 'Node.js', 'PostgreSQL', 'DevOps'],
+  },
+  {
+    title: 'Software Engineer, Applied AI Systems - Independent Contractor',
+    company: 'Raethexn Technologies',
+    type: 'Contract Part-time',
+    location: 'Canada',
+    period: 'Jan 2025 - Present',
+    details:
+      'Designing and building applied AI systems, memory infrastructure, retrieval pipelines, automation workflows, and production software.',
+    highlights: [
+      'Built LLM-powered applications, agent workflows, and automation systems.',
+      'Integrated AI capabilities into scalable production web software.',
+      'Designed memory, retrieval, RAG, and document-processing pipelines for AI applications.',
+      'Developed production systems with attention to security, reliability, maintainability, and deployment constraints.',
+      'Worked across GCP, Python, Laravel, Vue, Node.js, PostgreSQL, and DevOps workflows.',
+      'Explored interactive systems and real-time prototypes where they supported broader engineering and research goals.',
+    ],
+    skills: ['GCP', 'Python', 'Laravel', 'Vue', 'Node.js', 'PostgreSQL', 'RAG', 'DevOps'],
+  },
   {
     title: 'Software Engineer Intern',
     company: 'BASL.ai',
@@ -65,22 +103,22 @@ const WorkExperienceComponent = () => {
         </IconButton>
       </motion.div>
 
-      <div className="max-w-5xl mx-auto w-full flex flex-col h-full pt-2">
+      <div className="max-w-5xl mx-auto w-full flex flex-col pt-2">
         <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
           <h1 className="text-3xl font-bold tracking-tight">Work Experience</h1>
           <p className="text-sm text-zinc-500 font-mono mt-1">Industry roles in AI, XR, and full-stack engineering</p>
         </motion.div>
 
         <motion.div
-          className="flex-1 grid grid-cols-3 gap-4 overflow-hidden"
+          className="grid gap-4 pb-6 sm:grid-cols-2 xl:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {workExperiences.map(({ title, company, period, details, skills, link }) => (
+          {workExperiences.map(({ title, company, type, location, period, details, highlights, skills, link }) => (
             <motion.div
-              key={link}
-              className="flex flex-col border border-zinc-800 rounded-xl p-5 bg-zinc-900/30 overflow-hidden"
+              key={`${company}-${title}`}
+              className="flex flex-col border border-zinc-800 rounded-xl p-5 bg-zinc-900/30"
               variants={itemVariants}
               whileHover={cardHover}
             >
@@ -88,9 +126,22 @@ const WorkExperienceComponent = () => {
                 <h2 className="font-semibold text-white leading-tight">{title}</h2>
                 <p className="text-sm text-cyan-400 font-mono mt-0.5">{company}</p>
                 <p className="text-xs text-zinc-500 font-mono mt-0.5">{period}</p>
+                {(type || location) && (
+                  <p className="text-xs text-zinc-600 font-mono mt-0.5">
+                    {[type, location].filter(Boolean).join(' - ')}
+                  </p>
+                )}
               </div>
 
-              <p className="text-sm text-zinc-400 leading-relaxed flex-1">{details}</p>
+              <p className="text-sm text-zinc-400 leading-relaxed">{details}</p>
+
+              {highlights && (
+                <ul className="mt-3 space-y-1 pl-4 text-xs text-zinc-500 leading-relaxed list-disc">
+                  {highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              )}
 
               <div className="flex flex-wrap gap-1.5 mt-4">
                 {skills.map((skill) => (
@@ -103,14 +154,16 @@ const WorkExperienceComponent = () => {
                 ))}
               </div>
 
-              <motion.div whileHover={{ x: 3 }} transition={{ duration: 0.15 }}>
+              {link && (
+                <motion.div whileHover={{ x: 3 }} transition={{ duration: 0.15 }}>
                 <Link
                   to={link}
                   className="mt-4 inline-flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-300 transition-colors font-mono"
                 >
                   Full details →
                 </Link>
-              </motion.div>
+                </motion.div>
+              )}
             </motion.div>
           ))}
         </motion.div>
