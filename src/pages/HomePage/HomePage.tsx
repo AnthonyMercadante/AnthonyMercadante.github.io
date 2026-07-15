@@ -15,36 +15,6 @@ const GitHubIcon = () => (
   </svg>
 );
 
-const InstagramIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden>
-    <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.5-2.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z" />
-  </svg>
-);
-
-const SoundCloudIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden>
-    <path d="M17.715 10.402a3.72 3.72 0 00-1.173.188 4.739 4.739 0 00-4.475-3.28c-.27 0-.53.026-.79.062A5.986 5.986 0 006.938 9.73a4.173 4.173 0 00-.516-.032A4.419 4.419 0 002 14.114a4.421 4.421 0 004.421 4.42h11.273a3.34 3.34 0 100-6.671h-.003a3.42 3.42 0 00-.976.14z" />
-  </svg>
-);
-
-const TikTokIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden>
-    <path d="M17 1h-3v12.56a2.44 2.44 0 1 1-2.44-2.44h.12V8.83a5.56 5.56 0 1 0 5.56 5.55V8.5a5.5 5.5 0 0 0 3 0V5.5a5.5 5.5 0 0 1-3-4.5z" />
-  </svg>
-);
-
-const TwitchIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden>
-    <path d="M4.265 0L0 4.265v15.47h5.62V24l4.265-4.265h3.185L24 13.06V0H4.265zM21.265 11.56l-3.53 3.53h-3.53L10.06 19.47v-4.38H5.62V2.735h15.645v8.825zM15.53 6.18h-1.765v5.295H15.53V6.18zm-4.47 0H9.295v5.295h1.765V6.18z" />
-  </svg>
-);
-
-const YouTubeIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden>
-    <path d="M19.615 3.184H4.385A1.386 1.386 0 003 4.57v14.86a1.386 1.386 0 001.385 1.385h15.23A1.386 1.386 0 0021 19.43V4.57a1.386 1.386 0 00-1.385-1.385zM10 15V9l5 3-5 3z" />
-  </svg>
-);
-
 const StravaIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden>
     <path d="M12 2l5.5 10H13l-1 2h6.5L12 22 5.5 14H11l1-2H5.5L12 2z" />
@@ -60,13 +30,7 @@ const GlobeIcon = () => (
 
 const socialLinks = [
   { name: "GitHub", href: "https://github.com/AnthonyMercadante", icon: <GitHubIcon /> },
-  { name: "Studio", href: "https://github.com/Raethexn-Technologies", icon: <GitHubIcon />, label: "GitHub · Studio" },
   { name: "Raethexn.com", href: "https://www.raethexntechnologies.com/", icon: <GlobeIcon /> },
-  { name: "Instagram", href: "https://instagram.com/anthony_mercadante", icon: <InstagramIcon /> },
-  { name: "SoundCloud", href: "https://soundcloud.com/anthony_mercadante", icon: <SoundCloudIcon /> },
-  { name: "TikTok", href: "https://www.tiktok.com/@anthony_mercadante", icon: <TikTokIcon /> },
-  { name: "Twitch", href: "https://www.twitch.tv/anthonymercadante", icon: <TwitchIcon /> },
-  { name: "YouTube", href: "https://www.youtube.com/@anthonymercadante695", icon: <YouTubeIcon /> },
   { name: "Strava", href: "https://strava.app.link/42BwywgdHTb", icon: <StravaIcon /> },
 ];
 
@@ -123,7 +87,7 @@ export default function HomePage() {
             Connect
           </motion.p>
           <div className="grid grid-cols-3 gap-2">
-            {socialLinks.map(({ name, href, icon, label }) => (
+            {socialLinks.map(({ name, href, icon }) => (
               <motion.a
                 key={name}
                 href={href}
@@ -136,7 +100,7 @@ export default function HomePage() {
                 whileTap={{ scale: 0.96 }}
               >
                 <span className="text-zinc-400">{icon}</span>
-                <span className="text-xs text-zinc-400 truncate">{label ?? name}</span>
+                <span className="text-xs text-zinc-400 truncate">{name}</span>
               </motion.a>
             ))}
           </div>
