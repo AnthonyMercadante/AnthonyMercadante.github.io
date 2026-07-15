@@ -33,5 +33,9 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Local assistant/tool state
-.claude/
+# Project assistant skills
+.claude/*
+!.claude/skills/
+!.claude/skills/verify/
+!.claude/skills/verify/SKILL.md
+.claude/settings.local.json
