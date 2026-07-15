@@ -3,7 +3,7 @@ import coverPhoto from '../../assets/images/coverfinal.jpg';
 
 const Music = () => {
     return (
-        <div className="bg-black flex flex-col items-center justify-center text-white p-5">
+        <div className="flex flex-col items-center justify-center text-white p-5">
             <div className="w-full max-w-xs md:max-w-lg lg:max-w-4xl px-4 py-4">
                 {/* Title for SoundCloud Embed */}
                 <h2 className="text-xl md:text-2xl text-center mb-4">Latest DJ Mix</h2>

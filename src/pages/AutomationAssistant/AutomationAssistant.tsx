@@ -1,10 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import IconButton from '@mui/material/IconButton';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import { motion } from 'framer-motion';
-import { pageVariants, containerVariants, itemVariants, headerVariants, backButtonVariants } from '../../animations';
+import { pageVariants, containerVariants, itemVariants, headerVariants } from '../../animations';
+import BackButton from '../../components/BackButton';
 
 const sections = [
   {
@@ -93,24 +91,15 @@ const sections = [
 ];
 
 const AutomationAssistant = () => {
-  const navigate = useNavigate();
-
   return (
     <motion.div
-      className="h-screen flex flex-col px-6 py-8 bg-black text-zinc-300 overflow-y-auto"
+      className="h-screen flex flex-col px-6 py-8 text-zinc-300 overflow-y-auto"
       variants={pageVariants}
       initial="hidden"
       animate="visible"
       exit="exit"
     >
-      <motion.div variants={backButtonVariants} initial="hidden" animate="visible">
-        <IconButton
-          onClick={() => navigate(-1)}
-          sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-      </motion.div>
+      <BackButton />
 
       <div className="max-w-4xl mx-auto w-full flex flex-col h-full pt-2">
         <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
@@ -127,7 +116,7 @@ const AutomationAssistant = () => {
           {sections.map(({ label, accent, content }) => (
             <motion.div
               key={label}
-              className="flex flex-col border border-zinc-800 rounded-xl p-4 bg-zinc-900/30 overflow-hidden"
+              className="flex flex-col glass-card glass-card-hover p-4 overflow-hidden"
               variants={itemVariants}
               whileHover={{ borderColor: 'rgba(63,63,70,0.8)', transition: { duration: 0.2 } }}
             >

@@ -2,14 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import PreloadImages from '../../components/PreloadImages';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { motion } from 'framer-motion';
-import { pageVariants, containerVariants, itemVariants, headerVariants, backButtonVariants, cardHover, cardTap } from '../../animations';
+import { pageVariants, containerVariants, itemVariants, headerVariants, cardHover, cardTap } from '../../animations';
 
 import ProjectImage from '../../assets/images/OpenFlowIcon.png';
 import ProjectImage2 from '../../assets/images/CellTowerIcon.png';
 import ProjectImage3 from '../../assets/images/OVIN.png';
+import BackButton from '../../components/BackButton';
 
 const projects = [
   {
@@ -41,24 +40,17 @@ const XRDeveloper = () => {
   return (
     <PreloadImages>
       <motion.div
-        className="h-screen flex flex-col items-center justify-center px-6 py-8 bg-black text-white overflow-y-auto"
+        className="h-screen flex flex-col items-center justify-center px-6 py-8 text-white overflow-y-auto"
         variants={pageVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        <motion.div variants={backButtonVariants} initial="hidden" animate="visible">
-          <IconButton
-            onClick={() => navigate(-1)}
-            sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
-        </motion.div>
+        <BackButton />
 
         <div className="w-full max-w-3xl space-y-6">
           <motion.div variants={headerVariants} initial="hidden" animate="visible">
-            <h1 className="text-3xl font-bold tracking-tight">XR Projects</h1>
+            <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">XR Projects</h1>
             <p className="text-sm text-zinc-500 font-mono mt-1">Virtual reality simulations for engineering and industry education</p>
           </motion.div>
 
@@ -72,7 +64,7 @@ const XRDeveloper = () => {
               <motion.button
                 key={route}
                 onClick={() => navigate(route)}
-                className="flex flex-col gap-3 border border-zinc-800 rounded-xl p-4 bg-zinc-900/30 text-left group"
+                className="flex flex-col gap-3 glass-card glass-card-hover p-4 text-left group"
                 variants={itemVariants}
                 whileHover={cardHover}
                 whileTap={cardTap}

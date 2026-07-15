@@ -1,11 +1,10 @@
 import React from 'react';
-import { Box, Typography, IconButton, Grid, Button } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Typography, Grid, Button } from '@mui/material';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
-import { useNavigate } from 'react-router-dom';
 import Starfield from '../../components/Starfield';
 import FileTreeItem from '../../components/FileTreeItem';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import BackButton from '../../components/BackButton';
 
 const style = {
     container: {
@@ -1720,18 +1719,10 @@ const filesData = [
 
 
 const BattleShipBot = () => {
-    const navigate = useNavigate();
-
-    const handleBack = () => {
-        navigate(-1); // Navigate back to the previous page
-    };
-
     return (
         <Box sx={style.container}>
             <Starfield />
-            <IconButton onClick={handleBack} sx={style.backButton}>
-                <ArrowBackIcon />
-            </IconButton>
+            <BackButton />
 
             <Grid container spacing={2}>
                 <ProjectOverview />

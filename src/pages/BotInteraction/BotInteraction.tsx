@@ -1,12 +1,11 @@
 // React imports
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Box, Typography, IconButton, TextField, Button, List, ListItem, ListItemText, CircularProgress, Paper } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Typography, TextField, Button, List, ListItem, ListItemText, CircularProgress, Paper } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LandscapeOverlay from '../../components/LandscapeOverlay'; 
 import Starfield from '../../components/Starfield';
+import BackButton from '../../components/BackButton';
 
 type Message = {
     text: string;
@@ -14,17 +13,12 @@ type Message = {
 };
 
 const BotInteraction = () => {
-    const navigate = useNavigate();
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState<Message[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
     // reference for the chat messages container
     const chatContainerRef = useRef<HTMLUListElement | null>(null);
-
-    const handleBack = () => {
-        navigate(-1); // Navigate back to the previous page
-    };
 
     const messagesEndRef = useRef<HTMLLIElement | null>(null);
 
@@ -124,9 +118,7 @@ const BotInteraction = () => {
             color: 'text.primary',
             height: '100vh',
         }}>
-            <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
-                <ArrowBackIcon />
-            </IconButton>
+            <BackButton />
             <Typography variant="h4" gutterBottom><br></br>
                 Real Estate AI Bot Interaction
             </Typography>

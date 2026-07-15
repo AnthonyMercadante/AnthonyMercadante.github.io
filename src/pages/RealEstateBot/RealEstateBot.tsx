@@ -4,17 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 
 // Material UI components and icons
-import { Box, Typography, IconButton, useTheme, Button, Grid } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Typography, useTheme, Button, Grid } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
+import BackButton from '../../components/BackButton';
 
 const RealEstateBot = () => {
     const navigate = useNavigate();
     const theme = useTheme();
-
-    const handleBack = () => {
-        navigate(-1); // Navigate back to the previous page
-    };
 
     const handleBotInteraction = () => {
         // Navigate to the bot interaction page. Update the route as needed.
@@ -25,7 +21,7 @@ const RealEstateBot = () => {
         container: {
             padding: theme.spacing(3),
             color: theme.palette.common.white,
-            backgroundColor: theme.palette.background.default,
+            backgroundColor: 'transparent',
             minHeight: '100vh',
             display: 'flex',
             flexDirection: 'column',
@@ -58,9 +54,7 @@ const RealEstateBot = () => {
     return (
         <Box sx={style.container}>
             {/* Back button */}
-            <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
-                <ArrowBackIcon />
-            </IconButton>
+            <BackButton />
     
             {/* Main Grid Container */}
             <Grid container spacing={2}>

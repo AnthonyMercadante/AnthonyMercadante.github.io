@@ -1,22 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DownloadIcon from '@mui/icons-material/Download'; // Material UI Download Icon
 import Button from '@mui/material/Button'; // Material UI Button
 import LandscapeOverlay from '../../components/LandscapeOverlay';
+import BackButton from '../../components/BackButton';
 
 const TorontoNightlifeExplorer = () => {
-  const navigate = useNavigate();
-
-  const handleBack = () => {
-    navigate(-1);
-  };
-
   return (
-    <div className="flex flex-col items-center bg-black text-white py-6">
-      <button onClick={handleBack} className="absolute top-5 left-5 z-10 text-white">
-        <ArrowBackIcon />
-      </button>
+    <div className="flex flex-col items-center text-white py-6">
+      <BackButton />
 
       <div className="container mx-auto px-4 lg:px-16 text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gradient"><br></br><br></br>
