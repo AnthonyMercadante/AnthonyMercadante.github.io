@@ -1,16 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
+import BackButton from '../../components/BackButton';
 import { motion } from 'framer-motion';
-import { pageVariants, containerVariants, itemVariants, headerVariants, backButtonVariants, cardHover, cardTap } from '../../animations';
+import { pageVariants, containerVariants, itemVariants, headerVariants, cardHover, cardTap } from '../../animations';
 
 const navItems = [
   {
     label: 'About Me',
     route: '/about-me',
     description: 'Background, philosophy, and what drives the work',
+    accent: 'text-cyan-400',
+    glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(34,211,238,0.35)]',
     icon: (
       <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="8" r="4" />
@@ -22,6 +23,8 @@ const navItems = [
     label: 'Work Experience',
     route: '/WorkExperience',
     description: 'Industry roles in AI, XR, and full-stack engineering',
+    accent: 'text-violet-400',
+    glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(167,139,250,0.35)]',
     icon: (
       <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="7" width="20" height="14" rx="2" />
@@ -35,6 +38,8 @@ const navItems = [
     label: 'Projects',
     route: '/Projects',
     description: 'Open-source repos, XR simulations, AI tools, and more',
+    accent: 'text-emerald-400',
+    glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(52,211,153,0.35)]',
     icon: (
       <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="16 18 22 12 16 6" />
@@ -47,6 +52,8 @@ const navItems = [
     label: 'Skills & Stack',
     route: '/skills',
     description: 'Languages, frameworks, AI tooling, and infrastructure',
+    accent: 'text-orange-400',
+    glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(251,146,60,0.35)]',
     icon: (
       <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -68,18 +75,11 @@ const Portfolio = () => {
       animate="visible"
       exit="exit"
     >
-      <motion.div variants={backButtonVariants} initial="hidden" animate="visible">
-        <IconButton
-          onClick={() => navigate(-1)}
-          sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-      </motion.div>
+      <BackButton />
 
       <div className="max-w-lg mx-auto w-full flex flex-col h-full">
         <motion.div className="mb-6 pt-2" variants={headerVariants} initial="hidden" animate="visible">
-          <h2 className="text-3xl font-bold tracking-tight">Portfolio</h2>
+          <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">Portfolio</h2>
           <p className="text-sm text-zinc-500 font-mono mt-1">Anthony Mercadante · Raethexn Technologies</p>
         </motion.div>
 
@@ -89,29 +89,25 @@ const Portfolio = () => {
           initial="hidden"
           animate="visible"
         >
-          {navItems.map(({ label, route, description, icon }) => (
+          {navItems.map(({ label, route, description, icon, accent, glow }) => (
             <motion.button
               key={route}
               onClick={() => navigate(route)}
-              className="flex-1 flex items-center gap-4 border border-zinc-800 hover:border-zinc-600 rounded-xl px-6 bg-zinc-900/30 hover:bg-zinc-900/60 transition-colors text-left group"
+              className={`glass-card glass-card-hover ${glow} flex-1 flex items-center gap-4 px-6 text-left group`}
               variants={itemVariants}
               whileHover={cardHover}
               whileTap={cardTap}
             >
-              <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors shrink-0">
+              <span className={`${accent} opacity-60 group-hover:opacity-100 transition-opacity shrink-0`}>
                 {icon}
               </span>
               <div className="min-w-0">
                 <div className="font-medium text-white text-base">{label}</div>
-                <div className="text-xs text-zinc-500 mt-0.5">{description}</div>
+                <div className="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors mt-0.5">{description}</div>
               </div>
-              <motion.span
-                className="ml-auto text-zinc-600 shrink-0"
-                whileHover={{ x: 3, color: '#a1a1aa' }}
-                transition={{ duration: 0.15 }}
-              >
+              <span className="ml-auto text-zinc-600 group-hover:text-zinc-300 group-hover:translate-x-1 transition-all duration-200 shrink-0">
                 →
-              </motion.span>
+              </span>
             </motion.button>
           ))}
         </motion.div>

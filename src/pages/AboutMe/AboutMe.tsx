@@ -2,11 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import profileImage from '../../assets/images/professional-photo.jpg';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import BackButton from '../../components/BackButton';
 import PreloadImages from '../../components/PreloadImages';
 import { motion } from 'framer-motion';
-import { pageVariants, headerVariants, backButtonVariants, itemVariants, containerVariants, cardHover, cardTap } from '../../animations';
+import { pageVariants, headerVariants, itemVariants, containerVariants, cardHover, cardTap } from '../../animations';
 
 const AboutMe = () => {
   const navigate = useNavigate();
@@ -14,20 +13,13 @@ const AboutMe = () => {
   return (
     <PreloadImages>
       <motion.div
-        className="h-screen flex flex-col px-6 py-8 bg-black text-zinc-300 overflow-y-auto"
+        className="h-screen flex flex-col px-6 py-8 text-zinc-300 overflow-y-auto"
         variants={pageVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        <motion.div variants={backButtonVariants} initial="hidden" animate="visible">
-          <IconButton
-            onClick={() => navigate(-1)}
-            sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
-        </motion.div>
+        <BackButton />
 
         <div className="flex-1 flex flex-col sm:flex-row items-center gap-10 max-w-3xl mx-auto w-full pt-6">
 
@@ -38,11 +30,13 @@ const AboutMe = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <img
-              src={profileImage}
-              alt="Anthony Mercadante"
-              className="w-full h-auto rounded-2xl shadow-2xl"
-            />
+            <div className="rounded-2xl p-px bg-gradient-to-br from-cyan-400/50 via-white/10 to-violet-500/50 shadow-[0_0_40px_-12px_rgba(34,211,238,0.4)]">
+              <img
+                src={profileImage}
+                alt="Anthony Mercadante"
+                className="w-full h-auto rounded-[calc(1rem-1px)]"
+              />
+            </div>
           </motion.div>
 
           {/* Bio */}
@@ -53,7 +47,7 @@ const AboutMe = () => {
             animate="visible"
           >
             <motion.div className="space-y-1" variants={headerVariants}>
-              <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight tracking-tight">
+              <h1 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-500 bg-clip-text text-transparent">
                 Anthony Mercadante
               </h1>
               <p className="text-sm font-mono text-cyan-400 tracking-wide">Software & AI Engineer</p>
@@ -93,7 +87,7 @@ const AboutMe = () => {
             <motion.div variants={itemVariants} whileHover={cardHover} whileTap={cardTap}>
               <button
                 onClick={() => navigate('/skills')}
-                className="inline-flex items-center gap-2 border border-zinc-700 hover:border-zinc-500 rounded-lg px-5 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-zinc-900/40 transition-all"
+                className="glass-card glass-card-hover !rounded-lg inline-flex items-center gap-2 px-5 py-2.5 text-sm text-zinc-300 hover:text-white"
               >
                 View Skills & Stack →
               </button>

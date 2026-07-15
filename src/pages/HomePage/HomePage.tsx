@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { pageVariants, containerVariants, itemVariants, headerVariants, cardHover, cardTap } from "../../animations";
+import { pageVariants, containerVariants, itemVariants, headerVariants, cardTap } from "../../animations";
 
 const ExternalLinkIcon = () => (
   <svg viewBox="0 0 12 12" className="w-3 h-3 inline-block opacity-60" fill="currentColor">
@@ -29,9 +29,9 @@ const GlobeIcon = () => (
 );
 
 const socialLinks = [
-  { name: "GitHub", href: "https://github.com/AnthonyMercadante", icon: <GitHubIcon /> },
-  { name: "Raethexn.com", href: "https://www.raethexntechnologies.com/", icon: <GlobeIcon /> },
-  { name: "Strava", href: "https://strava.app.link/42BwywgdHTb", icon: <StravaIcon /> },
+  { name: "GitHub", href: "https://github.com/AnthonyMercadante", icon: <GitHubIcon />, hover: "group-hover/social:text-white" },
+  { name: "Raethexn.com", href: "https://www.raethexntechnologies.com/", icon: <GlobeIcon />, hover: "group-hover/social:text-cyan-300" },
+  { name: "Strava", href: "https://strava.app.link/42BwywgdHTb", icon: <StravaIcon />, hover: "group-hover/social:text-orange-400" },
 ];
 
 export default function HomePage() {
@@ -46,9 +46,19 @@ export default function HomePage() {
       <div className="w-full max-w-md space-y-10">
 
         {/* Identity */}
-        <motion.div className="space-y-2" variants={headerVariants}>
+        <motion.div className="space-y-3" variants={headerVariants}>
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.06] px-3 py-1">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping motion-reduce:animate-none" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            </span>
+            <span className="text-xs font-mono text-emerald-300/90 tracking-wide">Building AI systems at Clarity</span>
+          </div>
           <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-none">
-            <Link to="/about-me" className="hover:opacity-80 transition-opacity">
+            <Link
+              to="/about-me"
+              className="bg-gradient-to-br from-white via-zinc-100 to-zinc-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+            >
               Anthony Mercadante
             </Link>
           </h1>
@@ -70,14 +80,17 @@ export default function HomePage() {
           Building AI systems, memory infrastructure, and natural language interfaces.
         </motion.p>
 
-        {/* Primary CTA */}
-        <motion.div variants={itemVariants} whileHover={cardHover} whileTap={cardTap}>
+        {/* Primary CTA — gradient border with shine sweep */}
+        <motion.div variants={itemVariants} whileHover={{ scale: 1.015 }} whileTap={cardTap}>
           <Link
             to="/portfolio"
-            className="flex items-center justify-between w-full py-4 px-6 border border-zinc-700 rounded-xl hover:border-zinc-500 hover:bg-zinc-900/40 transition-all group"
+            className="block rounded-2xl p-px bg-gradient-to-r from-cyan-500/50 via-white/10 to-violet-500/50 shadow-[0_0_28px_-10px_rgba(34,211,238,0.35)] hover:shadow-[0_0_36px_-8px_rgba(34,211,238,0.5)] transition-shadow group"
           >
-            <span className="text-base font-medium">Portfolio</span>
-            <span className="text-zinc-500 group-hover:text-zinc-300 transition-colors text-lg">→</span>
+            <span className="relative flex items-center justify-between w-full py-4 px-6 rounded-[calc(1rem-1px)] bg-[#0a0a0e]/95 overflow-hidden">
+              <span className="absolute inset-0 -translate-x-full group-hover:animate-shine motion-reduce:hidden bg-gradient-to-r from-transparent via-white/[0.07] to-transparent w-1/2 skew-x-[-20deg]" />
+              <span className="text-base font-medium">Portfolio</span>
+              <span className="text-zinc-500 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all duration-200 text-lg">→</span>
+            </span>
           </Link>
         </motion.div>
 
@@ -87,20 +100,20 @@ export default function HomePage() {
             Connect
           </motion.p>
           <div className="grid grid-cols-3 gap-2">
-            {socialLinks.map(({ name, href, icon }) => (
+            {socialLinks.map(({ name, href, icon, hover }) => (
               <motion.a
                 key={name}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 border border-zinc-800 hover:border-zinc-600 rounded-lg py-2.5 px-3 bg-zinc-900/30 hover:bg-zinc-900/60 transition-all"
+                className="glass-card glass-card-hover !rounded-lg flex items-center gap-2 py-2.5 px-3 group/social"
                 title={name}
                 variants={itemVariants}
                 whileHover={{ scale: 1.04, transition: { duration: 0.15 } }}
                 whileTap={{ scale: 0.96 }}
               >
-                <span className="text-zinc-400">{icon}</span>
-                <span className="text-xs text-zinc-400 truncate">{name}</span>
+                <span className={`text-zinc-400 transition-colors ${hover}`}>{icon}</span>
+                <span className="text-xs text-zinc-400 group-hover/social:text-zinc-200 transition-colors truncate">{name}</span>
               </motion.a>
             ))}
           </div>

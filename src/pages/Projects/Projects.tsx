@@ -1,10 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import BackButton from '../../components/BackButton';
 import { motion } from 'framer-motion';
-import { pageVariants, containerVariants, itemVariants, headerVariants, backButtonVariants, cardTap } from '../../animations';
+import { pageVariants, containerVariants, itemVariants, headerVariants, cardTap } from '../../animations';
 
 import ProjectIconImage from '../../assets/images/VRProjectsIcon.png';
 import ProjectIconImage2 from '../../assets/images/BotProjects.png';
@@ -76,24 +75,17 @@ const Projects = () => {
 
   return (
     <motion.div
-      className="h-screen flex flex-col px-6 py-8 bg-black text-white overflow-y-auto"
+      className="h-screen flex flex-col px-6 py-8 text-white overflow-y-auto"
       variants={pageVariants}
       initial="hidden"
       animate="visible"
       exit="exit"
     >
-      <motion.div variants={backButtonVariants} initial="hidden" animate="visible">
-        <IconButton
-          onClick={() => navigate(-1)}
-          sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-      </motion.div>
+      <BackButton />
 
       <div className="max-w-4xl mx-auto w-full flex flex-col h-full pt-2">
         <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
-          <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">Projects</h1>
           <p className="text-sm text-zinc-500 font-mono mt-1">Open-source repositories and project archive</p>
         </motion.div>
 
@@ -105,13 +97,13 @@ const Projects = () => {
         >
           {/* Featured repos — 3 columns */}
           <motion.div
-            className="col-span-3 flex flex-col border border-zinc-800 rounded-xl overflow-hidden"
+            className="glass-card col-span-3 flex flex-col overflow-hidden"
             variants={itemVariants}
           >
-            <div className="px-5 py-3 border-b border-zinc-800 shrink-0">
+            <div className="px-5 py-3 border-b border-white/[0.08] bg-white/[0.02] shrink-0">
               <p className="text-xs text-zinc-500 font-mono uppercase tracking-widest">Open Source</p>
             </div>
-            <div className="flex-1 flex flex-col divide-y divide-zinc-800/60">
+            <div className="flex-1 flex flex-col divide-y divide-white/[0.06]">
               {featuredProjects.map(({ name, lang, tags, url, studio }) => (
                 <motion.a
                   key={name}
@@ -155,13 +147,13 @@ const Projects = () => {
 
           {/* Archive — 2 columns */}
           <motion.div
-            className="col-span-2 flex flex-col border border-zinc-800 rounded-xl overflow-hidden"
+            className="glass-card col-span-2 flex flex-col overflow-hidden"
             variants={itemVariants}
           >
-            <div className="px-5 py-3 border-b border-zinc-800 shrink-0">
+            <div className="px-5 py-3 border-b border-white/[0.08] bg-white/[0.02] shrink-0">
               <p className="text-xs text-zinc-500 font-mono uppercase tracking-widest">Archive</p>
             </div>
-            <div className="flex-1 flex flex-col divide-y divide-zinc-800/60">
+            <div className="flex-1 flex flex-col divide-y divide-white/[0.06]">
               {archiveCategories.map(({ title, route, imageUrl }) => (
                 <motion.button
                   key={route}

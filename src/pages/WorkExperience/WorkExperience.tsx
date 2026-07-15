@@ -1,10 +1,9 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
+import BackButton from '../../components/BackButton';
 import { motion } from 'framer-motion';
-import { pageVariants, containerVariants, itemVariants, headerVariants, backButtonVariants, cardHover } from '../../animations';
+import { pageVariants, containerVariants, itemVariants, headerVariants, cardHover } from '../../animations';
 
 interface WorkEntry {
   title: string;
@@ -84,28 +83,19 @@ const workExperiences: WorkEntry[] = [
 ];
 
 const WorkExperienceComponent = () => {
-  const navigate = useNavigate();
-
   return (
     <motion.div
-      className="h-screen flex flex-col px-6 py-8 bg-black text-white overflow-y-auto"
+      className="h-screen flex flex-col px-6 py-8 text-white overflow-y-auto"
       variants={pageVariants}
       initial="hidden"
       animate="visible"
       exit="exit"
     >
-      <motion.div variants={backButtonVariants} initial="hidden" animate="visible">
-        <IconButton
-          onClick={() => navigate(-1)}
-          sx={{ position: 'absolute', top: 20, left: 20, color: 'rgba(255,255,255,0.4)', '&:hover': { color: '#fff' } }}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-      </motion.div>
+      <BackButton />
 
       <div className="max-w-5xl mx-auto w-full flex flex-col pt-2">
         <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
-          <h1 className="text-3xl font-bold tracking-tight">Work Experience</h1>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">Work Experience</h1>
           <p className="text-sm text-zinc-500 font-mono mt-1">Industry roles in AI, XR, and full-stack engineering</p>
         </motion.div>
 
@@ -118,12 +108,20 @@ const WorkExperienceComponent = () => {
           {workExperiences.map(({ title, company, type, location, period, details, highlights, skills, link }) => (
             <motion.div
               key={`${company}-${title}`}
-              className="flex flex-col border border-zinc-800 rounded-xl p-5 bg-zinc-900/30"
+              className="glass-card glass-card-hover hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_36px_-12px_rgba(34,211,238,0.3)] flex flex-col p-5 text-left"
               variants={itemVariants}
               whileHover={cardHover}
             >
               <div className="mb-3">
-                <h2 className="font-semibold text-white leading-tight">{title}</h2>
+                <div className="flex items-start justify-between gap-2">
+                  <h2 className="font-semibold text-white leading-tight">{title}</h2>
+                  {period.includes('Present') && (
+                    <span className="inline-flex items-center gap-1.5 shrink-0 text-[10px] font-mono text-emerald-300/90 border border-emerald-400/20 bg-emerald-400/[0.06] rounded-full px-2 py-0.5 leading-relaxed">
+                      <span className="w-1 h-1 rounded-full bg-emerald-400" />
+                      Current
+                    </span>
+                  )}
+                </div>
                 <p className="text-sm text-cyan-400 font-mono mt-0.5">{company}</p>
                 <p className="text-xs text-zinc-500 font-mono mt-0.5">{period}</p>
                 {(type || location) && (
@@ -147,7 +145,7 @@ const WorkExperienceComponent = () => {
                 {skills.map((skill) => (
                   <span
                     key={skill}
-                    className="text-xs text-zinc-400 bg-zinc-800/60 border border-zinc-700/40 px-2 py-0.5 rounded font-mono"
+                    className="text-xs text-zinc-400 bg-white/[0.04] border border-white/10 px-2 py-0.5 rounded font-mono"
                   >
                     {skill}
                   </span>
