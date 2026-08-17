@@ -33,6 +33,22 @@ Thumbs.db
 .idea/
 .vscode/
 
+# Raw life-archive masters. These are the originals behind public/story/ —
+# 860 MB of 192 kHz WAVs, 3264 px phone photos, and 55 MB video. Two exceed
+# GitHub's hard 100 MB per-file limit, so they must never be committed. Only
+# the optimized derivatives in public/story/ ship. Back these up elsewhere.
+/src/assets/*.wav
+/src/assets/*.mp3
+/src/assets/*.mp4
+/src/assets/images/20??-??-?? *.jpg
+/src/assets/images/20??-??-?? *.png
+/src/assets/images/2014-01-27.jpg
+/src/assets/images/20??????_??????.jpg
+/src/assets/images/1356462527318.jpg
+/src/assets/images/1379461621138.jpg
+/src/assets/images/2020.jpg
+/src/assets/images/53j_5Zu_.jpeg
+
 # Project assistant skills
 .claude/*
 !.claude/skills/
