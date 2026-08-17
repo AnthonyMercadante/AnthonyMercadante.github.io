@@ -48,6 +48,11 @@ Thumbs.db
 /src/assets/images/1379461621138.jpg
 /src/assets/images/2020.jpg
 /src/assets/images/53j_5Zu_.jpeg
+# iPhone originals behind the music-years photos, HEIC included
+/src/assets/images/IMG_*.HEIC
+/src/assets/images/IMG_*.heic
+/src/assets/images/IMG_*.JPG
+/src/assets/images/IMG_*.jpg
 
 # Project assistant skills
 .claude/*
