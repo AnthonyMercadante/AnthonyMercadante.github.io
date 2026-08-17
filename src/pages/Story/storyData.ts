@@ -77,6 +77,14 @@ export interface Chapter {
   accent: Accent;
   paragraphs: string[];
   photos: string[];
+  /**
+   * Track slugs to play inside this chapter. Audio is distributed across the
+   * music chapters rather than stacked in one list, so a session bounce sits
+   * beside the photograph taken the same night.
+   */
+  tracks?: string[];
+  /** Video slugs to embed inside this chapter. */
+  clips?: string[];
 }
 
 /** The camera behind almost every photo in the 2012–2014 chapters. */
@@ -261,6 +269,95 @@ export const photos: Record<string, Photo> = {
     caption:
       'The same afternoon out on the convention floor, between two cosplayers in full fabricated armour. The costumes, the comics, the games, the hardware — all one impulse. Find the thing you love and go all the way in.',
   },
+  'fan-expo-jude': {
+    slug: 'fan-expo-jude',
+    date: '2014-08-29',
+    dateLabel: 'August 29, 2014',
+    title: 'Meeting Jude',
+    caption:
+      'The same Fan Expo, at a booth on the concourse: standing beside a life-size cutout of Jude from 6teen, next to the actor who voiced him. A cartoon I grew up on, and the person behind the voice throwing horns for the photo.',
+  },
+  'hamilton-room': {
+    slug: 'hamilton-room',
+    date: '2016-01-01',
+    dateLabel: 'Hamilton, 2015–2016',
+    title: 'The setup follows me',
+    caption:
+      'My room in Hamilton during the semester at Mohawk, two friends asleep across the bed at the end of a long night. Three panels, a condenser mic on a boom arm, the tower glowing blue, water bottles and books on the floor. Barely any space and no desk chair — I used the bed as one. Wherever I went, the setup came with me and rearranged itself to fit.',
+  },
+  'first-guitar': {
+    slug: 'first-guitar',
+    date: '2016-03-01',
+    dateLabel: 'Before Metalworks, c. 2016',
+    title: 'The first guitar',
+    caption:
+      'Two of us with guitars in the basement of my childhood house, a small Line 6 combo amp between us. The black one is mine — the first instrument I ever bought with my own money. This is close to the last time I made music in that house before leaving for Metalworks.',
+  },
+  'metalworks-studio-6': {
+    slug: 'metalworks-studio-6',
+    date: '2016-09-01',
+    dateLabel: 'Metalworks, 2016–2017',
+    title: 'Studio 6',
+    caption:
+      'One of the rooms at Metalworks: a full large-format console, main monitors soffit-mounted above it, timber diffusion across the ceiling, and a couch for whoever was listening. Walking into a room built entirely around how sound behaves is what opened my eyes to the whole discipline.',
+  },
+  'at-the-laptop': {
+    slug: 'at-the-laptop',
+    date: '2018-01-01',
+    dateLabel: 'The Synth Rider years',
+    title: 'White hair, mixer open',
+    caption:
+      'Overhead, mid-session: a mixer and arrangement open across the laptop, bleached hair pulled into a ponytail. I looked far more like a punk rockstar then than I do now, and that was entirely deliberate. Worth keeping in the record purely for how much a person can change.',
+  },
+  'the-purple-studio': {
+    slug: 'the-purple-studio',
+    date: '2018-08-13',
+    dateLabel: 'August 13, 2018 · 11:56 p.m.',
+    title: 'The studio we built',
+    caption:
+      'The room my dad and I built together in the basement of his new house. It started as bare cinderblock. Using what I had learned at Metalworks we treated it properly: bass traps in every corner, broadband absorbers on the walls, clouds overhead, acoustic insulation and matting behind and in front of the drywall, diagonal venting so sound could not escape through the ducts, and jambs fitted to the doors so the seals actually closed. Then we balanced the monitors to the room itself. Not a bedroom with foam on the wall — a real one.',
+  },
+  'studio-669-lounge': {
+    slug: 'studio-669-lounge',
+    date: '2018-08-19',
+    dateLabel: 'August 19, 2018 · 2:37 a.m.',
+    title: '669, from the couch',
+    caption:
+      'Half past two in the morning at 669 on Queen Street, shot from the couch at the back of the room — my own shoes in the frame, outboard gear glowing in the rack, the live room through the glass. Three floors of studios above a row of storefronts, and completely invisible from the pavement. Nobody walking past would ever have guessed.',
+  },
+  'studio-669-sept-8': {
+    slug: 'studio-669-sept-8',
+    date: '2018-09-08',
+    dateLabel: 'Saturday, September 8, 2018 · 11:46 p.m.',
+    title: 'Room 2, the night of "She"',
+    caption:
+      'Room 2 at 669, just before midnight on a Saturday — the room we always booked. This is the same session that produced the bounce filed as "She", which sits a little further down this page. The photograph and the audio are the same few hours of the same night, recovered separately, seven years apart.',
+  },
+  'studio-669-sept-22': {
+    slug: 'studio-669-sept-22',
+    date: '2018-09-22',
+    dateLabel: 'Saturday, September 22, 2018 · 10:17 p.m.',
+    title: 'Another Saturday, another group',
+    caption:
+      'Two weeks later, same building, different people around the desk: someone tracking into a laptop over a MIDI controller, monitors up, a TV running on the wall, and the rest of the room waiting on the couch behind me. The Saturday booking was a standing fixture that autumn.',
+  },
+  'in-n-out-la': {
+    slug: 'in-n-out-la',
+    date: '2018-12-02',
+    dateLabel: 'December 2, 2018 · 6:15 p.m.',
+    title: 'Los Angeles',
+    caption:
+      'Outside an In-N-Out under palm trees on my first evening in Los Angeles, an IHOP sign burning blue across the road. I could not get over it. Somebody else had paid to fly me here to work on music. Standing in that parking lot, it genuinely felt like I had made it.',
+  },
+  'la-studio-night': {
+    slug: 'la-studio-night',
+    date: '2018-12-05',
+    dateLabel: 'December 5, 2018 · 5:30 a.m.',
+    title: 'Half five in the morning, LA',
+    caption:
+      'A studio I worked out of in Los Angeles, shot as a panorama at half past five in the morning — a wall of screens running visuals, three laptops open, and everyone still going. In the room: a friend from high school who taught himself to produce, a friend from music school working in bass music, and a rapper from back home in Canada, all of us out there together.',
+    wide: true,
+  },
   'setup-2020': {
     slug: 'setup-2020',
     date: '2020-10-20',
@@ -349,7 +446,14 @@ export const chapters: Chapter[] = [
       'Video games were the reason everybody came, and they were the thing that shaped what I thought I wanted. At that point I assumed, reasonably, that I would end up building them.',
       'And it is worth saying plainly, because it explains everything that follows: I am a nerd at heart. Fan Expo in Toronto in August 2014, replica sword in hand, standing between cosplayers in full armour. The conventions, the comics, the games and the hardware were never separate interests. They were one impulse — find the thing you love and go all the way into it.',
     ],
-    photos: ['lan-new-years-eve', 'lan-in-the-dark', 'the-crew', 'fan-expo-sword', 'fan-expo-cosplay'],
+    photos: [
+      'lan-new-years-eve',
+      'lan-in-the-dark',
+      'the-crew',
+      'fan-expo-sword',
+      'fan-expo-cosplay',
+      'fan-expo-jude',
+    ],
   },
   {
     id: 'george-brown',
@@ -379,23 +483,74 @@ export const chapters: Chapter[] = [
       'The realisation was sharper than "this is not for me." It was that I had mistaken *proximity* to technology for the work itself. Being near computers is not the same as building things with them. So I left Mohawk as well.',
       'Two programs, two exits, no credential, and I was nineteen. From the outside that reads as drift. From the inside it was the opposite of drift — I was declining to spend the next decade paying off a career I already knew I did not want.',
     ],
-    photos: [],
+    photos: ['hamilton-room'],
   },
   {
     id: 'metalworks',
     era: '2016 – 2020',
-    railLabel: 'Music',
+    railLabel: 'Metalworks',
     title: 'Metalworks: Synth Rider and M E R C S',
-    subtitle: 'Audio engineering, two aliases, and everything that survived.',
+    subtitle: 'Audio engineering, and the two names I released under.',
     accent: 'fuchsia',
     paragraphs: [
       'Metalworks Institute of Sound and Music Production — Audio Engineering and Digital Music Production. This is the one I finished, and it turned out to be the most rigorous technical education I had had to that point.',
       'Signal chain. Gain staging. Compression, EQ, sidechaining, bus routing, phase relationships, headroom, and the difference between something being loud and something being *big*. It is systems engineering with your ears as the test suite. Debugging a mix that is somehow wrong is precisely debugging a system that is somehow wrong: isolate, bypass, solo, measure, and refuse to trust your own assumptions.',
+      'Walking into a room built from the floor up around the behaviour of sound will rearrange how you think. I loved that place. It opened up an entire discipline I had only been circling from the outside with a sound card and a condenser mic.',
       'From 2016 to 2020 I worked as an audio engineer and music producer. First as **Synth Rider**, making retro and synthwave — neon, arpeggios and 1980s nostalgia rendered entirely in software. Later as **M E R C S**, moving into bass music, which is a harder, heavier, far more sound-design-driven discipline.',
-      'I put it down in 2020. COVID closed the venues and ended the sessions, and I made the call deliberately rather than let it die by attrition.',
-      'Most of the work is simply gone. MacBooks died and there was no budget for cloud storage, which is its own expensively-learned lesson about backups. What follows is what survived: masters, pre-masters, dated session bounces and a forty-two second sketch. Some of it I can attribute precisely. Some of it is a file with a name, a timestamp, and no way to recover anything more. I have kept the technical metadata attached to each one, because for this era that metadata *is* the documentation.',
+      'Most of that work is simply gone. MacBooks died and there was no budget for cloud storage, which is its own expensively-learned lesson about backups. What is scattered through the rest of this page is what survived, kept with whatever technical metadata came attached — because for this era that metadata *is* the documentation.',
+    ],
+    photos: ['first-guitar', 'metalworks-studio-6', 'at-the-laptop'],
+    tracks: ['ocean-expressway', 'synth-rider-vocals'],
+    clips: ['studio-session-2015'],
+  },
+  {
+    id: 'humber',
+    era: '2017 – 2018',
+    railLabel: 'Humber',
+    title: 'Humber, in Parallel',
+    subtitle: 'General Arts and Science, majoring in philosophy, while the music ran.',
+    accent: 'amber',
+    paragraphs: [
+      'While all of this was happening I was also enrolled at Humber College, from 2017 to 2018, in General Arts and Science with a major in philosophy. Two entirely separate lives running at once: late sessions in studios downtown, and coursework on argument, ethics and epistemology in the daytime.',
+      'It sounds like an odd pairing next to a production career, and it was the most useful thing I could have been studying. Philosophy is training in taking a claim apart to find the load-bearing assumption underneath it — which is the same move as a teardown, and the same move as debugging. It gave me a formal vocabulary for something I had been doing with a screwdriver since I was thirteen.',
+      'It also mattered later. When the decision about music arrived, I had spent two years being taught to interrogate my own reasoning rather than follow the momentum I was already carrying.',
     ],
     photos: [],
+  },
+  {
+    id: 'the-studios',
+    era: '2018',
+    railLabel: 'Studios',
+    title: 'The Studios',
+    subtitle: 'One we built ourselves, and one hidden above a row of shops on Queen Street.',
+    accent: 'violet',
+    paragraphs: [
+      'Two rooms defined 2018.',
+      'The first, my dad and I built. He had moved into a new house and the basement room was bare cinderblock. I had just come out of Metalworks with a head full of room acoustics, so we did it properly rather than taping foam to a wall: bass traps in all four corners, broadband absorption on the walls, clouds overhead, acoustic insulation and matting layered behind *and* in front of the drywall, ducting run on the diagonal so sound could not travel straight out through the vents, and jambs fitted to the doors so the seals actually sealed. Then we balanced the monitors to the room itself. Building a studio with my father, using knowledge I had gone away to get, is still one of the things I am proudest of.',
+      'The second was **669** on Queen Street — named, as far as any of us knew, for its own street number. Three floors of studios stacked above a row of storefronts, run at the time by an engineer everyone just called Dot. We always booked Room 2. From the pavement it was completely anonymous; nobody walking past had any idea what was up there. The twenty-four-hour convenience store across the road probably had it figured out, given how many of us came through at four in the morning once everything else on the strip had shut.',
+      'It was also walking distance from **APT 200**, the hip-hop bar that was the pre-party and the after-party whenever an artist was in town that year. It is where a lot of the Toronto scene of that moment passed through, and where some of the people who went on to real recognition were still just around.',
+      'The Saturday booking became a fixture that autumn — and the archive proves it better than my memory does. The photograph below from Room 2 was taken at 11:46 p.m. on Saturday, 8 September 2018. The session bounce filed as "She" is from that same night. Two files that survived on completely different devices, reunited by their timestamps.',
+    ],
+    photos: ['the-purple-studio', 'studio-669-lounge', 'studio-669-sept-8', 'studio-669-sept-22'],
+    tracks: ['session-she', 'session-sept-15', 'sketch-sept-28'],
+    clips: ['the-light-promo'],
+  },
+  {
+    id: 'los-angeles',
+    era: 'December 2018',
+    railLabel: 'LA',
+    title: 'Los Angeles',
+    subtitle: 'Flown out to work, and the trip where I decided to stop.',
+    accent: 'rose',
+    paragraphs: [
+      'Around December 2018 the studio work connected me to **Daxz** — Jahmar Carter — a producer who has worked with Drake. He flew me out to Los Angeles to work across a handful of studios and projects for a short stretch.',
+      'I could not get over it. My first evening out there I stood in an In-N-Out parking lot under palm trees and it landed properly: somebody else was paying for me to be here, to make music. It felt like arriving. Like the goal I had been walking toward had actually turned up.',
+      'The work was real and the rooms were extraordinary — one panorama below was taken at half past five in the morning with everybody still going, a friend from high school who had taught himself to produce, a friend from music school working in bass, and a rapper from home all out there with us.',
+      'And it was on that same trip, toward the end of it, that I decided to finish at Humber and start moving out of music as a full-time career.',
+      'The reason was the shape of the industry rather than the work. It runs on being cut-throat, and I am not a cut-throat person. The lifestyle wrapped around it — the parties, the drugs, the whole rockstar apparatus — was simply not something I could see myself surviving for long, let alone building a life on. Sitting in the middle of the thing I had wanted, I could see clearly that wanting it had not made me suited to it.',
+      'So I walked, for the third time, and this is the one I am most glad about. It is the same decision I had made at George Brown and at Mohawk, and by then I had learned to trust it: leaving something that is working on paper because you can see what it costs.',
+    ],
+    photos: ['in-n-out-la', 'la-studio-night'],
   },
   {
     id: 'back-to-software',
@@ -405,6 +560,7 @@ export const chapters: Chapter[] = [
     subtitle: 'The lockdowns hand me two new obsessions.',
     accent: 'emerald',
     paragraphs: [
+      'Deciding in Los Angeles was not the same as stopping. I finished at Humber, and the music wound down across 2019 and into 2020 rather than ending at a stroke — still engineering, still producing, but no longer building a life around it. COVID closed the venues and ended the sessions outright, and I let **M E R C S** go there rather than watch it thin out any further.',
       'With the music set down, I went back to school for Software Development — the thing I had been circling since I was thirteen, approached properly this time, with a decade of hardware intuition and four years of signal-chain discipline behind it.',
       'The setup came along too. The 2020 photograph is the same instinct as 2009, eleven years later: a chair worth sitting in, a studio monitor on a stand, acoustic treatment on the wall, a boom arm still within reach. Different hardware entirely, identical person.',
       'The other thing the lockdowns handed me was the market. The COVID crash was the first time I watched a system that large break in real time, and I wanted the mechanics rather than the headlines. That turned into self-directed investing through Wealthsimple and a durable interest in markets as systems — incentives, liquidity and feedback loops, which is not so far from anything else I have taken apart on a folding table.',
@@ -453,7 +609,7 @@ export const tracks: Track[] = [
     duration: 234,
     source: 'MP3, 44.1 kHz / 128 kbps',
     note:
-      'A rough bounce off the end of a Saturday session, named for the vocal it was built around. Bounced at 128 kbps because it was only ever meant to be a reference on the drive home.',
+      'A rough bounce off the end of a Saturday session, named for the vocal it was built around. Bounced at 128 kbps because it was only ever meant to be a reference on the drive home. The photograph of Room 2 above was taken at 11:46 p.m. that same night.',
     attribution: 'filename',
   },
   {
@@ -464,7 +620,7 @@ export const tracks: Track[] = [
     duration: 175,
     source: 'MP3, 44.1 kHz / 128 kbps',
     note:
-      'The following Saturday. Two consecutive weekends of sessions survived as reference bounces, which is the closest thing here to a paper trail of a working routine.',
+      'The following Saturday. Between the bounces and the photographs, four consecutive weekends of September 2018 are documented — the 8th, the 15th, the 22nd and the 28th. That is the only stretch of the whole era with a real paper trail.',
     attribution: 'filename',
   },
   {
@@ -566,10 +722,24 @@ export const clips: Clip[] = [
   },
 ];
 
+/**
+ * Slugs of the tracks that carry no date and no alias. These are rendered as one
+ * closing block rather than mixed into a chapter, because their only honest
+ * shared label is "this is what was left on the drive".
+ */
+export const unattributedTrackSlugs = [
+  'night',
+  'rrp',
+  'demo-blind',
+  'pre-master',
+  'bp',
+  'untitled-110',
+];
+
 /** Pulled out of the prose so the summary at the top stays maintainable. */
 export const stats = [
   { value: '2009', label: 'First build, from scratch' },
   { value: '13', label: 'Years old when it booted' },
-  { value: '23', label: 'Photographs recovered' },
+  { value: '34', label: 'Photographs recovered' },
   { value: '11', label: 'Tracks that survived' },
 ];
