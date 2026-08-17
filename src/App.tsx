@@ -28,6 +28,7 @@ import MachineLearningProjects from './pages/MachineLearningProjects/MachineLear
 import AircraftIdentifierAI from './pages/AircraftIdentifierAI/AircraftIdentifierAI';
 import VoidGame from './pages/Games/Void/Void';
 import Music from './pages/Music/Music';
+import Story from './pages/Story/Story';
 import WaterScreen from './components/WaterScreen';
 import Ambient from './components/Ambient';
 
@@ -39,6 +40,7 @@ function AnimatedRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/about-me" element={<AboutMe />} />
+        <Route path="/story" element={<Story />} />
         <Route path="/skills" element={<Skills/>} />
         <Route path="/WorkExperience" element={<WorkExperience/>}/>
         <Route path="/XRDeveloper" element={<XRDeveloper/>}/>
