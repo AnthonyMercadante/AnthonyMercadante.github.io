@@ -84,6 +84,27 @@ const AboutMe = () => {
               </p>
             </motion.div>
 
+            {/* The long-form origin story: 2009 to 2020, with the photo and audio archive */}
+            <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={cardTap}>
+              <button
+                onClick={() => navigate('/story')}
+                className="w-full text-left rounded-xl p-px bg-gradient-to-r from-cyan-500/40 via-white/[0.08] to-violet-500/40 shadow-[0_0_24px_-12px_rgba(34,211,238,0.35)] hover:shadow-[0_0_32px_-10px_rgba(34,211,238,0.5)] transition-shadow group"
+              >
+                <span className="relative flex items-center justify-between gap-3 py-3 px-4 rounded-[calc(0.75rem-1px)] bg-[#0a0a0e]/95 overflow-hidden">
+                  <span className="absolute inset-0 -translate-x-full group-hover:animate-shine motion-reduce:hidden bg-gradient-to-r from-transparent via-white/[0.07] to-transparent w-1/2 skew-x-[-20deg]" />
+                  <span className="min-w-0">
+                    <span className="block text-sm font-medium text-white">How I got here</span>
+                    <span className="block text-xs text-zinc-500 mt-0.5">
+                      First build at 13, the salvage years, audio engineering — 2009 to 2020
+                    </span>
+                  </span>
+                  <span className="shrink-0 text-zinc-500 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all duration-200">
+                    →
+                  </span>
+                </span>
+              </button>
+            </motion.div>
+
             <motion.div variants={itemVariants} whileHover={cardHover} whileTap={cardTap}>
               <button
                 onClick={() => navigate('/skills')}

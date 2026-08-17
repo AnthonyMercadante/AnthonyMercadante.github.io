@@ -31,6 +31,21 @@ const navItems = [
     ),
   },
   {
+    label: 'How I Got Here',
+    route: '/story',
+    description: 'The long-form origin story, with the photo and audio archive',
+    meta: '8 chapters · 2009–2020 · 23 photos · 11 tracks',
+    accent: 'text-amber-400',
+    glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(251,191,36,0.35)]',
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        <path d="M9 7h6" />
+      </svg>
+    ),
+  },
+  {
     label: 'Work Experience',
     route: '/WorkExperience',
     description: 'Industry roles in AI, XR, and full-stack engineering',
