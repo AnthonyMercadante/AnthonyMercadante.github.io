@@ -10,6 +10,7 @@ import {
   tracks,
   clips,
   stats,
+  unattributedTrackSlugs,
   type Accent,
   type Photo,
 } from './storyData';
@@ -76,13 +77,15 @@ const structuredData = {
   url: 'https://anthonymercadante.github.io/',
   alternateName: ['Synth Rider', 'M E R C S'],
   description:
-    'Software and AI engineer. Built his first computer from scratch in the summer of 2009 at thirteen, spent 2009–2014 salvaging and rebuilding hardware, worked as an audio engineer and music producer from 2016 to 2020 under the aliases Synth Rider and M E R C S, and returned to software development in 2020.',
+    'Software and AI engineer. Built his first computer from scratch in the summer of 2009 at thirteen, spent 2009–2014 salvaging and rebuilding hardware, worked as an audio engineer and music producer from 2016 to 2020 under the aliases Synth Rider and M E R C S — including studio work in Toronto and Los Angeles — and returned to software development in 2020.',
   knowsAbout: [
     'Computer hardware assembly and repair',
     'Electronics and circuit prototyping',
     'Audio engineering',
     'Digital music production',
     'Signal chain and gain staging',
+    'Studio acoustic treatment and room design',
+    'Philosophy',
     'Software development',
     'AI systems',
     'Self-directed investing',
@@ -91,9 +94,10 @@ const structuredData = {
     { '@type': 'CollegeOrUniversity', name: 'George Brown College', description: 'Game Programming, Casa Loma campus, 2015. Left after one semester.' },
     { '@type': 'CollegeOrUniversity', name: 'Mohawk College', description: 'Information Technology, 2015–2016. Left after one semester.' },
     { '@type': 'CollegeOrUniversity', name: 'Metalworks Institute of Sound and Music Production', description: 'Audio Engineering and Digital Music Production, completed.' },
+    { '@type': 'CollegeOrUniversity', name: 'Humber College', description: 'General Arts and Science, major in philosophy, 2017–2018. Studied concurrently with working in music.' },
   ],
   hasOccupation: [
-    { '@type': 'Occupation', name: 'Audio Engineer and Music Producer', occupationalCategory: 'Music', description: 'Active 2016–2020 as Synth Rider (retro/synthwave) and M E R C S (bass music).' },
+    { '@type': 'Occupation', name: 'Audio Engineer and Music Producer', occupationalCategory: 'Music', description: 'Active 2016–2020 as Synth Rider (retro/synthwave) and M E R C S (bass music). Studio work in Toronto, and in Los Angeles in December 2018 with producer Daxz (Jahmar Carter).' },
     { '@type': 'Occupation', name: 'Software and AI Engineer', occupationalCategory: 'Software Engineering', description: 'From 2020 onward.' },
   ],
 };
@@ -112,6 +116,7 @@ const Story = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [activeChapter, setActiveChapter] = useState<string>(chapters[0].id);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const navRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
 
   /** Resolved photo objects per chapter, so the lightbox can arrow within one era. */
   const chapterPhotos = useMemo(() => {
@@ -139,10 +144,32 @@ const Story = () => {
     return () => observer.disconnect();
   }, []);
 
+  /**
+   * Eleven chapters overflow the nav rail, so keep the active chip in view —
+   * otherwise by the LA chapter the rail is still showing 2009 and the
+   * highlight is scrolled off somewhere to the left.
+   */
+  useEffect(() => {
+    const chip = navRefs.current[activeChapter];
+    const rail = chip?.parentElement?.parentElement;
+    if (!chip || !rail) return;
+
+    const chipMid = chip.offsetLeft + chip.offsetWidth / 2;
+    rail.scrollTo({ left: chipMid - rail.clientWidth / 2, behavior: 'smooth' });
+  }, [activeChapter]);
+
   const openLightbox = (chapterId: string, index: number) => {
     setLightboxChapter(chapterId);
     setLightboxIndex(index);
   };
+
+  /** Slug -> object lookups, so chapters can name their media by slug. */
+  const trackBySlug = useMemo(() => new Map(tracks.map((t) => [t.slug, t])), []);
+  const clipBySlug = useMemo(() => new Map(clips.map((c) => [c.slug, c])), []);
+  const salvageTracks = useMemo(
+    () => unattributedTrackSlugs.map((s) => trackBySlug.get(s)).filter((t): t is NonNullable<typeof t> => !!t),
+    [trackBySlug]
+  );
 
   return (
     <motion.div
@@ -175,10 +202,11 @@ const Story = () => {
               hardware to live in.
             </p>
             <p>
-              This is the long version, assembled from what survived: twenty-three photographs pulled
+              This is the long version, assembled from what survived: thirty-four photographs pulled
               off old phones, eleven audio files that outlived the laptops they were made on, and two
               video clips. Every date here was recovered from file metadata rather than from memory,
-              so the timeline is the machine&apos;s account, not mine.
+              so the timeline is the machine&apos;s account, not mine — and in one case it reunited a
+              photograph and a recording from the same night, seven years after both were forgotten.
             </p>
             <p className="text-zinc-500">
               My favourite thing in the world has always been to disappear into electronics.{' '}
@@ -217,6 +245,7 @@ const Story = () => {
                 <li key={c.id} className="shrink-0">
                   <a
                     href={`#${c.id}`}
+                    ref={(el) => { navRefs.current[c.id] = el; }}
                     className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-mono transition-colors ${
                       isActive ? `${a.text} bg-white/[0.06]` : 'text-zinc-500 hover:text-zinc-300'
                     }`}
@@ -236,6 +265,12 @@ const Story = () => {
         {chapters.map((chapter, chapterNumber) => {
           const a = accentClasses[chapter.accent];
           const chapterPhotoSet = chapterPhotos[chapter.id];
+          const chapterTracks = (chapter.tracks ?? [])
+            .map((s) => trackBySlug.get(s))
+            .filter((t): t is NonNullable<typeof t> => !!t);
+          const chapterClips = (chapter.clips ?? [])
+            .map((s) => clipBySlug.get(s))
+            .filter((c): c is NonNullable<typeof c> => !!c);
 
           return (
             <motion.section
@@ -312,50 +347,73 @@ const Story = () => {
                 </motion.div>
               )}
 
-              {/* The music archive lives inside the Metalworks chapter */}
-              {chapter.id === 'metalworks' && (
+              {/* Audio belonging to this chapter, sitting next to its photographs */}
+              {chapterTracks.length > 0 && (
                 <>
-                  <motion.div variants={itemVariants} className="mt-8 space-y-2.5">
-                    <SectionLabel>The surviving audio · {tracks.length} files</SectionLabel>
+                  <motion.div variants={itemVariants} className="mt-7 space-y-2">
+                    <SectionLabel>
+                      {chapterTracks.length} surviving {chapterTracks.length === 1 ? 'recording' : 'recordings'}
+                    </SectionLabel>
                     <p className="text-xs text-zinc-500 leading-relaxed">
-                      Transcoded from the original masters for the web. Source format and everything
-                      knowable about each file is listed with it; nothing here has been retitled or
-                      re-attributed to look tidier than the evidence allows.
+                      Transcoded from the original masters. Nothing has been retitled or re-attributed
+                      to look tidier than the evidence allows.
                     </p>
                   </motion.div>
-
                   <motion.div variants={containerVariants} className="mt-3">
-                    <TrackList tracks={tracks} />
+                    <TrackList tracks={chapterTracks} />
                   </motion.div>
+                </>
+              )}
 
-                  <motion.div variants={itemVariants} className="mt-8 space-y-2.5">
-                    <SectionLabel>Video · {clips.length} clips</SectionLabel>
-                    <div className="grid grid-cols-1 gap-3">
-                      {clips.map((clip) => (
-                        <div key={clip.slug} className="glass-card overflow-hidden">
-                          <video
-                            controls
-                            preload="none"
-                            playsInline
-                            poster={posterUrl(clip.slug)}
-                            className={`w-full bg-black object-cover ${clip.square ? 'aspect-square' : 'aspect-video'}`}
-                            src={videoUrl(clip.slug)}
-                          >
-                            <track kind="captions" />
-                          </video>
-                          <div className="p-4">
-                            <div className="flex items-baseline gap-2 flex-wrap">
-                              <h4 className="text-sm font-medium text-white">{clip.title}</h4>
-                              <span className="text-[11px] font-mono text-zinc-600 tabular-nums ml-auto">
-                                {clip.duration}
-                              </span>
-                            </div>
-                            <p className="text-[11px] font-mono text-fuchsia-300/70 mt-1">{clip.when}</p>
-                            <p className="text-xs text-zinc-400 leading-relaxed mt-2">{clip.note}</p>
+              {/* Video belonging to this chapter */}
+              {chapterClips.length > 0 && (
+                <motion.div variants={itemVariants} className="mt-7 space-y-2.5">
+                  <SectionLabel>
+                    {chapterClips.length === 1 ? 'Video' : `Video · ${chapterClips.length} clips`}
+                  </SectionLabel>
+                  <div className="grid grid-cols-1 gap-3">
+                    {chapterClips.map((clip) => (
+                      <div key={clip.slug} className="glass-card overflow-hidden">
+                        <video
+                          controls
+                          preload="none"
+                          playsInline
+                          poster={posterUrl(clip.slug)}
+                          className={`w-full bg-black object-cover ${clip.square ? 'aspect-square' : 'aspect-video'}`}
+                          src={videoUrl(clip.slug)}
+                        >
+                          <track kind="captions" />
+                        </video>
+                        <div className="p-4">
+                          <div className="flex items-baseline gap-2 flex-wrap">
+                            <h4 className="text-sm font-medium text-white">{clip.title}</h4>
+                            <span className="text-[11px] font-mono text-zinc-600 tabular-nums ml-auto">
+                              {clip.duration}
+                            </span>
                           </div>
+                          <p className={`text-[11px] font-mono mt-1 ${a.text} opacity-70`}>{clip.when}</p>
+                          <p className="text-xs text-zinc-400 leading-relaxed mt-2">{clip.note}</p>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* The undateable remainder, parked after the last music chapter */}
+              {chapter.id === 'los-angeles' && salvageTracks.length > 0 && (
+                <>
+                  <motion.div variants={itemVariants} className="mt-9 space-y-2">
+                    <SectionLabel>The rest of what survived · {salvageTracks.length} files</SectionLabel>
+                    <p className="text-xs text-zinc-500 leading-relaxed">
+                      These carry no date, no title worth the name, and no alias — just a filename and
+                      whatever the file format itself gives away. They could be from anywhere across the
+                      four years. Grouped here because &ldquo;this is what was left on the drive&rdquo; is
+                      the only label the evidence actually supports.
+                    </p>
+                  </motion.div>
+                  <motion.div variants={containerVariants} className="mt-3">
+                    <TrackList tracks={salvageTracks} />
                   </motion.div>
                 </>
               )}
@@ -376,11 +434,17 @@ const Story = () => {
             <p className="text-[15px] leading-relaxed text-zinc-300">
               A boy who took apart other people&apos;s broken computers because he could not afford new
               ones learned to read hardware. A producer who spent four years chasing why a mix was
-              &ldquo;somehow wrong&rdquo; learned to debug systems by ear. Someone who walked out of two
-              college programs learned to trust a technical read over an institutional one.
+              &ldquo;somehow wrong&rdquo; learned to debug systems by ear. Someone who studied philosophy
+              at night learned to find the assumption holding up an argument.
             </p>
             <p className="text-[15px] leading-relaxed text-zinc-400">
-              None of that was a detour. It is the whole toolkit, and I use all of it every day.
+              And three times — at George Brown, at Mohawk, and in a studio in Los Angeles with
+              everything apparently going right — I left something that looked good on paper because I
+              could see what it would actually cost. That turned out to be the most useful skill of the
+              lot.
+            </p>
+            <p className="text-[15px] leading-relaxed text-zinc-400">
+              None of it was a detour. It is the whole toolkit, and I use all of it every day.
             </p>
             <p className="text-xs font-mono text-zinc-600 pt-1">
               This chapter covers 2009 to 2020. The rest — the software career, Raethexn Technologies,

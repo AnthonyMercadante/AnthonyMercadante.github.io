@@ -34,7 +34,7 @@ const navItems = [
     label: 'How I Got Here',
     route: '/story',
     description: 'The long-form origin story, with the photo and audio archive',
-    meta: '8 chapters · 2009–2020 · 23 photos · 11 tracks',
+    meta: '11 chapters · 2009–2020 · 34 photos · 11 tracks',
     accent: 'text-amber-400',
     glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(251,191,36,0.35)]',
     icon: (
