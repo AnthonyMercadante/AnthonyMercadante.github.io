@@ -2,14 +2,25 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import BackButton from '../../components/BackButton';
+import portrait from '../../assets/images/portrait.jpg';
+import { ArrowUpRightIcon } from '../../components/SocialIcons';
 import { motion } from 'framer-motion';
-import { pageVariants, containerVariants, itemVariants, headerVariants, cardHover, cardTap } from '../../animations';
+import { pageVariants, containerVariants, itemVariants, headerVariants, cardTap } from '../../animations';
+
+/** The one project worth leading with. Everything else lives under Projects. */
+const featured = {
+  name: 'OpenMemory',
+  href: 'https://github.com/Raethexn-Technologies/OpenMemory',
+  blurb: 'Portable AI memory on the Internet Computer, with Physarum-inspired graph dynamics for recall that strengthens along the paths you actually use.',
+  tags: ['PHP', 'ICP', 'Knowledge Graph', 'Raethexn'],
+};
 
 const navItems = [
   {
     label: 'About Me',
     route: '/about-me',
     description: 'Background, philosophy, and what drives the work',
+    meta: 'Engineer · Founder · Canada',
     accent: 'text-cyan-400',
     glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(34,211,238,0.35)]',
     icon: (
@@ -23,6 +34,7 @@ const navItems = [
     label: 'Work Experience',
     route: '/WorkExperience',
     description: 'Industry roles in AI, XR, and full-stack engineering',
+    meta: '5 roles · since 2022 · Clarity, Raethexn, BASL.ai, Mohawk',
     accent: 'text-violet-400',
     glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(167,139,250,0.35)]',
     icon: (
@@ -38,6 +50,7 @@ const navItems = [
     label: 'Projects',
     route: '/Projects',
     description: 'Open-source repos, XR simulations, AI tools, and more',
+    meta: '5 featured repos · 5 archive collections',
     accent: 'text-emerald-400',
     glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(52,211,153,0.35)]',
     icon: (
@@ -52,6 +65,7 @@ const navItems = [
     label: 'Skills & Stack',
     route: '/skills',
     description: 'Languages, frameworks, AI tooling, and infrastructure',
+    meta: '6 categories · AI, cloud, frontend, XR',
     accent: 'text-orange-400',
     glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(251,146,60,0.35)]',
     icon: (
@@ -64,12 +78,18 @@ const navItems = [
   },
 ];
 
+const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+  <motion.p className="text-[11px] text-zinc-600 font-mono uppercase tracking-[0.18em]" variants={itemVariants}>
+    {children}
+  </motion.p>
+);
+
 const Portfolio = () => {
   const navigate = useNavigate();
 
   return (
     <motion.div
-      className="h-screen flex flex-col px-6 py-8 text-white overflow-y-auto"
+      className="min-h-screen px-6 py-8 text-white text-left"
       variants={pageVariants}
       initial="hidden"
       animate="visible"
@@ -77,40 +97,91 @@ const Portfolio = () => {
     >
       <BackButton />
 
-      <div className="max-w-lg mx-auto w-full flex flex-col h-full">
-        <motion.div className="mb-6 pt-2" variants={headerVariants} initial="hidden" animate="visible">
-          <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">Portfolio</h2>
-          <p className="text-sm text-zinc-500 font-mono mt-1">Anthony Mercadante · Raethexn Technologies</p>
+      <div className="max-w-lg mx-auto w-full space-y-8 pt-2">
+
+        {/* Header — carries the face over from the landing page */}
+        <motion.div className="flex items-center gap-4" variants={headerVariants} initial="hidden" animate="visible">
+          <span className="shrink-0 block w-14 h-14 rounded-full overflow-hidden bg-[#0a0a0e] ring-1 ring-white/10">
+            <img src={portrait} alt="" aria-hidden className="w-full h-full object-cover scale-[1.04]" />
+          </span>
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">
+              The work
+            </h2>
+            <p className="text-sm text-zinc-500 font-mono mt-0.5">Anthony Mercadante · Raethexn Technologies</p>
+          </div>
         </motion.div>
 
-        <motion.div
-          className="flex-1 flex flex-col gap-3"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {navItems.map(({ label, route, description, icon, accent, glow }) => (
-            <motion.button
-              key={route}
-              onClick={() => navigate(route)}
-              className={`glass-card glass-card-hover ${glow} flex-1 flex items-center gap-4 px-6 text-left group`}
-              variants={itemVariants}
-              whileHover={cardHover}
-              whileTap={cardTap}
-            >
-              <span className={`${accent} opacity-60 group-hover:opacity-100 transition-opacity shrink-0`}>
-                {icon}
+        {/* Featured project */}
+        <motion.div className="space-y-3" variants={containerVariants} initial="hidden" animate="visible">
+          <SectionLabel>Currently building</SectionLabel>
+
+          <motion.a
+            href={featured.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glass-card glass-card-hover hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_40px_-12px_rgba(34,211,238,0.4)] block p-5 group/featured"
+            variants={itemVariants}
+            whileHover={{ y: -2, transition: { duration: 0.18 } }}
+            whileTap={cardTap}
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_2px_rgba(34,211,238,0.5)]" />
+              <span className="text-lg font-semibold text-white">{featured.name}</span>
+              <span className="ml-auto text-zinc-600 group-hover/featured:text-cyan-300 transition-colors">
+                <ArrowUpRightIcon />
               </span>
-              <div className="min-w-0">
-                <div className="font-medium text-white text-base">{label}</div>
-                <div className="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors mt-0.5">{description}</div>
-              </div>
-              <span className="ml-auto text-zinc-600 group-hover:text-zinc-300 group-hover:translate-x-1 transition-all duration-200 shrink-0">
-                →
-              </span>
-            </motion.button>
-          ))}
+            </div>
+
+            <p className="text-sm text-zinc-400 leading-relaxed mt-2.5">{featured.blurb}</p>
+
+            <div className="flex flex-wrap gap-1.5 mt-3.5">
+              {featured.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[10px] font-mono text-zinc-500 border border-white/[0.08] rounded-md px-2 py-0.5 group-hover/featured:border-white/[0.14] group-hover/featured:text-zinc-400 transition-colors"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.a>
         </motion.div>
+
+        {/* Hub */}
+        <motion.div className="space-y-3" variants={containerVariants} initial="hidden" animate="visible">
+          <SectionLabel>Explore</SectionLabel>
+
+          <div className="flex flex-col gap-2.5">
+            {navItems.map(({ label, route, description, meta, icon, accent, glow }) => (
+              <motion.button
+                key={route}
+                onClick={() => navigate(route)}
+                className={`glass-card glass-card-hover ${glow} flex items-start gap-4 p-5 text-left group w-full`}
+                variants={itemVariants}
+                whileHover={{ x: 3, transition: { duration: 0.15 } }}
+                whileTap={cardTap}
+              >
+                <span className={`${accent} opacity-70 group-hover:opacity-100 transition-opacity shrink-0 mt-0.5`}>
+                  {icon}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="font-medium text-white text-base">{label}</div>
+                  <div className="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors mt-1">
+                    {description}
+                  </div>
+                  <div className={`text-[11px] font-mono ${accent} opacity-50 group-hover:opacity-80 transition-opacity mt-2`}>
+                    {meta}
+                  </div>
+                </div>
+                <span className="text-zinc-600 group-hover:text-zinc-300 group-hover:translate-x-1 transition-all duration-200 shrink-0 mt-0.5">
+                  →
+                </span>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+
       </div>
 
       <LandscapeOverlay />
