@@ -1,38 +1,30 @@
-# Anthony Mercadante's Portfolio Website
+# Anthony Mercadante - Portfolio
 
-Welcome to the digital canvas of my professional saga! 🚀 This repository is the heart and soul of my personal portfolio website, a vibrant showcase of my journey through the world of software development, my burgeoning skills, and the milestones I've achieved along the way.
+This is the source for [Anthony Mercadante's portfolio](https://AnthonyMercadante.github.io/), a personal-brand site for software engineering, applied AI, XR development, and the work built along the way.
 
-## What's Inside? 🌟
+The site is designed as a small, narrative portfolio rather than a conventional project index. It brings together current work, professional experience, technical skills, and a long-form archive of the experiences that led back to software.
 
-- **Crafted with React & Tailwind**: Built using the powerful React framework and spiced up with Tailwind CSS, this website stands as a testament to my love for sleek, responsive design and efficient coding.
-- **Python API Integration**: It's not just about looks! The site taps into various Python API web services, bringing several of my projects to life directly on the web platform, including a real estate bot that simulates a real estate agent for the Toronto market.
-- **Inspired by Apple**: Drawing design inspiration from Apple's aesthetic, the website sports a clean, modern interface that's a joy to navigate.
+## What is here
 
-## Key Highlights ✨
+- **Personal-brand hub** — The landing page introduces the site and points into the main portfolio sections.
+- **Work and experience** — Background, professional roles, and work across AI, XR, full-stack engineering, and automation.
+- **Projects** — Featured repositories and project collections covering applied AI, bots, React applications, XR simulations, games, and creative tools.
+- **Skills and stack** — Languages, frameworks, AI tooling, cloud, frontend, and XR technologies.
+- **Life archive** — The [`/story`](https://AnthonyMercadante.github.io/story) route tells the origin story through 11 chapters spanning 2009 onward, with 34 recovered photographs, 11 surviving tracks, and selected video clips.
 
-- **Responsive Design**: A seamless experience across devices, be it a desktop behemoth or a mobile wonder.
-- **Interactive UI**: Engaging and intuitive, the UI is an invitation to explore and discover.
-- **Dynamic Content**: My portfolio of work, including machine learning projects, bots, and virtual reality experiences, is neatly packaged and presented in an organized, captivating format.
+The portfolio currently leads with [OpenMemory](https://github.com/Raethexn-Technologies/OpenMemory), a portable AI memory project on the Internet Computer using knowledge-graph dynamics for recall.
 
-## Featured Projects 🚀
+## Technology
 
-- **AircraftIdentificationAI**: A machine learning project using Python and YoloV8, aimed at identifying aircraft models from pictures.
-- **Battleship Bot**: A Java-based bot utilizing data structures and algorithms to efficiently win the game of Battleship.
-- **Toronto Real Estate Bot**: A conversational AI simulating a real estate agent for the Toronto market, powered by NLP techniques and connected via a web service.
-- **VR Cell Tower Repair Simulator**: A Unity and C# project creating a virtual reality simulator for training in cell tower repair.
-- **Eco Challenge Tracker**: A React Native app encouraging environmental challenges through geotagged images.
-- **OVIN Project**: A virtual reality project designed as an information center, game, mechanic shop, and driving simulator.
-- **Open Flow Water Machine Lab**: A VR laboratory for Mohawk College students to complete fluid dynamics labs.
-- **Toronto Nightlife Explorer**: A React Native app for discovering Toronto's curated nightlife through web API calls.
+- React 18 and TypeScript
+- React Router for client-side routes
+- Tailwind CSS and Material UI for the visual system
+- Framer Motion for page transitions and interaction
+- GitHub Pages for deployment
 
-## Professional Experience 🛠
+The story archive keeps its media in `public/story/` and references those assets by URL so large photos, audio files, and video clips do not get bundled into the JavaScript application.
 
-- **XR Developer, Mohawk College's XR Innovation Studio**: Spent a year developing cutting-edge XR solutions, contributing significantly to the field of virtual and augmented reality.
-- **Automation Assistant, IDEAWORKS**: Engaged in automation projects within Mohawk College's Research Department, leveraging technology to streamline processes and enhance efficiency.
-
-## Getting Started 🚀
-
-To get a local version up and running, follow these simple steps:
+## Run locally
 
 ```bash
 git clone https://github.com/AnthonyMercadante/AnthonyMercadante.github.io.git
@@ -41,14 +33,39 @@ npm install --legacy-peer-deps
 npm start
 ```
 
-Voilà! The website spins up at `http://localhost:3000`.
+The development server runs at [http://localhost:3000](http://localhost:3000).
 
-## On the Web 🌐
+The `--legacy-peer-deps` flag is required because one existing dependency declares an older React peer range.
 
-The website is proudly hosted on GitHub Pages. Showcase to the world by deploying to the `gh-pages` branch.
+## Build and deploy
 
-## Join the Odyssey 🌌
+Create a production build with:
 
-Got ideas? Contributions, issues, and feature requests are more than welcome. Feel free to explore the [issues page](https://github.com/AnthonyMercadante/AnthonyMercadante.github.io/issues) if you're interested in contributing.
+```bash
+npm run build
+```
 
-Thank you for stopping by my repository! 🙏
+The project is configured for GitHub Pages. The package scripts also include:
+
+```bash
+npm run deploy
+```
+
+This builds the site and publishes the `build/` directory to the `gh-pages` branch.
+
+## Project structure
+
+```text
+src/
+  components/       Shared visual and interaction components
+  pages/            Portfolio sections and project pages
+  assets/           Images used by the application bundle
+  App.tsx           Router and application shell
+public/story/       Optimized photos, audio, and video for the life archive
+```
+
+The archive's chapters, captions, track catalogue, and metadata live in [`src/pages/Story/storyData.ts`](src/pages/Story/storyData.ts).
+
+## License and contributions
+
+This repository is the source for a personal portfolio. You are welcome to explore the code, but please open an issue before proposing changes or reusing the site's content and media.
