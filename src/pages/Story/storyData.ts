@@ -367,6 +367,23 @@ export const photos: Record<string, Photo> = {
       'October 2020. A racing chair, a studio monitor up on a stand, acoustic treatment on the wall behind the desk, a boom arm still within arm\'s reach, and a game running on the panel. Different hardware entirely. Identical instinct.',
     wide: true,
   },
+  'hand-coded-learning-2022': {
+    slug: 'hand-coded-learning-2022',
+    date: '2022-02-23',
+    dateLabel: 'February 23, 2022',
+    title: 'Everything open at once',
+    caption:
+      'February 23, 2022. School was fully remote, the work was still being written by hand, and the browser was part of the toolchain. Visual Studio Code on the left, a working assignment on the right, and Stack Overflow and W3Schools doing the explaining that an LLM could not yet do. The comment in the file records the date: a small, precise snapshot of learning software the slow way.',
+  },
+  'xr-lab-whiteboard-2023': {
+    slug: 'xr-lab-whiteboard-2023',
+    date: '2023-01-04',
+    dateLabel: 'January 4, 2023',
+    title: 'The XR Lab wall',
+    caption:
+      'January 4, 2023, in Mohawk College\'s XR Lab. After a short stint supporting the manager of funding proposals at IdeaWorks, I landed in the XR Department as an XR Developer. The work sat exactly at the intersection I had been moving toward: part software, part game development, part education, with the strange and immediate joy of making something people could step inside.',
+    wide: true,
+  },
 };
 
 export const chapters: Chapter[] = [
@@ -568,6 +585,34 @@ export const chapters: Chapter[] = [
     ],
     photos: ['setup-2020'],
   },
+  {
+    id: 'the-hand-coded-years',
+    era: '2021 – 2022',
+    railLabel: 'School',
+    title: 'The Hand-Coded Years',
+    subtitle: 'Remote school, browser tabs, and learning one error at a time.',
+    accent: 'sky',
+    paragraphs: [
+      'School was fully remote. There was no classroom to disappear into and no instructor a few desks away to ask when the code stopped making sense. My main sources of help were Stack Overflow and W3Schools: search, read, try, break it, read again, and eventually understand why the fix worked.',
+      'LLMs were not part of the workflow yet. Everything was still coded by hand, and that constraint mattered. I had to sit with the syntax, trace the error, and build a mental model instead of asking a machine to produce a plausible answer. The browser became the second monitor in the learning process: documentation, examples, assignment requirements, and the application all open together.',
+      'The photograph from February 23, 2022 is a small record of that process. It is not a polished project screenshot; it is the desk while the work was happening. Code on one side, the result on the other, and enough tabs open to show how much of programming at that stage was investigation.',
+    ],
+    photos: ['hand-coded-learning-2022'],
+  },
+  {
+    id: 'xr-lab',
+    era: 'January 2023 –',
+    railLabel: 'XR Lab',
+    title: 'Into the XR Lab',
+    subtitle: 'The most fun job I have had: games, education, and software in the same room.',
+    accent: 'violet',
+    paragraphs: [
+      'In January 2023, after a short stint working with the manager of funding proposals at IdeaWorks, I landed a job in Mohawk College\'s XR Department as an XR Developer. It was a sharp turn from learning software remotely to building experiences that other people could actually enter and use.',
+      'The XR Lab felt like the best parts of video games and education meeting in the middle. There was the immediate feedback and playfulness of games, but the purpose was teaching: prototypes, simulations, experiments, and tools that made an idea tangible. The work was technical, but it was also physical and social in a way that ordinary application code rarely is.',
+      'I had spent years moving between hardware, audio, games, philosophy, and software, often wondering whether the path was finally going to converge. In the XR Lab it did. The computer was still a system to understand, but now the result could surround someone, teach them something, and make them want to keep exploring.',
+    ],
+    photos: ['xr-lab-whiteboard-2023'],
+  },
 ];
 
 /**
@@ -740,6 +785,6 @@ export const unattributedTrackSlugs = [
 export const stats = [
   { value: '2009', label: 'First build, from scratch' },
   { value: '13', label: 'Years old when it booted' },
-  { value: '34', label: 'Photographs recovered' },
+  { value: '36', label: 'Photographs recovered' },
   { value: '11', label: 'Tracks that survived' },
 ];

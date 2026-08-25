@@ -188,7 +188,7 @@ const Story = () => {
         <motion.div className="max-w-2xl mx-auto space-y-6" variants={headerVariants} initial="hidden" animate="visible">
           <div className="space-y-3">
             <p className="text-[11px] font-mono text-cyan-400 uppercase tracking-[0.18em]">
-              Origins · 2009 — 2020
+              Origins · 2009 — 2023
             </p>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.05] bg-gradient-to-br from-white via-zinc-100 to-zinc-500 bg-clip-text text-transparent">
               How I got here
@@ -202,7 +202,7 @@ const Story = () => {
               hardware to live in.
             </p>
             <p>
-              This is the long version, assembled from what survived: thirty-four photographs pulled
+              This is the long version, assembled from what survived: thirty-six photographs pulled
               off old phones, eleven audio files that outlived the laptops they were made on, and two
               video clips. Every date here was recovered from file metadata rather than from memory,
               so the timeline is the machine&apos;s account, not mine — and in one case it reunited a
@@ -447,8 +447,8 @@ const Story = () => {
               None of it was a detour. It is the whole toolkit, and I use all of it every day.
             </p>
             <p className="text-xs font-mono text-zinc-600 pt-1">
-              This chapter covers 2009 to 2020. The rest — the software career, Raethexn Technologies,
-              and the AI work — continues from here.
+              This chapter covers 2009 to 2023. The rest — Raethexn Technologies and the AI work —
+              continues from here.
             </p>
           </motion.div>
         </motion.section>
