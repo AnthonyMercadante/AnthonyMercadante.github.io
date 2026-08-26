@@ -5,6 +5,7 @@ import Image3 from '../../assets/images/Toolsforuse.png';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import PreloadImages from '../../components/PreloadImages';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const OpenFlowMachinePortfolio = () => {
   return (
@@ -17,6 +18,10 @@ const OpenFlowMachinePortfolio = () => {
             Open Flow Water Channel Machine in Virtual Reality
             <br></br>
           </h1>
+
+          <div className="mb-10">
+            <StoryLink chapter="xr-lab" label="The lab this was built in" />
+          </div>
 
           <div className="md:flex md:flex-row md:justify-center">
             <div className="md:w-1/2 text-left px-4 mb-6">

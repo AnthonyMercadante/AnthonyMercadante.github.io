@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import BackButton from '../../components/BackButton';
 import { motion } from 'framer-motion';
+import StoryLink from '../../components/StoryLink';
 import { pageVariants, containerVariants, itemVariants, headerVariants, cardHover } from '../../animations';
 
 interface WorkEntry {
@@ -15,6 +16,11 @@ interface WorkEntry {
   highlights?: string[];
   skills: string[];
   link?: string;
+  /**
+   * How the role actually came about, and the /story chapter that tells it.
+   * A CV says what the job was; this says why it happened at all.
+   */
+  origin?: { note: string; chapter: string };
 }
 
 const workExperiences: WorkEntry[] = [
@@ -34,6 +40,10 @@ const workExperiences: WorkEntry[] = [
       'Working across GCP, Python, Laravel, Vue, Node.js, PostgreSQL, and DevOps workflows.',
     ],
     skills: ['GCP', 'Vertex AI', 'Python', 'Laravel', 'Vue', 'Node.js', 'PostgreSQL', 'DevOps'],
+    origin: {
+      note: 'Seven months of applications before this one landed.',
+      chapter: 'clarity',
+    },
   },
   {
     title: 'Software Engineer, Applied AI Systems - Independent Contractor',
@@ -52,6 +62,10 @@ const workExperiences: WorkEntry[] = [
       'Explored interactive systems and real-time prototypes where they supported broader engineering and research goals.',
     ],
     skills: ['GCP', 'Python', 'Laravel', 'Vue', 'Node.js', 'PostgreSQL', 'RAG', 'DevOps'],
+    origin: {
+      note: 'Started in the year between the startup folding and the next job.',
+      chapter: 'the-lean-year',
+    },
   },
   {
     title: 'Software Engineer Intern',
@@ -61,6 +75,10 @@ const workExperiences: WorkEntry[] = [
       'Full-stack SaaS delivery on a knowledge-management platform for real-estate brokerages. Shipped production features weekly — auto-import pipeline for 10k-row MLS/CRM exports in under 30s, Twilio voice/SMS with in-browser calling and voicemail transcription, Docker-based CI/CD across dev/stage/prod.',
     skills: ['Vue 3', 'Inertia.js', 'Laravel', 'TailwindCSS', 'Twilio', 'Docker', 'PHPUnit'],
     link: '/BaslEngineer',
+    origin: {
+      note: 'Hired off a chatbot I built as a joke about my sister.',
+      chapter: 'the-bot',
+    },
   },
   {
     title: 'XR Software Developer',
@@ -70,6 +88,10 @@ const workExperiences: WorkEntry[] = [
       'Built immersive XR learning environments for engineering and automotive education. Key deliverables: open-channel water flow simulation for fluid dynamics training, VR cell tower inspection simulator, and an interactive automotive industry exhibit for the Ontario VR Innovation Network (OVIN).',
     skills: ['C#', 'Unity', 'Unreal Engine', 'Blender', 'Git'],
     link: '/XRDeveloper',
+    origin: {
+      note: 'Nobody was teaching XR yet, which turned out to be the point.',
+      chapter: 'xr-lab',
+    },
   },
   {
     title: 'Automation Assistant',
@@ -79,6 +101,10 @@ const workExperiences: WorkEntry[] = [
       'Developed a Python desktop application to automate the grant proposal creation process for the research funding department. Integrated OpenAI for AI-assisted draft generation, Qt 6 for the UI, SQLite for proposal history — my first production LLM integration.',
     skills: ['Python', 'Qt 6', 'OpenAI API', 'httpx', 'SQLite'],
     link: '/AutomationAssistant',
+    origin: {
+      note: 'A floor of applied-research desks nobody was allowed to touch.',
+      chapter: 'ideaworks',
+    },
   },
 ];
 
@@ -97,6 +123,13 @@ const WorkExperienceComponent = () => {
         <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
           <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">Work Experience</h1>
           <p className="text-sm text-zinc-500 font-mono mt-1">Industry roles in AI, XR, and full-stack engineering</p>
+          <p className="text-xs text-zinc-600 mt-2">
+            None of these started where the dates say. Each one links back to the chapter of{' '}
+            <Link to="/story" className="text-zinc-400 hover:text-white underline decoration-white/20 underline-offset-2 transition-colors">
+              the story
+            </Link>{' '}
+            it came out of.
+          </p>
         </motion.div>
 
         <motion.div
@@ -105,7 +138,7 @@ const WorkExperienceComponent = () => {
           initial="hidden"
           animate="visible"
         >
-          {workExperiences.map(({ title, company, type, location, period, details, highlights, skills, link }) => (
+          {workExperiences.map(({ title, company, type, location, period, details, highlights, skills, link, origin }) => (
             <motion.div
               key={`${company}-${title}`}
               className="glass-card glass-card-hover hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_36px_-12px_rgba(34,211,238,0.3)] flex flex-col p-5 text-left"
@@ -139,6 +172,13 @@ const WorkExperienceComponent = () => {
                     <li key={highlight}>{highlight}</li>
                   ))}
                 </ul>
+              )}
+
+              {origin && (
+                <div className="mt-4 border-l border-white/10 pl-3">
+                  <p className="text-xs text-zinc-500 italic leading-relaxed">{origin.note}</p>
+                  <StoryLink chapter={origin.chapter} variant="inline" className="mt-1.5" />
+                </div>
               )}
 
               <div className="flex flex-wrap gap-1.5 mt-4">

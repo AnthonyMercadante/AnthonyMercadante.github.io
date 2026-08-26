@@ -1134,6 +1134,14 @@ export const chapters: Chapter[] = [
 ];
 
 /**
+ * Chapter lookup by id, for the pages elsewhere on the site that point back
+ * into a chapter. Returns undefined rather than throwing so a mistyped id
+ * drops the link instead of taking a project page down with it.
+ */
+export const chapterById = (id: string): Chapter | undefined =>
+  chapters.find((c) => c.id === id);
+
+/**
  * The surviving music catalogue, 2016–2020.
  *
  * Ordering is deliberate: confirmed releases first, then dated sessions, then

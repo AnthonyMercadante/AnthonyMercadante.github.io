@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'; // Material UI Button
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import PreloadImages from '../../components/PreloadImages';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const EcoChallenger = () => {
     return (
@@ -15,6 +16,10 @@ const EcoChallenger = () => {
                     <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gradient"><br></br><br></br>
                         Eco Challenge Tracker: Community Engagement in Environmental Cleanup
                     </h1>
+
+                    <div className="mb-10">
+                        <StoryLink chapter="the-hand-coded-years" label="Built during the fully remote years" />
+                    </div>
 
                     <iframe
                         className="w-full md:max-w-3xl mx-auto aspect-video mb-6"

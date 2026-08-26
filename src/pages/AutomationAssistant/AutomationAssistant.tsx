@@ -3,6 +3,7 @@ import LandscapeOverlay from '../../components/LandscapeOverlay';
 import { motion } from 'framer-motion';
 import { pageVariants, containerVariants, itemVariants, headerVariants } from '../../animations';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const sections = [
   {
@@ -105,6 +106,11 @@ const AutomationAssistant = () => {
         <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
           <h1 className="text-3xl font-bold text-white tracking-tight">Automation Assistant</h1>
           <p className="text-sm font-mono text-cyan-400 mt-1">Mohawk College Research Dept. · Sep 2022 – Dec 2022</p>
+          <StoryLink
+            chapter="ideaworks"
+            label="The floor of desks nobody was allowed to touch"
+            className="mt-3"
+          />
         </motion.div>
 
         <motion.div

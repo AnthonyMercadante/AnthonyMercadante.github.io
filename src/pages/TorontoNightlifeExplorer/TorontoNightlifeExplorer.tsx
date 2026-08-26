@@ -3,6 +3,7 @@ import DownloadIcon from '@mui/icons-material/Download'; // Material UI Download
 import Button from '@mui/material/Button'; // Material UI Button
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const TorontoNightlifeExplorer = () => {
   return (
@@ -13,6 +14,10 @@ const TorontoNightlifeExplorer = () => {
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gradient"><br></br><br></br>
           Toronto Nightlife Explorer: Discover the City's Vibrant Nightlife
         </h1>
+
+        <div className="mb-10">
+          <StoryLink chapter="the-hand-coded-years" label="Coursework from the fully remote years" />
+        </div>
 
         <iframe
           className="w-full md:max-w-3xl mx-auto aspect-video mb-6"

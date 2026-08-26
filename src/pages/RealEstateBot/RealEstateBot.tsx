@@ -7,6 +7,7 @@ import LandscapeOverlay from '../../components/LandscapeOverlay';
 import { Box, Typography, useTheme, Button, Grid } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const RealEstateBot = () => {
     const navigate = useNavigate();
@@ -64,6 +65,7 @@ const RealEstateBot = () => {
                     <Typography variant="h2" sx={style.header}>
                         <br></br><br></br>Real Estate Bot
                     </Typography>
+                    <StoryLink chapter="the-bot" label="I thought it would be funny to automate my sister" />
                 </Grid>
     
                 {/* Text Content */}

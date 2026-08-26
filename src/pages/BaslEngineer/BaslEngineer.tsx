@@ -3,6 +3,7 @@ import LandscapeOverlay from '../../components/LandscapeOverlay';
 import { motion } from 'framer-motion';
 import { pageVariants, containerVariants, itemVariants, headerVariants } from '../../animations';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const sections = [
   {
@@ -103,6 +104,11 @@ const BaslEngineer: React.FC = () => {
         <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
           <h1 className="text-3xl font-bold text-white tracking-tight">Software Engineer Intern</h1>
           <p className="text-sm font-mono text-cyan-400 mt-1">BASL.ai · May 2024 – Sep 2024</p>
+          <StoryLink
+            chapter="the-bot"
+            label="They found me through a chatbot I built as a joke"
+            className="mt-3"
+          />
         </motion.div>
 
         <motion.div

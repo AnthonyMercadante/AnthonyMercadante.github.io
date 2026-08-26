@@ -3,6 +3,7 @@ import Image1 from '../../assets/images/beingInterviewed.jpg';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import PreloadImages from '../../components/PreloadImages';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const AircraftIdentifierAI = () => {
     return (
@@ -14,6 +15,10 @@ const AircraftIdentifierAI = () => {
                     <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gradient"><br></br>
                         Using <span className="text-blue-500">Machine Learning</span> for Historical Aircraft Identification
                     </h1>
+
+                    <div className="mb-10">
+                        <StoryLink chapter="research" label="Trained from scratch, on one GPU, with nobody to ask" />
+                    </div>
 
                     <div className="md:flex md:flex-row md:justify-center">
                         <div className="md:w-1/3 text-left px-10 mb-6">

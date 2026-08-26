@@ -4,6 +4,7 @@ import Image2 from '../../assets/images/OVINFormulaCar.png';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import PreloadImages from '../../components/PreloadImages';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const OVIN = () => {
   return (
@@ -15,6 +16,10 @@ const OVIN = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gradient"><br></br>
             Ontario Vehicle Innovation Network: VR in Automotive Education<br></br>
           </h1>
+
+          <div className="mb-10">
+            <StoryLink chapter="ovin" label="Same tools as the tower, audience aged eleven" />
+          </div>
 
           <div className="md:flex md:flex-row md:justify-center">
             <div className="md:w-1/2 text-left px-4 mb-6">

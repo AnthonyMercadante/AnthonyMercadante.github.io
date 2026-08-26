@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import Lightbox from '../../components/Lightbox';
@@ -12,26 +12,10 @@ import {
   clips,
   stats,
   unattributedTrackSlugs,
-  type Accent,
   type Photo,
 } from './storyData';
+import { accentClasses } from './accents';
 import { pageVariants, containerVariants, itemVariants, headerVariants } from '../../animations';
-
-/**
- * Accent classes are written out as complete literal strings because Tailwind
- * scans source text — a template like `text-${accent}-400` would never make it
- * into the built stylesheet.
- */
-const accentClasses: Record<Accent, { text: string; rail: string; dot: string; border: string }> = {
-  cyan: { text: 'text-cyan-400', rail: 'bg-cyan-400/60', dot: 'bg-cyan-400 shadow-[0_0_10px_2px_rgba(34,211,238,0.5)]', border: 'border-cyan-400/20' },
-  amber: { text: 'text-amber-400', rail: 'bg-amber-400/60', dot: 'bg-amber-400 shadow-[0_0_10px_2px_rgba(251,191,36,0.5)]', border: 'border-amber-400/20' },
-  violet: { text: 'text-violet-400', rail: 'bg-violet-400/60', dot: 'bg-violet-400 shadow-[0_0_10px_2px_rgba(167,139,250,0.5)]', border: 'border-violet-400/20' },
-  sky: { text: 'text-sky-400', rail: 'bg-sky-400/60', dot: 'bg-sky-400 shadow-[0_0_10px_2px_rgba(56,189,248,0.5)]', border: 'border-sky-400/20' },
-  rose: { text: 'text-rose-400', rail: 'bg-rose-400/60', dot: 'bg-rose-400 shadow-[0_0_10px_2px_rgba(251,113,133,0.5)]', border: 'border-rose-400/20' },
-  orange: { text: 'text-orange-400', rail: 'bg-orange-400/60', dot: 'bg-orange-400 shadow-[0_0_10px_2px_rgba(251,146,60,0.5)]', border: 'border-orange-400/20' },
-  fuchsia: { text: 'text-fuchsia-400', rail: 'bg-fuchsia-400/60', dot: 'bg-fuchsia-400 shadow-[0_0_10px_2px_rgba(232,121,249,0.5)]', border: 'border-fuchsia-400/20' },
-  emerald: { text: 'text-emerald-400', rail: 'bg-emerald-400/60', dot: 'bg-emerald-400 shadow-[0_0_10px_2px_rgba(52,211,153,0.5)]', border: 'border-emerald-400/20' },
-};
 
 /** Minimal inline formatter for the `**bold**` / `*emphasis*` used in the prose. */
 const INLINE = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
@@ -122,6 +106,7 @@ const SectionLabel = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Story = () => {
+  const { hash } = useLocation();
   const [lightboxChapter, setLightboxChapter] = useState<string | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [activeChapter, setActiveChapter] = useState<string>(chapters[0].id);
@@ -136,6 +121,19 @@ const Story = () => {
     });
     return map;
   }, []);
+
+  /**
+   * Arriving from a project page on /story#cell-tower. The browser will not do
+   * this for us — the chapter does not exist yet at the point it looks for the
+   * fragment — so the jump happens here, once the sections are committed.
+   * Every photo and clip below reserves its space with a fixed aspect ratio, so
+   * nothing shifts underneath us afterwards, and `scroll-mt-20` on each section
+   * keeps the target clear of the sticky nav.
+   */
+  useEffect(() => {
+    if (!hash) return;
+    document.getElementById(hash.slice(1))?.scrollIntoView({ block: 'start' });
+  }, [hash]);
 
   // Highlight whichever chapter is currently under the sticky nav.
   useEffect(() => {

@@ -1,7 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 import { motion } from 'framer-motion';
 import { pageVariants, containerVariants, itemVariants, headerVariants, cardTap } from '../../animations';
 
@@ -18,6 +19,10 @@ const langColors: Record<string, string> = {
   TypeScript: 'bg-blue-400',
 };
 
+/**
+ * `chapter` is the id of the /story chapter this work came out of, where there
+ * is one. The story links out to the project pages; these are the way back.
+ */
 const featuredProjects = [
   {
     name: 'OpenMemory',
@@ -25,6 +30,7 @@ const featuredProjects = [
     tags: ['ICP', 'AI Memory', 'Knowledge Graph'],
     url: 'https://github.com/Raethexn-Technologies/OpenMemory',
     studio: true,
+    chapter: 'clarity',
   },
   {
     name: 'AircraftIdentificationAI',
@@ -32,6 +38,7 @@ const featuredProjects = [
     tags: ['PyTorch', 'CNN', 'RCAF Partnership'],
     url: 'https://github.com/AnthonyMercadante/AircraftIdentificationAI',
     studio: false,
+    chapter: 'research',
   },
   {
     name: 'FlowChannel-XR',
@@ -39,6 +46,7 @@ const featuredProjects = [
     tags: ['Unity', 'XR', 'Simulation'],
     url: 'https://github.com/AnthonyMercadante/FlowChannel-XR',
     studio: false,
+    chapter: 'xr-lab',
   },
   {
     name: 'nl2sql-poc',
@@ -53,15 +61,17 @@ const featuredProjects = [
     tags: ['CLI', 'Finance'],
     url: 'https://github.com/AnthonyMercadante/StockPeek',
     studio: false,
+    // The markets became an interest in the same lockdown that sent me back to software.
+    chapter: 'back-to-software',
   },
 ];
 
 const archiveCategories = [
-  { title: 'Game Projects', route: '/Games/Void', imageUrl: ProjectIconImage6 },
-  { title: 'VR Projects', route: '/XRDeveloper', imageUrl: ProjectIconImage },
-  { title: 'Bot Projects', route: '/Bots', imageUrl: ProjectIconImage2 },
-  { title: 'React Native Projects', route: '/ReactProjects', imageUrl: ProjectIconImage3 },
-  { title: 'Machine Learning Projects', route: '/MachineLearningProjects', imageUrl: ProjectIconImage4 },
+  { title: 'Game Projects', route: '/Games/Void', imageUrl: ProjectIconImage6, chapter: 'the-lean-year' },
+  { title: 'VR Projects', route: '/XRDeveloper', imageUrl: ProjectIconImage, chapter: 'xr-lab' },
+  { title: 'Bot Projects', route: '/Bots', imageUrl: ProjectIconImage2, chapter: 'the-bot' },
+  { title: 'React Native Projects', route: '/ReactProjects', imageUrl: ProjectIconImage3, chapter: 'the-hand-coded-years' },
+  { title: 'Machine Learning Projects', route: '/MachineLearningProjects', imageUrl: ProjectIconImage4, chapter: 'research' },
 ];
 
 const GitHubIcon = () => (
@@ -87,10 +97,19 @@ const Projects = () => {
         <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
           <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">Projects</h1>
           <p className="text-sm text-zinc-500 font-mono mt-1">Open-source repositories and project archive</p>
+          <p className="text-xs text-zinc-600 mt-2">
+            Most of these have a year and a room behind them — follow the small links through to{' '}
+            <Link to="/story" className="text-zinc-400 hover:text-white underline decoration-white/20 underline-offset-2 transition-colors">
+              the story
+            </Link>.
+          </p>
         </motion.div>
 
         <motion.div
-          className="flex-1 grid grid-cols-5 gap-4 overflow-hidden"
+          /* min-h-0 + an explicit `minmax(0, 1fr)` row: without both, the grid
+             sizes itself to its content and the two-line rows push the last
+             repo off the bottom of the screen. */
+          className="flex-1 min-h-0 grid grid-cols-5 grid-rows-1 gap-4 overflow-hidden"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -103,44 +122,57 @@ const Projects = () => {
             <div className="px-5 py-3 border-b border-white/[0.08] bg-white/[0.02] shrink-0">
               <p className="text-xs text-zinc-500 font-mono uppercase tracking-widest">Open Source</p>
             </div>
-            <div className="flex-1 flex flex-col divide-y divide-white/[0.06]">
-              {featuredProjects.map(({ name, lang, tags, url, studio }) => (
-                <motion.a
+            <div className="flex-1 min-h-0 flex flex-col divide-y divide-white/[0.06]">
+              {featuredProjects.map(({ name, lang, tags, url, studio, chapter }) => (
+                /*
+                  The repo link is an overlay covering the row rather than a
+                  wrapper around it: the story pill is itself a link, and an
+                  anchor cannot legally sit inside another anchor. The row stays
+                  clickable end to end, and the pill sits above it.
+                */
+                <motion.div
                   key={name}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center gap-3 px-5 transition-colors group"
+                  className="relative flex-1 flex items-center gap-3 px-5 py-2 transition-colors group"
                   whileHover={{ backgroundColor: 'rgba(39,39,42,0.6)' }}
                   transition={{ duration: 0.15 }}
                 >
-                  <div className="flex items-center gap-2 min-w-0 flex-1">
-                    <span className="font-mono font-medium text-sm text-white group-hover:text-cyan-400 transition-colors truncate">
-                      {name}
-                    </span>
-                    {studio && (
-                      <span className="text-xs text-cyan-400/70 border border-cyan-400/30 px-1.5 py-0.5 rounded-full font-mono shrink-0 leading-none">
-                        studio
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0"
+                    aria-label={`${name} on GitHub`}
+                  />
+                  <div className="relative min-w-0 flex-1 flex flex-col items-start gap-1 pointer-events-none">
+                    <span className="inline-flex items-center gap-2 max-w-full">
+                      <span className="font-mono font-medium text-sm text-white group-hover:text-cyan-400 transition-colors truncate">
+                        {name}
                       </span>
-                    )}
+                      {studio && (
+                        <span className="text-xs text-cyan-400/70 border border-cyan-400/30 px-1.5 py-0.5 rounded-full font-mono shrink-0 leading-none">
+                          studio
+                        </span>
+                      )}
+                      <span className="text-zinc-600 group-hover:text-zinc-400 transition-colors shrink-0">
+                        <GitHubIcon />
+                      </span>
+                    </span>
+                    {chapter && <StoryLink chapter={chapter} variant="inline" className="pointer-events-auto" />}
                   </div>
-                  <div className="flex items-center gap-2 shrink-0">
+                  <div className="relative flex items-center gap-2 shrink-0 pointer-events-none">
                     <div className="flex items-center gap-1">
                       <span className={`w-2 h-2 rounded-full shrink-0 ${langColors[lang] ?? 'bg-zinc-400'}`} />
                       <span className="text-xs text-zinc-500 font-mono">{lang}</span>
                     </div>
-                    <div className="hidden sm:flex flex-wrap gap-1">
+                    <div className="hidden md:flex flex-wrap gap-1 justify-end">
                       {tags.map((tag) => (
                         <span key={tag} className="text-xs text-zinc-600 bg-zinc-800/60 border border-zinc-700/40 px-1.5 py-0.5 rounded font-mono leading-none">
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <span className="text-zinc-600 group-hover:text-zinc-400 transition-colors">
-                      <GitHubIcon />
-                    </span>
                   </div>
-                </motion.a>
+                </motion.div>
               ))}
             </div>
           </motion.div>
@@ -153,32 +185,37 @@ const Projects = () => {
             <div className="px-5 py-3 border-b border-white/[0.08] bg-white/[0.02] shrink-0">
               <p className="text-xs text-zinc-500 font-mono uppercase tracking-widest">Archive</p>
             </div>
-            <div className="flex-1 flex flex-col divide-y divide-white/[0.06]">
-              {archiveCategories.map(({ title, route, imageUrl }) => (
-                <motion.button
+            <div className="flex-1 min-h-0 flex flex-col divide-y divide-white/[0.06]">
+              {archiveCategories.map(({ title, route, imageUrl, chapter }) => (
+                <motion.div
                   key={route}
-                  onClick={() => navigate(route)}
-                  className="flex-1 flex items-center gap-4 px-5 transition-colors group text-left"
+                  className="relative flex-1 flex items-center gap-4 px-5 py-2 transition-colors group text-left"
                   whileHover={{ backgroundColor: 'rgba(39,39,42,0.6)' }}
                   whileTap={cardTap}
                   transition={{ duration: 0.15 }}
                 >
+                  <button
+                    onClick={() => navigate(route)}
+                    className="absolute inset-0"
+                    aria-label={`Open ${title}`}
+                  />
                   <img
                     src={imageUrl}
                     alt={title}
-                    className="w-8 h-8 rounded-lg object-cover opacity-70 group-hover:opacity-100 transition-opacity shrink-0"
+                    className="relative w-8 h-8 rounded-lg object-cover opacity-70 group-hover:opacity-100 transition-opacity shrink-0 pointer-events-none"
                   />
-                  <span className="text-sm text-zinc-300 group-hover:text-white transition-colors flex-1">
-                    {title}
-                  </span>
-                  <motion.span
-                    className="text-zinc-600 text-sm shrink-0"
-                    whileHover={{ x: 3, color: '#a1a1aa' }}
-                    transition={{ duration: 0.15 }}
-                  >
+                  <div className="relative min-w-0 flex-1 flex flex-col items-start gap-1 pointer-events-none">
+                    <span className="text-sm text-zinc-300 group-hover:text-white transition-colors max-w-full truncate">
+                      {title}
+                    </span>
+                    <StoryLink chapter={chapter} variant="inline" className="pointer-events-auto" />
+                  </div>
+                  {/* Follows the row's hover rather than its own, now that the
+                      click target is the overlay behind it. */}
+                  <span className="relative text-zinc-600 text-sm shrink-0 self-center pointer-events-none transition-all duration-150 group-hover:text-zinc-400 group-hover:translate-x-0.5">
                     →
-                  </motion.span>
-                </motion.button>
+                  </span>
+                </motion.div>
               ))}
             </div>
           </motion.div>

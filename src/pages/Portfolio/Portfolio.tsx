@@ -6,6 +6,20 @@ import portrait from '../../assets/images/portrait.jpg';
 import { ArrowUpRightIcon } from '../../components/SocialIcons';
 import { motion } from 'framer-motion';
 import { pageVariants, containerVariants, itemVariants, headerVariants, cardTap } from '../../animations';
+import { chapters, photos, clips } from '../Story/storyData';
+
+/**
+ * Counted from the archive rather than typed in. The story grew from eleven
+ * chapters to twenty-one, and from thirty-four photographs to seventy-three,
+ * while this line went on advertising the old numbers.
+ */
+const years = chapters.flatMap((c) => c.era.match(/\d{4}/g) ?? []).map(Number);
+const storyMeta = [
+  `${chapters.length} chapters`,
+  `${Math.min(...years)}–${Math.max(...years)}`,
+  `${Object.keys(photos).length} photos`,
+  `${clips.length} clips`,
+].join(' · ');
 
 /** The one project worth leading with. Everything else lives under Projects. */
 const featured = {
@@ -33,8 +47,8 @@ const navItems = [
   {
     label: 'How I Got Here',
     route: '/story',
-    description: 'The long-form origin story, with the photo and audio archive',
-    meta: '11 chapters · 2009–2020 · 34 photos · 11 tracks',
+    description: 'The long-form origin story, with the photo, audio and video archive',
+    meta: storyMeta,
     accent: 'text-amber-400',
     glow: 'hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_32px_-10px_rgba(251,191,36,0.35)]',
     icon: (

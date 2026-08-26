@@ -8,6 +8,7 @@ import { pageVariants, containerVariants, itemVariants, headerVariants, cardHove
 import ReactProjectIconImage2 from '../../assets/images/TorontoNightlifeExplorerIcon.png';
 import ReactProjectIconImage from '../../assets/images/EcoChallengeTrackerIcon.png';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const projects = [
   {
@@ -44,6 +45,11 @@ const ReactProjects = () => {
           <motion.div variants={headerVariants} initial="hidden" animate="visible">
             <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">React Native Projects</h1>
             <p className="text-sm text-zinc-500 font-mono mt-1">Cross-platform mobile applications</p>
+            <StoryLink
+              chapter="the-hand-coded-years"
+              label="Coursework from the remote years, coded by hand"
+              className="mt-3"
+            />
           </motion.div>
 
           <motion.div

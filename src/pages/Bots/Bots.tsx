@@ -8,6 +8,7 @@ import { pageVariants, containerVariants, itemVariants, headerVariants, cardHove
 import ProjectImage from '../../assets/images/RealEstateBot.png';
 import ProjectImage2 from '../../assets/images/BattleShipBot.png';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const projects = [
   {
@@ -44,6 +45,11 @@ const Bots = () => {
           <motion.div variants={headerVariants} initial="hidden" animate="visible">
             <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">Bot Projects</h1>
             <p className="text-sm text-zinc-500 font-mono mt-1">AI-powered automation and game agents</p>
+            <StoryLink
+              chapter="the-bot"
+              label="One of these started as a joke and turned into a job"
+              className="mt-3"
+            />
           </motion.div>
 
           <motion.div

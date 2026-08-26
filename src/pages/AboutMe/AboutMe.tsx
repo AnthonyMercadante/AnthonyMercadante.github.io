@@ -84,7 +84,7 @@ const AboutMe = () => {
               </p>
             </motion.div>
 
-            {/* The long-form origin story: 2009 to 2020, with the photo and audio archive */}
+            {/* The long-form origin story: 2009 to 2025, with the photo, audio and video archive */}
             <motion.div variants={itemVariants} whileHover={{ y: -2 }} whileTap={cardTap}>
               <button
                 onClick={() => navigate('/story')}
@@ -95,7 +95,7 @@ const AboutMe = () => {
                   <span className="min-w-0">
                     <span className="block text-sm font-medium text-white">How I got here</span>
                     <span className="block text-xs text-zinc-500 mt-0.5">
-                      First build at 13, the salvage years, audio engineering — 2009 to 2020
+                      First build at 13, the salvage years, audio engineering — 2009 to 2025
                     </span>
                   </span>
                   <span className="shrink-0 text-zinc-500 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all duration-200">

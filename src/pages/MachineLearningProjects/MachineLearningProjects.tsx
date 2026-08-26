@@ -6,6 +6,7 @@ import { pageVariants, itemVariants, headerVariants, cardHover, cardTap } from '
 
 import MachineLearningProjectIconImage from '../../assets/images/AircraftIdentificationAI.webp';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const projects = [
   {
@@ -35,6 +36,11 @@ const MachineLearningProjects = () => {
           <motion.div variants={headerVariants} initial="hidden" animate="visible">
             <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">Machine Learning</h1>
             <p className="text-sm text-zinc-500 font-mono mt-1">Computer vision and applied ML</p>
+            <StoryLink
+              chapter="research"
+              label="Where the AI work started properly"
+              className="mt-3"
+            />
           </motion.div>
 
           {projects.map(({ title, route, imageUrl, description, tags }) => (

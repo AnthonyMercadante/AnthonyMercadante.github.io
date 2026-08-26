@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { pageVariants, containerVariants, itemVariants, headerVariants } from '../../../animations';
 import BackButton from '../../../components/BackButton';
+import StoryLink from '../../../components/StoryLink';
 
 const sections = [
   {
@@ -93,6 +94,11 @@ const VoidGame: React.FC = () => {
         <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
           <h1 className="text-3xl font-bold text-white tracking-tight">VOID</h1>
           <p className="text-sm font-mono text-violet-400 mt-1">Raethexn Technologies · Unity · Alpha v0.0.1</p>
+          <StoryLink
+            chapter="the-lean-year"
+            label="Built as the antidote to a hundred silent job applications"
+            className="mt-3"
+          />
         </motion.div>
 
         <motion.div

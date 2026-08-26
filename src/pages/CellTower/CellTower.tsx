@@ -5,6 +5,7 @@ import Image3 from '../../assets/images/celltowerfromabove.png';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import PreloadImages from '../../components/PreloadImages';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const CellTowerTrainingPortfolio = () => {
   return (
@@ -16,6 +17,10 @@ const CellTowerTrainingPortfolio = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-12 text-gradient"><br></br>
             Cell Tower Repair Training in Virtual Reality <br></br>
           </h1>
+
+          <div className="mb-10">
+            <StoryLink chapter="cell-tower" label="They recommended we climb a real one first" />
+          </div>
 
           <div className="md:flex md:flex-row md:justify-center">
             <div className="md:w-1/2 text-left px-4 mb-6">

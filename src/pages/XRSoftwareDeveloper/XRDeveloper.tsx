@@ -9,6 +9,7 @@ import ProjectImage from '../../assets/images/OpenFlowIcon.png';
 import ProjectImage2 from '../../assets/images/CellTowerIcon.png';
 import ProjectImage3 from '../../assets/images/OVIN.png';
 import BackButton from '../../components/BackButton';
+import StoryLink from '../../components/StoryLink';
 
 const projects = [
   {
@@ -52,6 +53,11 @@ const XRDeveloper = () => {
           <motion.div variants={headerVariants} initial="hidden" animate="visible">
             <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">XR Projects</h1>
             <p className="text-sm text-zinc-500 font-mono mt-1">Virtual reality simulations for engineering and industry education</p>
+            <StoryLink
+              chapter="xr-lab"
+              label="Nobody was teaching this yet, which was the point"
+              className="mt-3"
+            />
           </motion.div>
 
           <motion.div
