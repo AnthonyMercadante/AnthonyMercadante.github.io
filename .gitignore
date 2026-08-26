@@ -53,6 +53,22 @@ Thumbs.db
 /src/assets/images/IMG_*.heic
 /src/assets/images/IMG_*.JPG
 /src/assets/images/IMG_*.jpg
+# iPhone originals behind the XR Lab, research and 2025 photographs. The screen
+# grabs arrived as PNG and the .MOV clips are 4K — IMG_3942.MOV alone is 306 MB,
+# three times GitHub's per-file ceiling.
+/src/assets/images/IMG_*.PNG
+/src/assets/*.MOV
+/src/assets/*.mov
+# Photos that came off the phone with a UUID or a Messages-export name rather
+# than an IMG_ number. Listed individually because a glob broad enough to catch
+# them would also swallow the project artwork in the same directory.
+/src/assets/images/69463059643__E5D901B1-134B-45C1-B7B3-C91D1434C9EB.HEIC
+/src/assets/images/70888593991__20978BA5-DD93-436A-AC5C-BC4CFA906688.HEIC
+/src/assets/images/1C879EC4-C420-4AB1-B153-1202384C6AEF.JPG
+/src/assets/images/2c932416-8734-4763-8e34-b8d5c3834d70.JPG
+/src/assets/images/FBDC9C68-A4F3-4C2F-9E1D-62822431AEEE.JPG
+/src/assets/images/FF68515B-EB8A-49A3-ACFA-3D7AB27AEDF7.jpeg
+/src/assets/images/e11836a0-c8de-4714-8e77-3952c8953757.JPG
 
 # Project assistant skills
 .claude/*
