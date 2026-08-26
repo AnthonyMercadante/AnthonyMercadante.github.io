@@ -61,8 +61,15 @@ export interface Clip {
   slug: string;
   title: string;
   when: string;
-  duration: string;
+  /** Read off the encoded file. Absent for the clips hosted on YouTube. */
+  duration?: string;
   note: string;
+  /**
+   * Set when the source file was too large to keep in `public/story/` and lives
+   * on YouTube instead. The player embeds rather than serving a local file, and
+   * no derivative or poster frame exists for these.
+   */
+  youtubeId?: string;
   /** Square social-format video vs standard widescreen. */
   square?: boolean;
   /**
@@ -1003,19 +1010,21 @@ export const chapters: Chapter[] = [
     links: [{ label: 'The cell tower simulator', to: '/CellTower' }],
   },
   {
-    id: 'flood-room',
-    era: 'March 2023',
-    railLabel: 'Flood',
-    title: 'The Flood Room',
-    subtitle: 'A side project of my own, running alongside the tower.',
+    id: 'raethexn',
+    era: 'March – June 2023',
+    railLabel: 'Raethexn',
+    title: 'Raethexn Technologies',
+    subtitle: 'Founded as an XR studio, and run in the evenings alongside the day job.',
     accent: 'sky',
     paragraphs: [
-      'Running in parallel with the tower, on my own time under **Raethexn Technologies**, was a second climbing experience that had nothing to do with the college. A room fills with water. You climb to stay above it. That is the whole mechanic, and it turns out to be enough.',
+      'I founded **Raethexn Technologies** in 2023, and it started as an XR company. The premise was the one the tower had already proved: training that is expensive, slow or genuinely dangerous to run for real can be rehearsed in a headset instead, and somebody has to build those. Everything below ran in parallel with the college work, in evenings, and none of it was Mohawk\'s.',
+      'The first thing was a climbing experience of my own. A room fills with water. You climb to stay above it. That is the whole mechanic, and it turns out to be enough.',
       'It came out of **Physical: 100**, which was airing that winter — and not for the reason you would guess. Building the tower had taught me something nobody warns you about: climbing in VR means holding your arms above your head, hand over hand, for minutes at a time, and it is genuinely hard work. Ten minutes in a headset and your shoulders know about it the next day. The show was built entirely around that kind of endurance, so the shape it suggested — a physical trial, a rising clock, no way out but up — was one the medium was already good at without anybody having noticed.',
-      'The first clip is the water being built in the editor, untextured and flat orange, pouring out of a duct with the ladder already standing in the corner. The second is five days later, from inside the headset, one hand closed on a rung in the dark. Those two clips are the whole of what survived.',
+      'The first clip below is the water being built in the editor, untextured and flat orange, pouring out of a duct with the ladder already standing in the corner. The second is five days later, from inside the headset, one hand closed on a rung in the dark.',
+      'By June there was a real one: a workplace-training demo for **Purolator**, which is the studio doing the thing it was founded to do rather than a proof to myself that it could. The company has changed shape a great deal since — it is where the AI and memory work lives now — but it started here, with a headset and a training problem.',
     ],
     photos: [],
-    clips: ['flood-room-water-sim', 'flood-room-in-headset'],
+    clips: ['flood-room-water-sim', 'flood-room-in-headset', 'purolator-training'],
   },
   {
     id: 'printers',
@@ -1119,7 +1128,7 @@ export const chapters: Chapter[] = [
       'Then the job market. The AI boom was in full swing and the entry level was brutal. It took seven months to find work in my field, and seven months is a long time to be told nothing at all.',
       'So I did what I have done at every other point in this story, which is learn something and try to make it pay. One of those things was turning my machine into a crypto miner. The screenshot below is honest about the scale of it: two rigs, four devices, an estimate of one dollar sixty a day. It was not a plan. It was a refusal to sit still.',
       'Another was going back to making visuals for DJs — programmatically this time, driven by the audio itself, which quietly pulled the music years, the graphics work and the code into one thing. The clip below is that running on a monitor in March 2025.',
-      'And to break up the applications I worked on a game, **Void**. Sending a hundred applications into silence needs an antidote.',
+      'And to break up the applications I worked on a game, **Void**. It was already running before any of this started — the playthrough below was recorded in December 2024 — but sending a hundred applications into silence needs an antidote, and it became one.',
       'In June I finished my last outstanding course and graduated with two diplomas. The last two photographs are that day: crossing the stage, and standing in the lobby afterwards holding both of them open.',
     ],
     photos: [
@@ -1130,7 +1139,7 @@ export const chapters: Chapter[] = [
       'convocation-stage',
       'two-diplomas',
     ],
-    clips: ['generative-visuals'],
+    clips: ['void-playthrough', 'generative-visuals'],
     links: [{ label: 'Void', to: '/Games/Void' }],
   },
   {
@@ -1333,6 +1342,22 @@ export const clips: Clip[] = [
     square: true,
     note:
       'Five days later, captured from inside a Quest: a tracked hand closed on the rung, the ladder running up out of frame, racking and pipework in the dark on either side. Eleven seconds is enough to know whether a climb feels like a climb.',
+  },
+  {
+    slug: 'purolator-training',
+    title: 'Purolator workplace training',
+    when: 'June 9, 2023',
+    youtubeId: 'cVkQ1PhlYsA',
+    note:
+      'A VR workplace-training demo for **Purolator**, and the clearest surviving picture of what Raethexn was set up to do in 2023: take the training that is expensive, slow or hazardous to run for real, and rehearse it in a headset instead. The recording turned up years later in Google Drive, too large to sit in this archive with everything else, so it lives on YouTube.',
+  },
+  {
+    slug: 'void-playthrough',
+    title: 'Void — playthrough',
+    when: 'December 2024',
+    youtubeId: '1FKdzQ8HbpU',
+    note:
+      'A full run through the alpha, recorded before the seven months of applications had properly begun — which is the honest date on Void. It was already underway when the job market closed; it just became far more useful to have afterwards.',
   },
   {
     slug: 'kinect-kiosk',

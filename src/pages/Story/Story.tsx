@@ -91,6 +91,7 @@ const structuredData = {
   hasOccupation: [
     { '@type': 'Occupation', name: 'Audio Engineer and Music Producer', occupationalCategory: 'Music', description: 'Active 2016–2020 as Synth Rider (retro/synthwave) and M E R C S (bass music). Studio work in Toronto, and in Los Angeles in December 2018 with producer Daxz (Jahmar Carter).' },
     { '@type': 'Occupation', name: 'XR Developer', occupationalCategory: 'Software Engineering', description: 'Mohawk College XR Department, from January 2023. Built a VR cell tower climbing and repair simulator with Korol Contracting, demonstrated at the STAC conference in March 2023, and an electric-vehicle careers experience for the Ontario Vehicle Innovation Network (OVIN). Departmental lead on spatial and binaural audio.' },
+    { '@type': 'Occupation', name: 'Founder, Raethexn Technologies', occupationalCategory: 'Software Engineering', description: 'Founded Raethexn Technologies in 2023 as an XR studio building simulation and workplace training, run alongside the college work — including a climbing experience of his own and a VR workplace-training demo for Purolator in June 2023. The studio has since moved to applied AI systems and memory infrastructure, including OpenMemory.' },
     { '@type': 'Occupation', name: 'Applied Researcher', occupationalCategory: 'Machine Learning', description: 'Mohawk College IdeaWorks, 2023–2024. Trained an aircraft identification model from scratch, without cloud infrastructure or a pretrained backbone, with Professor Steven Adams. Interviewed by CHCH in February 2024.' },
     { '@type': 'Occupation', name: 'Software and AI Engineer', occupationalCategory: 'Software Engineering', description: 'From 2020 onward. Built a real estate conversational agent against the OpenAI API in 2023, which led to an engineering role at basl.ai connecting it to live listing data. AI engineer at Clarity from July 2025.' },
   ],
@@ -213,7 +214,8 @@ const Story = () => {
             <p>
               This is the long version, assembled from what survived: seventy-three photographs
               pulled off old phones, eleven audio files that outlived the laptops they were made on,
-              and eight video clips. Every date here was recovered from file metadata rather than
+              and ten video clips, two of them too large to keep here and parked on YouTube instead.
+              Every date here was recovered from file metadata rather than
               from memory, so the timeline is the machine&apos;s account, not mine — and in one case
               it reunited a photograph and a recording from the same night, seven years after both
               were forgotten.
@@ -400,31 +402,43 @@ const Story = () => {
                   <div className="grid grid-cols-1 gap-3">
                     {chapterClips.map((clip) => (
                       <div key={clip.slug} className="glass-card overflow-hidden">
-                        {/*
-                          Phone-shot vertical clips get a fixed height and their
-                          natural width instead of filling the column: 9:16 across
-                          a text column is absurd, and cropping to 16:9 throws
-                          away most of the frame.
-                        */}
-                        <video
-                          controls
-                          preload="none"
-                          playsInline
-                          poster={posterUrl(clip.slug)}
-                          className={
-                            clip.portrait
-                              ? 'mx-auto h-[min(70vh,520px)] max-w-full bg-black'
-                              : `w-full bg-black object-cover ${clip.square ? 'aspect-square' : 'aspect-video'}`
-                          }
-                          src={videoUrl(clip.slug)}
-                        >
-                          <track kind="captions" />
-                        </video>
+                        {clip.youtubeId ? (
+                          /* Too large for public/story/, so it is embedded rather than served. */
+                          <iframe
+                            className="w-full aspect-video bg-black"
+                            src={`https://www.youtube-nocookie.com/embed/${clip.youtubeId}`}
+                            title={clip.title}
+                            frameBorder="0"
+                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        ) : (
+                          /*
+                            Phone-shot vertical clips get a fixed height and their
+                            natural width instead of filling the column: 9:16 across
+                            a text column is absurd, and cropping to 16:9 throws
+                            away most of the frame.
+                          */
+                          <video
+                            controls
+                            preload="none"
+                            playsInline
+                            poster={posterUrl(clip.slug)}
+                            className={
+                              clip.portrait
+                                ? 'mx-auto h-[min(70vh,520px)] max-w-full bg-black'
+                                : `w-full bg-black object-cover ${clip.square ? 'aspect-square' : 'aspect-video'}`
+                            }
+                            src={videoUrl(clip.slug)}
+                          >
+                            <track kind="captions" />
+                          </video>
+                        )}
                         <div className="p-4">
                           <div className="flex items-baseline gap-2 flex-wrap">
                             <h4 className="text-sm font-medium text-white">{clip.title}</h4>
                             <span className="text-[11px] font-mono text-zinc-600 tabular-nums ml-auto">
-                              {clip.duration}
+                              {clip.duration ?? 'YouTube'}
                             </span>
                           </div>
                           <p className={`text-[11px] font-mono mt-1 ${a.text} opacity-70`}>{clip.when}</p>

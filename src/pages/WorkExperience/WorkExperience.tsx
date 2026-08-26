@@ -63,8 +63,8 @@ const workExperiences: WorkEntry[] = [
     ],
     skills: ['GCP', 'Python', 'Laravel', 'Vue', 'Node.js', 'PostgreSQL', 'RAG', 'DevOps'],
     origin: {
-      note: 'Started in the year between the startup folding and the next job.',
-      chapter: 'the-lean-year',
+      note: 'Founded in 2023 as an XR studio; the applied-AI work came later.',
+      chapter: 'raethexn',
     },
   },
   {

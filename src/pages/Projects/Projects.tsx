@@ -30,7 +30,7 @@ const featuredProjects = [
     tags: ['ICP', 'AI Memory', 'Knowledge Graph'],
     url: 'https://github.com/Raethexn-Technologies/OpenMemory',
     studio: true,
-    chapter: 'clarity',
+    chapter: 'raethexn',
   },
   {
     name: 'AircraftIdentificationAI',
