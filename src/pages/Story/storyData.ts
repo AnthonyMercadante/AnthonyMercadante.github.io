@@ -8,9 +8,9 @@
  * timeline without needing the rest of the codebase.
  *
  * Media lives in public/story/ and is referenced by URL, never imported. The
- * originals are 860 MB of 192 kHz WAVs and 3264 px phone photos; routing them
- * through webpack would be a disaster, and two of them exceed GitHub's 100 MB
- * per-file ceiling. See .gitignore.
+ * originals are over a gigabyte of 192 kHz WAVs, 4032 px phone photos and 4K
+ * video; routing them through webpack would be a disaster, and several of them
+ * exceed GitHub's 100 MB per-file ceiling. See .gitignore.
  *
  * Every date below was recovered from EXIF or file metadata rather than memory.
  * Photo timestamps are local Eastern time; the EXIF is stored as UTC.
@@ -65,6 +65,23 @@ export interface Clip {
   note: string;
   /** Square social-format video vs standard widescreen. */
   square?: boolean;
+  /**
+   * Shot vertically on a phone. Rendered at a fixed height rather than full
+   * width, because a 9:16 clip stretched across the column is absurd and
+   * cropping it to 16:9 throws away most of the frame.
+   */
+  portrait?: boolean;
+}
+
+/**
+ * A pointer from a chapter out to the project page that covers the same work in
+ * technical detail. The story tells you why something was built; these go to
+ * what was actually built.
+ */
+export interface ChapterLink {
+  label: string;
+  /** Internal route, e.g. '/CellTower'. */
+  to: string;
 }
 
 export interface Chapter {
@@ -85,12 +102,23 @@ export interface Chapter {
   tracks?: string[];
   /** Video slugs to embed inside this chapter. */
   clips?: string[];
+  /** Project pages covering the work this chapter describes. */
+  links?: ChapterLink[];
 }
 
 /** The camera behind almost every photo in the 2012–2014 chapters. */
 export const ARCHIVE_CAMERA = 'Samsung Galaxy Note II (SGH-T889V)';
 
 export const photos: Record<string, Photo> = {
+  'showing-my-uncle': {
+    slug: 'showing-my-uncle',
+    date: '2009-01-01',
+    dateLabel: 'c. 2009',
+    title: 'Showing my uncle',
+    caption:
+      'A photograph of a photograph, which is why the file metadata says May 2024 — the print is far older than the scan of it. Me as a teenager on the couch with an HP laptop across my knees and my uncle stretched out beside me, almost certainly being shown whatever I had just worked out how to make the thing do. It sits somewhere around the first build, and it is the earliest image in this archive.',
+    wide: true,
+  },
   'den-first-corner': {
     slug: 'den-first-corner',
     date: '2012-12-25',
@@ -381,8 +409,319 @@ export const photos: Record<string, Photo> = {
     dateLabel: 'January 4, 2023',
     title: 'The XR Lab wall',
     caption:
-      'January 4, 2023, in Mohawk College\'s XR Lab. After a short stint supporting the manager of funding proposals at IdeaWorks, I landed in the XR Department as an XR Developer. The work sat exactly at the intersection I had been moving toward: part software, part game development, part education, with the strange and immediate joy of making something people could step inside.',
+      'January 4, 2023, in Mohawk College\'s XR Lab — the first week of the job, as an XR Developer. The work sat exactly at the intersection I had been moving toward: part software, part game development, part education, with the strange and immediate joy of making something people could step inside.',
     wide: true,
+  },
+
+  // ── IdeaWorks ─────────────────────────────────────────────
+  'ideaworks-cubicles': {
+    slug: 'ideaworks-cubicles',
+    date: '2023-01-26',
+    dateLabel: 'January 26, 2023 · 2:11 p.m.',
+    title: 'The floor nobody sat on',
+    caption:
+      'The IdeaWorks floor: banks of cubicles against an orange wall, every monitor live, every chair empty, and a printed notice taped to each divider. Most of the developers remoted into these machines from home, and the standing instruction was to touch nothing — no keyboard, no mouse, no power button — because somebody was on the other end of all of it. A room full of computers being used by people who were not in the room.',
+  },
+
+  // ── The XR Lab ────────────────────────────────────────────
+  'xr-desk-day-one': {
+    slug: 'xr-desk-day-one',
+    date: '2023-01-05',
+    dateLabel: 'January 5, 2023 · 10:30 a.m.',
+    title: 'Before anything was on it',
+    caption:
+      'My desk in the XR Lab in the first week of the job: two Dell panels on an arm, a keyboard, a Quest 2 and its controllers still factory-white, and Windows on the right-hand monitor twenty per cent of the way through a blue-screen restart. Everything in the rest of this chapter got built on top of this.',
+  },
+  'xr-desk-assembled': {
+    slug: 'xr-desk-assembled',
+    date: '2023-01-05',
+    dateLabel: 'January 5, 2023 · 11:56 a.m.',
+    title: 'Eighty-six minutes later',
+    caption:
+      'The same desk, the same morning, eighty-six minutes after the photograph before it. A laptop with Unity open in the middle, three headsets spread across the surface, a tower under the desk, and both panels full. The lab ran at roughly this tempo for the next two years.',
+  },
+  'xr-immersive-room': {
+    slug: 'xr-immersive-room',
+    date: '2023-01-06',
+    dateLabel: 'January 6, 2023 · 12:57 p.m.',
+    title: 'The projection wall',
+    caption:
+      'A curved projection wall down one side of the lab with a scene running across it, and a colleague out on the open floor in a headset, a controller in each hand. The point of the wall is that everyone else in the room can see what the person inside is seeing — which is the only practical way to argue about whether an interaction feels right.',
+  },
+  'xr-printed-head-rig': {
+    slug: 'xr-printed-head-rig',
+    date: '2023-01-11',
+    dateLabel: 'January 11, 2023 · 3:08 p.m.',
+    title: 'A head that is not a head',
+    caption:
+      'A Quest 2 sitting on a printed stand with a controller balanced across it. The stand holds the headset upright and keeps its proximity sensor convinced that somebody is wearing it, so a build can run and be tested without pulling a headset on and off two hundred times a day. We printed our own tooling because nobody was selling it yet.',
+  },
+  'xr-field-recorder': {
+    slug: 'xr-field-recorder',
+    date: '2023-01-20',
+    dateLabel: 'January 20, 2023 · 4:07 p.m.',
+    title: 'The recorder',
+    caption:
+      'A Zoom H1n held over a backlit laptop keyboard. Bought so we could capture our own source material rather than licence it, and the moment the audio work in this story came back around — four years of signal chain, pointed at spatial sound inside a headset.',
+  },
+
+  // ── The cell tower project ────────────────────────────────
+  'xr-studio-grows': {
+    slug: 'xr-studio-grows',
+    date: '2023-02-27',
+    dateLabel: 'February 27, 2023 · 5:04 p.m.',
+    title: 'The studio fills up',
+    caption:
+      'Late February 2023. The dev room has gone from one desk to a run of them down two walls: six panels lit, headsets parked at every station, a backpack on the floor, and one colleague still working with a driving scene up on her monitors. The team and the hardware grew at the same rate, which was fast.',
+  },
+  'xr-studio-panorama': {
+    slug: 'xr-studio-panorama',
+    date: '2023-03-07',
+    dateLabel: 'March 7, 2023 · 2:15 p.m.',
+    title: 'The dev room, entire',
+    caption:
+      'A panorama of the whole dev room in the middle of the tower project: a profiler trace on the far-left panel, the tower scene, a build labelled PROTOTYPE, headsets at every seat — and, standing on the desk between two monitors, my own 3D printer. I brought it in to tinker with and never took it home.',
+    wide: true,
+  },
+  'tower-in-engine': {
+    slug: 'tower-in-engine',
+    date: '2023-04-03',
+    dateLabel: 'April 3, 2023 · 12:06 a.m.',
+    title: 'Video memory exhausted',
+    caption:
+      'The tower scene rendered in the editor just after midnight: lattice mast, mounted dishes and drums, a service truck on the gravel pad, real trees closing in around it. Along the top the engine is reporting that video memory has been exhausted — 647 MB over budget. Both halves of this image are the job.',
+    wide: true,
+  },
+  'stac-booth-build': {
+    slug: 'stac-booth-build',
+    date: '2023-03-27',
+    dateLabel: 'March 27, 2023 · 1:17 p.m.',
+    title: 'Building the booth',
+    caption:
+      'Setting up at the STAC conference the day before doors opened: two towers, a monitor running the tower scene, four Quests laid out along the table with wipes and sanitiser between them, and a colleague down on the floor sorting cable. A booth build is ninety per cent power and ten per cent everything else.',
+  },
+  'stac-team': {
+    slug: 'stac-team',
+    date: '2023-03-28',
+    dateLabel: 'March 28, 2023 · 8:58 a.m.',
+    title: 'Climb with us',
+    caption:
+      'Three of us in front of the booth on the morning it opened. The screen behind reads *Climb With Us in Virtual Reality* — Mohawk College and Korol Contracting — and the orange board on the right is the pitch for The Ultimate Tower Experience. I am the one in the XR Developer shirt.',
+    wide: true,
+  },
+  'stac-booth': {
+    slug: 'stac-booth',
+    date: '2023-03-28',
+    dateLabel: 'March 28, 2023 · 8:59 a.m.',
+    title: 'The booth',
+    caption:
+      'The same booth a minute later, from the aisle: headsets in a row on a skirted table, continuing-education banners on either side, and behind the drape a poster crediting the STAC committee. We were there to show an entire trade what its training might look like, and to advertise the college\'s brand new micro-credential in tower work.',
+  },
+
+  // ── Printers, and a lab that kept growing ─────────────────
+  'print-bed-batch': {
+    slug: 'print-bed-batch',
+    date: '2023-03-09',
+    dateLabel: 'March 9, 2023 · 8:57 a.m.',
+    title: 'A normal morning',
+    caption:
+      'A bed full of small black parts at nine in the morning — collars, bushings, threaded sockets, brackets — with a headset sitting behind the printer. Nothing here is a showpiece. This is what continuous printing actually looks like: an ordinary batch of the pieces something else needed in order to exist.',
+  },
+  'makerspace-printers': {
+    slug: 'makerspace-printers',
+    date: '2023-04-12',
+    dateLabel: 'April 12, 2023 · 2:27 p.m.',
+    title: 'The makerspace catches up',
+    caption:
+      'A large-format printer alongside an enclosed Wanhao Duplicator, both parked on rolling tool chests in the college learning commons with students working at tables behind them. The makerspace improved dramatically across that year, and it changed what the XR Lab was able to ask for.',
+  },
+  'printed-axe': {
+    slug: 'printed-axe',
+    date: '2023-07-25',
+    dateLabel: 'July 25, 2023 · 10:11 a.m.',
+    title: 'One very large axe',
+    caption:
+      'Holding a printed axe roughly as long as my arm span, in blue PLA, in the makerspace. It came off the bed in sections and was assembled afterwards. By this point the question had stopped being whether we could print a thing and become how large we felt like printing it.',
+  },
+  'varjo-and-haptics': {
+    slug: 'varjo-and-haptics',
+    date: '2023-03-31',
+    dateLabel: 'March 31, 2023 · 11:34 a.m.',
+    title: 'Kit above the Quests',
+    caption:
+      'Shot off a monitor running a webcam capture: me with the phone up, and a colleague in a high-end headset and a haptic vest with the projection wall curving away behind. Hardware several tiers above the Quests, being tried out because it had arrived and somebody had to find out what it did.',
+  },
+  'omni-treadmill': {
+    slug: 'omni-treadmill',
+    date: '2023-06-19',
+    dateLabel: 'June 19, 2023 · 12:45 p.m.',
+    title: 'The treadmill',
+    caption:
+      'An omnidirectional VR treadmill in the corner of the lab — harness ring, tracked base, low-friction plate, and the pair of special overshoes on the floor next to it. New tech came out, we bought it, and then we found out what it was actually good for by building on it.',
+  },
+  'another-station': {
+    slug: 'another-station',
+    date: '2023-04-25',
+    dateLabel: 'April 25, 2023 · 2:55 p.m.',
+    title: 'Another station',
+    caption:
+      'A fresh triple-monitor corner desk, still on the default wallpaper, with a whiteboard behind it working through polyhexes on a grid. Empty stations kept appearing because people kept joining. This is what a department growing looks like from the inside.',
+  },
+  'home-studio-2023': {
+    slug: 'home-studio-2023',
+    date: '2023-04-18',
+    dateLabel: 'April 18, 2023 · 7:50 p.m.',
+    title: 'Home, that spring',
+    caption:
+      'My room in April 2023: a light wood studio desk, monitors on stands either side of the panel, a DJ controller on a riser, a guitar in the corner, broadband absorbers on the walls, and a Quest sitting exactly where a microphone used to. The basement corner from 2012, eleven years and a great deal of better hardware later.',
+    wide: true,
+  },
+
+  // ── OVIN ──────────────────────────────────────────────────
+  'ovin-robot-arm': {
+    slug: 'ovin-robot-arm',
+    date: '2023-04-26',
+    dateLabel: 'April 26, 2023 · 9:03 p.m.',
+    title: 'The OVIN garage',
+    caption:
+      'A robot arm the size of a building lifting a car over a facade whose doors read Testing Facility, Hangar Showroom, Garage and Track. Along the bottom the editor is warning that the mesh exceeds the polygon limit for a convex hull. The doors are labelled in plain words because the audience was eleven years old.',
+  },
+  'ovin-islands': {
+    slug: 'ovin-islands',
+    date: '2023-07-07',
+    dateLabel: 'July 7, 2023 · 3:51 p.m.',
+    title: 'Islands',
+    caption:
+      'The shape of the OVIN experience: separate islands floating in a blue void — a gas station, the garage with its robot arm, and a sign carrying the OVIN and Ontario wordmarks — that you travel between rather than walk between. Built for the Ontario Vehicle Innovation Network to make the electric vehicle industry look like somewhere worth working.',
+    wide: true,
+  },
+  'mohawk-camaro': {
+    slug: 'mohawk-camaro',
+    date: '2023-06-22',
+    dateLabel: 'June 22, 2023 · 11:09 a.m.',
+    title: 'Research trip',
+    caption:
+      'A Camaro ZL1 in Mohawk livery, up in the college automotive shop between the hoists with the rest of the fleet behind it. We were shown around the shop so the cars and engine parts in the experience could be modelled from real ones rather than approximated.',
+  },
+  'ovin-engine-model': {
+    slug: 'ovin-engine-model',
+    date: '2023-06-28',
+    dateLabel: 'June 28, 2023 · 4:48 p.m.',
+    title: 'Every part, separately',
+    caption:
+      'An engine on screen mid-texturing, material library running along the bottom — headers, belts, pulleys, intake, alternator, all modelled as individual parts rather than as one object. It had to come apart, because a child in a headset was going to take it apart.',
+  },
+  'quest-pyramid': {
+    slug: 'quest-pyramid',
+    date: '2023-07-27',
+    dateLabel: 'July 27, 2023 · 11:08 a.m.',
+    title: 'Enough for a classroom',
+    caption:
+      'Twenty-odd Meta Quest 2s, still sealed, stacked into a pyramid on the floor of the lab before anybody was allowed to open them. OVIN funded enough hardware to run a whole classroom at once, which is the difference between a demo and a programme.',
+  },
+  'headset-cabinets': {
+    slug: 'headset-cabinets',
+    date: '2023-06-19',
+    dateLabel: 'June 19, 2023 · 12:45 p.m.',
+    title: 'Where they lived',
+    caption:
+      'The headsets in their cabinets — Mohawk-branded straps, hung in rows, charging. On top of the cabinets sit a printed skull, a moai and a Lego head, which is roughly the correct ratio of serious equipment to printer test pieces for a room like this one.',
+  },
+  'vrto-2023': {
+    slug: 'vrto-2023',
+    date: '2023-07-19',
+    dateLabel: 'July 19, 2023 · 11:23 a.m.',
+    title: 'VRTO 2023',
+    caption:
+      'Marquee letters spelling VRTO 2023 on a polished floor, in a room overlooking a half-built Toronto tower and its crane. The other half of a job like this is going to see what everybody else is building, before you find out the hard way that you have built it too.',
+  },
+
+  // ── Applied research ──────────────────────────────────────
+  'chch-interview': {
+    slug: 'chch-interview',
+    date: '2024-02-13',
+    dateLabel: 'February 13, 2024 · 12:45 p.m.',
+    title: 'On camera',
+    caption:
+      'Being interviewed in front of a Mohawk IdeaWorks banner, camera on sticks, microphone held out on the end of an arm. We had made enough progress on the aircraft identification research that the local news came in to ask about it.',
+  },
+  'research-team': {
+    slug: 'research-team',
+    date: '2024-02-13',
+    dateLabel: 'February 13, 2024 · 12:47 p.m.',
+    title: 'The research team',
+    caption:
+      'The team two minutes later, with the crew\'s camera still standing between us and the IdeaWorks and Engineering Technology banners on the wall. Applied research at a college looks like this: a meeting room, a handful of students, and a professor willing to point them at something genuinely hard.',
+    wide: true,
+  },
+  'chch-lower-third': {
+    slug: 'chch-lower-third',
+    date: '2024-02-13',
+    dateLabel: 'February 13, 2024 · 6:51 p.m.',
+    title: 'Software Development Student',
+    caption:
+      'The broadcast that evening on CHCH, name and title along the bottom of the frame. Being made to explain the work to people outside it is its own useful test — a model you cannot describe in twenty seconds is a model you may not fully understand.',
+    wide: true,
+  },
+  'chch-team-on-air': {
+    slug: 'chch-team-on-air',
+    date: '2024-02-13',
+    dateLabel: 'February 13, 2024 · 10:41 p.m.',
+    title: 'On air',
+    caption:
+      'The whole team on the broadcast, thumbs up in front of the IdeaWorks banner. A photograph of a television screen, which is still how most people keep a copy of anything.',
+    wide: true,
+  },
+
+  // ── 2025 ──────────────────────────────────────────────────
+  'home-office-2025': {
+    slug: 'home-office-2025',
+    date: '2025-01-07',
+    dateLabel: 'January 7, 2025 · 3:59 p.m.',
+    title: 'The room, 2025',
+    caption:
+      'January 2025: two desks meeting in the corner, track lighting and an LED strip overhead, absorbers on the walls, a headset up on a shelf, a microphone on a boom arm, and a chart running on one panel while an editor runs on the other. Sixteen years on from the first build, and it is recognisably the same room, rebuilt.',
+  },
+  'home-office-treadmill': {
+    slug: 'home-office-treadmill',
+    date: '2025-01-07',
+    dateLabel: 'January 7, 2025 · 11:18 p.m.',
+    title: 'Standing desk, treadmill under it',
+    caption:
+      'The same room later the same night, from the doorway: the second desk raised to standing height with a walking treadmill underneath it, and code up on the panel above. Most of the seven months of job applications happened in this room.',
+  },
+  'mining-rig': {
+    slug: 'mining-rig',
+    date: '2025-01-28',
+    dateLabel: 'January 28, 2025 · 3:13 p.m.',
+    title: 'One sixty a day',
+    caption:
+      'Mining software running across two terminal panes with the dashboard overlaid on top: two active rigs, four active devices, an unpaid balance of one Canadian cent, and an estimate of CA$1.60 a day. Kept here at its true scale. It was never going to work. It was a refusal to sit still while nobody was answering.',
+  },
+  'void-city': {
+    slug: 'void-city',
+    date: '2025-03-12',
+    dateLabel: 'March 12, 2025 · 12:49 p.m.',
+    title: 'Void',
+    caption:
+      'A city built out of coloured blocks seen from above, graded from violet through blue into green, with a single red marker somewhere near the middle of it. Work on the game **Void**, made in the gaps between job applications — because sending a hundred applications into silence needs an antidote.',
+    wide: true,
+  },
+  'convocation-stage': {
+    slug: 'convocation-stage',
+    date: '2025-06-19',
+    dateLabel: 'June 19, 2025 · 3:10 p.m.',
+    title: 'Crossing the stage',
+    caption:
+      'Convocation, shot from up in the seats: gown on, crossing in front of the hooding party while the row behind waits its turn. Ten years after walking out of the first programme at George Brown.',
+  },
+  'two-diplomas': {
+    slug: 'two-diplomas',
+    date: '2025-06-19',
+    dateLabel: 'June 19, 2025 · 4:24 p.m.',
+    title: 'Two diplomas',
+    caption:
+      'An hour later, in the lobby, holding both of them open under a screen reading Welcome to Mohawk College. Two programmes finished; three left before them. The order those happened in turned out to matter far less than I feared it would at nineteen.',
   },
 };
 
@@ -398,8 +737,9 @@ export const chapters: Chapter[] = [
       'The summer I was thirteen, I built a computer from scratch. Not a kit and not an upgrade — a bare case, a motherboard still in its anti-static bag, and the very specific terror of seating a processor for the first time with no idea whether the force you are applying is correct or catastrophic.',
       'By the time that machine settled into its final form it carried 16 GB of RAM and an NVIDIA GeForce GTX 480, and mechanical drives with actual spinning platters inside them. You knew it was working because you could hear it and feel it through the desk.',
       'It booted. That is the entire story, and it rearranged everything. A pile of components I had assembled on a carpet had become a working system that did what I asked it to. I have been chasing that exact feeling ever since, and every job I have held since is a version of it.',
+      'The only picture that survives from anywhere near this is a print, rephotographed years later: me on a couch with a laptop across my knees and my uncle beside me, almost certainly being shown whatever I had just worked out how to do. That is the posture the rest of this page is written in.',
     ],
-    photos: [],
+    photos: ['showing-my-uncle'],
   },
   {
     id: 'salvage',
@@ -600,18 +940,196 @@ export const chapters: Chapter[] = [
     photos: ['hand-coded-learning-2022'],
   },
   {
+    id: 'ideaworks',
+    era: '2022 – 2023',
+    railLabel: 'IdeaWorks',
+    title: 'IdeaWorks',
+    subtitle: 'A floor full of desks nobody was allowed to touch.',
+    accent: 'orange',
+    paragraphs: [
+      'Before the XR job there was a short stint at **IdeaWorks**, Mohawk\'s applied research office, supporting the manager of funding proposals. It was administrative work sitting right at the edge of interesting work: reading what other people were proposing to build, and watching how they argued for the money to build it.',
+      'The floor looked like the photograph below and almost always did. Most of the developers remoted into those cubicles from home, so the machines were awake and the chairs were empty. The instruction was to touch nothing — not a keyboard, not a mouse, not a power button — because somebody was on the other end of every one of them.',
+      'The photograph carries a timestamp of 26 January 2023, a few weeks after I had already moved across to the XR Department. The floor had not changed. It never really did.',
+    ],
+    photos: ['ideaworks-cubicles'],
+  },
+  {
     id: 'xr-lab',
-    era: 'January 2023 –',
+    era: 'January 2023',
     railLabel: 'XR Lab',
     title: 'Into the XR Lab',
-    subtitle: 'The most fun job I have had: games, education, and software in the same room.',
+    subtitle: 'Nobody was teaching this yet, which turned out to be the point.',
     accent: 'violet',
     paragraphs: [
-      'In January 2023, after a short stint working with the manager of funding proposals at IdeaWorks, I landed a job in Mohawk College\'s XR Department as an XR Developer. It was a sharp turn from learning software remotely to building experiences that other people could actually enter and use.',
-      'The XR Lab felt like the best parts of video games and education meeting in the middle. There was the immediate feedback and playfulness of games, but the purpose was teaching: prototypes, simulations, experiments, and tools that made an idea tangible. The work was technical, but it was also physical and social in a way that ordinary application code rarely is.',
-      'I had spent years moving between hardware, audio, games, philosophy, and software, often wondering whether the path was finally going to converge. In the XR Lab it did. The computer was still a system to understand, but now the result could surround someone, teach them something, and make them want to keep exploring.',
+      'In January 2023 I landed a job in Mohawk College\'s XR Department as an XR Developer. Because of what XR is and what it runs on — headsets, tracked controllers, depth cameras, motion rigs, machines strong enough to drive all of it — the work had to happen in the building. This was still the tail end of the era when everything else had gone remote, and we were required on site. I did not mind for a second.',
+      'The first two desk photographs below are eighty-six minutes apart. At half past ten in the morning there is a bare surface, two Dell panels, a Quest 2 still factory-white, and Windows on the right-hand monitor a fifth of the way through a blue-screen restart. By 11:56 there is a laptop with Unity open, three headsets, a tower underneath and both panels full. That is the tempo of the place in one morning.',
+      'There was no formal education in any of it. XR was new enough that nobody was teaching it, so everything came out of Unity\'s own documentation, the SDK notes from whoever built the device, forum threads and a very great deal of YouTube. It became obvious extremely quickly that the one differentiating skill was whether you could teach yourself something properly and fast. That was the job. That was the whole job.',
+      'For the same reason there was nobody in the department with ten years of experience to sit beside — there was no such person anywhere. Everyone was new to it, including the people selling us the hardware. New kit would come out, we would buy it, and we would find out what it could do by building something with it. It genuinely felt like being early.',
+      'The physical side mattered as much as the code. The lab had 3D printers that were advanced for the time, which meant we could make the objects a mixed-reality scene needed instead of designing around whatever could be bought. That extended to our own tooling: the printed rig below holds a headset upright and keeps its proximity sensor convinced somebody is wearing it, so a build can be run and tested without pulling a headset on and off two hundred times a day.',
+      'And then the music came back. Making spatial audio behave — binaural, properly directional, tracking correctly against head rotation so a sound stays where the world put it when you turn your head — is the same discipline as four years at Metalworks and in rooms on Queen Street, aimed at a different output. Alongside one other developer I became the person the department came to for anything audio-related. The handheld recorder in the photograph from 20 January is a Zoom H1n, bought so we could capture our own source material rather than licence it.',
     ],
-    photos: ['xr-lab-whiteboard-2023'],
+    photos: [
+      'xr-lab-whiteboard-2023',
+      'xr-desk-day-one',
+      'xr-desk-assembled',
+      'xr-immersive-room',
+      'xr-printed-head-rig',
+      'xr-field-recorder',
+    ],
+  },
+  {
+    id: 'cell-tower',
+    era: 'January – March 2023',
+    railLabel: 'Tower',
+    title: 'The Ultimate Tower Experience',
+    subtitle: 'They recommended we climb one first.',
+    accent: 'cyan',
+    paragraphs: [
+      'The department\'s first major project was a VR cell tower simulator, built with **Korol Contracting**. The industry had a recruitment problem: climbing towers is a specialised, dangerous, well-paid trade that very few people were entering, and the training pipeline behind it is long and expensive. The hope was that an experience could do two jobs at once — pull the right people in, and let the wrong people find out early, safely and cheaply, that they did not want to be three hundred feet up a lattice.',
+      'So it was recommended that the developers climb one. Not a three-hundred-foot mast — Korol\'s indoor training tower, which is more than enough to make the point. Harness on, clipped in, actually up it. The video below is a colleague starting his first climb on 27 January 2023, with the rest of us filming from the floor. You cannot fake the part that matters: what the rungs do to your hands, what your body does when you look down, exactly where the fear arrives. That was the thing we were being asked to reproduce.',
+      'Then we built it. The second clip is the terrain and the mast being blocked out in the editor late on a March evening; the still from 3 April is the same scene rendered, with the engine complaining in the corner that video memory has been exhausted — which is roughly what the project felt like most weeks. The square clip is the thing itself, recorded from inside a headset: tracked hands on the rungs, a dish passing on the left, nothing underneath.',
+      'At the end of March we took it to the **STAC** conference and put it in front of the industry. The screen read *Climb With Us in Virtual Reality*, and next to it we were advertising the college\'s brand new micro-credential in tower work. Three of us, a skirted table, a stack of Quests and a lot of sanitising wipes, showing an entire trade what its training might look like.',
+    ],
+    photos: [
+      'xr-studio-grows',
+      'xr-studio-panorama',
+      'tower-in-engine',
+      'stac-booth-build',
+      'stac-team',
+      'stac-booth',
+    ],
+    clips: ['tower-climb-training', 'tower-terrain-build', 'tower-climb-in-headset'],
+    links: [{ label: 'The cell tower simulator', to: '/CellTower' }],
+  },
+  {
+    id: 'printers',
+    era: 'March – July 2023',
+    railLabel: 'Printers',
+    title: 'Printers, Prints, and a Lab That Kept Growing',
+    subtitle: 'I brought my own printer in and never took it home.',
+    accent: 'amber',
+    paragraphs: [
+      'Somewhere in the middle of the tower project my interest in 3D printing stopped being a hobby. I brought my own printer into the dev lab — it is sitting on the desk in the panorama in the previous chapter, between a monitor running the editor and a monitor running the tower — and printed more or less continuously: jigs, mounts, controller adapters, headset stands, props for scenes, and a long tail of things that existed purely because I wanted to know whether they would come off the bed.',
+      'The photograph from the morning of 9 March is a full plate of small black parts. That is a normal run, not a special one.',
+      'The college\'s makerspace grew alongside the lab. By April there was a large-format machine and an enclosed Wanhao parked on tool chests out in the learning commons, and by July we could produce genuinely large objects — the axe I am holding in the photograph from 25 July came off a bed in sections and was assembled afterwards.',
+      'We also built for the lab itself. The vertical screen in the video below stood in the corner on castors with a Kinect depth camera bolted to the top of it, and I made small experiences for it: a screensaver that noticed you and reacted. Nobody asked for that. It got built because the hardware was sitting there.',
+      'Everything kept arriving. An omnidirectional treadmill. Headsets several tiers above the Quests, with haptic vests to go with them. Another triple-monitor station going in because another person had joined. The setup at home moved in step — the photograph from 18 April is my room that spring, with a Quest sitting exactly where a microphone used to.',
+    ],
+    photos: [
+      'print-bed-batch',
+      'makerspace-printers',
+      'printed-axe',
+      'varjo-and-haptics',
+      'omni-treadmill',
+      'another-station',
+      'home-studio-2023',
+    ],
+    clips: ['kinect-kiosk'],
+  },
+  {
+    id: 'ovin',
+    era: 'April – July 2023',
+    railLabel: 'OVIN',
+    title: 'OVIN',
+    subtitle: 'Same tools, audience aged eleven.',
+    accent: 'emerald',
+    paragraphs: [
+      'The next project was **OVIN** — the Ontario Vehicle Innovation Network. Where the tower experience was aimed at adults choosing a trade, this one was aimed at children, and the goal was simple: make the electric vehicle industry look like somewhere you would want to work.',
+      'It was built as a set of islands floating in a void that you travel between rather than walk between — a gas station, a garage with a robot arm swinging over it, a testing facility, a hangar showroom, a track. Doors labelled in plain words, because the audience was eleven.',
+      'The research for it was the best part of the job. We were given a tour of Mohawk\'s aircraft hangar so the hangar in the experience could be a real one — the video below is from inside it, looking out at the airfield — and a tour of the automotive shop, where the college keeps a Camaro in its own livery up between the hoists. The engine in the photograph is what came out of that second visit: every part modelled and textured separately, because a child in a headset was going to pull it apart.',
+      'Because it was built for classrooms, OVIN funded enough hardware to run a whole room at once. Twenty-odd Quest 2s arrived in July and I stacked them into a pyramid on the floor before anyone was allowed to open them, which I regret nothing about. After that they lived in cabinets, charging in rows.',
+      'We went to **VRTO** in Toronto that July as well, which is the other half of a job like this: going to see what everybody else is building, before you find out the hard way that you have built it too.',
+    ],
+    photos: [
+      'ovin-robot-arm',
+      'ovin-islands',
+      'mohawk-camaro',
+      'ovin-engine-model',
+      'quest-pyramid',
+      'headset-cabinets',
+      'vrto-2023',
+    ],
+    clips: ['hangar-tour'],
+    links: [{ label: 'The OVIN experience', to: '/OVIN' }],
+  },
+  {
+    id: 'research',
+    era: '2023 – 2024',
+    railLabel: 'Research',
+    title: 'Applied Research, and the Local News',
+    subtitle: 'Training a model from scratch, on one machine, with nobody to ask.',
+    accent: 'sky',
+    paragraphs: [
+      'Across that year the role changed shape. New students kept joining the team and mentoring them became a real part of what I did — which is a strange thing to be doing eighteen months after teaching yourself the subject off YouTube, and also the fastest way I know to find out what you actually understand.',
+      'Eventually my own coursework won. I dropped to part-time in the lab, which was the right call and still felt like a loss. But it opened the next door: I found I could substitute credits for applied research, and I took it.',
+      'The project, with **Professor Steven Adams**, was to train a model from scratch to identify aircraft from photographs — first that there was an aircraft in the frame at all, then which aircraft it was. *From scratch* means what it says: no cloud, no pretrained backbone handed to us, no course to follow.',
+      'Two things we learned in the first few months are things I now take entirely for granted. The first is how much data a model like that actually needs, which is always an order of magnitude past whatever you assumed. The second is what a GPU does to training time. Moving the work onto one cut our iteration time by something close to a factor of ten — and a factor of ten is not a speed-up, it is a different research process, because you can suddenly afford to be wrong.',
+      'We made enough progress that the local news came in to interview us. The photographs from 13 February 2024 are that afternoon: the crew setting up in a meeting room, the team, and a lower third on CHCH with my name on it reading *Software Development Student*.',
+      'This is where the AI work started for me properly. Everything I do now runs off it.',
+    ],
+    photos: ['chch-interview', 'research-team', 'chch-lower-third', 'chch-team-on-air'],
+    links: [
+      { label: 'Aircraft identification', to: '/AircraftIdentifierAI' },
+      { label: 'Machine learning projects', to: '/MachineLearningProjects' },
+    ],
+  },
+  {
+    id: 'the-bot',
+    era: '2023 – 2025',
+    railLabel: 'The Bot',
+    title: 'Trying to Replace My Sister With a Chatbot',
+    subtitle: 'A joke that turned into a job.',
+    accent: 'fuchsia',
+    paragraphs: [
+      'At the same time I was taking an introductory AI course at the college, and my sister was working as a real estate agent. I thought it would be funny to try to automate her.',
+      'This was early. ChatGPT was effectively the only game in town, the chat interface itself was brand new, and almost all of my work was against the API rather than a product. I built a bot that could hold a conversation as a real estate agent: work out what somebody actually wanted, answer questions about listings, stay in character while doing it.',
+      'It was a joke and then it was not. It caught the attention of **basl.ai**, a knowledge-management company working in real estate who already held the licence the thing would have needed anyway, and they hired me to keep building it — specifically to wire it into live listing data so it was answering from the market rather than from its training set. That is the entire problem with these systems in one sentence, and I was very lucky to be pointed straight at it in 2023.',
+    ],
+    photos: [],
+    links: [
+      { label: 'The real estate bot', to: '/RealEstateBot' },
+      { label: 'Engineering at basl.ai', to: '/BaslEngineer' },
+    ],
+  },
+  {
+    id: 'the-lean-year',
+    era: '2025',
+    railLabel: '2025',
+    title: 'Seven Months',
+    subtitle: 'The startup sinks, the market shuts, and I do whatever works.',
+    accent: 'rose',
+    paragraphs: [
+      'By early 2025 school was ending and so was the startup. There was no budget to keep me on, and not long afterwards the company itself began to go under. My read, for what it is worth, is scope creep with no go-to-market underneath it — an enormous amount of product built for a customer nobody had gone out and found. I did at least get several friends from college hired there before it went, which remains one of my favourite things I have done.',
+      'Then the job market. The AI boom was in full swing and the entry level was brutal. It took seven months to find work in my field, and seven months is a long time to be told nothing at all.',
+      'So I did what I have done at every other point in this story, which is learn something and try to make it pay. One of those things was turning my machine into a crypto miner. The screenshot below is honest about the scale of it: two rigs, four devices, an estimate of one dollar sixty a day. It was not a plan. It was a refusal to sit still.',
+      'Another was going back to making visuals for DJs — programmatically this time, driven by the audio itself, which quietly pulled the music years, the graphics work and the code into one thing. The clip below is that running on a monitor in March 2025.',
+      'And to break up the applications I worked on a game, **Void**. Sending a hundred applications into silence needs an antidote.',
+      'In June I finished my last outstanding course and graduated with two diplomas. The last two photographs are that day: crossing the stage, and standing in the lobby afterwards holding both of them open.',
+    ],
+    photos: [
+      'home-office-2025',
+      'home-office-treadmill',
+      'mining-rig',
+      'void-city',
+      'convocation-stage',
+      'two-diplomas',
+    ],
+    clips: ['generative-visuals'],
+    links: [{ label: 'Void', to: '/Games/Void' }],
+  },
+  {
+    id: 'clarity',
+    era: 'July 2025 →',
+    railLabel: 'Clarity',
+    title: 'Clarity',
+    subtitle: 'AI engineer — which is every previous chapter running at once.',
+    accent: 'cyan',
+    paragraphs: [
+      'In July 2025 I started at **Clarity** as an AI engineer, seven months after I began looking.',
+      'That is the story so far. A thirteen-year-old on a carpet with a motherboard. A teenager taking apart other people\'s dead laptops because he could not afford new ones. Four years spent working out why a mix was somehow wrong. A philosophy course at night. A studio built with my father out of bare cinderblock. A college lab where nobody yet knew how any of it worked. A model trained from scratch on one GPU.',
+      'None of it was planned. All of it turned out to be the same subject.',
+    ],
+    photos: [],
   },
 ];
 
@@ -765,6 +1283,60 @@ export const clips: Clip[] = [
     note:
       'A thirty-second square promo cut for social, built around a featured vocalist, finished with chromatic aberration and analogue-video artefacting. Made in the era when a release meant you also shot and cut the trailer yourself.',
   },
+  {
+    slug: 'tower-climb-training',
+    title: 'First climb',
+    when: 'January 27, 2023 · 9:39 a.m.',
+    duration: '0:47',
+    portrait: true,
+    note:
+      'A colleague starting his first climb on Korol\'s indoor training tower — harnessed, clipped in, working up the lattice past the cable run — with the rest of us filming from the floor. The recommendation was that the developers climb one before building the experience, and it was the right recommendation. You cannot reproduce what you have not felt.',
+  },
+  {
+    slug: 'tower-terrain-build',
+    title: 'Blocking out the tower',
+    when: 'March 8, 2023 · 10:23 p.m.',
+    duration: '0:22',
+    portrait: true,
+    note:
+      'Shot off a laptop screen late at night: terrain and mast being assembled in the editor, the ladder run climbing away up the side, project folders visible along the bottom — Tower, F150truck, Forest, HandHeld, Tablet. The unglamorous middle of a project, which is most of a project.',
+  },
+  {
+    slug: 'tower-climb-in-headset',
+    title: 'From inside the headset',
+    when: 'March 13, 2023 · 10:45 p.m.',
+    duration: '0:11',
+    square: true,
+    note:
+      'Captured from inside a Quest while climbing the tower in the finished scene: tracked hands on the rungs, a dish and its manufacturer plate passing on the left, nothing at all underneath. Eleven seconds is enough to know whether it works.',
+  },
+  {
+    slug: 'kinect-kiosk',
+    title: 'The lab screensaver',
+    when: 'April 13, 2023 · 9:19 a.m.',
+    duration: '0:34',
+    portrait: true,
+    note:
+      'A tall screen on castors in the corner of the lab with a Kinect depth camera bolted to the top of it, running a rendered figure inside a lit box. I built small experiences for this one because the hardware was sitting there and nobody had asked me not to.',
+  },
+  {
+    slug: 'hangar-tour',
+    title: 'Inside the hangar',
+    when: 'June 21, 2023 · 10:28 a.m.',
+    duration: '0:27',
+    portrait: true,
+    note:
+      'Mohawk\'s aircraft hangar during the OVIN research trip — a wing in the foreground, insulated wall panels overhead, and the door standing open onto the apron with the airfield and a control tower beyond it. We were shown around so the hangar in the experience could be modelled from a real one.',
+  },
+  {
+    slug: 'generative-visuals',
+    title: 'Visuals, generated',
+    when: 'March 1, 2025 · 5:12 p.m.',
+    duration: '0:08',
+    portrait: true,
+    note:
+      'Audio-reactive visuals running full-screen beside a column of preset names, in the middle of the seven months of job applications. Producing visuals for DJs was work I had done years earlier by hand; doing it programmatically pulled the music, the graphics and the code into a single thing.',
+  },
 ];
 
 /**
@@ -785,6 +1357,6 @@ export const unattributedTrackSlugs = [
 export const stats = [
   { value: '2009', label: 'First build, from scratch' },
   { value: '13', label: 'Years old when it booted' },
-  { value: '36', label: 'Photographs recovered' },
+  { value: '73', label: 'Photographs recovered' },
   { value: '11', label: 'Tracks that survived' },
 ];

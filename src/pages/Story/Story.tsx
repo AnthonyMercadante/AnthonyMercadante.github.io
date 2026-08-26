@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import LandscapeOverlay from '../../components/LandscapeOverlay';
 import Lightbox from '../../components/Lightbox';
@@ -77,7 +78,7 @@ const structuredData = {
   url: 'https://anthonymercadante.github.io/',
   alternateName: ['Synth Rider', 'M E R C S'],
   description:
-    'Software and AI engineer. Built his first computer from scratch in the summer of 2009 at thirteen, spent 2009–2014 salvaging and rebuilding hardware, worked as an audio engineer and music producer from 2016 to 2020 under the aliases Synth Rider and M E R C S — including studio work in Toronto and Los Angeles — and returned to software development in 2020.',
+    'Software and AI engineer. Built his first computer from scratch in the summer of 2009 at thirteen, spent 2009–2014 salvaging and rebuilding hardware, worked as an audio engineer and music producer from 2016 to 2020 under the aliases Synth Rider and M E R C S — including studio work in Toronto and Los Angeles — returned to software development in 2020, worked as an XR Developer in Mohawk College\'s XR Department from 2023, ran applied computer-vision research at the college in 2023–2024, and has worked as an AI engineer since July 2025.',
   knowsAbout: [
     'Computer hardware assembly and repair',
     'Electronics and circuit prototyping',
@@ -85,9 +86,15 @@ const structuredData = {
     'Digital music production',
     'Signal chain and gain staging',
     'Studio acoustic treatment and room design',
+    'Spatial and binaural audio for XR',
     'Philosophy',
     'Software development',
+    'Virtual and mixed reality development',
+    'Unity and real-time 3D',
+    '3D printing and rapid prototyping',
+    'Computer vision and model training',
     'AI systems',
+    'Large language model application development',
     'Self-directed investing',
   ],
   alumniOf: [
@@ -95,10 +102,13 @@ const structuredData = {
     { '@type': 'CollegeOrUniversity', name: 'Mohawk College', description: 'Information Technology, 2015–2016. Left after one semester.' },
     { '@type': 'CollegeOrUniversity', name: 'Metalworks Institute of Sound and Music Production', description: 'Audio Engineering and Digital Music Production, completed.' },
     { '@type': 'CollegeOrUniversity', name: 'Humber College', description: 'General Arts and Science, major in philosophy, 2017–2018. Studied concurrently with working in music.' },
+    { '@type': 'CollegeOrUniversity', name: 'Mohawk College', description: 'Software Development, 2020–2025. Graduated June 19, 2025 with two diplomas, including applied research credits earned on a computer-vision project with Professor Steven Adams.' },
   ],
   hasOccupation: [
     { '@type': 'Occupation', name: 'Audio Engineer and Music Producer', occupationalCategory: 'Music', description: 'Active 2016–2020 as Synth Rider (retro/synthwave) and M E R C S (bass music). Studio work in Toronto, and in Los Angeles in December 2018 with producer Daxz (Jahmar Carter).' },
-    { '@type': 'Occupation', name: 'Software and AI Engineer', occupationalCategory: 'Software Engineering', description: 'From 2020 onward.' },
+    { '@type': 'Occupation', name: 'XR Developer', occupationalCategory: 'Software Engineering', description: 'Mohawk College XR Department, from January 2023. Built a VR cell tower climbing and repair simulator with Korol Contracting, demonstrated at the STAC conference in March 2023, and an electric-vehicle careers experience for the Ontario Vehicle Innovation Network (OVIN). Departmental lead on spatial and binaural audio.' },
+    { '@type': 'Occupation', name: 'Applied Researcher', occupationalCategory: 'Machine Learning', description: 'Mohawk College IdeaWorks, 2023–2024. Trained an aircraft identification model from scratch, without cloud infrastructure or a pretrained backbone, with Professor Steven Adams. Interviewed by CHCH in February 2024.' },
+    { '@type': 'Occupation', name: 'Software and AI Engineer', occupationalCategory: 'Software Engineering', description: 'From 2020 onward. Built a real estate conversational agent against the OpenAI API in 2023, which led to an engineering role at basl.ai connecting it to live listing data. AI engineer at Clarity from July 2025.' },
   ],
 };
 
@@ -145,7 +155,8 @@ const Story = () => {
   }, []);
 
   /**
-   * Eleven chapters overflow the nav rail, so keep the active chip in view —
+   * The chapters overflow the nav rail several times over, so keep the active
+   * chip in view —
    * otherwise by the LA chapter the rail is still showing 2009 and the
    * highlight is scrolled off somewhere to the left.
    */
@@ -188,7 +199,7 @@ const Story = () => {
         <motion.div className="max-w-2xl mx-auto space-y-6" variants={headerVariants} initial="hidden" animate="visible">
           <div className="space-y-3">
             <p className="text-[11px] font-mono text-cyan-400 uppercase tracking-[0.18em]">
-              Origins · 2009 — 2023
+              Origins · 2009 — 2025
             </p>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.05] bg-gradient-to-br from-white via-zinc-100 to-zinc-500 bg-clip-text text-transparent">
               How I got here
@@ -202,11 +213,12 @@ const Story = () => {
               hardware to live in.
             </p>
             <p>
-              This is the long version, assembled from what survived: thirty-six photographs pulled
-              off old phones, eleven audio files that outlived the laptops they were made on, and two
-              video clips. Every date here was recovered from file metadata rather than from memory,
-              so the timeline is the machine&apos;s account, not mine — and in one case it reunited a
-              photograph and a recording from the same night, seven years after both were forgotten.
+              This is the long version, assembled from what survived: seventy-three photographs
+              pulled off old phones, eleven audio files that outlived the laptops they were made on,
+              and eight video clips. Every date here was recovered from file metadata rather than
+              from memory, so the timeline is the machine&apos;s account, not mine — and in one case
+              it reunited a photograph and a recording from the same night, seven years after both
+              were forgotten.
             </p>
             <p className="text-zinc-500">
               My favourite thing in the world has always been to disappear into electronics.{' '}
@@ -309,6 +321,22 @@ const Story = () => {
                 ))}
               </motion.div>
 
+              {/* Out to the project pages that cover this work technically */}
+              {(chapter.links?.length ?? 0) > 0 && (
+                <motion.div variants={itemVariants} className="mt-5 flex flex-wrap gap-2">
+                  {chapter.links!.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-mono transition-colors ${a.border} ${a.text} hover:bg-white/[0.06]`}
+                    >
+                      {link.label}
+                      <span aria-hidden="true">&rarr;</span>
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+
               {/* Photo grid */}
               {chapterPhotoSet.length > 0 && (
                 <motion.div variants={itemVariants} className="mt-7 space-y-2.5">
@@ -374,12 +402,22 @@ const Story = () => {
                   <div className="grid grid-cols-1 gap-3">
                     {chapterClips.map((clip) => (
                       <div key={clip.slug} className="glass-card overflow-hidden">
+                        {/*
+                          Phone-shot vertical clips get a fixed height and their
+                          natural width instead of filling the column: 9:16 across
+                          a text column is absurd, and cropping to 16:9 throws
+                          away most of the frame.
+                        */}
                         <video
                           controls
                           preload="none"
                           playsInline
                           poster={posterUrl(clip.slug)}
-                          className={`w-full bg-black object-cover ${clip.square ? 'aspect-square' : 'aspect-video'}`}
+                          className={
+                            clip.portrait
+                              ? 'mx-auto h-[min(70vh,520px)] max-w-full bg-black'
+                              : `w-full bg-black object-cover ${clip.square ? 'aspect-square' : 'aspect-video'}`
+                          }
                           src={videoUrl(clip.slug)}
                         >
                           <track kind="captions" />
@@ -444,11 +482,17 @@ const Story = () => {
               lot.
             </p>
             <p className="text-[15px] leading-relaxed text-zinc-400">
+              Then a college lab where nobody had ten years of experience because the field was not
+              ten years old, and where the only skill that separated people was whether they could
+              teach themselves something quickly. Everything since — the research, the models, the
+              engineering work — is that same skill, pointed somewhere new.
+            </p>
+            <p className="text-[15px] leading-relaxed text-zinc-400">
               None of it was a detour. It is the whole toolkit, and I use all of it every day.
             </p>
             <p className="text-xs font-mono text-zinc-600 pt-1">
-              This chapter covers 2009 to 2023. The rest — Raethexn Technologies and the AI work —
-              continues from here.
+              This chapter covers 2009 to July 2025. The rest — Raethexn Technologies and the
+              current AI work — continues from here.
             </p>
           </motion.div>
         </motion.section>
