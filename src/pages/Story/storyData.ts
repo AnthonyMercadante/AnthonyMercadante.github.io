@@ -489,7 +489,7 @@ export const photos: Record<string, Photo> = {
     dateLabel: 'April 3, 2023 · 12:06 a.m.',
     title: 'Video memory exhausted',
     caption:
-      'The tower scene rendered in the editor just after midnight: lattice mast, mounted dishes and drums, a service truck on the gravel pad, real trees closing in around it. Along the top the engine is reporting that video memory has been exhausted — 647 MB over budget. Both halves of this image are the job.',
+      'Not the project — what I did after it, on my own time, to find the ceiling. The same site rebuilt from scratch in Unreal Engine and pushed as far toward photoreal as I could take it: lattice mast, mounted dishes and drums, a service truck on the gravel pad, photoscanned rock underfoot and real foliage closing in. Along the top the engine is reporting that video memory has been exhausted, 546 MB over budget. Beautiful on a monitor, and completely undrivable by any headset of that generation — which was the thing I was trying to find out.',
     wide: true,
   },
   'stac-booth-build': {
@@ -987,19 +987,35 @@ export const chapters: Chapter[] = [
     paragraphs: [
       'The department\'s first major project was a VR cell tower simulator, built with **Korol Contracting**. The industry had a recruitment problem: climbing towers is a specialised, dangerous, well-paid trade that very few people were entering, and the training pipeline behind it is long and expensive. The hope was that an experience could do two jobs at once — pull the right people in, and let the wrong people find out early, safely and cheaply, that they did not want to be three hundred feet up a lattice.',
       'So it was recommended that the developers climb one. Not a three-hundred-foot mast — Korol\'s indoor training tower, which is more than enough to make the point. Harness on, clipped in, actually up it. The video below is a colleague starting his first climb on 27 January 2023, with the rest of us filming from the floor. You cannot fake the part that matters: what the rungs do to your hands, what your body does when you look down, exactly where the fear arrives. That was the thing we were being asked to reproduce.',
-      'Then we built it. The second clip is the terrain and the mast being blocked out in the editor late on a March evening; the still from 3 April is the same scene rendered, with the engine complaining in the corner that video memory has been exhausted — which is roughly what the project felt like most weeks. The square clip is the thing itself, recorded from inside a headset: tracked hands on the rungs, a dish passing on the left, nothing underneath.',
+      'Then we built it. A harness mapped onto a virtual body, hands that would wrap a rung instead of clipping straight through it, and the industry\'s safety procedure built into the sequence rather than bolted on at the end.',
       'At the end of March we took it to the **STAC** conference and put it in front of the industry. The screen read *Climb With Us in Virtual Reality*, and next to it we were advertising the college\'s brand new micro-credential in tower work. Three of us, a skirted table, a stack of Quests and a lot of sanitising wipes, showing an entire trade what its training might look like.',
+      'The last photograph below is not from the project. Once the thing had shipped I wanted to know what the same site would look like with the realism turned all the way up, so I rebuilt it in **Unreal** on my own time — photoscanned rock, real foliage, a lit sky, the service truck on the pad. Along the top the engine is reporting that video memory has been exhausted, 546 MB over budget. It was extraordinary on a monitor and no headset of that generation could have driven it for a second, which was the answer I had gone looking for.',
     ],
     photos: [
       'xr-studio-grows',
       'xr-studio-panorama',
-      'tower-in-engine',
       'stac-booth-build',
       'stac-team',
       'stac-booth',
+      'tower-in-engine',
     ],
-    clips: ['tower-climb-training', 'tower-terrain-build', 'tower-climb-in-headset'],
+    clips: ['tower-climb-training'],
     links: [{ label: 'The cell tower simulator', to: '/CellTower' }],
+  },
+  {
+    id: 'flood-room',
+    era: 'March 2023',
+    railLabel: 'Flood',
+    title: 'The Flood Room',
+    subtitle: 'A side project of my own, running alongside the tower.',
+    accent: 'sky',
+    paragraphs: [
+      'Running in parallel with the tower, on my own time under **Raethexn Technologies**, was a second climbing experience that had nothing to do with the college. A room fills with water. You climb to stay above it. That is the whole mechanic, and it turns out to be enough.',
+      'It came out of **Physical: 100**, which was airing that winter — and not for the reason you would guess. Building the tower had taught me something nobody warns you about: climbing in VR means holding your arms above your head, hand over hand, for minutes at a time, and it is genuinely hard work. Ten minutes in a headset and your shoulders know about it the next day. The show was built entirely around that kind of endurance, so the shape it suggested — a physical trial, a rising clock, no way out but up — was one the medium was already good at without anybody having noticed.',
+      'The first clip is the water being built in the editor, untextured and flat orange, pouring out of a duct with the ladder already standing in the corner. The second is five days later, from inside the headset, one hand closed on a rung in the dark. Those two clips are the whole of what survived.',
+    ],
+    photos: [],
+    clips: ['flood-room-water-sim', 'flood-room-in-headset'],
   },
   {
     id: 'printers',
@@ -1009,7 +1025,7 @@ export const chapters: Chapter[] = [
     subtitle: 'I brought my own printer in and never took it home.',
     accent: 'amber',
     paragraphs: [
-      'Somewhere in the middle of the tower project my interest in 3D printing stopped being a hobby. I brought my own printer into the dev lab — it is sitting on the desk in the panorama in the previous chapter, between a monitor running the editor and a monitor running the tower — and printed more or less continuously: jigs, mounts, controller adapters, headset stands, props for scenes, and a long tail of things that existed purely because I wanted to know whether they would come off the bed.',
+      'Somewhere in the middle of the tower project my interest in 3D printing stopped being a hobby. I brought my own printer into the dev lab — it is sitting on the desk in the panorama in the tower chapter, between a monitor running the editor and a monitor running the tower — and printed more or less continuously: jigs, mounts, controller adapters, headset stands, props for scenes, and a long tail of things that existed purely because I wanted to know whether they would come off the bed.',
       'The photograph from the morning of 9 March is a full plate of small black parts. That is a normal run, not a special one.',
       'The college\'s makerspace grew alongside the lab. By April there was a large-format machine and an enclosed Wanhao parked on tool chests out in the learning commons, and by July we could produce genuinely large objects — the axe I am holding in the photograph from 25 July came off a bed in sections and was assembled afterwards.',
       'We also built for the lab itself. The vertical screen in the video below stood in the corner on castors with a Kinect depth camera bolted to the top of it, and I made small experiences for it: a screensaver that noticed you and reacted. Nobody asked for that. It got built because the hardware was sitting there.',
@@ -1301,22 +1317,22 @@ export const clips: Clip[] = [
       'A colleague starting his first climb on Korol\'s indoor training tower — harnessed, clipped in, working up the lattice past the cable run — with the rest of us filming from the floor. The recommendation was that the developers climb one before building the experience, and it was the right recommendation. You cannot reproduce what you have not felt.',
   },
   {
-    slug: 'tower-terrain-build',
-    title: 'Blocking out the tower',
+    slug: 'flood-room-water-sim',
+    title: 'The water, in the editor',
     when: 'March 8, 2023 · 10:23 p.m.',
     duration: '0:22',
     portrait: true,
     note:
-      'Shot off a laptop screen late at night: terrain and mast being assembled in the editor, the ladder run climbing away up the side, project folders visible along the bottom — Tower, F150truck, Forest, HandHeld, Tablet. The unglamorous middle of a project, which is most of a project.',
+      'Shot off a laptop screen late at night: the flood itself, still untextured, pouring out of a duct near the ceiling and spreading across the floor in flat orange. The ladder is already standing in the scene on the left, because the ladder was the design — the water rises and the only direction left is up.',
   },
   {
-    slug: 'tower-climb-in-headset',
-    title: 'From inside the headset',
+    slug: 'flood-room-in-headset',
+    title: 'Climbing, from inside the headset',
     when: 'March 13, 2023 · 10:45 p.m.',
     duration: '0:11',
     square: true,
     note:
-      'Captured from inside a Quest while climbing the tower in the finished scene: tracked hands on the rungs, a dish and its manufacturer plate passing on the left, nothing at all underneath. Eleven seconds is enough to know whether it works.',
+      'Five days later, captured from inside a Quest: a tracked hand closed on the rung, the ladder running up out of frame, racking and pipework in the dark on either side. Eleven seconds is enough to know whether a climb feels like a climb.',
   },
   {
     slug: 'kinect-kiosk',
