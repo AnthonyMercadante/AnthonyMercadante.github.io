@@ -1,191 +1,139 @@
-// React imports
-import React, { useState, useRef, useEffect } from 'react';
-import { Box, Typography, TextField, Button, List, ListItem, ListItemText, CircularProgress, Paper } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import LandscapeOverlay from '../../components/LandscapeOverlay'; 
-import Starfield from '../../components/Starfield';
-import BackButton from '../../components/BackButton';
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import PageShell from '../../components/PageShell';
 
-type Message = {
-    text: string;
-    sender: string;
-};
+type Message = { text: string; sender: 'user' | 'bot' };
+const examples = [
+  'Can you explain how down payments work in real estate transactions?',
+  'What should first-time homebuyers know before purchasing a property?',
+];
 
-const BotInteraction = () => {
-    const [input, setInput] = useState('');
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-
-    // reference for the chat messages container
-    const chatContainerRef = useRef<HTMLUListElement | null>(null);
-
-    const messagesEndRef = useRef<HTMLLIElement | null>(null);
-
-    useEffect(() => {
-        if (chatContainerRef.current) {
-            // Scroll to the bottom of the chat container
-            const scrollHeight = chatContainerRef.current.scrollHeight;
-            chatContainerRef.current.scrollTop = scrollHeight;
-        }
-        window.scrollTo(0, 0);
-    }, [messages]);
-
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-        // Check if the key pressed is 'Enter'
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent the default action to avoid a new line
-            handleSendMessage(); // Call the sendMessage function
-        }
+export default function BotInteraction() {
+  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [lastQuestion, setLastQuestion] = useState('');
+  const request = useRef<AbortController | null>(null);
+  const conversation = useRef<HTMLDivElement>(null);
+  useEffect(() => () => request.current?.abort(), []);
+  useEffect(() => {
+    if (conversation.current) conversation.current.scrollTop = conversation.current.scrollHeight;
+  }, [messages, loading, error]);
+  const send = async (question: string, retry = false) => {
+    const value = question.trim();
+    if (!value || request.current) return;
+    const controller = new AbortController();
+    request.current = controller;
+    setLoading(true);
+    setError(false);
+    setLastQuestion(value);
+    setInput('');
+    if (!retry) setMessages((previous) => [...previous, { text: value, sender: 'user' }]);
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
+    try {
+      const response = await fetch('https://realestateassistantapi.azurewebsites.net/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: value }),
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error('Request failed');
+      const data = await response.json();
+      if (typeof data.response !== 'string' || !data.response.trim())
+        throw new Error('Empty response');
+      setMessages((previous) => [...previous, { text: data.response, sender: 'bot' }]);
+    } catch {
+      setError(true);
+    } finally {
+      window.clearTimeout(timeout);
+      request.current = null;
+      setLoading(false);
     }
-
-    const handleExampleQuestion = async (question: string) => {
-        // Add the example question to the chat display as a user message
-        setMessages(messages => [...messages, { text: question, sender: 'user' }]);
-
-        setIsLoading(true);
-
-        try {
-            // Send the messageto the Flask backend
-            const response = await fetch('https://realestateassistantapi.azurewebsites.net/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message: question }),
-            });
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            // Add the bot's response to the chat display
-            setMessages(messages => [...messages, { text: data.response, sender: 'bot' }]);
-        } catch (error) {
-            console.error('Failed to send message:', error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-
-
-    const handleSendMessage = async () => {
-        const userInput = input.trim();
-        if (userInput) {
-            // Add the user's message to the chat display
-            setMessages(messages => [...messages, { text: userInput, sender: 'user' }]);
-            setInput('');
-            setIsLoading(true);
-
-            try {
-                // Send the message to the Flask backend
-                const response = await fetch('https://realestateassistantapi.azurewebsites.net/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ message: userInput }),
-                });
-
-
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                // Add the bot's response to the chat display
-                setIsLoading(false);
-                setMessages(messages => [...messages, { text: data.response, sender: 'bot' }]);
-            } catch (error) {
-                console.error('Failed to send message:', error);
-                setIsLoading(false);
-            }
-        }
-    };
-
-
-    return (
-        <Box sx={{
-            padding: 4.5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            bgcolor: 'transparent',
-            color: 'text.primary',
-            height: '100vh',
-        }}>
-            <BackButton />
-            <Typography variant="h4" gutterBottom><br></br>
-                Real Estate AI Bot Interaction
-            </Typography>
-            <Box sx={{ width: '100%', maxWidth: 600, minHeight: 400, bgcolor: 'background.paper', borderRadius: 2, padding: 2, marginBottom: 2 }}>
-                <List
-                    sx={{ maxHeight: 300, overflow: 'auto' }}
-                    ref={chatContainerRef}
-                >
-                    {messages.map((message, index) => (
-                        <ListItem
-                            key={index}
-                            style={{ alignSelf: message.sender === 'user' ? 'flex-end' : 'flex-start' }}
-                            ref={index === messages.length - 1 ? messagesEndRef : null}
-                        >
-                            <ListItemText
-                                primary={message.text}
-                                sx={{ wordBreak: 'break-word', background: message.sender === 'user' ? '#525050' : '#333769', borderRadius: '10px', padding: '10px' }}
-                            />
-                        </ListItem>
-                    ))}
-                </List>
-                <Box component="form" sx={{ display: 'flex', alignItems: 'center', marginTop: 1 }}>
-                    <TextField
-                        fullWidth
-                        variant="outlined"
-                        placeholder="Type your message here..."
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        sx={{ mr: 1, bgcolor: 'background.paper' }}
-                    />
-                    <Button variant="contained" endIcon={<SendIcon />} onClick={handleSendMessage}>
-                        Send
-                    </Button>
-                </Box>
-                {isLoading && <CircularProgress />}
-            </Box>
-            {/* Example Questions Section */}
-            <Paper sx={{ width: '100%', maxWidth: 600, padding: 2, bgcolor: 'background.paper' }} elevation={3}>
-                <Typography variant="h6" gutterBottom sx={{ marginLeft: 2 }}>
-                    Example Questions:
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                    <Button
-                        variant="outlined"
-                        startIcon={<HelpOutlineIcon />}
-                        sx={{ justifyContent: 'flex-start', borderRadius: '20px', borderColor: 'primary.main' }}
-                        onClick={() => handleExampleQuestion("Can you explain how down payments work in real estate transactions?")}
-                    >
-                        Can you explain how down payments work in real estate transactions?
-                    </Button>
-                    <Button
-                        variant="outlined"
-                        startIcon={<HelpOutlineIcon />}
-                        sx={{ justifyContent: 'flex-start', borderRadius: '20px', borderColor: 'primary.main' }}
-                        onClick={() => handleExampleQuestion("What should first-time homebuyers know before purchasing a property?")}
-                    >
-                        What should first-time homebuyers know before purchasing a property?
-                    </Button>
-                </Box>
-            </Paper>
-            <Starfield/>
-            <LandscapeOverlay />
-
-        </Box>
-    );
-
-};
-
-export default BotInteraction;
+  };
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    send(input);
+  };
+  return (
+    <PageShell
+      title="Real Estate Bot"
+      eyebrow="Interactive project / Demo"
+      description="A conversational assistant built for questions about the Toronto and Ontario real estate markets."
+      parent={{ to: '/RealEstateBot', label: 'About this project' }}
+      className="chat-page"
+    >
+      <div className="chat-panel">
+        <div className="chat-panel-header">
+          <span>Conversation</span>
+          <span className="mono">Project demo</span>
+        </div>
+        <div
+          className="chat-conversation"
+          ref={conversation}
+          role="log"
+          aria-label="Conversation with the Real Estate Bot"
+          aria-live="polite"
+          aria-relevant="additions text"
+        >
+          {messages.length === 0 && (
+            <div className="chat-empty">
+              <span aria-hidden="true">↳</span>
+              <h2>Start with a question.</h2>
+              <p>Ask about the market, the process, or a term you’ve come across.</p>
+            </div>
+          )}
+          {messages.map((message, index) => (
+            <div key={index} className={`chat-message chat-${message.sender}`}>
+              <span>{message.sender === 'user' ? 'You' : 'Real Estate Bot'}</span>
+              <p>{message.text}</p>
+            </div>
+          ))}
+          {loading && (
+            <p className="chat-status" role="status">
+              Waiting for the bot…
+            </p>
+          )}
+        </div>
+        {error && (
+          <div className="chat-error" role="alert">
+            <p>The demo couldn’t respond. The service may be unavailable.</p>
+            <button
+              className="text-link"
+              onClick={() => send(lastQuestion, true)}
+              disabled={loading}
+            >
+              Try again <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        )}
+        <form className="chat-form" onSubmit={submit}>
+          <label className="sr-only" htmlFor="chat-question">
+            Your question
+          </label>
+          <input
+            id="chat-question"
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            placeholder="Ask a question…"
+            autoComplete="off"
+            disabled={loading}
+          />
+          <button type="submit" disabled={loading || !input.trim()} aria-label="Send question">
+            Send <span aria-hidden="true">↑</span>
+          </button>
+        </form>
+      </div>
+      <section className="chat-examples" aria-labelledby="example-heading">
+        <h2 id="example-heading" className="eyebrow">
+          A place to start
+        </h2>
+        {examples.map((question) => (
+          <button key={question} onClick={() => send(question)} disabled={loading}>
+            {question}
+            <span aria-hidden="true">↗</span>
+          </button>
+        ))}
+      </section>
+    </PageShell>
+  );
+}

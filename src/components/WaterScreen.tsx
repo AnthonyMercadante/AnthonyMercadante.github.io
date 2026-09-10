@@ -1,104 +1,131 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useReducedMotion } from 'framer-motion';
+
+type MotionPermissionEvent = typeof DeviceOrientationEvent & {
+  requestPermission?: () => Promise<string>;
+};
 
 export default function WaterScreen() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
+  const reduceMotion = useReducedMotion();
+  const [paused, setPaused] = useState(false);
+  const [tilt, setTilt] = useState(false);
+  const [tiltError, setTiltError] = useState(false);
+  const [supportsTilt] = useState(() => typeof DeviceOrientationEvent !== 'undefined');
+  const enableTilt = async () => {
+    try {
+      const event = DeviceOrientationEvent as MotionPermissionEvent;
+      const allowed = !event.requestPermission || (await event.requestPermission()) === 'granted';
+      setTilt(allowed);
+      setTiltError(!allowed);
+    } catch {
+      setTiltError(true);
+    }
+  };
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
-
-    /* ---------- size ---------- */
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    if (!canvas || !ctx) return;
+    let frame = 0;
+    let width = 0,
+      height = 0;
+    let phase = 0,
+      slope = 0,
+      level = 0;
+    const target = { slope: 0, level: 0 };
+    const running = !paused && !reduceMotion;
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+      slope += (target.slope - slope) * 0.05;
+      level += (target.level - level) * 0.05;
+      if (running) phase += 0.014;
+      ctx.beginPath();
+      for (let i = 0; i <= 100; i++) {
+        const x = (width * i) / 100;
+        const y =
+          height * (0.65 + level) +
+          slope * height * (i / 100 - 0.5) +
+          Math.sin(phase + i * 0.08) * 5;
+        if (i) ctx.lineTo(x, y);
+        else ctx.moveTo(x, y);
+      }
+      ctx.lineTo(width, height);
+      ctx.lineTo(0, height);
+      ctx.closePath();
+      ctx.fillStyle = '#72b5b02b';
+      ctx.fill();
+      ctx.strokeStyle = '#9bd4d185';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    };
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = canvas.clientWidth;
+      height = canvas.clientHeight;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      draw();
+    };
+    const loop = () => {
+      draw();
+      if (running && !document.hidden) frame = requestAnimationFrame(loop);
+    };
+    const visibility = () => {
+      cancelAnimationFrame(frame);
+      if (!document.hidden) loop();
+    };
+    const pointer = (event: PointerEvent) => {
+      target.slope = (event.clientX / width - 0.5) * 0.32;
+      target.level = (event.clientY / height - 0.5) * 0.12;
+    };
+    const orientation = (event: DeviceOrientationEvent) => {
+      target.slope = Math.max(-0.5, Math.min(0.5, (event.gamma ?? 0) / 90));
+      target.level = Math.max(-0.12, Math.min(0.12, (event.beta ?? 0) / 360));
     };
     resize();
-    window.addEventListener("resize", resize);
-
-    /* ---------- state ---------- */
-    const p = { slope: 0, offset: 0, t: 0 };
-    const ease = 0.08;
-
-    /* ---------- input ---------- */
-    const applyInput = (gamma: number, beta: number) => {
-      const h = canvas.height;
-      const slopeRange = h * 0.25;
-      const heightRange = h * 0.15;
-      p.slope  += ((slopeRange  * gamma) - p.slope)  * ease;
-      p.offset += ((-heightRange * beta ) - p.offset) * ease;
-    };
-
-    /* 1️⃣ pointer fallback (always) */
-    window.addEventListener("mousemove", e => {
-      applyInput((e.clientX / canvas.width) * 2 - 1,
-                 (e.clientY / canvas.height) * 2 - 1);
-    });
-
-    /* 2️⃣ motion if available */
-    const motionOK = () => {
-      window.addEventListener("deviceorientation", e => {
-        applyInput((e.gamma ?? 0) / 90, (e.beta ?? 0) / 90);
-      }, true);
-    };
-
-    if (typeof DeviceOrientationEvent !== "undefined") {
-      // iOS 13+ secure‑context permission dance
-      if ("requestPermission" in DeviceOrientationEvent) {
-        const ask = async () => {
-          try {
-            const res = await (DeviceOrientationEvent as any).requestPermission();
-            if (res === "granted") motionOK();
-          } catch {}
-        };
-        // one‑time overlay
-        const div = document.createElement("div");
-        div.className =
-          "fixed inset-0 z-50 flex items-center justify-center bg-black/60 text-white";
-        div.innerHTML =
-          '<button class="px-6 py-3 bg-blue-600 rounded">Enable motion</button>';
-        div.onclick = () => { ask(); div.remove(); };
-        document.body.appendChild(div);
-      } else {
-        // Android / desktop
-        motionOK();
-      }
-    }
-
-    /* ---------- draw ---------- */
-    const draw = () => {
-      const { width: w, height: h } = canvas;
-      p.t += 0.03;
-      ctx.clearRect(0, 0, w, h);
-      ctx.beginPath();
-      const baseY = h * 0.7;
-      const samples = 120;
-      for (let i = 0; i < samples; i++) {
-        const x = (i / (samples - 1)) * w;
-        const y =
-          baseY +
-          p.offset +
-          p.slope * (x - w / 2) +
-          Math.sin(p.t + i * 0.3) * 4;
-        i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
-      }
-      ctx.lineTo(w, h);
-      ctx.lineTo(0, h);
-      ctx.closePath();
-      ctx.fillStyle = "rgba(37,145,255,0.35)";
-      ctx.fill();
-      requestAnimationFrame(draw);
-    };
-    draw();
-
+    loop();
+    window.addEventListener('resize', resize);
+    document.addEventListener('visibilitychange', visibility);
+    if (running) window.addEventListener('pointermove', pointer, { passive: true });
+    if (running && tilt) window.addEventListener('deviceorientation', orientation);
     return () => {
-      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(frame);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('pointermove', pointer);
+      window.removeEventListener('deviceorientation', orientation);
+      document.removeEventListener('visibilitychange', visibility);
     };
-  }, []);
-
+  }, [paused, reduceMotion, tilt]);
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none select-none"
-    />
+    <div className="water-study">
+      <canvas ref={canvasRef} aria-hidden="true" />
+      <div className="water-controls">
+        <Link className="back-link" to="/">
+          ← The surface
+        </Link>
+        <p className="eyebrow">An interactive study</p>
+        <h1>Water.</h1>
+        <p>A small experiment in motion and equilibrium.</p>
+        <div>
+          <button
+            className="action-link"
+            disabled={!!reduceMotion}
+            onClick={() => setPaused(!paused)}
+          >
+            {reduceMotion ? 'Motion reduced' : paused ? 'Resume motion' : 'Pause motion'}
+          </button>
+          {supportsTilt && !tilt && !reduceMotion && (
+            <button className="text-link" onClick={enableTilt}>
+              Enable device tilt ↗
+            </button>
+          )}
+        </div>
+        {tiltError && (
+          <p role="status">Device tilt wasn’t enabled. You can still move the pointer.</p>
+        )}
+      </div>
+    </div>
   );
 }
