@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
-import LandscapeOverlay from '../../components/LandscapeOverlay';
+import MediaEmbed from '../../components/MediaEmbed';
+import './Story.css';
 import Lightbox from '../../components/Lightbox';
 import TrackList from '../../components/TrackList';
 import {
@@ -62,7 +63,7 @@ const structuredData = {
   url: 'https://anthonymercadante.github.io/',
   alternateName: ['Synth Rider', 'M E R C S'],
   description:
-    'Software and AI engineer. Built his first computer from scratch in the summer of 2009 at thirteen, spent 2009–2014 salvaging and rebuilding hardware, worked as an audio engineer and music producer from 2016 to 2020 under the aliases Synth Rider and M E R C S — including studio work in Toronto and Los Angeles — returned to software development in 2020, worked as an XR Developer in Mohawk College\'s XR Department from 2023, ran applied computer-vision research at the college in 2023–2024, and has worked as an AI engineer since July 2025.',
+    "Software and AI engineer. Built his first computer from scratch in the summer of 2009 at thirteen, spent 2009–2014 salvaging and rebuilding hardware, worked as an audio engineer and music producer from 2016 to 2020 under the aliases Synth Rider and M E R C S — including studio work in Toronto and Los Angeles — returned to software development in 2020, worked as an XR Developer in Mohawk College's XR Department from 2023, ran applied computer-vision research at the college in 2023–2024, and has worked as an AI engineer since July 2025.",
   knowsAbout: [
     'Computer hardware assembly and repair',
     'Electronics and circuit prototyping',
@@ -82,32 +83,82 @@ const structuredData = {
     'Self-directed investing',
   ],
   alumniOf: [
-    { '@type': 'CollegeOrUniversity', name: 'George Brown College', description: 'Game Programming, Casa Loma campus, 2015. Left after one semester.' },
-    { '@type': 'CollegeOrUniversity', name: 'Mohawk College', description: 'Information Technology, 2015–2016. Left after one semester.' },
-    { '@type': 'CollegeOrUniversity', name: 'Metalworks Institute of Sound and Music Production', description: 'Audio Engineering and Digital Music Production, completed.' },
-    { '@type': 'CollegeOrUniversity', name: 'Humber College', description: 'General Arts and Science, major in philosophy, 2017–2018. Studied concurrently with working in music.' },
-    { '@type': 'CollegeOrUniversity', name: 'Mohawk College', description: 'Software Development, 2020–2025. Graduated June 19, 2025 with two diplomas, including applied research credits earned on a computer-vision project with Professor Steven Adams.' },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'George Brown College',
+      description: 'Game Programming, Casa Loma campus, 2015. Left after one semester.',
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Mohawk College',
+      description: 'Information Technology, 2015–2016. Left after one semester.',
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Metalworks Institute of Sound and Music Production',
+      description: 'Audio Engineering and Digital Music Production, completed.',
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Humber College',
+      description:
+        'General Arts and Science, major in philosophy, 2017–2018. Studied concurrently with working in music.',
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Mohawk College',
+      description:
+        'Software Development, 2020–2025. Graduated June 19, 2025 with two diplomas, including applied research credits earned on a computer-vision project with Professor Steven Adams.',
+    },
   ],
   hasOccupation: [
-    { '@type': 'Occupation', name: 'Audio Engineer and Music Producer', occupationalCategory: 'Music', description: 'Active 2016–2020 as Synth Rider (retro/synthwave) and M E R C S (bass music). Studio work in Toronto, and in Los Angeles in December 2018 with producer Daxz (Jahmar Carter).' },
-    { '@type': 'Occupation', name: 'XR Developer', occupationalCategory: 'Software Engineering', description: 'Mohawk College XR Department, from January 2023. Built a VR cell tower climbing and repair simulator with Korol Contracting, demonstrated at the STAC conference in March 2023, and an electric-vehicle careers experience for the Ontario Vehicle Innovation Network (OVIN). Departmental lead on spatial and binaural audio.' },
-    { '@type': 'Occupation', name: 'Founder, Raethexn Technologies', occupationalCategory: 'Software Engineering', description: 'Founded Raethexn Technologies in 2023 as an XR studio building simulation and workplace training, run alongside the college work — including a climbing experience of his own and a VR workplace-training demo for Purolator in June 2023. The studio has since moved to applied AI systems and memory infrastructure, including OpenMemory.' },
-    { '@type': 'Occupation', name: 'Applied Researcher', occupationalCategory: 'Machine Learning', description: 'Mohawk College IdeaWorks, 2023–2024. Trained an aircraft identification model from scratch, without cloud infrastructure or a pretrained backbone, with Professor Steven Adams. Interviewed by CHCH in February 2024.' },
-    { '@type': 'Occupation', name: 'Software and AI Engineer', occupationalCategory: 'Software Engineering', description: 'From 2020 onward. Built a real estate conversational agent against the OpenAI API in 2023, which led to an engineering role at basl.ai connecting it to live listing data. AI engineer at Clarity from July 2025.' },
+    {
+      '@type': 'Occupation',
+      name: 'Audio Engineer and Music Producer',
+      occupationalCategory: 'Music',
+      description:
+        'Active 2016–2020 as Synth Rider (retro/synthwave) and M E R C S (bass music). Studio work in Toronto, and in Los Angeles in December 2018 with producer Daxz (Jahmar Carter).',
+    },
+    {
+      '@type': 'Occupation',
+      name: 'XR Developer',
+      occupationalCategory: 'Software Engineering',
+      description:
+        'Mohawk College XR Department, from January 2023. Built a VR cell tower climbing and repair simulator with Korol Contracting, demonstrated at the STAC conference in March 2023, and an electric-vehicle careers experience for the Ontario Vehicle Innovation Network (OVIN). Departmental lead on spatial and binaural audio.',
+    },
+    {
+      '@type': 'Occupation',
+      name: 'Founder, Raethexn Technologies',
+      occupationalCategory: 'Software Engineering',
+      description:
+        'Founded Raethexn Technologies in 2023 as an XR studio building simulation and workplace training, run alongside the college work — including a climbing experience of his own and a VR workplace-training demo for Purolator in June 2023. The studio has since moved to applied AI systems and memory infrastructure, including OpenMemory.',
+    },
+    {
+      '@type': 'Occupation',
+      name: 'Applied Researcher',
+      occupationalCategory: 'Machine Learning',
+      description:
+        'Mohawk College IdeaWorks, 2023–2024. Trained an aircraft identification model from scratch, without cloud infrastructure or a pretrained backbone, with Professor Steven Adams. Interviewed by CHCH in February 2024.',
+    },
+    {
+      '@type': 'Occupation',
+      name: 'Software and AI Engineer',
+      occupationalCategory: 'Software Engineering',
+      description:
+        'From 2020 onward. Built a real estate conversational agent against the OpenAI API in 2023, which led to an engineering role at basl.ai connecting it to live listing data. AI engineer at Clarity from July 2025.',
+    },
   ],
 };
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <motion.p
-    className="text-[11px] text-zinc-600 font-mono uppercase tracking-[0.18em]"
-    variants={itemVariants}
-  >
+  <motion.p className="eyebrow" variants={itemVariants}>
     {children}
   </motion.p>
 );
 
 const Story = () => {
   const { hash } = useLocation();
+  const reduceMotion = useReducedMotion();
   const [lightboxChapter, setLightboxChapter] = useState<string | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [activeChapter, setActiveChapter] = useState<string>(chapters[0].id);
@@ -146,7 +197,7 @@ const Story = () => {
         if (visible[0]?.target.id) setActiveChapter(visible[0].target.id);
       },
       // Bias the band toward the top of the viewport so the nav tracks reading position.
-      { rootMargin: '-20% 0px -70% 0px', threshold: 0 }
+      { rootMargin: '-20% 0px -70% 0px', threshold: 0 },
     );
 
     Object.values(sectionRefs.current).forEach((el) => el && observer.observe(el));
@@ -164,9 +215,15 @@ const Story = () => {
     const rail = chip?.parentElement?.parentElement;
     if (!chip || !rail) return;
 
-    const chipMid = chip.offsetLeft + chip.offsetWidth / 2;
-    rail.scrollTo({ left: chipMid - rail.clientWidth / 2, behavior: 'smooth' });
-  }, [activeChapter]);
+    const vertical = window.matchMedia('(min-width: 1100px)').matches;
+    const position = vertical ? chip.offsetTop : chip.offsetLeft;
+    const size = vertical ? chip.offsetHeight : chip.offsetWidth;
+    const viewport = vertical ? rail.clientHeight : rail.clientWidth;
+    rail.scrollTo({
+      [vertical ? 'top' : 'left']: position + size / 2 - viewport / 2,
+      behavior: reduceMotion ? 'auto' : 'smooth',
+    });
+  }, [activeChapter, reduceMotion]);
 
   const openLightbox = (chapterId: string, index: number) => {
     setLightboxChapter(chapterId);
@@ -177,50 +234,60 @@ const Story = () => {
   const trackBySlug = useMemo(() => new Map(tracks.map((t) => [t.slug, t])), []);
   const clipBySlug = useMemo(() => new Map(clips.map((c) => [c.slug, c])), []);
   const salvageTracks = useMemo(
-    () => unattributedTrackSlugs.map((s) => trackBySlug.get(s)).filter((t): t is NonNullable<typeof t> => !!t),
-    [trackBySlug]
+    () =>
+      unattributedTrackSlugs
+        .map((s) => trackBySlug.get(s))
+        .filter((t): t is NonNullable<typeof t> => !!t),
+    [trackBySlug],
   );
 
   return (
     <motion.div
-      className="min-h-screen text-white text-left"
+      className="story-page"
       variants={pageVariants}
-      initial="hidden"
+      initial={false}
       animate="visible"
       exit="exit"
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
 
-      <BackButton />
+      <div className="story-back">
+        <BackButton />
+      </div>
 
       {/* ── Hero ───────────────────────────────────────────────── */}
-      <header className="px-6 pt-20 pb-12 sm:pt-24">
-        <motion.div className="max-w-2xl mx-auto space-y-6" variants={headerVariants} initial="hidden" animate="visible">
+      <header className="story-hero">
+        <motion.div
+          className="story-hero-inner space-y-6"
+          variants={headerVariants}
+          initial={false}
+          animate="visible"
+        >
           <div className="space-y-3">
             <p className="text-[11px] font-mono text-cyan-400 uppercase tracking-[0.18em]">
               Origins · 2009 — 2025
             </p>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.05] bg-gradient-to-br from-white via-zinc-100 to-zinc-500 bg-clip-text text-transparent">
-              How I got here
-            </h1>
+            <h1 className="story-title">How I got here</h1>
           </div>
 
           <div className="space-y-4 text-[15px] leading-relaxed text-zinc-400">
             <p>
-              I built my first computer from scratch in the summer of 2009, when I was thirteen. What
-              happened after that was not a career plan — it was one obsession that kept finding new
-              hardware to live in.
+              I built my first computer from scratch in the summer of 2009, when I was thirteen.
+              What happened after that was not a career plan — it was one obsession that kept
+              finding new hardware to live in.
             </p>
             <p>
               This is the long version, assembled from what survived: seventy-three photographs
               pulled off old phones, eleven audio files that outlived the laptops they were made on,
               and ten video clips, two of them too large to keep here and parked on YouTube instead.
-              Every date here was recovered from file metadata rather than
-              from memory, so the timeline is the machine&apos;s account, not mine — and in one case
-              it reunited a photograph and a recording from the same night, seven years after both
-              were forgotten.
+              Every date here was recovered from file metadata rather than from memory, so the
+              timeline is the machine&apos;s account, not mine — and in one case it reunited a
+              photograph and a recording from the same night, seven years after both were forgotten.
             </p>
-            <p className="text-zinc-500">
+            <p className="text-zinc-400">
               My favourite thing in the world has always been to disappear into electronics.{' '}
               <span className="text-white">That has never once left me.</span>
             </p>
@@ -228,286 +295,320 @@ const Story = () => {
 
           {/* Stats */}
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2"
+            className="story-stats"
             variants={containerVariants}
-            initial="hidden"
+            initial={false}
             animate="visible"
           >
             {stats.map(({ value, label }) => (
-              <motion.div key={label} className="glass-card p-3.5" variants={itemVariants}>
+              <motion.div key={label} className="story-stat" variants={itemVariants}>
                 <div className="text-xl font-semibold text-white tabular-nums">{value}</div>
-                <div className="text-[10px] font-mono text-zinc-500 leading-snug mt-1">{label}</div>
+                <div className="text-[10px] font-mono text-zinc-400 leading-snug mt-1">{label}</div>
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
       </header>
 
-      {/* ── Sticky chapter nav ─────────────────────────────────── */}
-      <nav
-        aria-label="Chapters"
-        className="sticky top-0 z-30 border-y border-white/[0.06] bg-[#050507]/85 backdrop-blur-md"
-      >
-        <div className="max-w-2xl mx-auto px-6">
-          <ul className="flex gap-1 overflow-x-auto py-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {chapters.map((c) => {
-              const a = accentClasses[c.accent];
-              const isActive = activeChapter === c.id;
-              return (
-                <li key={c.id} className="shrink-0">
-                  <a
-                    href={`#${c.id}`}
-                    ref={(el) => { navRefs.current[c.id] = el; }}
-                    className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-mono transition-colors ${
-                      isActive ? `${a.text} bg-white/[0.06]` : 'text-zinc-500 hover:text-zinc-300'
-                    }`}
-                  >
-                    <span className={`w-1 h-1 rounded-full ${isActive ? a.dot : 'bg-zinc-700'}`} />
-                    {c.railLabel}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </nav>
-
-      {/* ── Chapters ───────────────────────────────────────────── */}
-      <div className="max-w-2xl mx-auto px-6 py-12 space-y-20">
-        {chapters.map((chapter, chapterNumber) => {
-          const a = accentClasses[chapter.accent];
-          const chapterPhotoSet = chapterPhotos[chapter.id];
-          const chapterTracks = (chapter.tracks ?? [])
-            .map((s) => trackBySlug.get(s))
-            .filter((t): t is NonNullable<typeof t> => !!t);
-          const chapterClips = (chapter.clips ?? [])
-            .map((s) => clipBySlug.get(s))
-            .filter((c): c is NonNullable<typeof c> => !!c);
-
-          return (
-            <motion.section
-              key={chapter.id}
-              id={chapter.id}
-              ref={(el: HTMLElement | null) => { sectionRefs.current[chapter.id] = el; }}
-              className="scroll-mt-20"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-            >
-              {/* Chapter header */}
-              <motion.div variants={itemVariants} className="space-y-2.5">
-                <div className="flex items-center gap-2.5">
-                  <span className={`w-1.5 h-1.5 rounded-full ${a.dot}`} />
-                  <span className={`text-[11px] font-mono ${a.text} tracking-wide`}>{chapter.era}</span>
-                  <span className="text-[11px] font-mono text-zinc-700 ml-auto tabular-nums">
-                    {String(chapterNumber + 1).padStart(2, '0')} / {String(chapters.length).padStart(2, '0')}
-                  </span>
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">
-                  {chapter.title}
-                </h2>
-                <p className={`text-sm ${a.text} opacity-80`}>{chapter.subtitle}</p>
-              </motion.div>
-
-              {/* Prose */}
-              <motion.div
-                variants={itemVariants}
-                className={`mt-5 space-y-4 text-[15px] leading-relaxed text-zinc-400 border-l pl-5 ${a.border}`}
+      <div className="story-layout">
+        {/* ── Sticky chapter nav ─────────────────────────────────── */}
+        <nav aria-label="Chapters" className="story-navigation">
+          <div className="story-nav-inner">
+            <div className="story-nav-heading">
+              <span className="eyebrow">Contents</span>
+              <span className="mono">
+                {String(chapters.findIndex((c) => c.id === activeChapter) + 1).padStart(2, '0')} /{' '}
+                {chapters.length}
+              </span>
+            </div>
+            <label className="story-chapter-select">
+              <span className="sr-only">Jump to chapter</span>
+              <select
+                value={activeChapter}
+                onChange={(event) => {
+                  window.location.hash = event.target.value;
+                  document.getElementById(event.target.value)?.scrollIntoView({ block: 'start' });
+                }}
               >
-                {chapter.paragraphs.map((p, i) => (
-                  <p key={i}>{renderInline(p)}</p>
+                {chapters.map((c) => (
+                  <option value={c.id} key={c.id}>
+                    {c.era} — {c.title}
+                  </option>
                 ))}
-              </motion.div>
-
-              {/* Out to the project pages that cover this work technically */}
-              {(chapter.links?.length ?? 0) > 0 && (
-                <motion.div variants={itemVariants} className="mt-5 flex flex-wrap gap-2">
-                  {chapter.links!.map((link) => (
-                    <Link
-                      key={link.to}
-                      to={link.to}
-                      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-mono transition-colors ${a.border} ${a.text} hover:bg-white/[0.06]`}
+              </select>
+            </label>
+            <ul className="story-chapter-list">
+              {chapters.map((c) => {
+                const a = accentClasses[c.accent];
+                const isActive = activeChapter === c.id;
+                return (
+                  <li key={c.id} className="story-chapter-item">
+                    <a
+                      href={`#${c.id}`}
+                      aria-current={isActive ? 'location' : undefined}
+                      ref={(el) => {
+                        navRefs.current[c.id] = el;
+                      }}
+                      className={`story-chapter-link ${isActive ? 'is-active' : ''}`}
                     >
-                      {link.label}
-                      <span aria-hidden="true">&rarr;</span>
-                    </Link>
+                      <span
+                        className={`w-1 h-1 rounded-full ${isActive ? a.dot : 'bg-zinc-700'}`}
+                      />
+                      <span>
+                        <small>{c.era}</small>
+                        {c.railLabel}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </nav>
+
+        {/* ── Chapters ───────────────────────────────────────────── */}
+        <div className="story-chapters">
+          {chapters.map((chapter, chapterNumber) => {
+            const a = accentClasses[chapter.accent];
+            const chapterPhotoSet = chapterPhotos[chapter.id];
+            const chapterTracks = (chapter.tracks ?? [])
+              .map((s) => trackBySlug.get(s))
+              .filter((t): t is NonNullable<typeof t> => !!t);
+            const chapterClips = (chapter.clips ?? [])
+              .map((s) => clipBySlug.get(s))
+              .filter((c): c is NonNullable<typeof c> => !!c);
+
+            return (
+              <motion.section
+                key={chapter.id}
+                id={chapter.id}
+                ref={(el: HTMLElement | null) => {
+                  sectionRefs.current[chapter.id] = el;
+                }}
+                className="story-chapter"
+                variants={containerVariants}
+                initial={false}
+                animate="visible"
+                viewport={{ once: true, margin: '-80px' }}
+              >
+                {/* Chapter header */}
+                <motion.div variants={itemVariants} className="space-y-2.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className={`w-1.5 h-1.5 rounded-full ${a.dot}`} />
+                    <span className={`text-[11px] font-mono ${a.text} tracking-wide`}>
+                      {chapter.era}
+                    </span>
+                    <span className="text-[11px] font-mono text-zinc-400 ml-auto tabular-nums">
+                      {String(chapterNumber + 1).padStart(2, '0')} /{' '}
+                      {String(chapters.length).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  <h2 className="story-chapter-title">{chapter.title}</h2>
+                  <p className={`text-sm ${a.text} opacity-80`}>{chapter.subtitle}</p>
+                </motion.div>
+
+                {/* Prose */}
+                <motion.div variants={itemVariants} className="story-prose">
+                  {chapter.paragraphs.map((p, i) => (
+                    <p key={i}>{renderInline(p)}</p>
                   ))}
                 </motion.div>
-              )}
 
-              {/* Photo grid */}
-              {chapterPhotoSet.length > 0 && (
-                <motion.div variants={itemVariants} className="mt-7 space-y-2.5">
-                  <SectionLabel>
-                    {chapterPhotoSet.length} photograph{chapterPhotoSet.length === 1 ? '' : 's'}
-                  </SectionLabel>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    {chapterPhotoSet.map((photo, i) => (
-                      <button
-                        key={photo.slug}
-                        onClick={() => openLightbox(chapter.id, i)}
-                        className={`group relative overflow-hidden rounded-lg border border-white/[0.08] bg-white/[0.02] hover:border-white/25 transition-colors ${
-                          photo.wide ? 'col-span-2' : ''
-                        } ${photo.wide ? 'aspect-[2/1]' : 'aspect-square'}`}
-                        aria-label={`View: ${photo.title}`}
-                      >
-                        <img
-                          src={thumbUrl(photo.slug)}
-                          alt={photo.title}
-                          loading="lazy"
-                          className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.04] transition-all duration-500"
-                        />
-                        {/* Caption scrim */}
-                        <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-2.5 pt-6 pb-2 text-left">
-                          <span className="block text-[10px] font-medium text-white leading-tight truncate">
-                            {photo.title}
-                          </span>
-                          <span className="block text-[9px] font-mono text-zinc-400 mt-px">
-                            {photo.dateLabel}
-                          </span>
-                        </span>
-                      </button>
+                {/* Out to the project pages that cover this work technically */}
+                {(chapter.links?.length ?? 0) > 0 && (
+                  <motion.div variants={itemVariants} className="mt-5 flex flex-wrap gap-2">
+                    {chapter.links!.map((link) => (
+                      <Link key={link.to} to={link.to} className="story-project-link">
+                        {link.label}
+                        <span aria-hidden="true">&rarr;</span>
+                      </Link>
                     ))}
-                  </div>
-                </motion.div>
-              )}
+                  </motion.div>
+                )}
 
-              {/* Audio belonging to this chapter, sitting next to its photographs */}
-              {chapterTracks.length > 0 && (
-                <>
-                  <motion.div variants={itemVariants} className="mt-7 space-y-2">
+                {/* Photo grid */}
+                {chapterPhotoSet.length > 0 && (
+                  <motion.div variants={itemVariants} className="mt-7 space-y-2.5">
                     <SectionLabel>
-                      {chapterTracks.length} surviving {chapterTracks.length === 1 ? 'recording' : 'recordings'}
+                      {chapterPhotoSet.length} photograph{chapterPhotoSet.length === 1 ? '' : 's'}
                     </SectionLabel>
-                    <p className="text-xs text-zinc-500 leading-relaxed">
-                      Transcoded from the original masters. Nothing has been retitled or re-attributed
-                      to look tidier than the evidence allows.
-                    </p>
-                  </motion.div>
-                  <motion.div variants={containerVariants} className="mt-3">
-                    <TrackList tracks={chapterTracks} />
-                  </motion.div>
-                </>
-              )}
 
-              {/* Video belonging to this chapter */}
-              {chapterClips.length > 0 && (
-                <motion.div variants={itemVariants} className="mt-7 space-y-2.5">
-                  <SectionLabel>
-                    {chapterClips.length === 1 ? 'Video' : `Video · ${chapterClips.length} clips`}
-                  </SectionLabel>
-                  <div className="grid grid-cols-1 gap-3">
-                    {chapterClips.map((clip) => (
-                      <div key={clip.slug} className="glass-card overflow-hidden">
-                        {clip.youtubeId ? (
-                          /* Too large for public/story/, so it is embedded rather than served. */
-                          <iframe
-                            className="w-full aspect-video bg-black"
-                            src={`https://www.youtube-nocookie.com/embed/${clip.youtubeId}`}
-                            title={clip.title}
-                            frameBorder="0"
-                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {chapterPhotoSet.map((photo, i) => (
+                        <button
+                          key={photo.slug}
+                          onClick={() => openLightbox(chapter.id, i)}
+                          className={`group relative overflow-hidden rounded-lg border border-white/[0.08] bg-white/[0.02] hover:border-white/25 transition-colors ${
+                            photo.wide ? 'col-span-2' : ''
+                          } ${photo.wide ? 'aspect-[2/1]' : 'aspect-square'}`}
+                          aria-label={`View: ${photo.title}`}
+                        >
+                          <img
+                            src={thumbUrl(photo.slug)}
+                            alt={photo.title}
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.04] transition-all duration-500"
                           />
-                        ) : (
-                          /*
+                          {/* Caption scrim */}
+                          <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-2.5 pt-6 pb-2 text-left">
+                            <span className="block text-[10px] font-medium text-white leading-tight truncate">
+                              {photo.title}
+                            </span>
+                            <span className="block text-[9px] font-mono text-zinc-400 mt-px">
+                              {photo.dateLabel}
+                            </span>
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Audio belonging to this chapter, sitting next to its photographs */}
+                {chapterTracks.length > 0 && (
+                  <>
+                    <motion.div variants={itemVariants} className="mt-7 space-y-2">
+                      <SectionLabel>
+                        {chapterTracks.length} surviving{' '}
+                        {chapterTracks.length === 1 ? 'recording' : 'recordings'}
+                      </SectionLabel>
+                      <p className="text-xs text-zinc-400 leading-relaxed">
+                        Transcoded from the original masters. Nothing has been retitled or
+                        re-attributed to look tidier than the evidence allows.
+                      </p>
+                    </motion.div>
+                    <motion.div variants={containerVariants} className="mt-3">
+                      <TrackList tracks={chapterTracks} />
+                    </motion.div>
+                  </>
+                )}
+
+                {/* Video belonging to this chapter */}
+                {chapterClips.length > 0 && (
+                  <motion.div variants={itemVariants} className="mt-7 space-y-2.5">
+                    <SectionLabel>
+                      {chapterClips.length === 1 ? 'Video' : `Video · ${chapterClips.length} clips`}
+                    </SectionLabel>
+                    <div className="grid grid-cols-1 gap-3">
+                      {chapterClips.map((clip) => (
+                        <div key={clip.slug} className="glass-card overflow-hidden">
+                          {clip.youtubeId ? (
+                            /* Too large for public/story/, so it is embedded rather than served. */
+                            <MediaEmbed
+                              src={`https://www.youtube-nocookie.com/embed/${clip.youtubeId}`}
+                              title={clip.title}
+                            />
+                          ) : (
+                            /*
                             Phone-shot vertical clips get a fixed height and their
                             natural width instead of filling the column: 9:16 across
                             a text column is absurd, and cropping to 16:9 throws
                             away most of the frame.
                           */
-                          <video
-                            controls
-                            preload="none"
-                            playsInline
-                            poster={posterUrl(clip.slug)}
-                            className={
-                              clip.portrait
-                                ? 'mx-auto h-[min(70vh,520px)] max-w-full bg-black'
-                                : `w-full bg-black object-cover ${clip.square ? 'aspect-square' : 'aspect-video'}`
-                            }
-                            src={videoUrl(clip.slug)}
-                          >
-                            <track kind="captions" />
-                          </video>
-                        )}
-                        <div className="p-4">
-                          <div className="flex items-baseline gap-2 flex-wrap">
-                            <h4 className="text-sm font-medium text-white">{clip.title}</h4>
-                            <span className="text-[11px] font-mono text-zinc-600 tabular-nums ml-auto">
-                              {clip.duration ?? 'YouTube'}
-                            </span>
+                            <video
+                              controls
+                              onPlay={(event) => {
+                                const playing = event.currentTarget;
+                                document.querySelectorAll('audio, video').forEach((media) => {
+                                  if (media !== playing) (media as HTMLMediaElement).pause();
+                                });
+                              }}
+                              preload="none"
+                              playsInline
+                              poster={posterUrl(clip.slug)}
+                              className={
+                                clip.portrait
+                                  ? 'mx-auto h-[min(70vh,520px)] max-w-full bg-black'
+                                  : `w-full bg-black object-cover ${clip.square ? 'aspect-square' : 'aspect-video'}`
+                              }
+                              src={videoUrl(clip.slug)}
+                            >
+                              <track kind="captions" />
+                            </video>
+                          )}
+                          <div className="p-4">
+                            <div className="flex items-baseline gap-2 flex-wrap">
+                              <h4 className="text-sm font-medium text-white">{clip.title}</h4>
+                              <span className="text-[11px] font-mono text-zinc-400 tabular-nums ml-auto">
+                                {clip.duration ?? 'YouTube'}
+                              </span>
+                            </div>
+                            <p className={`text-[11px] font-mono mt-1 ${a.text} opacity-70`}>
+                              {clip.when}
+                            </p>
+                            <p className="text-xs text-zinc-400 leading-relaxed mt-2">
+                              {clip.note}
+                            </p>
                           </div>
-                          <p className={`text-[11px] font-mono mt-1 ${a.text} opacity-70`}>{clip.when}</p>
-                          <p className="text-xs text-zinc-400 leading-relaxed mt-2">{clip.note}</p>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* The undateable remainder, parked after the last music chapter */}
-              {chapter.id === 'los-angeles' && salvageTracks.length > 0 && (
-                <>
-                  <motion.div variants={itemVariants} className="mt-9 space-y-2">
-                    <SectionLabel>The rest of what survived · {salvageTracks.length} files</SectionLabel>
-                    <p className="text-xs text-zinc-500 leading-relaxed">
-                      These carry no date, no title worth the name, and no alias — just a filename and
-                      whatever the file format itself gives away. They could be from anywhere across the
-                      four years. Grouped here because &ldquo;this is what was left on the drive&rdquo; is
-                      the only label the evidence actually supports.
-                    </p>
+                      ))}
+                    </div>
                   </motion.div>
-                  <motion.div variants={containerVariants} className="mt-3">
-                    <TrackList tracks={salvageTracks} />
-                  </motion.div>
-                </>
-              )}
-            </motion.section>
-          );
-        })}
+                )}
 
-        {/* ── Closing ──────────────────────────────────────────── */}
-        <motion.section
-          className="pt-4"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-        >
-          <motion.div variants={itemVariants} className="glass-card p-6 space-y-4">
-            <SectionLabel>The through-line</SectionLabel>
-            <p className="text-[15px] leading-relaxed text-zinc-300">
-              A boy who took apart other people&apos;s broken computers because he could not afford new
-              ones learned to read hardware. A producer who spent four years chasing why a mix was
-              &ldquo;somehow wrong&rdquo; learned to debug systems by ear. Someone who studied philosophy
-              at night learned to find the assumption holding up an argument.
-            </p>
-            <p className="text-[15px] leading-relaxed text-zinc-400">
-              And three times — at George Brown, at Mohawk, and in a studio in Los Angeles with
-              everything apparently going right — I left something that looked good on paper because I
-              could see what it would actually cost. That turned out to be the most useful skill of the
-              lot.
-            </p>
-            <p className="text-[15px] leading-relaxed text-zinc-400">
-              Then a college lab where nobody had ten years of experience because the field was not
-              ten years old, and where the only skill that separated people was whether they could
-              teach themselves something quickly. Everything since — the research, the models, the
-              engineering work — is that same skill, pointed somewhere new.
-            </p>
-            <p className="text-[15px] leading-relaxed text-zinc-400">
-              None of it was a detour. It is the whole toolkit, and I use all of it every day.
-            </p>
-            <p className="text-xs font-mono text-zinc-600 pt-1">
-              This chapter covers 2009 to July 2025. The rest — Raethexn Technologies and the
-              current AI work — continues from here.
-            </p>
-          </motion.div>
-        </motion.section>
+                {/* The undateable remainder, parked after the last music chapter */}
+                {chapter.id === 'los-angeles' && salvageTracks.length > 0 && (
+                  <>
+                    <motion.div variants={itemVariants} className="mt-9 space-y-2">
+                      <SectionLabel>
+                        The rest of what survived · {salvageTracks.length} files
+                      </SectionLabel>
+                      <p className="text-xs text-zinc-400 leading-relaxed">
+                        These carry no date, no title worth the name, and no alias — just a filename
+                        and whatever the file format itself gives away. They could be from anywhere
+                        across the four years. Grouped here because &ldquo;this is what was left on
+                        the drive&rdquo; is the only label the evidence actually supports.
+                      </p>
+                    </motion.div>
+                    <motion.div variants={containerVariants} className="mt-3">
+                      <TrackList tracks={salvageTracks} />
+                    </motion.div>
+                  </>
+                )}
+              </motion.section>
+            );
+          })}
+
+          {/* ── Closing ──────────────────────────────────────────── */}
+          <motion.section
+            className="story-closing"
+            variants={containerVariants}
+            initial={false}
+            animate="visible"
+            viewport={{ once: true, margin: '-80px' }}
+          >
+            <motion.div variants={itemVariants} className="story-closing-content space-y-4">
+              <SectionLabel>The through-line</SectionLabel>
+              <p className="text-[15px] leading-relaxed text-zinc-300">
+                A boy who took apart other people&apos;s broken computers because he could not
+                afford new ones learned to read hardware. A producer who spent four years chasing
+                why a mix was &ldquo;somehow wrong&rdquo; learned to debug systems by ear. Someone
+                who studied philosophy at night learned to find the assumption holding up an
+                argument.
+              </p>
+              <p className="text-[15px] leading-relaxed text-zinc-400">
+                And three times — at George Brown, at Mohawk, and in a studio in Los Angeles with
+                everything apparently going right — I left something that looked good on paper
+                because I could see what it would actually cost. That turned out to be the most
+                useful skill of the lot.
+              </p>
+              <p className="text-[15px] leading-relaxed text-zinc-400">
+                Then a college lab where nobody had ten years of experience because the field was
+                not ten years old, and where the only skill that separated people was whether they
+                could teach themselves something quickly. Everything since — the research, the
+                models, the engineering work — is that same skill, pointed somewhere new.
+              </p>
+              <p className="text-[15px] leading-relaxed text-zinc-400">
+                None of it was a detour. It is the whole toolkit, and I use all of it every day.
+              </p>
+              <p className="text-xs font-mono text-zinc-400 pt-1">
+                This chapter covers 2009 to July 2025. The rest — Raethexn Technologies and the
+                current AI work — continues from here.
+              </p>
+            </motion.div>
+          </motion.section>
+        </div>
       </div>
 
       <Lightbox
@@ -516,8 +617,6 @@ const Story = () => {
         onClose={() => setLightboxIndex(null)}
         onNavigate={setLightboxIndex}
       />
-
-      <LandscapeOverlay />
     </motion.div>
   );
 };

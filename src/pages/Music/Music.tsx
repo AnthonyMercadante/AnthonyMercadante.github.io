@@ -1,63 +1,107 @@
-import React from 'react';
-import coverPhoto from '../../assets/images/coverfinal.jpg'; 
+import { Link } from 'react-router-dom';
+import PageShell from '../../components/PageShell';
+import MediaEmbed from '../../components/MediaEmbed';
+import TrackList from '../../components/TrackList';
+import coverPhoto from '../../assets/images/coverfinal.jpg';
+import { tracks } from '../Story/storyData';
 
-const Music = () => {
-    return (
-        <div className="flex flex-col items-center justify-center text-white p-5">
-            <div className="w-full max-w-xs md:max-w-lg lg:max-w-4xl px-4 py-4">
-                {/* Title for SoundCloud Embed */}
-                <h2 className="text-xl md:text-2xl text-center mb-4">Latest DJ Mix</h2>
-                <iframe 
-                    title="SoundCloud Player" 
-                    width="100%" 
-                    height="300" 
-                    scrolling="no" 
-                    frameBorder="no" 
-                    allow="autoplay"
-                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1928549981&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-                </iframe>
-                <div className="text-xs mt-2 text-gray-400 text-center">
-                    <a href="https://soundcloud.com/anthony_mercadante" title="Anthony Mercadante" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
-                        Anthony Mercadante
-                    </a> · 
-                    <a href="https://soundcloud.com/raethexn/radio-show-001" title="Radio Show #001" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
-                        Radio Show #002
-                    </a>
-                </div>
-                <iframe 
-                    title="SoundCloud Player" 
-                    width="100%" 
-                    height="300" 
-                    scrolling="no" 
-                    frameBorder="no" 
-                    allow="autoplay"
-                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1798062109&color=%23ff5500&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=true"
-                    className="shadow-lg rounded-lg">
-                </iframe>
-                <div className="text-xs mt-2 text-gray-400 text-center">
-                    <a href="https://soundcloud.com/anthony_mercadante" title="Anthony Mercadante" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
-                        Anthony Mercadante
-                    </a> · 
-                    <a href="https://soundcloud.com/anthony_mercadante/radio-show-001" title="Radio Show #001" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
-                        Radio Show #001
-                    </a>
-                </div>
-            </div>
+const featuredRecordings = tracks.slice(0, 2);
 
-            {/* Event Cover Photo */}
-            <div className="mt-6 w-full max-w-xs md:max-w-lg lg:max-w-4xl">
-                <h2 className="text-xl md:text-2xl text-center mb-4">Upcoming Event</h2>
-                <img src={coverPhoto} alt="Event Cover" className="rounded-lg shadow-lg"/>
-            </div>
+const mixes = [
+  { name: 'Radio Show #002', id: '1928549981' },
+  { name: 'Radio Show #001', id: '1798062109' },
+];
 
-            {/* Event Ticket Link */}
-            <div className="mt-6 mb-6 text-center">
-                <a href="https://www.eventbrite.com/e/the-brunch-therapy-unlimited-alcohol-and-food-tickets-885912055807" target="_blank" rel="noopener noreferrer" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Buy Tickets
-                </a>
-            </div>
+export default function Music() {
+  return (
+    <PageShell
+      title="Music"
+      eyebrow="The other kind of engineering"
+      description="Studio recordings, DJ mixes, and the years spent learning to listen."
+      className="music-page"
+    >
+      <section className="music-archive" aria-labelledby="recordings-heading">
+        <div>
+          <p className="eyebrow">2016–2020 / The studio years</p>
+          <h2 id="recordings-heading">
+            What survived
+            <br />
+            the hard drives.
+          </h2>
+          <p>
+            {tracks.length} recordings, alongside the photographs and stories of the rooms they were
+            made in. Original titles and attribution, wherever the evidence supports them.
+          </p>
+          <Link className="text-link" to="/story#metalworks">
+            Explore all recordings & their stories <span aria-hidden="true">→</span>
+          </Link>
         </div>
-    );
+        <img
+          src={`${process.env.PUBLIC_URL}/story/photos/thumb/metalworks-studio-6.jpg`}
+          alt="Metalworks Studio 6, from the personal archive"
+          width="640"
+          height="480"
+          loading="lazy"
+        />
+      </section>
+      <section className="music-recordings" aria-labelledby="featured-recordings-heading">
+        <div className="section-heading">
+          <h2 className="eyebrow" id="featured-recordings-heading">
+            Two recordings from the archive
+          </h2>
+          <span>Press play</span>
+        </div>
+        <TrackList tracks={featuredRecordings} />
+      </section>
+      <section aria-labelledby="mix-heading">
+        <div className="section-heading">
+          <h2 id="mix-heading" className="eyebrow">
+            From the decks
+          </h2>
+          <span>Mix archive</span>
+        </div>
+        <p className="mix-availability">
+          The original SoundCloud uploads are currently unavailable. Their archive entries and
+          original players are kept here.
+        </p>
+        <div className="mix-grid">
+          {mixes.map((mix) => (
+            <article key={mix.id}>
+              <MediaEmbed
+                title={mix.name}
+                provider="SoundCloud"
+                availabilityNote="Original upload unavailable · Check SoundCloud"
+                src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${mix.id}&color=%23c5dfaa&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=true`}
+              />
+              <div className="mix-caption">
+                <h3>{mix.name}</h3>
+                <span>Anthony Mercadante</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="music-event" aria-labelledby="event-heading">
+        <div>
+          <p className="eyebrow">Event archive</p>
+          <h2 id="event-heading">Behind the decks</h2>
+          <a
+            className="text-link"
+            href="https://www.eventbrite.com/e/the-brunch-therapy-unlimited-alcohol-and-food-tickets-885912055807"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Original event listing <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <img
+          src={coverPhoto}
+          alt="The Brunch Therapy event artwork"
+          loading="lazy"
+          width="2700"
+          height="1350"
+        />
+      </section>
+    </PageShell>
+  );
 }
-
-export default Music;

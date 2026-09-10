@@ -31,6 +31,7 @@ const TrackList: React.FC<{ tracks: Track[] }> = ({ tracks }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [playing, setPlaying] = useState(false);
+  const [error, setError] = useState(false);
   const [position, setPosition] = useState(0);
   /** Real duration off the decoded file; falls back to the catalogued value. */
   const [loadedDuration, setLoadedDuration] = useState(0);
@@ -41,15 +42,32 @@ const TrackList: React.FC<{ tracks: Track[] }> = ({ tracks }) => {
 
     const onTime = () => setPosition(el.currentTime);
     const onMeta = () => setLoadedDuration(el.duration);
+    const onPause = () => setPlaying(false);
+    const onPlay = () => {
+      setPlaying(true);
+      document.querySelectorAll('audio, video').forEach((media) => {
+        if (media !== el) (media as HTMLMediaElement).pause();
+      });
+    };
+    const onError = () => {
+      setPlaying(false);
+      setError(true);
+    };
     const onEnd = () => {
       setPlaying(false);
       setPosition(0);
     };
 
+    el.addEventListener('play', onPlay);
+    el.addEventListener('pause', onPause);
+    el.addEventListener('error', onError);
     el.addEventListener('timeupdate', onTime);
     el.addEventListener('loadedmetadata', onMeta);
     el.addEventListener('ended', onEnd);
     return () => {
+      el.removeEventListener('play', onPlay);
+      el.removeEventListener('pause', onPause);
+      el.removeEventListener('error', onError);
       el.removeEventListener('timeupdate', onTime);
       el.removeEventListener('loadedmetadata', onMeta);
       el.removeEventListener('ended', onEnd);
@@ -61,8 +79,12 @@ const TrackList: React.FC<{ tracks: Track[] }> = ({ tracks }) => {
    * the button rather than leaving it showing a pause icon over silence.
    */
   const start = (el: HTMLAudioElement) => {
+    setError(false);
     setPlaying(true);
-    el.play().catch(() => setPlaying(false));
+    el.play().catch(() => {
+      setPlaying(false);
+      setError(true);
+    });
   };
 
   const toggle = (track: Track) => {
@@ -95,7 +117,7 @@ const TrackList: React.FC<{ tracks: Track[] }> = ({ tracks }) => {
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 archive-tracks">
       {/* eslint-disable-next-line jsx-a11y/media-has-caption -- instrumental archive audio */}
       <audio ref={audioRef} preload="none" />
 
@@ -116,7 +138,7 @@ const TrackList: React.FC<{ tracks: Track[] }> = ({ tracks }) => {
               <button
                 onClick={() => toggle(track)}
                 aria-label={`${isPlaying ? 'Pause' : 'Play'} ${track.title}`}
-                className={`shrink-0 mt-0.5 flex items-center justify-center w-9 h-9 rounded-full border transition-all ${
+                className={`shrink-0 mt-0.5 flex items-center justify-center w-11 h-11 rounded-full border transition-all ${
                   isActive
                     ? 'border-fuchsia-400/40 bg-fuchsia-400/10 text-fuchsia-300'
                     : 'border-white/[0.10] bg-white/[0.03] text-zinc-400 hover:text-white hover:border-white/25'
@@ -142,21 +164,27 @@ const TrackList: React.FC<{ tracks: Track[] }> = ({ tracks }) => {
                       {track.alias}
                     </span>
                   )}
-                  <span className="text-[11px] font-mono text-zinc-600 tabular-nums ml-auto">
+                  <span className="text-[11px] font-mono text-zinc-400 tabular-nums ml-auto">
                     {fmt(duration)}
                   </span>
                 </div>
 
-                <p className="text-[11px] font-mono text-zinc-500 mt-1">
+                <p className="text-[11px] font-mono text-zinc-400 mt-1">
                   {track.when} · {track.source}
                 </p>
 
                 <p className="text-xs text-zinc-400 leading-relaxed mt-2">{track.note}</p>
 
+                {isActive && error && (
+                  <p role="status" className="text-xs text-amber-200 mt-2">
+                    This recording couldn’t play. Tap play to try again.
+                  </p>
+                )}
+
                 {/* Scrubber, only mounted for the active track */}
                 {isActive && (
                   <div className="flex items-center gap-2.5 mt-3">
-                    <span className="text-[10px] font-mono text-zinc-500 tabular-nums w-8">
+                    <span className="text-[10px] font-mono text-zinc-400 tabular-nums w-8">
                       {fmt(position)}
                     </span>
                     <input
@@ -167,19 +195,20 @@ const TrackList: React.FC<{ tracks: Track[] }> = ({ tracks }) => {
                       value={Math.min(position, duration || 0)}
                       onChange={(e) => seek(Number(e.target.value))}
                       aria-label={`Seek within ${track.title}`}
-                      className="flex-1 h-1 appearance-none rounded-full bg-white/10 accent-fuchsia-400 cursor-pointer
+                      aria-valuetext={`${fmt(position)} of ${fmt(duration)}`}
+                      className="track-seek flex-1 h-1 appearance-none rounded-full bg-white/10 accent-fuchsia-400 cursor-pointer
                                  [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3
                                  [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full
                                  [&::-webkit-slider-thumb]:bg-fuchsia-400
                                  [&::-webkit-slider-thumb]:shadow-[0_0_10px_2px_rgba(232,121,249,0.5)]"
                     />
-                    <span className="text-[10px] font-mono text-zinc-600 tabular-nums w-8 text-right">
+                    <span className="text-[10px] font-mono text-zinc-400 tabular-nums w-8 text-right">
                       -{fmt(Math.max(0, (duration || 0) - position))}
                     </span>
                   </div>
                 )}
 
-                <p className="text-[10px] font-mono text-zinc-700 mt-2">
+                <p className="text-[10px] font-mono text-zinc-400 mt-2">
                   {attributionLabel[track.attribution]}
                 </p>
               </div>
