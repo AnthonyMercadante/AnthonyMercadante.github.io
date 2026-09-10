@@ -1,40 +1,40 @@
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
-let theme = createTheme({
+export default createTheme({
   palette: {
     mode: 'dark',
-    background: {
-      default: '#050507',
-    },
-    text: {
-      primary: '#fff',
-    },
-    // ... other theme options
+    primary: { main: '#c5dfaa' },
+    background: { default: '#0b1012', paper: '#141a1d' },
+    text: { primary: '#f0efe8', secondary: '#959e9e' },
+    divider: 'rgba(213,225,219,.14)',
   },
   typography: {
     fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, sans-serif',
+    body1: { fontSize: '1rem', lineHeight: 1.85, color: '#c0c4c2' },
+    h1: {
+      fontSize: 'clamp(38px, 5vw, 68px)',
+      lineHeight: 1.06,
+      fontWeight: 500,
+      letterSpacing: '-.055em',
+    },
+    h2: { fontSize: '1.6rem', lineHeight: 1.25, fontWeight: 500, letterSpacing: '-.03em' },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          backgroundColor: '#1a1a1a',
-          color: '#fff', 
-          padding: '10px 20px', 
-          textTransform: 'none', 
-          fontSize: '1rem', 
-          borderRadius: '8px', 
-          boxShadow: 'none', 
-          '&:hover': {
-            backgroundColor: '#333',
-          },
+          minHeight: 46,
+          color: '#f0efe8',
+          padding: '10px 18px',
+          textTransform: 'none',
+          fontSize: '.8125rem',
+          borderRadius: 5,
+          border: '1px solid rgba(213,225,219,.2)',
+          backgroundColor: '#141a1d',
+          boxShadow: 'none',
+          '&:hover': { backgroundColor: '#1b2225', boxShadow: 'none' },
         },
       },
     },
   },
-  // ... other theme options like typography
 });
-
-theme = responsiveFontSizes(theme);
-
-export default theme;

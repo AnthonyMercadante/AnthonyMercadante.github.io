@@ -3,7 +3,7 @@
  * single tile style can tint them on hover — see HomePage's socialLinks.
  */
 
-const box = "w-[26px] h-[26px]";
+const box = 'w-[26px] h-[26px]';
 const stroke = `${box} fill-none stroke-current`;
 
 export const GitHubIcon = () => (
@@ -14,12 +14,19 @@ export const GitHubIcon = () => (
 
 export const StravaIcon = () => (
   <svg viewBox="0 0 24 24" className={`${box} fill-current`} aria-hidden>
-    <path d="M12 2l5.5 10H13l-1 2h6.5L12 22 5.5 14H11l1-2H5.5L12 2z" />
+    <path d="M10 2L3 15h4.2L10 9.8l2.8 5.2H17L10 2zm7 13l-2.3 4.2L12.5 15H9l5.7 9L21 15h-4z" />
   </svg>
 );
 
 export const InstagramIcon = () => (
-  <svg viewBox="0 0 24 24" className={stroke} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+  <svg
+    viewBox="0 0 24 24"
+    className={stroke}
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden
+  >
     <rect x="2.75" y="2.75" width="18.5" height="18.5" rx="5.5" />
     <circle cx="12" cy="12" r="4.25" />
     <circle cx="17.4" cy="6.6" r="1.15" className="fill-current stroke-none" />
@@ -58,21 +65,44 @@ export const AppleMusicIcon = () => (
 
 /** Goodreads' serif "g" with its long descender. */
 export const GoodreadsIcon = () => (
-  <svg viewBox="0 0 24 24" className={stroke} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+  <svg
+    viewBox="0 0 24 24"
+    className={stroke}
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden
+  >
     <circle cx="10.5" cy="9" r="5" />
     <path d="M15.5 4v11.5a5.2 5.2 0 0 1-9.4 3.1" />
   </svg>
 );
 
 export const MailIcon = () => (
-  <svg viewBox="0 0 24 24" className={stroke} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+  <svg
+    viewBox="0 0 24 24"
+    className={stroke}
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden
+  >
     <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
     <path d="M3 7l9 6 9-6" />
   </svg>
 );
 
 export const ArrowUpRightIcon = () => (
-  <svg viewBox="0 0 12 12" className="w-3 h-3 inline-block" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+  <svg
+    viewBox="0 0 12 12"
+    className="w-3 h-3 inline-block"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.3"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden
+  >
     <path d="M3.5 8.5L8.5 3.5M4.5 3.5h4v4" />
   </svg>
 );

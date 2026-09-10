@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0;url=index.html">
-  <script>
-    sessionStorage.redirect = location.href.split('/').slice(3).join('/');
-  </script>
-</head>
-<body>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Anthony Mercadante</title>
+    <script>
+      try {
+        sessionStorage.setItem('redirect', location.pathname + location.search + location.hash);
+        location.replace('/');
+      } catch (_) {}
+    </script>
+  </head>
+  <body>
+    <p>Return to <a href="/">Anthony Mercadante’s website</a>.</p>
+  </body>
 </html>
