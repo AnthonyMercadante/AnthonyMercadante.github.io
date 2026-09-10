@@ -27,6 +27,7 @@ const OpenFlowMachine = lazy(() => import('./pages/OpenFlowMachine/OpenFlowMachi
 const CellTower = lazy(() => import('./pages/CellTower/CellTower'));
 const OVIN = lazy(() => import('./pages/OVIN/OVIN'));
 const Projects = lazy(() => import('./pages/Projects/Projects'));
+const OpenMemory = lazy(() => import('./pages/OpenMemory/OpenMemory'));
 const RealEstateBot = lazy(() => import('./pages/RealEstateBot/RealEstateBot'));
 const BotInteraction = lazy(() => import('./pages/BotInteraction/BotInteraction'));
 const BattleShipBot = lazy(() => import('./pages/BattleShipBot/BattleShipBot'));
@@ -140,6 +141,7 @@ function Site() {
               <Route path="/CellTower" element={<CellTower />} />
               <Route path="/OVIN" element={<OVIN />} />
               <Route path="/Projects" element={<Projects />} />
+              <Route path="/OpenMemory" element={<OpenMemory />} />
               <Route path="/RealEstateBot" element={<RealEstateBot />} />
               <Route path="/BotInteraction" element={<BotInteraction />} />
               <Route path="/BattleShipBot" element={<BattleShipBot />} />

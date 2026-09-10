@@ -10,6 +10,7 @@ export const routeInfo: Record<string, { title: string; parent: string; parentLa
   '/skills': { title: 'Skills & stack', parent: '/portfolio', parentLabel: 'The work' },
   '/workexperience': { title: 'Work experience', parent: '/portfolio', parentLabel: 'The work' },
   '/projects': { title: 'Projects', parent: '/portfolio', parentLabel: 'The work' },
+  '/openmemory': { title: 'OpenMemory', parent: '/Projects', parentLabel: 'Projects' },
   '/xrdeveloper': { title: 'XR projects', parent: '/Projects', parentLabel: 'Projects' },
   '/automationassistant': {
     title: 'Automation Assistant',
