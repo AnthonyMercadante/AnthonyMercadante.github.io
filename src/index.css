@@ -467,6 +467,48 @@ code,
 .featured-project .tags {
   margin-top: 25px;
 }
+.featured-project > p.featured-thesis {
+  font-size: 21px;
+  line-height: 1.4;
+  letter-spacing: -0.035em;
+  color: var(--paper);
+  margin-bottom: 14px;
+}
+.featured-case-link {
+  margin-top: 18px;
+}
+.featured-project .featured-footnote {
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+.featured-footnote a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--text);
+}
+.featured-footnote a:hover {
+  color: var(--accent);
+}
+.bio-project-link {
+  color: var(--paper);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
+.bio-project-link:hover {
+  color: var(--accent);
+}
+.story-current-project {
+  border-left: 1px solid var(--line);
+  padding-left: 18px;
+  margin-top: 24px;
+}
+.story-current-project .text-link {
+  font-size: 12px;
+}
 .featured-footnote {
   display: flex;
   justify-content: space-between;

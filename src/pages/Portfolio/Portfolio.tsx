@@ -3,6 +3,7 @@ import PageShell, { Tags } from '../../components/PageShell';
 import { ArrowUpRightIcon } from '../../components/SocialIcons';
 import { chapters, photos } from '../Story/storyData';
 import { featuredProjects, archiveCategories } from '../../data/projects';
+import { openMemory } from '../../data/openMemory';
 
 const archivePhotos = ['the-workbench', 'metalworks-studio-6', 'xr-desk-day-one'].map(
   (slug) => photos[slug],
@@ -49,24 +50,27 @@ export default function Portfolio() {
             <span className="status-dot" aria-hidden="true" />
             Currently building
           </p>
-          <a
-            href="https://github.com/Raethexn-Technologies/OpenMemory"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="featured-title-link"
-          >
+          <Link to={openMemory.route} className="featured-title-link">
             <h2 id="featured-title">OpenMemory</h2>
             <ArrowUpRightIcon />
-            <span className="sr-only"> on GitHub (opens in a new tab)</span>
-          </a>
+            <span className="sr-only"> case study</span>
+          </Link>
+          <p className="featured-thesis">{openMemory.thesis}</p>
           <p>
-            Portable AI memory on the Internet Computer, with Physarum-inspired graph dynamics for
-            recall that strengthens along the paths you actually use.
+            Bring ChatGPT, Claude, and Gemini exports into a local history you can question and
+            trace back to source. Built on deeper work in cross-agent memory, retrieval, and
+            ownership.
           </p>
-          <Tags items={['PHP', 'ICP', 'Knowledge Graph', 'Raethexn']} />
+          <Tags items={openMemory.tags} label="Project themes" />
+          <Link className="text-link featured-case-link" to={openMemory.route}>
+            Read the project story <span aria-hidden="true">→</span>
+          </Link>
           <div className="featured-footnote">
             <span>Raethexn Technologies</span>
-            <span>Open source ↗</span>
+            <a href={openMemory.repository} target="_blank" rel="noopener noreferrer">
+              GitHub <span aria-hidden="true">↗</span>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
         </section>
         <nav className="explore-list" aria-label="Explore the work">

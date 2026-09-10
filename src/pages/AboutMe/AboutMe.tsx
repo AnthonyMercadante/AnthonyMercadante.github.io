@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PageShell, { TextLink } from '../../components/PageShell';
 import profileImage from '../../assets/images/professional-photo.jpg';
+import { openMemory } from '../../data/openMemory';
 
 export default function AboutMe() {
   return (
@@ -33,10 +34,13 @@ export default function AboutMe() {
           </p>
           <p>
             I started programming at 14. My current focus is on{' '}
-            <span className="bio-highlight">AI agent architectures</span>, LLM integrations, memory
-            infrastructure, and natural language interfaces. Recent work includes{' '}
-            <span className="bio-highlight">OpenMemory</span> — portable AI memory on ICP with
-            Physarum-inspired graph dynamics — and the{' '}
+            <span className="bio-highlight">AI agent architectures</span>, memory and retrieval, and
+            natural language interfaces, with a growing interest in provenance and privacy. Recent
+            work includes{' '}
+            <Link className="bio-project-link" to={openMemory.route}>
+              OpenMemory
+            </Link>{' '}
+            — bringing AI history across providers into a memory layer the user controls — and the{' '}
             <span className="bio-highlight">AircraftIdentificationAI</span> project, built in
             partnership with Canada's National Air Force Museum.
           </p>

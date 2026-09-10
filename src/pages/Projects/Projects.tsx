@@ -2,15 +2,17 @@ import { Link } from 'react-router-dom';
 import PageShell, { Tags } from '../../components/PageShell';
 import StoryLink from '../../components/StoryLink';
 import { featuredProjects, archiveCategories } from '../../data/projects';
+import { openMemory } from '../../data/openMemory';
 
 const descriptions: Record<string, string> = {
-  OpenMemory: 'Portable AI memory with Physarum-inspired graph dynamics.',
+  OpenMemory: openMemory.summary,
   AircraftIdentificationAI: 'Computer vision for historical aircraft identification.',
   'FlowChannel-XR': 'An open-channel water flow simulation for engineering education.',
   'nl2sql-poc': 'A proof of concept for natural language to SQL.',
   StockPeek: 'A command-line project for exploring financial data.',
 };
 const caseStudies: Record<string, string> = {
+  OpenMemory: openMemory.route,
   AircraftIdentificationAI: '/AircraftIdentifierAI',
   'FlowChannel-XR': '/OpenFlowMachine',
 };
@@ -36,21 +38,35 @@ export default function Projects() {
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div className="repository-body">
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="repository-title"
-                >
-                  <h3>{name}</h3>
-                  <span aria-hidden="true">↗</span>
-                  <span className="sr-only"> on GitHub (opens in a new tab)</span>
-                </a>
+                {name === openMemory.name ? (
+                  <Link to={openMemory.route} className="repository-title">
+                    <h3>{name}</h3>
+                    <span aria-hidden="true">→</span>
+                    <span className="sr-only"> case study</span>
+                  </Link>
+                ) : (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="repository-title"
+                  >
+                    <h3>{name}</h3>
+                    <span aria-hidden="true">↗</span>
+                    <span className="sr-only"> on GitHub (opens in a new tab)</span>
+                  </a>
+                )}
                 <p>{descriptions[name]}</p>
                 <Tags items={[lang, ...tags]} />
               </div>
               <div className="repository-context">
                 {studio && <span className="studio-label">Raethexn Technologies</span>}
+                {name === openMemory.name && (
+                  <a className="text-link" href={url} target="_blank" rel="noopener noreferrer">
+                    Repository <span aria-hidden="true">↗</span>
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                )}
                 {caseStudies[name] && (
                   <Link className="text-link" to={caseStudies[name]}>
                     Case study <span aria-hidden="true">→</span>

@@ -3,13 +3,14 @@ import ProjectIconImage2 from '../assets/images/BotProjects.png';
 import ProjectIconImage3 from '../assets/images/ReactProjectIcon.png';
 import ProjectIconImage4 from '../assets/images/Machine Learning.webp';
 import ProjectIconImage6 from '../assets/images/video-games-projects.png';
+import { openMemory } from './openMemory';
 
 export const featuredProjects = [
   {
-    name: 'OpenMemory',
-    lang: 'PHP',
-    tags: ['ICP', 'AI Memory', 'Knowledge Graph'],
-    url: 'https://github.com/Raethexn-Technologies/OpenMemory',
+    name: openMemory.name,
+    lang: 'Laravel / Vue',
+    tags: openMemory.tags,
+    url: openMemory.repository,
     studio: true,
     chapter: 'raethexn',
   },
