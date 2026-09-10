@@ -1,10 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import LandscapeOverlay from '../../components/LandscapeOverlay';
-import BackButton from '../../components/BackButton';
-import { motion } from 'framer-motion';
+import PageShell, { Tags } from '../../components/PageShell';
 import StoryLink from '../../components/StoryLink';
-import { pageVariants, containerVariants, itemVariants, headerVariants, cardHover } from '../../animations';
 
 interface WorkEntry {
   title: string;
@@ -108,108 +104,80 @@ const workExperiences: WorkEntry[] = [
   },
 ];
 
-const WorkExperienceComponent = () => {
+export default function WorkExperience() {
   return (
-    <motion.div
-      className="h-screen flex flex-col px-6 py-8 text-white overflow-y-auto"
-      variants={pageVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
+    <PageShell
+      title="Work experience"
+      eyebrow="The professional path / Since 2022"
+      description={
+        <>
+          Industry roles in AI, XR, and full-stack engineering. Each one has a story that starts
+          before the dates below.
+        </>
+      }
     >
-      <BackButton />
-
-      <div className="max-w-5xl mx-auto w-full flex flex-col pt-2">
-        <motion.div className="mb-5" variants={headerVariants} initial="hidden" animate="visible">
-          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">Work Experience</h1>
-          <p className="text-sm text-zinc-500 font-mono mt-1">Industry roles in AI, XR, and full-stack engineering</p>
-          <p className="text-xs text-zinc-600 mt-2">
-            None of these started where the dates say. Each one links back to the chapter of{' '}
-            <Link to="/story" className="text-zinc-400 hover:text-white underline decoration-white/20 underline-offset-2 transition-colors">
-              the story
-            </Link>{' '}
-            it came out of.
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="grid gap-4 pb-6 sm:grid-cols-2 xl:grid-cols-3"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {workExperiences.map(({ title, company, type, location, period, details, highlights, skills, link, origin }) => (
-            <motion.div
-              key={`${company}-${title}`}
-              className="glass-card glass-card-hover hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_0_36px_-12px_rgba(34,211,238,0.3)] flex flex-col p-5 text-left"
-              variants={itemVariants}
-              whileHover={cardHover}
-            >
-              <div className="mb-3">
-                <div className="flex items-start justify-between gap-2">
-                  <h2 className="font-semibold text-white leading-tight">{title}</h2>
-                  {period.includes('Present') && (
-                    <span className="inline-flex items-center gap-1.5 shrink-0 text-[10px] font-mono text-emerald-300/90 border border-emerald-400/20 bg-emerald-400/[0.06] rounded-full px-2 py-0.5 leading-relaxed">
-                      <span className="w-1 h-1 rounded-full bg-emerald-400" />
-                      Current
-                    </span>
-                  )}
-                </div>
-                <p className="text-sm text-cyan-400 font-mono mt-0.5">{company}</p>
-                <p className="text-xs text-zinc-500 font-mono mt-0.5">{period}</p>
+      <div className="experience-list">
+        {workExperiences.map(
+          ({
+            title,
+            company,
+            type,
+            location,
+            period,
+            details,
+            highlights,
+            skills,
+            link,
+            origin,
+          }) => (
+            <article key={`${company}-${title}`} className="experience-entry">
+              <div className="experience-meta">
+                <p className="experience-period">{period}</p>
+                <h2>{company}</h2>
                 {(type || location) && (
-                  <p className="text-xs text-zinc-600 font-mono mt-0.5">
-                    {[type, location].filter(Boolean).join(' - ')}
+                  <p className="experience-location">
+                    {[type, location].filter(Boolean).join(' · ')}
                   </p>
                 )}
-              </div>
-
-              <p className="text-sm text-zinc-400 leading-relaxed">{details}</p>
-
-              {highlights && (
-                <ul className="mt-3 space-y-1 pl-4 text-xs text-zinc-500 leading-relaxed list-disc">
-                  {highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-              )}
-
-              {origin && (
-                <div className="mt-4 border-l border-white/10 pl-3">
-                  <p className="text-xs text-zinc-500 italic leading-relaxed">{origin.note}</p>
-                  <StoryLink chapter={origin.chapter} variant="inline" className="mt-1.5" />
-                </div>
-              )}
-
-              <div className="flex flex-wrap gap-1.5 mt-4">
-                {skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="text-xs text-zinc-400 bg-white/[0.04] border border-white/10 px-2 py-0.5 rounded font-mono"
-                  >
-                    {skill}
+                {period.includes('Present') && (
+                  <span className="current-label">
+                    <span className="status-dot" aria-hidden="true" />
+                    Current
                   </span>
-                ))}
+                )}
               </div>
-
-              {link && (
-                <motion.div whileHover={{ x: 3 }} transition={{ duration: 0.15 }}>
-                <Link
-                  to={link}
-                  className="mt-4 inline-flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-300 transition-colors font-mono"
-                >
-                  Full details →
-                </Link>
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
-        </motion.div>
+              <div className="experience-body">
+                <h3>{title}</h3>
+                <p>{details}</p>
+                {highlights && (
+                  <details className="responsibilities">
+                    <summary>
+                      Responsibilities <span aria-hidden="true">+</span>
+                    </summary>
+                    <ul>
+                      {highlights.map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+                <Tags items={skills} />
+                {origin && (
+                  <aside className="experience-origin">
+                    <p>{origin.note}</p>
+                    <StoryLink chapter={origin.chapter} variant="inline" />
+                  </aside>
+                )}
+                {link && (
+                  <Link className="text-link" to={link}>
+                    Inside the role <span aria-hidden="true">→</span>
+                  </Link>
+                )}
+              </div>
+            </article>
+          ),
+        )}
       </div>
-
-      <LandscapeOverlay />
-    </motion.div>
+    </PageShell>
   );
-};
-
-export default WorkExperienceComponent;
+}
