@@ -1,3 +1,7 @@
+export function normalizePathname(pathname: string) {
+  return pathname.replace(/\/+$/, '').toLowerCase() || '/';
+}
+
 export const routeInfo: Record<string, { title: string; parent: string; parentLabel: string }> = {
   '/': { title: 'Anthony Mercadante', parent: '/', parentLabel: 'Home' },
   '/portfolio': { title: 'The work', parent: '/', parentLabel: 'Home' },

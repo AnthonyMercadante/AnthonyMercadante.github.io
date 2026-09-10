@@ -14,7 +14,7 @@ import theme from './theme';
 import './App.css';
 import Ambient from './components/Ambient';
 import SiteNavigation, { SiteFooter } from './components/SiteNavigation';
-import { routeInfo } from './routeInfo';
+import { normalizePathname, routeInfo } from './routeInfo';
 
 const Portfolio = lazy(() => import('./pages/Portfolio/Portfolio'));
 const AboutMe = lazy(() => import('./pages/AboutMe/AboutMe'));
@@ -52,8 +52,9 @@ function RouteEffects({ initial }: { initial: React.MutableRefObject<boolean> })
   const location = useLocation();
   const navigationType = useNavigationType();
   useLayoutEffect(() => {
-    const title = routeInfo[location.pathname.toLowerCase()]?.title ?? 'Page not found';
-    document.title = location.pathname === '/' ? title : `${title} — Anthony Mercadante`;
+    const pathname = normalizePathname(location.pathname);
+    const title = routeInfo[pathname]?.title ?? 'Page not found';
+    document.title = pathname === '/' ? title : `${title} — Anthony Mercadante`;
     const previousRestoration = window.history.scrollRestoration;
     window.history.scrollRestoration = 'manual';
     const frame = requestAnimationFrame(() => {
@@ -107,8 +108,8 @@ class RouteErrorBoundary extends React.Component<
 function Site() {
   const { pathname } = useLocation();
   const initial = useRef(true);
-  const isHome = pathname === '/';
-  const isWater = pathname.toLowerCase() === '/water';
+  const isHome = normalizePathname(pathname) === '/';
+  const isWater = normalizePathname(pathname) === '/water';
   return (
     <div className="App">
       <Ambient />

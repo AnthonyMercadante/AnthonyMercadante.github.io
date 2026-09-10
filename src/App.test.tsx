@@ -48,11 +48,17 @@ test('the homepage keeps all eight social destinations primary and work secondar
   expect(screen.getByRole('link', { name: /Email — Say hello/ })).not.toHaveAttribute('target');
 });
 
-test('a direct project entry has a parent destination without relying on history', () => {
-  render(
-    <MemoryRouter initialEntries={['/CellTower']}>
-      <BackButton />
-    </MemoryRouter>,
-  );
-  expect(screen.getByRole('link', { name: /XR projects/ })).toHaveAttribute('href', '/XRDeveloper');
-});
+test.each(['/CellTower', '/CellTower/', '/CELLTOWER/'])(
+  'a direct project entry at %s has a parent destination without relying on history',
+  (path) => {
+    render(
+      <MemoryRouter initialEntries={[path]}>
+        <BackButton />
+      </MemoryRouter>,
+    );
+    expect(screen.getByRole('link', { name: /XR projects/ })).toHaveAttribute(
+      'href',
+      '/XRDeveloper',
+    );
+  },
+);
