@@ -373,8 +373,9 @@ export default function OpenMemory() {
             <span className="eyebrow">Optional generation</span>
             <h3>A configured model.</h3>
             <p>
-              With generation disabled, Ask still returns evidence. No archive is sent for
-              ingestion.
+              Off until the operator grants the operation, and even then each Ask needs the
+              owner's explicit choice to generate. Without it, Ask still returns evidence. No
+              archive is sent for ingestion.
             </p>
           </div>
         </div>
@@ -382,9 +383,9 @@ export default function OpenMemory() {
           <article>
             <h3>Private by default</h3>
             <p>
-              History routes resolve a corpus owner. Imported conversations stay outside public
-              graph recall and MCP responses; a connected agent cannot search this archive through
-              MCP.
+              Every history route needs a signed-in owner whose account is explicitly bound to one
+              corpus. Imported conversations stay outside public graph recall and MCP responses; a
+              connected agent cannot search this archive through MCP.
             </p>
           </article>
           <article>
@@ -406,8 +407,9 @@ export default function OpenMemory() {
         </div>
         <p className="om-section-note">
           The local application remains a trust boundary. Pattern-based redaction is not a guarantee
-          that every sensitive detail is removed, and local owner scoping is not a hosted multi-user
-          authentication system. <SourceLink path="SECURITY.md">Security boundaries</SourceLink>
+          that every sensitive detail is removed, model grants are deployment-wide rather than per
+          client, and a compromised application process can bypass its own checks.{' '}
+          <SourceLink path="SECURITY.md">Security boundaries</SourceLink>
         </p>
       </section>
 
@@ -554,7 +556,7 @@ export default function OpenMemory() {
         <div className="om-source-note">
           <p>
             Implementation reviewed{' '}
-            <time dateTime={openMemory.reviewedDate}>10 September 2026</time>.
+            <time dateTime={openMemory.reviewedDate}>23 September 2026</time>.
           </p>
           <SourceLink path="README.md">
             Source snapshot {openMemory.reviewedRevision.slice(0, 7)}

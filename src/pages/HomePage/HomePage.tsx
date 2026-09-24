@@ -1,6 +1,13 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, PointerEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from 'framer-motion';
 import { pageVariants } from '../../animations';
 import portrait from '../../assets/images/portrait.jpg';
 import {
@@ -75,6 +82,59 @@ const socialLinks = [
   },
 ];
 
+/**
+ * The portrait as a foil card: it tilts toward the pointer while a sheen and
+ * an iridescent wash track across it, inside a slowly turning colour ring.
+ */
+function HoloPortrait() {
+  const reduce = useReducedMotion();
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+  const spring = { stiffness: 180, damping: 18, mass: 0.6 };
+  const rotateX = useSpring(useTransform(py, [0, 1], [14, -14]), spring);
+  const rotateY = useSpring(useTransform(px, [0, 1], [-14, 14]), spring);
+  const sheenX = useTransform(px, [0, 1], [0, 100]);
+  const sheenY = useTransform(py, [0, 1], [0, 100]);
+  const foilAngle = useTransform(px, [0, 1], [70, 250]);
+  const sheen = useMotionTemplate`radial-gradient(circle at ${sheenX}% ${sheenY}%, rgba(255,255,255,0.4), rgba(255,255,255,0) 55%)`;
+  const foil = useMotionTemplate`linear-gradient(${foilAngle}deg, transparent 20%, rgba(155,212,209,0.28) 38%, rgba(197,223,170,0.26) 50%, rgba(237,171,169,0.24) 62%, transparent 80%)`;
+
+  const onMove = (e: PointerEvent<HTMLAnchorElement>) => {
+    if (reduce) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width);
+    py.set((e.clientY - r.top) / r.height);
+  };
+  const onLeave = () => {
+    px.set(0.5);
+    py.set(0.5);
+  };
+
+  return (
+    <div className="home-portrait-stage">
+      <motion.div style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}>
+        <Link
+          className="home-portrait"
+          to="/about-me"
+          aria-label="About Anthony Mercadante"
+          onPointerMove={onMove}
+          onPointerLeave={onLeave}
+        >
+          <span className="portrait-foil-ring" aria-hidden="true" />
+          <span className="portrait-face">
+            <img src={portrait} alt="Anthony Mercadante" width="112" height="112" />
+            <motion.span className="portrait-foil" aria-hidden="true" style={{ backgroundImage: foil }} />
+            <motion.span className="portrait-sheen" aria-hidden="true" style={{ backgroundImage: sheen }} />
+          </span>
+          <span className="portrait-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </Link>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function HomePage() {
   return (
     <motion.div className="home" variants={pageVariants} initial="hidden" animate="visible">
@@ -96,16 +156,11 @@ export default function HomePage() {
             <h1>
               Anthony
               <br />
-              Mercadante
+              <span className="aurora-text">Mercadante</span>
             </h1>
             <p className="home-role">Software &amp; AI Engineer</p>
           </div>
-          <Link className="home-portrait" to="/about-me" aria-label="About Anthony Mercadante">
-            <img src={portrait} alt="Anthony Mercadante" width="112" height="112" />
-            <span className="portrait-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </Link>
+          <HoloPortrait />
         </header>
         <div className="home-intro">
           <p>
@@ -138,7 +193,7 @@ export default function HomePage() {
               <a
                 key={name}
                 href={href}
-                className="social-tile"
+                className="social-tile glass-edge"
                 style={{ '--tile-accent': color } as CSSProperties}
                 target={name === 'Email' ? undefined : '_blank'}
                 rel={name === 'Email' ? undefined : 'noopener noreferrer'}

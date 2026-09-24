@@ -90,6 +90,57 @@ code,
     radial-gradient(ellipse at 12% 0%, rgba(65, 96, 90, 0.16), transparent 52%),
     radial-gradient(ellipse at 95% 95%, rgba(110, 85, 56, 0.08), transparent 45%);
 }
+.ambient-sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* A vignette keeps the sky's edges from competing with the reading column */
+.ambient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(4, 7, 8, 0.55) 100%);
+}
+/*
+ * Frosted glass with a refracting hairline edge: ::before draws a gradient
+ * border that catches light top-left, fades, and catches again bottom-right.
+ * Opt-in for surfaces that sit directly on the sky.
+ */
+.glass-edge {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(150deg, rgba(240, 239, 232, 0.06), rgba(240, 239, 232, 0.015) 48%, rgba(240, 239, 232, 0.035));
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgba(240, 239, 232, 0.08),
+    0 30px 70px -40px rgba(0, 0, 0, 0.75);
+}
+.glass-edge::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(158deg, rgba(240, 239, 232, 0.3), rgba(240, 239, 232, 0.06) 26%, rgba(240, 239, 232, 0.02) 58%, rgba(197, 223, 170, 0.18));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 3;
+}
+/* The one word a headline leans on, lit like the sky behind it */
+.aurora-text {
+  background: linear-gradient(100deg, #f0efe8 0%, #c5dfaa 38%, #9bd4d1 72%, #ddbc87 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 .skip-link {
   position: fixed;
   left: 20px;
@@ -428,7 +479,7 @@ code,
   align-items: start;
 }
 .featured-project {
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
   padding: 30px;
   border-radius: 8px;
   background: linear-gradient(145deg, rgba(155, 190, 149, 0.08), rgba(155, 190, 149, 0.015));

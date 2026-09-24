@@ -45,7 +45,7 @@ export default function Portfolio() {
       parent={{ to: '/', label: 'The surface' }}
     >
       <div className="portfolio-layout">
-        <section className="featured-project" aria-labelledby="featured-title">
+        <section className="featured-project glass-edge" aria-labelledby="featured-title">
           <p className="eyebrow">
             <span className="status-dot" aria-hidden="true" />
             Currently building

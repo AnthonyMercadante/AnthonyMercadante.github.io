@@ -113,7 +113,7 @@ function Site() {
   const isWater = normalizePathname(pathname) === '/water';
   return (
     <div className="App">
-      <Ambient />
+      <Ambient live={isHome} />
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>

@@ -14,7 +14,7 @@ The site is designed as a small, narrative portfolio rather than a conventional 
 
 The portfolio leads with [OpenMemory](https://github.com/Raethexn-Technologies/OpenMemory), a Raethexn Technologies project bringing AI history across providers into a user-controlled memory layer. Its [case study](https://anthonymercadante.github.io/OpenMemory) follows local conversation imports, evidence and provenance, and the separate live-memory and research layers: MCP, retrieval, Physarum-inspired graph dynamics, and ICP ownership experiments. Implemented functionality is distinguished from the roadmap; the illustrative evidence trail uses entirely synthetic content.
 
-The case study is based on the pushed OpenMemory implementation at [`6c52e01`](https://github.com/Raethexn-Technologies/OpenMemory/tree/6c52e01aa180556b6424b367093668e4addc1ef1), reviewed September 10, 2026. Shared positioning and pinned source references live in `src/data/openMemory.ts`.
+The case study is based on the pushed OpenMemory implementation at [`6094a61`](https://github.com/Raethexn-Technologies/OpenMemory/tree/6094a61b4fc29fdc1bd7ad75c0238b8f91988943), reviewed September 23, 2026. Shared positioning and pinned source references live in `src/data/openMemory.ts`.
 
 ## Technology
 
