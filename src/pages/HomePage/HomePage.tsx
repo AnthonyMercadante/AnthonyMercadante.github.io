@@ -170,7 +170,10 @@ export default function HomePage() {
           <div className="home-current">
             <span className="status-dot" aria-hidden="true" />
             <span>
-              Building AI systems at <Link to="/WorkExperience">Clarity</Link>
+              Building AI systems at{' '}
+              <a href="https://claritydc.com/" target="_blank" rel="noopener noreferrer">
+                Clarity<span className="sr-only"> (opens in a new tab)</span>
+              </a>
             </span>
           </div>
           <a
