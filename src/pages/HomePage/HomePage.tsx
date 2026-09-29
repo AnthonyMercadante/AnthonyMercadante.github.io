@@ -18,7 +18,7 @@ import {
   GoodreadsIcon,
   InstagramIcon,
   TikTokIcon,
-  MailIcon,
+  XIcon,
   ArrowUpRightIcon,
 } from '../../components/SocialIcons';
 import './HomePage.css';
@@ -60,10 +60,10 @@ const socialLinks = [
     color: '#e0e6df',
   },
   {
-    name: 'Email',
+    name: 'X',
     interest: 'Say hello',
-    href: 'mailto:Anthony@raethexntechnologies.com',
-    icon: <MailIcon />,
+    href: 'https://x.com/AnthMercadante',
+    icon: <XIcon />,
     color: '#c3b1e0',
   },
   {
@@ -198,9 +198,9 @@ export default function HomePage() {
                 href={href}
                 className="social-tile glass-edge"
                 style={{ '--tile-accent': color } as CSSProperties}
-                target={name === 'Email' ? undefined : '_blank'}
-                rel={name === 'Email' ? undefined : 'noopener noreferrer'}
-                aria-label={`${name} — ${interest}${name === 'Email' ? '' : ' (opens in a new tab)'}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${name} — ${interest} (opens in a new tab)`}
               >
                 <span className="social-arrow" aria-hidden="true">
                   ↗

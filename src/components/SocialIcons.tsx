@@ -78,17 +78,9 @@ export const GoodreadsIcon = () => (
   </svg>
 );
 
-export const MailIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    className={stroke}
-    strokeWidth="1.7"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden
-  >
-    <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
-    <path d="M3 7l9 6 9-6" />
+export const XIcon = () => (
+  <svg viewBox="0 0 24 24" className={`${box} fill-current`} aria-hidden>
+    <path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77L17.75 3zm-1.08 16.18h1.7L7.4 4.73H5.58l11.09 14.45z" />
   </svg>
 );
 

@@ -39,13 +39,16 @@ test('the homepage keeps all eight social destinations primary and work secondar
       expect.stringContaining('Letterboxd'),
       expect.stringContaining('Music'),
       expect.stringContaining('GitHub'),
-      expect.stringContaining('Email'),
+      expect.stringContaining('X'),
       expect.stringContaining('TikTok'),
       expect.stringContaining('Instagram'),
     ]),
   );
   expect(screen.getByRole('link', { name: /The work/ })).toHaveAttribute('href', '/portfolio');
-  expect(screen.getByRole('link', { name: /Email — Say hello/ })).not.toHaveAttribute('target');
+  expect(screen.getByRole('link', { name: /^X — Say hello/ })).toHaveAttribute(
+    'href',
+    'https://x.com/AnthMercadante',
+  );
 });
 
 test.each(['/CellTower', '/CellTower/', '/CELLTOWER/'])(
