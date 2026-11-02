@@ -4,6 +4,7 @@ import { ArrowUpRightIcon } from '../../components/SocialIcons';
 import { chapters, photos } from '../Story/storyData';
 import { featuredProjects, archiveCategories } from '../../data/projects';
 import { openMemory } from '../../data/openMemory';
+import { tikRune } from '../../data/tikRune';
 
 const archivePhotos = ['the-workbench', 'metalworks-studio-6', 'xr-desk-day-one'].map(
   (slug) => photos[slug],
@@ -13,7 +14,7 @@ const entries = [
     label: 'Projects',
     to: '/Projects',
     detail: 'Open-source systems, XR simulations, and experiments.',
-    meta: `${featuredProjects.length} featured repos / ${archiveCategories.length} collections`,
+    meta: `${featuredProjects.length} featured projects / ${archiveCategories.length} collections`,
   },
   {
     label: 'Work experience',
@@ -40,7 +41,7 @@ export default function Portfolio() {
     <PageShell
       title="The work"
       eyebrow="Anthony Mercadante / Portfolio"
-      description="AI systems, memory infrastructure, and interactive worlds. Different tools, the same instinct to build."
+      description="AI systems, investment research, and interactive worlds. Different tools, the same instinct to build."
       className="portfolio-page"
       parent={{ to: '/', label: 'The surface' }}
     >
@@ -50,27 +51,37 @@ export default function Portfolio() {
             <span className="status-dot" aria-hidden="true" />
             Currently building
           </p>
-          <Link to={openMemory.route} className="featured-title-link">
-            <h2 id="featured-title">OpenMemory</h2>
+          <a
+            href={tikRune.url}
+            className="featured-title-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 id="featured-title">TikRune</h2>
             <ArrowUpRightIcon />
-            <span className="sr-only"> case study</span>
-          </Link>
-          <p className="featured-thesis">{openMemory.thesis}</p>
+            <span className="sr-only"> research page (opens in a new tab)</span>
+          </a>
+          <p className="featured-thesis">{tikRune.thesis}</p>
           <p>
-            Bring ChatGPT, Claude, and Gemini exports into a local history you can question and
-            trace back to source. Built on deeper work in cross-agent memory, retrieval, and
-            ownership.
+            Research for long-term investors that starts from something happening in the world and
+            follows it outward: which businesses it would change, which companies are exposed, and
+            what evidence would strengthen or weaken the thesis. Canadian and TSX-focused.
           </p>
-          <Tags items={openMemory.tags} label="Project themes" />
-          <Link className="text-link featured-case-link" to={openMemory.route}>
-            Read the project story <span aria-hidden="true">→</span>
-          </Link>
+          <Tags items={tikRune.tags} label="Project themes" />
+          <a
+            className="text-link featured-case-link"
+            href={tikRune.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read about the research <span aria-hidden="true">↗</span>
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
           <div className="featured-footnote">
-            <span>Raethexn Technologies</span>
-            <a href={openMemory.repository} target="_blank" rel="noopener noreferrer">
-              GitHub <span aria-hidden="true">↗</span>
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
+            <span>Raethexn Technologies · In private development</span>
+            <Link to={openMemory.route}>
+              Previously: OpenMemory <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </section>
         <nav className="explore-list" aria-label="Explore the work">

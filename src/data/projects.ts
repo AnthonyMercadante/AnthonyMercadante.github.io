@@ -4,8 +4,18 @@ import ProjectIconImage3 from '../assets/images/ReactProjectIcon.png';
 import ProjectIconImage4 from '../assets/images/Machine Learning.webp';
 import ProjectIconImage6 from '../assets/images/video-games-projects.png';
 import { openMemory } from './openMemory';
+import { tikRune } from './tikRune';
 
 export const featuredProjects = [
+  {
+    name: tikRune.name,
+    lang: 'Laravel / React Native',
+    tags: tikRune.tags,
+    url: tikRune.url,
+    studio: true,
+    chapter: 'raethexn',
+    privateRepo: true,
+  },
   {
     name: openMemory.name,
     lang: 'Laravel / Vue',

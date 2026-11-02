@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import PageShell, { TextLink } from '../../components/PageShell';
 import profileImage from '../../assets/images/professional-photo.jpg';
 import { openMemory } from '../../data/openMemory';
+import { tikRune } from '../../data/tikRune';
 
 export default function AboutMe() {
   return (
@@ -37,10 +38,20 @@ export default function AboutMe() {
             <span className="bio-highlight">AI agent architectures</span>, memory and retrieval, and
             natural language interfaces, with a growing interest in provenance and privacy. Recent
             work includes{' '}
+            <a
+              className="bio-project-link"
+              href={tikRune.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TikRune
+            </a>{' '}
+            — scenario-led investment research that traces developments in the world to the
+            companies they would change —{' '}
             <Link className="bio-project-link" to={openMemory.route}>
               OpenMemory
-            </Link>{' '}
-            — bringing AI history across providers into a memory layer the user controls — and the{' '}
+            </Link>
+            , a memory layer for AI history that the user controls, and the{' '}
             <span className="bio-highlight">AircraftIdentificationAI</span> project, built in
             partnership with Canada's National Air Force Museum.
           </p>

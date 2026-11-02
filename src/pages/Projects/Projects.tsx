@@ -3,8 +3,10 @@ import PageShell, { Tags } from '../../components/PageShell';
 import StoryLink from '../../components/StoryLink';
 import { featuredProjects, archiveCategories } from '../../data/projects';
 import { openMemory } from '../../data/openMemory';
+import { tikRune } from '../../data/tikRune';
 
 const descriptions: Record<string, string> = {
+  TikRune: tikRune.summary,
   OpenMemory: openMemory.summary,
   AircraftIdentificationAI: 'Computer vision for historical aircraft identification.',
   'FlowChannel-XR': 'An open-channel water flow simulation for engineering education.',
@@ -27,12 +29,12 @@ export default function Projects() {
       <section aria-labelledby="open-source-heading">
         <div className="section-heading">
           <h2 id="open-source-heading" className="eyebrow">
-            Open source
+            Featured work
           </h2>
-          <span className="mono">{featuredProjects.length} repositories</span>
+          <span className="mono">{featuredProjects.length} projects</span>
         </div>
         <div className="repository-list">
-          {featuredProjects.map(({ name, lang, tags, url, studio, chapter }, i) => (
+          {featuredProjects.map(({ name, lang, tags, url, studio, chapter, privateRepo }, i) => (
             <article key={name} className="repository-row">
               <span className="entry-number" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
@@ -53,7 +55,9 @@ export default function Projects() {
                   >
                     <h3>{name}</h3>
                     <span aria-hidden="true">↗</span>
-                    <span className="sr-only"> on GitHub (opens in a new tab)</span>
+                    <span className="sr-only">
+                      {privateRepo ? ' research page' : ' on GitHub'} (opens in a new tab)
+                    </span>
                   </a>
                 )}
                 <p>{descriptions[name]}</p>
@@ -61,6 +65,7 @@ export default function Projects() {
               </div>
               <div className="repository-context">
                 {studio && <span className="studio-label">Raethexn Technologies</span>}
+                {privateRepo && <span className="studio-label">In private development</span>}
                 {name === openMemory.name && (
                   <a className="text-link" href={url} target="_blank" rel="noopener noreferrer">
                     Repository <span aria-hidden="true">↗</span>

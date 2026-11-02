@@ -558,7 +558,12 @@ code,
   margin-top: 24px;
 }
 .story-current-project .text-link {
+  display: flex;
+  width: fit-content;
   font-size: 12px;
+}
+.story-current-project .text-link + .text-link {
+  margin-top: 8px;
 }
 .featured-footnote {
   display: flex;

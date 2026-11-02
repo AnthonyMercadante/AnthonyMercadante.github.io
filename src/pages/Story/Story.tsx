@@ -17,6 +17,7 @@ import {
 } from './storyData';
 import { accentClasses } from './accents';
 import { openMemory } from '../../data/openMemory';
+import { tikRune } from '../../data/tikRune';
 import { pageVariants, containerVariants, itemVariants, headerVariants } from '../../animations';
 
 /** Minimal inline formatter for the `**bold**` / `*emphasis*` used in the prose. */
@@ -132,7 +133,7 @@ const structuredData = {
       name: 'Founder, Raethexn Technologies',
       occupationalCategory: 'Software Engineering',
       description:
-        'Founded Raethexn Technologies in 2023 as an XR studio building simulation and workplace training, run alongside the college work — including a climbing experience of his own and a VR workplace-training demo for Purolator in June 2023. The studio has since moved to applied AI systems and memory infrastructure, including OpenMemory: user-controlled AI history across providers and live cross-agent memory.',
+        'Founded Raethexn Technologies in 2023 as an XR studio building simulation and workplace training, run alongside the college work — including a climbing experience of his own and a VR workplace-training demo for Purolator in June 2023. The studio has since moved to applied AI systems, including TikRune, scenario-led investment research, and OpenMemory, user-controlled AI history across providers.',
     },
     {
       '@type': 'Occupation',
@@ -431,6 +432,15 @@ const Story = () => {
                 {chapter.id === 'raethexn' && (
                   <aside className="story-current-project">
                     <p className="eyebrow">Where the studio went next</p>
+                    <a
+                      href={tikRune.url}
+                      className="text-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      TikRune / scenario-led investment research <span aria-hidden="true">↗</span>
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
                     <Link to={openMemory.route} className="text-link">
                       OpenMemory / AI history across providers <span aria-hidden="true">→</span>
                     </Link>
