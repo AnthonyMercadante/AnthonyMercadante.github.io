@@ -484,6 +484,49 @@ code,
   border-radius: 8px;
   background: linear-gradient(145deg, rgba(155, 190, 149, 0.08), rgba(155, 190, 149, 0.015));
 }
+.nova-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+.nova-feature > div > .eyebrow {
+  color: var(--accent);
+}
+.nova-feature .featured-title-link {
+  margin-top: 22px;
+}
+.nova-feature > div > p:not(.eyebrow):not(.featured-thesis) {
+  font-size: 13px;
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+.nova-feature-scope li {
+  display: flex;
+  gap: 20px;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+.nova-feature-scope h3 {
+  color: var(--paper);
+  font-size: 15px;
+}
+.nova-feature-scope p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 6px;
+}
+@media (max-width: 639px) {
+  .nova-feature {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .nova-feature-scope li {
+    padding: 16px 0;
+  }
+}
 .featured-project > .eyebrow {
   display: flex;
   align-items: center;
@@ -518,7 +561,8 @@ code,
 .featured-project .tags {
   margin-top: 25px;
 }
-.featured-project > p.featured-thesis {
+.featured-project > p.featured-thesis,
+.nova-feature .featured-thesis {
   font-size: 21px;
   line-height: 1.4;
   letter-spacing: -0.035em;

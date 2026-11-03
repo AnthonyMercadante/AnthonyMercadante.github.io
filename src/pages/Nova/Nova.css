@@ -1,0 +1,382 @@
+.nova-page > .page-heading {
+  margin-bottom: 38px;
+}
+.nova-page > .page-heading .page-description {
+  color: var(--aqua);
+}
+.nova-introduction {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 60px;
+  align-items: start;
+}
+.nova-thesis {
+  font: clamp(34px, 4.5vw, 52px) / 1.1 Georgia, serif;
+  letter-spacing: -0.035em;
+  color: var(--paper);
+}
+.nova-thesis em,
+.nova-demo-statement em {
+  color: var(--accent);
+  font-weight: 400;
+}
+.nova-lede {
+  font-size: 15px;
+  line-height: 1.9;
+  margin-top: 24px;
+  max-width: 620px;
+}
+.nova-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 26px;
+}
+.nova-at-a-glance {
+  border-radius: 8px;
+  padding: 28px;
+}
+.nova-at-a-glance > .eyebrow {
+  color: var(--accent);
+}
+.nova-at-a-glance dl {
+  margin: 16px 0 24px;
+}
+.nova-at-a-glance dl > div {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.nova-at-a-glance dt {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+.nova-at-a-glance dd {
+  color: var(--paper);
+  font-size: 14px;
+}
+.nova-section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  padding: 12px 0;
+  margin-top: 48px;
+  border-block: 1px solid var(--line);
+}
+.nova-section-nav a {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 44px;
+  font-size: 12px;
+  color: var(--text);
+}
+.nova-section-nav a span {
+  color: var(--accent);
+}
+.nova-section-nav a:hover {
+  color: var(--accent);
+}
+.nova-section {
+  padding-top: 56px;
+  scroll-margin-top: var(--header-height);
+}
+.nova-section + .nova-section {
+  margin-top: 48px;
+  border-top: 1px solid var(--line);
+}
+.nova-page h2 {
+  color: var(--paper);
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+.nova-page h3 {
+  color: var(--paper);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+}
+.nova-section p:not(.eyebrow):not(.nova-demo-statement) {
+  font-size: 13px;
+  line-height: 1.85;
+}
+.nova-section-heading {
+  margin-bottom: 30px;
+  max-width: 760px;
+}
+.nova-section-heading h2,
+.nova-context h2 {
+  margin-top: 14px;
+}
+.nova-section-heading > p:last-child:not(.eyebrow) {
+  margin-top: 18px;
+}
+.nova-context {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 64px;
+}
+.nova-context p:not(.eyebrow) {
+  margin-top: 18px;
+}
+.nova-context .nova-source-note {
+  color: var(--muted);
+  font-size: 11px !important;
+  border-left: 1px solid var(--accent);
+  padding-left: 16px;
+}
+.nova-capabilities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 48px;
+}
+.nova-capabilities article {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.nova-capabilities h3 {
+  margin: 12px 0;
+}
+.nova-capability-detail {
+  display: block;
+  margin-top: 18px;
+  color: var(--aqua);
+  font-size: 10px;
+  line-height: 1.8;
+}
+.nova-architecture {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.nova-architecture-lanes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.nova-architecture-lane {
+  padding: 24px;
+}
+.nova-architecture-lane > .eyebrow {
+  min-height: 36px;
+}
+.nova-architecture-core {
+  background: rgba(197, 223, 170, 0.035);
+  border-inline: 1px solid var(--line);
+}
+.nova-architecture-core > .eyebrow {
+  color: var(--accent);
+}
+.nova-node {
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+.nova-node h3 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.nova-node p {
+  color: var(--muted);
+  font-size: 11px !important;
+}
+.nova-node > span {
+  display: block;
+  margin-top: 10px;
+  color: var(--aqua);
+  font-size: 10px;
+  line-height: 1.7;
+}
+.nova-architecture-note {
+  color: var(--accent);
+  font-size: 10px !important;
+}
+.nova-architecture figcaption {
+  padding: 20px 24px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.nova-decisions {
+  border-top: 1px solid var(--line);
+}
+.nova-decisions details {
+  border-bottom: 1px solid var(--line);
+}
+.nova-decisions summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 64px;
+  padding: 16px 0;
+  list-style: none;
+  cursor: pointer;
+  color: var(--paper);
+  font-size: 14px;
+}
+.nova-decisions summary::-webkit-details-marker {
+  display: none;
+}
+.nova-decisions summary:hover {
+  color: var(--accent);
+}
+.nova-decisions summary span {
+  color: var(--accent);
+  font-size: 20px;
+}
+.nova-decisions details[open] summary span {
+  transform: rotate(45deg);
+}
+.nova-decisions details > p {
+  max-width: 800px;
+  padding: 0 32px 24px 0;
+}
+.nova-demo-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+.nova-demo-pending {
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: 8px;
+}
+.nova-demo-pending .eyebrow {
+  color: var(--aqua);
+}
+.nova-demo-statement {
+  margin: 30px 0 22px;
+  font: clamp(30px, 3vw, 40px) / 1.2 Georgia, serif;
+  color: var(--paper);
+  letter-spacing: -0.03em;
+}
+.nova-demo-pending > .mono {
+  display: block;
+  margin-top: 28px;
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.nova-demo-outline li {
+  display: flex;
+  gap: 18px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+.nova-demo-outline h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.nova-demo-outline p {
+  color: var(--muted);
+}
+.nova-demo-note {
+  font-size: 11px !important;
+  margin-top: 16px;
+}
+.nova-capture-plan,
+.nova-screenshots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+.nova-capture-plan > div {
+  border-left: 1px solid var(--line);
+  padding-left: 16px;
+}
+.nova-capture-plan p {
+  margin-top: 8px;
+  color: var(--paper);
+}
+.nova-capture-plan .eyebrow {
+  font-size: 9px;
+}
+.nova-screenshots img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.nova-screenshots figcaption {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 12px;
+  color: var(--muted);
+}
+.nova-case-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 900px) {
+  .nova-introduction {
+    gap: 32px;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+  .nova-context {
+    gap: 32px;
+  }
+  .nova-architecture-lane {
+    padding: 18px;
+  }
+}
+@media (max-width: 639px) {
+  .nova-introduction,
+  .nova-context,
+  .nova-capabilities,
+  .nova-demo-layout,
+  .nova-screenshots,
+  .nova-architecture-lanes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nova-at-a-glance {
+    padding: 24px;
+  }
+  .nova-at-a-glance dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 20px;
+  }
+  .nova-at-a-glance dd {
+    font-size: 12px;
+  }
+  .nova-section-nav {
+    gap: 0 22px;
+    margin-top: 32px;
+  }
+  .nova-section-nav a {
+    font-size: 11px;
+    gap: 8px;
+  }
+  .nova-section {
+    padding-top: 36px;
+  }
+  .nova-section + .nova-section {
+    margin-top: 36px;
+  }
+  .nova-architecture-core {
+    border-inline: 0;
+    border-block: 1px solid var(--line);
+  }
+  .nova-architecture-lane {
+    padding: 24px;
+  }
+  .nova-architecture-lane > .eyebrow {
+    min-height: auto;
+    margin-bottom: 16px;
+  }
+  .nova-capture-plan {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+}

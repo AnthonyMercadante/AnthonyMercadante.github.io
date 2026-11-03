@@ -5,8 +5,16 @@ import ProjectIconImage4 from '../assets/images/Machine Learning.webp';
 import ProjectIconImage6 from '../assets/images/video-games-projects.png';
 import { openMemory } from './openMemory';
 import { tikRune } from './tikRune';
+import { nova } from './nova';
 
 export const featuredProjects = [
+  {
+    name: nova.name,
+    lang: 'Laravel / Vue',
+    tags: nova.tags,
+    url: nova.route,
+    studio: false,
+  },
   {
     name: tikRune.name,
     lang: 'Laravel / React Native',

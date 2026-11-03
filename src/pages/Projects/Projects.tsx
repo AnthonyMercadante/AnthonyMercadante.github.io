@@ -4,8 +4,10 @@ import StoryLink from '../../components/StoryLink';
 import { featuredProjects, archiveCategories } from '../../data/projects';
 import { openMemory } from '../../data/openMemory';
 import { tikRune } from '../../data/tikRune';
+import { nova } from '../../data/nova';
 
 const descriptions: Record<string, string> = {
+  Nova: nova.summary,
   TikRune: tikRune.summary,
   OpenMemory: openMemory.summary,
   AircraftIdentificationAI: 'Computer vision for historical aircraft identification.',
@@ -14,6 +16,7 @@ const descriptions: Record<string, string> = {
   StockPeek: 'A command-line project for exploring financial data.',
 };
 const caseStudies: Record<string, string> = {
+  Nova: nova.route,
   OpenMemory: openMemory.route,
   AircraftIdentificationAI: '/AircraftIdentifierAI',
   'FlowChannel-XR': '/OpenFlowMachine',
@@ -24,7 +27,7 @@ export default function Projects() {
     <PageShell
       title="Projects"
       eyebrow="Built / explored / archived"
-      description="Open-source repositories and a growing record of experiments. Most have a year and a room behind them."
+      description="AI systems, business automation, and a growing record of experiments. The architecture, decisions, and work behind them."
     >
       <section aria-labelledby="open-source-heading">
         <div className="section-heading">
@@ -40,8 +43,8 @@ export default function Projects() {
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div className="repository-body">
-                {name === openMemory.name ? (
-                  <Link to={openMemory.route} className="repository-title">
+                {name === openMemory.name || name === nova.name ? (
+                  <Link to={caseStudies[name]} className="repository-title">
                     <h3>{name}</h3>
                     <span aria-hidden="true">→</span>
                     <span className="sr-only"> case study</span>

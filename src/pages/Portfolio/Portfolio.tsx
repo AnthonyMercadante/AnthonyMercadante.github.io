@@ -5,6 +5,7 @@ import { chapters, photos } from '../Story/storyData';
 import { featuredProjects, archiveCategories } from '../../data/projects';
 import { openMemory } from '../../data/openMemory';
 import { tikRune } from '../../data/tikRune';
+import { nova } from '../../data/nova';
 
 const archivePhotos = ['the-workbench', 'metalworks-studio-6', 'xr-desk-day-one'].map(
   (slug) => photos[slug],
@@ -45,6 +46,54 @@ export default function Portfolio() {
       className="portfolio-page"
       parent={{ to: '/', label: 'The surface' }}
     >
+      <section
+        className="featured-project glass-edge nova-feature"
+        aria-labelledby="nova-feature-title"
+      >
+        <div>
+          <p className="eyebrow">Featured engineering / AI & automation</p>
+          <Link to={nova.route} className="featured-title-link">
+            <h2 id="nova-feature-title">{nova.name}</h2>
+            <span aria-hidden="true">→</span>
+            <span className="sr-only"> case study</span>
+          </Link>
+          <p className="featured-thesis">{nova.subtitle}</p>
+          <p>{nova.summary}</p>
+          <Tags items={['Laravel', 'Vue 3', 'OpenAI', 'Cloud Run']} />
+          <Link to={nova.route} className="text-link featured-case-link">
+            Explore the case study <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+        <ol className="nova-feature-scope" aria-label="Nova engineering scope">
+          <li>
+            <span className="entry-number" aria-hidden="true">
+              01
+            </span>
+            <div>
+              <h3>Lead intelligence</h3>
+              <p>Research, qualification, and evidence.</p>
+            </div>
+          </li>
+          <li>
+            <span className="entry-number" aria-hidden="true">
+              02
+            </span>
+            <div>
+              <h3>Real-time AI</h3>
+              <p>Live voice and 38 business tools.</p>
+            </div>
+          </li>
+          <li>
+            <span className="entry-number" aria-hidden="true">
+              03
+            </span>
+            <div>
+              <h3>Cloud architecture</h3>
+              <p>Application, workers, and infrastructure.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
       <div className="portfolio-layout">
         <section className="featured-project glass-edge" aria-labelledby="featured-title">
           <p className="eyebrow">

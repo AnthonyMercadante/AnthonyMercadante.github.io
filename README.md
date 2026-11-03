@@ -12,11 +12,25 @@ The site is designed as a small, narrative portfolio rather than a conventional 
 - **Skills and stack** — Languages, frameworks, AI tooling, cloud, frontend, and XR technologies.
 - **Life archive** — The [`/story`](https://AnthonyMercadante.github.io/story) route tells the origin story through 11 chapters spanning 2009 onward, with 34 recovered photographs, 11 surviving tracks, and selected video clips.
 
-The portfolio leads with [TikRune](https://www.raethexntechnologies.com/research/tikrune), scenario-led investment research in private development at Raethexn Technologies. It follows developments in the world to the businesses they would change, the companies exposed, and the evidence for and against a thesis. Shared positioning lives in `src/data/tikRune.ts`.
+The portfolio features [Nova](https://anthonymercadante.github.io/Nova), an AI lead intelligence and meeting automation platform, first on the work overview and in the project listing. Its case study covers lead qualification, real-time voice, business tools, and cloud infrastructure. All claims are based on the sanitized Nova-Portfolio `README.md`, `ARCHITECTURE.md`, and `docs/DEMO.md`; no private development source or client materials are included. Shared copy and media configuration live in `src/data/nova.ts`.
+
+[TikRune](https://www.raethexntechnologies.com/research/tikrune), scenario-led investment research in private development at Raethexn Technologies, remains the currently-building feature. It follows developments in the world to the businesses they would change, the companies exposed, and the evidence for and against a thesis. Shared positioning lives in `src/data/tikRune.ts`.
 
 [OpenMemory](https://github.com/Raethexn-Technologies/OpenMemory), the studio's earlier project, brings AI history across providers into a user-controlled memory layer. Its [case study](https://anthonymercadante.github.io/OpenMemory) follows local conversation imports, evidence and provenance, and the separate live-memory and research layers: MCP, retrieval, Physarum-inspired graph dynamics, and ICP ownership experiments. Implemented functionality is distinguished from the roadmap; the illustrative evidence trail uses entirely synthetic content.
 
 The case study is based on the pushed OpenMemory implementation at [`6094a61`](https://github.com/Raethexn-Technologies/OpenMemory/tree/6094a61b4fc29fdc1bd7ad75c0238b8f91988943), reviewed September 23, 2026. Shared positioning and pinned source references live in `src/data/openMemory.ts`.
+
+## Adding Nova demo assets
+
+The `/Nova` page currently shows an intentional recording-pending panel and three labelled capture slots, without media requests or inactive controls. To replace them:
+
+1. Record the sanitized, synthetic-data walkthrough described in Nova-Portfolio's `docs/DEMO.md`. Distinguish offline tool replay from live meeting voice.
+2. In `src/data/nova.ts`, set `novaMedia.demoVideo` to `{ embedUrl: 'https://www.youtube.com/embed/VIDEO_ID', title: 'Nova — lead intelligence and meeting automation' }`. Add an optional local `poster` URL. The existing player loads only after a click and uses YouTube's privacy-enhanced domain. Include accurate captions in the uploaded video.
+3. Put reviewed screenshots in `public/projects/nova/`, then add `{ src: '/projects/nova/lead-detail.webp', alt: 'Describe the visible screen and relevant evidence', caption: 'Lead qualification and evidence' }` entries to `novaMedia.screenshots`. Suggested captures are lead detail, the opportunity pipeline, and the progress board. Each image links to its full-size version.
+
+Use synthetic records only; exclude client data, tokens, private prompts, and internal identifiers. Leave `demoVideo: null` and `screenshots: []` until the real assets exist. No screenshot directory or dummy files are needed in advance.
+
+Nova follows the existing case-study metadata pattern: React updates the document title, description, and Open Graph fields on navigation and restores the default metadata when leaving. Social crawlers that do not execute JavaScript will still see the site's default HTML metadata; route-specific static social previews would require prerendering.
 
 ## Technology
 

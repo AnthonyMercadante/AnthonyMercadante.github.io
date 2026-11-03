@@ -568,6 +568,9 @@ export default function OpenMemory() {
           <Link to="/story#raethexn" className="text-link">
             Where Raethexn began <span aria-hidden="true">→</span>
           </Link>
+          <Link to="/Nova" className="text-link">
+            Nova / AI & automation case study <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </footer>
     </PageShell>
